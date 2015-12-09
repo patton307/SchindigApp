@@ -1,6 +1,5 @@
 (function() {
-  'use strict';
-
+ 'use strict';
 
 
 
@@ -36,9 +35,12 @@ angular
         .state('splash', {
         url: '/',
         templateUrl: 'js/common/views/tabs.html'
-      })
+      });
 
-})
+});
+
+
+
 
 
 
