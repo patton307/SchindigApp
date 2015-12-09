@@ -12,7 +12,11 @@
       $stateProvider
         .state('evtWiz', {
           url: '/wizard',
-          templateUrl: "js/eventWizard/views/test.html"
+          templateUrl: "js/eventWizard/views/evtNameType.html"
+        })
+        .state('subType', {
+          url: '/subType',
+          templateUrl: "js/eventWizard/views/evtSubType.html"
         })
     })
 
