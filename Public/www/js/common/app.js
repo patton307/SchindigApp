@@ -31,7 +31,6 @@ angular
     .config(function($stateProvider) {
 
       $stateProvider
-
         .state('splash', {
         url: '',
         templateUrl: 'js/common/views/tabs.html'

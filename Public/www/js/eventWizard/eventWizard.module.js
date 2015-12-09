@@ -9,17 +9,16 @@
 
     $stateProvider
       .state('wizard', {
-        url:'wizard',
+        url:'/wizard',
         templateUrl: "js/eventWizard/views/evtNameType.html",
-        abstract:true,
+        abstract: true,
         controller:"EventWizardController as EventWizCtrl"
-
       })
       .state('wizard.name', {
         url:'/name-type',
         views: {
            'wizard-nameType':{
-            templateUrl:"js/eventWizard/views/evtSubType.html",
+            templateUrl:"js/eventWizard/views/evtNameType.html",
             controller:"EventWizCtrl"
           }
         }
