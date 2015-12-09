@@ -3,7 +3,7 @@
   angular
   .module("eventWizard")
 
-  .controller("eventWizardController", function($scope, eventWizardService){
+  .controller("EventWizardController", function($scope, EventWizardService){
       var vm = this;
   });
 
