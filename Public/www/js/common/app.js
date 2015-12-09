@@ -33,7 +33,7 @@ angular
       $stateProvider
 
         .state('splash', {
-        url: '/',
+        url: '',
         templateUrl: 'js/common/views/tabs.html'
       });
 

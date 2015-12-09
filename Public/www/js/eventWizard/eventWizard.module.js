@@ -17,7 +17,7 @@
       })
       .state('wizard.name', {
         url:'/name-type',
-        view: {
+        views: {
            'wizard-nameType':{
             templateUrl:"js/eventWizard/views/evtSubType.html",
             controller:"EventWizCtrl"
@@ -27,7 +27,7 @@
       })
       .state('wizard.subtype', {
         url:"/subtype",
-        view: {
+        views: {
           'wizard-subType':{
             templateUrl:"js/eventWizard/views/evtSubType.html",
             controller:"EventWizCtrl"
@@ -37,7 +37,7 @@
       })
       .state('wizard.whenwhere', {
         url:"/whenwhere",
-        view: {
+        views: {
           'wizard-whenWhere':{
             templateUrl:"js/eventWizard/views/evtSubType.html",
             controller:"EventWizCtrl"
@@ -46,7 +46,7 @@
       })
       .state('wizard.favors', {
         url:"/favors",
-        view: {
+        views: {
           'wizard-favors':{
             templateUrl:"js/eventWizard/views/evtFavors.html",
             controller:"EventWizCtrl"
@@ -55,7 +55,7 @@
       })
       .state('wizard.strechgoal', {
         url:"/strechgoal",
-        view: {
+        views: {
           'wizard-strechgoal':{
             templateUrl:"js/eventWizard/views/evtStrechGoal.html",
             controller:"EventWizCtrl"
@@ -64,7 +64,7 @@
       })
       .state('wizard.invites', {
         url:"/invites",
-        view: {
+        views: {
           'wizard-invites':{
             templateUrl:"js/eventWizard/views/evtInvites.html",
             controller:"EventWizCtrl"

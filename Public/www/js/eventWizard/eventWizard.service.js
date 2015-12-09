@@ -4,13 +4,13 @@
   angular
     .module('eventWizard')
 
-    .factory('eventWizardService', function($http){
+    .factory('EventWizardService', function($http){
 
     });
 
     return {
-      
-    }
+
+    };
 
 
 }());
