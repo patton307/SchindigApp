@@ -10,7 +10,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular
-  .module('starter',
+  .module('schindig',
     ['ionic',
     'eventWizard'
     ])
@@ -19,7 +19,7 @@ angular
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
+      // for form inwputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
       // Don't remove this line unless you know what you are doing. It stops the viewport
@@ -32,5 +32,7 @@ angular
     }
   });
 })
+
+
 
 }());
