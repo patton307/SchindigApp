@@ -4,13 +4,16 @@
   angular
     .module('eventWizard')
 
-    .factory('eventWizardService', function($http){
-
+    .factory('EventWizardService', function($http){
+      var getData = function() {
+        return $http.get('http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart2')
+      }
+      return {
+        getData: getData
+      }
     });
 
-    return {
-      
-    }
+
 
 
 }());
