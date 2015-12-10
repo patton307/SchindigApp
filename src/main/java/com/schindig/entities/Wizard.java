@@ -12,16 +12,31 @@ public class Wizard {
 
     @GeneratedValue
     @Id
-    Integer id;
+    public Integer id;
 
     @Column(nullable = false)
-    String partyType;
+    public String partyType;
 
-    String partyMod;
+    public String partyMod;
+
+    public Wizard(){}
 
     public Wizard(String partyType, String partyMod) {
 
         this.partyType = partyType;
         this.partyMod = partyMod;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
+    public String getPartyType() {
+
+        return partyType;
+    }
+    public String getPartyMod() {
+
+        return partyMod;
     }
 }

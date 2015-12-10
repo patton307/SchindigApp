@@ -3,11 +3,13 @@
   angular
   .module("eventWizard")
 
-  .controller("EventWizardController", function($scope, EventWizardService){
+  .controller("EventWizardController", function($scope, $http, EventWizardService){
       var vm = this;
-      console.log('blue');
-  
 
+      EventWizardService.getWizard().then(function(data){
+        console.log('event controler', data);
+        $scope.wizardItems = data;
+      });
 
   });
 

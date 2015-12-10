@@ -1,21 +1,27 @@
 package com.schindig.controllers;
 import com.schindig.entities.Catalog;
+import com.schindig.entities.Party;
+import com.schindig.entities.User;
 import com.schindig.entities.Wizard;
 import com.schindig.services.CatalogRepo;
+import com.schindig.services.PartyRepo;
+import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
+import com.schindig.utils.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Agronis on 12/9/15.
  */
+@CrossOrigin
 @RestController
 public class MainController {
 
@@ -24,6 +30,12 @@ public class MainController {
 
     @Autowired
     CatalogRepo catalog;
+
+    @Autowired
+    PartyRepo parties;
+
+    @Autowired
+    UserRepo users;
 
     @PostConstruct
     public void init() {
@@ -57,16 +69,57 @@ public class MainController {
 
     }
 
+    /**1**/
     @RequestMapping("/get-wizard")
-    public ArrayList<Wizard> partyList() {
-
+    public ArrayList<Wizard> getPartyList() {
         return (ArrayList<Wizard>) wizard.findAll();
     }
 
+    /**2**/
     @RequestMapping("/get-catalog")
-    public ArrayList<Catalog> catalogList() {
-
+    public ArrayList<Catalog> getCatalogList() {
         return (ArrayList<Catalog>) catalog.findAll();
     }
-    
+
+    /**5**/
+    @RequestMapping("/create-party")
+    public void createParty(
+            @RequestBody Params params ){
+
+        Party p = new Party(
+                params.partyName, params.partyDate, params.street1, params.street2, params.city,
+                params.usState, params.zip, params.wizID, params.inviteList,
+                params.rsvp, params.catalogList, params.stretchName, params.stretchGoal);
+
+        parties.save(p);
+
+    }
+
+    /**6**/
+    @RequestMapping("/add-favor")
+    public void addFavor(
+            @RequestBody Params params ){
+        Catalog c = new Catalog(params.partyFavor);
+        catalog.save(c);
+
+    }
+
+    /**7**/
+    @RequestMapping("/add-invite")
+    public void addInvite(
+            @RequestBody Params params ){
+        Party p = parties.findOne(params.partyId);
+        p.inviteList.add(params.invitePhone);
+        parties.save(p);
+    }
+
+    /**8**/
+    @RequestMapping("/rsvp")
+    public void rsvp(
+            @RequestBody Params params ){
+        Party p = parties.findOne(params.partyId);
+        User u = users.findOne(params.userId);
+        p.rsvp.put(u.id, params.rsvpStatus);
+    }
+
 }
