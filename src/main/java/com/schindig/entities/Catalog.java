@@ -12,23 +12,23 @@ public class Catalog {
 
     @GeneratedValue
     @Id
-    Integer id;
+    public Integer id;
 
     @Column(nullable = false)
-    String name;
+    public String favorName;
 
-    Integer useCount = 0;
+    public Integer useCount = 0;
 
     Catalog(){}
 
-    public Catalog(String name) {
+    public Catalog(String favorName) {
 
-        this.name = name;
+        this.favorName = favorName;
     }
 
-    public String getName() {
+    public String getFavorName() {
 
-        return name;
+        return favorName;
     }
     public Integer getUseCount() {
 

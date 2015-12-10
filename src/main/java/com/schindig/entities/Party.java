@@ -1,5 +1,6 @@
 package com.schindig.entities;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,40 +12,64 @@ public class Party {
 
     @GeneratedValue
     @Id
-    Integer id;
+    public Integer id;
 
 //    @OneToMany
-//    User user;
+//    public User host;
 
     @Column(nullable = false)
-    String street1;
+    public String partyName;
 
     @Column(nullable = false)
-    String street2;
+    public LocalDateTime createDate;
 
     @Column(nullable = false)
-    String city;
+    public LocalDateTime partyDate;
 
     @Column(nullable = false)
-    String state;
+    public String street1;
+
+    public String street2;
 
     @Column(nullable = false)
-    Integer zip;
+    public String city;
 
     @Column(nullable = false)
-    Integer wizID;
+    public String usState;
 
-    ArrayList<String> inviteList;
+    @Column(nullable = false)
+    public Integer zip;
 
-    HashMap<Integer, String> rsvp;
+    @Column(nullable = false)
+    public Integer wizID;
 
-    HashMap<Integer, Catalog> catalogList;
+    public ArrayList<String> inviteList;
 
-    String stretchName;
-    Integer stretchGoal;
+    public HashMap<Integer, String> rsvp;
 
-    Party(){}
+    public HashMap<Integer, Catalog> catalogList;
 
+    public String stretchName;
+
+    public Integer stretchGoal;
+
+    public Party(){}
+    public Party(String partyName, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Integer wizID, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, HashMap<Integer, Catalog> catalogList, String stretchName, Integer stretchGoal) {
+
+        this.partyName = partyName;
+        this.partyDate = partyDate;
+        this.street1 = street1;
+        this.street2 = street2;
+        this.city = city;
+        this.usState = usState;
+        this.zip = zip;
+        this.wizID = wizID;
+        this.inviteList = inviteList;
+        this.rsvp = rsvp;
+        this.catalogList = catalogList;
+        this.stretchName = stretchName;
+        this.stretchGoal = stretchGoal;
+    }
     public Integer getId() {
 
         return id;
@@ -60,10 +85,6 @@ public class Party {
     public String getCity() {
 
         return city;
-    }
-    public String getState() {
-
-        return state;
     }
     public Integer getZip() {
 
@@ -92,5 +113,14 @@ public class Party {
     public Integer getStretchGoal() {
 
         return stretchGoal;
+    }
+    public String getUsState() {
+
+        return usState;
+    }
+    public String getPartyName() {
+
+
+        return partyName;
     }
 }

@@ -13,35 +13,35 @@ public class User {
 
     @GeneratedValue
     @Id
-    Integer id;
+    public Integer id;
 
     @Column(nullable = false)
 //    @Size(min = 4, message = "Username must be a minimum of 4 characters in length.")
-    String username;
+    public String username;
 
     @Column(nullable = false)
 //    @Size(min = 5, message = "Password must be at least 5 characters in length.")
-    String password;
+    public String password;
 
     @Column(nullable = false)
 //    @Size(min = 2, message = "First name must have a minimum of 2 letters.")
-    String firstName;
+    public String firstName;
 
     @Column(nullable = false)
 //    @Size(min = 2, message = "Last name must have a minimum of 2 letters.")
-    String lastName;
+    public String lastName;
 
     @Column(nullable = false)
-    String email;
+    public String email;
 
     @Column(nullable = false)
 //    @Size(min = 10, message = "Requires a 10-digit number.")
-    String phone;
+    public String phone;
 
-    Integer partyCount;
-    Integer hostCount;
-    Integer inviteCount;
-    Integer invitedCount;
+    public Integer partyCount;
+    public Integer hostCount;
+    public Integer inviteCount;
+    public Integer invitedCount;
 
     User(){}
     
