@@ -1,5 +1,6 @@
 package com.schindig.controllers;
 import com.schindig.entities.Catalog;
+import com.schindig.entities.Party;
 import com.schindig.entities.Wizard;
 import com.schindig.services.CatalogRepo;
 import com.schindig.services.WizardRepo;
@@ -7,11 +8,14 @@ import com.schindig.utils.Methods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Agronis on 12/9/15.
@@ -58,14 +62,12 @@ public class MainController {
     }
 
     @RequestMapping("/get-wizard")
-    public ArrayList<Wizard> partyList() {
-
+    public ArrayList<Wizard> getPartyList() {
         return (ArrayList<Wizard>) wizard.findAll();
     }
 
     @RequestMapping("/get-catalog")
-    public ArrayList<Catalog> catalogList() {
-
+    public ArrayList<Catalog> getCatalogList() {
         return (ArrayList<Catalog>) catalog.findAll();
     }
     
