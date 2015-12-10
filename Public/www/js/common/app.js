@@ -29,11 +29,11 @@ angular
         }
       });
     })
-    .config(function($stateProvider) {
-
+    .config(function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/');
       $stateProvider
         .state('splash', {
-        url: '',
+        url: '/',
         templateUrl: 'js/common/views/tabs.html'
       });
 
