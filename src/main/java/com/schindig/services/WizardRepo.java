@@ -1,6 +1,5 @@
 package com.schindig.services;
 import com.schindig.entities.Wizard;
-import com.sun.tools.javac.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
