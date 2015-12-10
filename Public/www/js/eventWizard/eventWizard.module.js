@@ -3,7 +3,8 @@
 
   angular
     .module('eventWizard', [
-      'ionic'
+      'ionic',
+      
     ])
     .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/wizard/name')
@@ -11,10 +12,12 @@
       .state('wizard', {
         url:'/wizard/name-type',
         templateUrl: "js/eventWizard/views/evtNameType.html",
+        controller: 'EventWizardController'
       })
       .state('name', {
         url:'/wizard/subtype',
         templateUrl:"js/eventWizard/views/evtSubType.html",
+        controller: 'EventWizardController'
       })
       .state('whenwhere', {
         url:"/wizard/whenwhere",
