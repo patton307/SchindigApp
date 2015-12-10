@@ -12,30 +12,9 @@
       $cordovaDatePicker,
       $http
     ){
-      var dates = {
-        date: new Date(),
-        mode: 'date', // or 'time'
-        minDate: new Date() - 10000,
-        allowOldDates: true,
-        allowFutureDates: false,
-        doneButtonLabel: 'DONE',
-        doneButtonColor: '#F2F3F4',
-        cancelButtonLabel: 'CANCEL',
-        cancelButtonColor: '#000000'
-      };
+      
 
-
-        document.addEventListener("deviceready", function () {
-
-          $scope.showDates = function() {
-            $cordovaDatePicker.show(dates).then(function(date){
-            alert(date);
-        });
-      }
-
-      }, false);
-
-
+//MAKES PHONE VIBRATE///
       $scope.vibrate = function() {
         $cordovaVibration.vibrate(100);
       };

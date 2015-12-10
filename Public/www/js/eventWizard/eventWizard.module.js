@@ -6,7 +6,7 @@
       'ionic'
     ])
     .config(function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('')
+    $urlRouterProvider.otherwise('/wizard/name')
     $stateProvider
       .state('wizard', {
         url:'/wizard/name-type',
@@ -31,7 +31,7 @@
       .state('invites', {
         url:"/wizard/invites",
         templateUrl:"js/eventWizard/views/evtInvites.html"
-      });
+      })
     });
 
 }());
