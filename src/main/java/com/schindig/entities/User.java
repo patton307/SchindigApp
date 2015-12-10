@@ -42,5 +42,7 @@ public class User {
     Integer hostCount;
     Integer inviteCount;
     Integer invitedCount;
+
+    User(){}
     
 }

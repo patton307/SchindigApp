@@ -19,8 +19,24 @@ public class Catalog {
 
     Integer useCount = 0;
 
+    Catalog(){}
+
     public Catalog(String name) {
 
         this.name = name;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+    public Integer getUseCount() {
+
+        return useCount;
+    }
+
+    public Integer getId() {
+
+        return id;
     }
 }

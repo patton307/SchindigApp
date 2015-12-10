@@ -43,7 +43,54 @@ public class Party {
     String stretchName;
     Integer stretchGoal;
 
+    Party(){}
 
+    public Integer getId() {
 
-    
+        return id;
+    }
+    public String getStreet1() {
+
+        return street1;
+    }
+    public String getStreet2() {
+
+        return street2;
+    }
+    public String getCity() {
+
+        return city;
+    }
+    public String getState() {
+
+        return state;
+    }
+    public Integer getZip() {
+
+        return zip;
+    }
+    public Integer getWizID() {
+
+        return wizID;
+    }
+    public ArrayList<String> getInviteList() {
+
+        return inviteList;
+    }
+    public HashMap<Integer, String> getRsvp() {
+
+        return rsvp;
+    }
+    public HashMap<Integer, Catalog> getCatalogList() {
+
+        return catalogList;
+    }
+    public String getStretchName() {
+
+        return stretchName;
+    }
+    public Integer getStretchGoal() {
+
+        return stretchGoal;
+    }
 }
