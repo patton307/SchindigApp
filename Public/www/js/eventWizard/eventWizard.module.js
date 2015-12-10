@@ -5,13 +5,11 @@
     .module('eventWizard', [
       'ionic'
     ])
-    .config(function($stateProvider){
-
+    .config(function($stateProvider, $urlRouterProvider){
+      $urlRouterProvider.otherwise('');
     $stateProvider
       .state('wizard', {
         url:'/wizard',
-        templateUrl: "js/eventWizard/views/evtNameType.html",
-        abstract: true,
         controller:"EventWizardController as EventWizCtrl"
       })
       .state('wizard.name', {
