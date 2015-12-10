@@ -57,11 +57,16 @@ public class MainController {
 
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/get-wizard")
     public ArrayList<Wizard> partyList() {
-        ArrayList<Wizard> wizardList = (ArrayList<Wizard>) wizard.findAll();
-        return wizardList;
+
+        return (ArrayList<Wizard>) wizard.findAll();
     }
 
+    @RequestMapping("/get-catalog")
+    public ArrayList<Catalog> catalogList() {
+
+        return (ArrayList<Catalog>) catalog.findAll();
+    }
     
 }
