@@ -2,19 +2,16 @@
   'use strict';
 
   angular
-    .module('eventWizard')
-
-    .factory('EventWizardService', function($http){
+    .module('profile')
+    .factory('ProfileService', function($http){
       var getData = function() {
-        console.log('wizard service')
+        console.log('profile service')
         return $http.get('http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart2')
       }
       return {
         getData: getData
       }
-    });
-
-
+    })
 
 
 }());
