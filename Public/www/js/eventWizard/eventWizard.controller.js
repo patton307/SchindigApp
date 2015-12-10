@@ -5,7 +5,7 @@
 
   .controller("EventWizardController", function($scope, EventWizardService){
       var vm = this;
-      console.log('blue');
+      
   });
 
 
