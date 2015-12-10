@@ -12,7 +12,7 @@
       $cordovaDatePicker,
       $http
     ){
-      
+
 
 //MAKES PHONE VIBRATE///
       $scope.vibrate = function() {

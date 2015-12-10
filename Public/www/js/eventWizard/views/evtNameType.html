@@ -3,17 +3,10 @@
 
  <ion-content>
    <h1>EVENT WIZARD - FIRST PAGE</h1>
-   <p>{{wizardItems}}</p>
-   <div class = "list inset-list">
+   <div ng-repeat="item in wizardItems.data" class = "list inset-list">
      <div class="item">
-       Birthday
-     </div>
-     <div class="item">
-       Anniversary
-     </div>
-     <div class="item">
-       Holiday
-     </div>
+       {{item.partyType}}
+    </div>
    </div>
    <a class='button button-calm icon-left ion-home' href='#/wizard/subtype'>View Parties</a>
    <a class='button button-calm icon-left ion-home' href='#/wizard/whenwhere'>View Dog</a>

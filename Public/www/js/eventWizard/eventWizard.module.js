@@ -3,7 +3,8 @@
 
   angular
     .module('eventWizard', [
-      'ionic'
+      'ionic',
+      
     ])
     .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/wizard/name')

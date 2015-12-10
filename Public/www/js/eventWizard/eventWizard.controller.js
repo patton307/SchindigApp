@@ -3,20 +3,12 @@
   angular
   .module("eventWizard")
 
-  .controller("EventWizardController", function($scope, EventWizardService){
+  .controller("EventWizardController", function($scope, $http, EventWizardService){
       var vm = this;
-      var getWizard = function() {
-        return $http.get('localhost:8080/get-wizard').then(function(data){
-          console.log(data);
-        })
-      // var getWizard = function(data) {
-      //   return $http.get('localhost:8080/get-wizard').then(function(data){
-      //     console.log(data);
-      //   })
-      // EventWizardService.getWizard().success(function(wizardItems){
-      //   $scope.wizardItems = wizardItems
-      //   console.log(wizardItems);
-      // })
+      EventWizardService.getWizard().then(function(data){
+        console.log('event controler', data);
+        $scope.wizardItems = data
+      })
   });
 
 
