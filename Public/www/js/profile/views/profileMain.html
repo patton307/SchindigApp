@@ -1,5 +1,34 @@
 <ion-view>
   <ion-content>
-    This is The Profile Page
+    <h1>this is the profile page</h1>
+    <div class="list card">
+      <div class="item item-image">
+        <img ng-src="{{profilePicture}}" alt="">
+      </div>
+    </div>
+    <div class="padding">
+      <button ng-click='getProfilePicture()'
+              class="button button-block button-royal">
+        Attempt to Load Picture
+      </button>
+      <button ng-click='takePicture()'
+              class="button button-block button-calm">
+        Take Picture
+      </button>
+      <button ng-click='savePhoto(profilePicture)'
+              class="button button-block button-royal">
+        Save Picture
+      </button>
+    </div>
+    <div class="padding">
+      <button ng-click='vibrate()' class="button button-block button-assertive">
+        Vibrate
+      </button>
+    </div>
+    <div class="geoLocator">
+      <p class="latitude">Latitude: {{lat}}</p>
+      <p class="longitude">Longitude: {{long}}</p>
+    </div>
+
   </ion-content>
 </ion-view>

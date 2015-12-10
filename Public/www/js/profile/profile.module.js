@@ -3,14 +3,16 @@
 
   angular
     .module('profile', [
-      'ionic'
+      'ionic',
+      'ngCordova'
     ])
     .config(function($stateProvider, $urlRouterProvider){
       $urlRouterProvider.otherwise('')
       $stateProvider
         .state('profile', {
           url: '/profile',
-          templateUrl: 'js/profile/views/profileMain.html'
+          templateUrl: 'js/profile/views/profileMain.html',
+          controller: 'ProfileController'
         })
     });
 
