@@ -6,67 +6,32 @@
       'ionic'
     ])
     .config(function($stateProvider, $urlRouterProvider){
-      $urlRouterProvider.otherwise('');
+
+    $urlRouterProvider.otherwise('');
     $stateProvider
       .state('wizard', {
-        url:'/wizard',
-        controller:"EventWizardController as EventWizCtrl"
+        url:'/wizard/name-type',
+        templateUrl: "js/eventWizard/views/evtNameType.html",
       })
-      .state('wizard.name', {
-        url:'/name-type',
-        views: {
-           'wizard-nameType':{
-            templateUrl:"js/eventWizard/views/evtNameType.html",
-            controller:"EventWizCtrl"
-          }
-        }
-
+      .state('name', {
+        url:'/wizard/subtype',
+        templateUrl:"js/eventWizard/views/evtSubType.html",
       })
-      .state('wizard.subtype', {
-        url:"/subtype",
-        views: {
-          'wizard-subType':{
-            templateUrl:"js/eventWizard/views/evtSubType.html",
-            controller:"EventWizCtrl"
-          }
-        }
-
+      .state('whenwhere', {
+        url:"/wizard/whenwhere",
+        templateUrl:"js/eventWizard/views/evtWhenWhere.html"
       })
-      .state('wizard.whenwhere', {
-        url:"/whenwhere",
-        views: {
-          'wizard-whenWhere':{
-            templateUrl:"js/eventWizard/views/evtSubType.html",
-            controller:"EventWizCtrl"
-          }
-        }
+      .state('favors', {
+        url:"/wizard/favors",
+        templateUrl:"js/eventWizard/views/evtFavors.html",
       })
-      .state('wizard.favors', {
-        url:"/favors",
-        views: {
-          'wizard-favors':{
-            templateUrl:"js/eventWizard/views/evtFavors.html",
-            controller:"EventWizCtrl"
-          }
-        }
+      .state('stretchgoal', {
+        url:"/wizard/strechgoal",
+        templateUrl:"js/eventWizard/views/evtStrechGoal.html"
       })
-      .state('wizard.strechgoal', {
-        url:"/strechgoal",
-        views: {
-          'wizard-strechgoal':{
-            templateUrl:"js/eventWizard/views/evtStrechGoal.html",
-            controller:"EventWizCtrl"
-          }
-        }
-      })
-      .state('wizard.invites', {
-        url:"/invites",
-        views: {
-          'wizard-invites':{
-            templateUrl:"js/eventWizard/views/evtInvites.html",
-            controller:"EventWizCtrl"
-          }
-        }
+      .state('invites', {
+        url:"/wizard/invites",
+        templateUrl:"js/eventWizard/views/evtInvites.html"
       });
     });
 

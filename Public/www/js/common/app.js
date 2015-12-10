@@ -11,7 +11,8 @@
 angular
   .module('schindig',[
     'ionic',
-    'eventWizard'
+    'eventWizard',
+    'profile'
     ])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
