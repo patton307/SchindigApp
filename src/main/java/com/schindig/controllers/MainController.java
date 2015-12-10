@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Agronis on 12/9/15.
  */
-@Controller
+@RestController
 public class MainController {
 
     @Autowired
