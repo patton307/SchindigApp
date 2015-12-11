@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/utils/Params.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/utils/Params.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -90,13 +88,10 @@
       <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6086106">
-              <caret line="113" column="33" selection-start-line="113" selection-start-column="33" selection-end-line="113" selection-end-column="33" />
+            <state vertical-scroll-proportion="1.37182">
+              <caret line="111" column="2" selection-start-line="111" selection-start-column="2" selection-end-line="111" selection-end-column="2" />
               <folding>
                 <element signature="method#init#0;class#MainController#0" expanded="false" />
-                <element signature="method#createParty#0;class#MainController#0" expanded="false" />
-                <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
-                <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -689,6 +684,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -1100,7 +1127,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449779667229</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Created routes for rsvp &amp; update-user.&#10;Updated Params file.&#10;New Jar.">
+      <created>1449792484447</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1449792484447</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1155,7 +1188,8 @@
     <MESSAGE value="Fixed getters" />
     <MESSAGE value="CrossOrigin" />
     <MESSAGE value="Created routes for:&#10;&#10;add-favor&#10;add-invite&#10;create-party&#10;rsvp&#10;&#10;Created Parameter class.&#10;&#10;Minor changes to Party &amp; User class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Created routes for:&#10;&#10;add-favor&#10;add-invite&#10;create-party&#10;rsvp&#10;&#10;Created Parameter class.&#10;&#10;Minor changes to Party &amp; User class." />
+    <MESSAGE value="Created routes for rsvp &amp; update-user.&#10;Updated Params file.&#10;New Jar." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created routes for rsvp &amp; update-user.&#10;Updated Params file.&#10;New Jar." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1221,9 +1255,6 @@
           <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
           <folding>
             <element signature="method#init#0;class#MainController#0" expanded="false" />
-            <element signature="method#createParty#0;class#MainController#0" expanded="false" />
-            <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
-            <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1323,9 +1354,6 @@
           <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
           <folding>
             <element signature="method#init#0;class#MainController#0" expanded="false" />
-            <element signature="method#createParty#0;class#MainController#0" expanded="false" />
-            <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
-            <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1629,13 +1657,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6086106">
-          <caret line="113" column="33" selection-start-line="113" selection-start-column="33" selection-end-line="113" selection-end-column="33" />
+        <state vertical-scroll-proportion="1.37182">
+          <caret line="111" column="2" selection-start-line="111" selection-start-column="2" selection-end-line="111" selection-end-column="2" />
           <folding>
             <element signature="method#init#0;class#MainController#0" expanded="false" />
-            <element signature="method#createParty#0;class#MainController#0" expanded="false" />
-            <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
-            <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
           </folding>
         </state>
       </provider>
