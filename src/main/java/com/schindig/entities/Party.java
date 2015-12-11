@@ -40,7 +40,7 @@ public class Party {
     @Column(nullable = false)
     public Integer zip;
 
-    @ManyToOne
+    @OneToOne
     Wizard wizId;
 
     public ArrayList<String> inviteList;
@@ -52,6 +52,14 @@ public class Party {
     public String stretchName;
 
     public Integer stretchGoal;
+
+    public Integer pos;
+
+    public Boolean byob = false;
+
+    public Boolean theme = false;
+
+    public String parking = " ";
 
     public Party(){}
     public Party(String partyName, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Wizard wizId, ArrayList<String> inviteList, ArrayList<Catalog> catalogList, Integer stretchGoal, String stretchName) {
@@ -69,6 +77,28 @@ public class Party {
         this.catalogList = catalogList;
         this.stretchGoal = stretchGoal;
         this.stretchName = stretchName;
+    }
+    public Party(Integer id, String partyName, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Wizard wizId, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer pos, Boolean byob, Boolean theme, String parking) {
+
+        this.id = id;
+        this.partyName = partyName;
+        this.createDate = createDate;
+        this.partyDate = partyDate;
+        this.street1 = street1;
+        this.street2 = street2;
+        this.city = city;
+        this.usState = usState;
+        this.zip = zip;
+        this.wizId = wizId;
+        this.inviteList = inviteList;
+        this.rsvp = rsvp;
+        this.catalogList = catalogList;
+        this.stretchName = stretchName;
+        this.stretchGoal = stretchGoal;
+        this.pos = pos;
+        this.byob = byob;
+        this.theme = theme;
+        this.parking = parking;
     }
     public Integer getId() {
 
