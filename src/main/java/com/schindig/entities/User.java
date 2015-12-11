@@ -43,6 +43,31 @@ public class User {
     public Integer inviteCount;
     public Integer invitedCount;
 
-    User(){}
-    
+    public User(){}
+    public User(Integer id, String username) {
+        this.username = username;
+        this.id = id;
+    }
+    public User(Integer id, String username, String firstName, String lastName, String email, String phone) {
+
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+    }
+    public User(Integer id, String username, String firstName, String lastName, String email, String phone, Integer partyCount, Integer hostCount, Integer inviteCount, Integer invitedCount) {
+
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.partyCount = partyCount;
+        this.hostCount = hostCount;
+        this.inviteCount = inviteCount;
+        this.invitedCount = invitedCount;
+    }
 }

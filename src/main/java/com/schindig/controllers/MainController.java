@@ -10,13 +10,11 @@ import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Params;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Agronis on 12/9/15.
@@ -71,57 +69,102 @@ public class MainController {
     }
 
     /**1**/
-    @RequestMapping("/get-wizard")
+    @RequestMapping(path = "/wizard", method = RequestMethod.GET)
     public ArrayList<Wizard> getPartyList() {
         return (ArrayList<Wizard>) wizard.findAll();
     }
 
     /**2**/
-    @RequestMapping("/get-catalog")
+    @RequestMapping(path = "/catalog", method = RequestMethod.GET)
     public ArrayList<Catalog> getCatalogList() {
         return (ArrayList<Catalog>) catalog.findAll();
     }
 
-    /**5**/
-    @RequestMapping(path = "/create-party", method = RequestMethod.POST)
-    public void createParty( @RequestBody Party party ){
-        parties.save(party);
+    @RequestMapping(path = "/parties", method = RequestMethod.GET)
+    public ArrayList<Party> getAllParties(@RequestBody User user){
+        user = users.findOne(user.id);
+        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
+        final User finalUser = user;
+        partyList.stream()
+                .filter(party -> {
+                    return (party.inviteList.contains(finalUser.phone));
+                })
+                .collect(Collectors.toCollection(ArrayList<Party>::new));
+        return partyList;
     }
-//
-//    /**6**/
-//    @RequestMapping(path = "/add-favor", method = RequestMethod.POST)
-//    public void addFavor( @RequestBody Params params ){
-//        Party p = parties.findOne(params.partyId);
-//        Catalog c = new Catalog(params.partyFavor);
-//        c.useCount += 1;
-//        catalog.save(c);
-//        p.catalogList.add(c);
-//        parties.save(p);
-//
+
+    /**5**/
+    @RequestMapping(path = "/party/create", method = RequestMethod.POST)
+    public Party createParty( @RequestBody Party party ){
+        /**User u = party.host;
+        u.hostCount += 1;
+        users.save(u);*/
+        parties.save(party);
+        return party;
+    }
+
+    /**6**/
+    @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
+    public Party addFavor( @RequestBody Party party, @RequestBody Catalog item ){
+        Party p = parties.findOne(party.id);
+        item = new Catalog(item.favorName);
+        item.useCount += 1;
+        catalog.save(item);
+        p.catalogList.add(item);
+        parties.save(p);
+        return p;
+
+    }
+
+    /**7**/
+    @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
+    public Party addInvite( @RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ){
+        party.inviteList.add(invitePhone);
+        parties.save(party);
+        user.inviteCount += 1;
+        users.save(user);
+        return party;
+    }
+
+    /**8**/
+    @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
+    public Party rsvp( @RequestBody Party party, @RequestBody User user, @RequestBody String rsvpStatus){
+        party.rsvp.put(user.id, rsvpStatus);
+        parties.save(party);
+        return party;
+    }
+
+    /**9**/
+    @RequestMapping(path = "/user/update", method = RequestMethod.POST)
+    public User updateUser( @RequestBody User user ){
+        users.save(user);
+        user.password = null;
+        return user;
+    }
+
+    @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
+    public Party getParty(@PathVariable("id") int id) {
+        return parties.findOne(id);
+    }
+
+    @RequestMapping(path = "/party/update", method = RequestMethod.POST)
+    public Party updateParty(@RequestBody Party party) {
+        parties.save(party);
+        return party;
+    }
+
+    /** Can't use this until all user methods are in.
+//    @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
+//    public ArrayList<Party> deleteParty(@RequestBody Party party) {
+//        User u = party.host;
+//        u.hostCount -= 1;
+//        u.inviteCount -= party.inviteList.size();
+//        parties.delete(party.id);
+//        users.save(u);
+//        return (ArrayList<Party>) parties.findAll();
 //    }
-//
-//    /**7**/
-//    @RequestMapping(path = "/add-invite", method = RequestMethod.POST)
-//    public void addInvite( @RequestBody Params params ){
-//        Party p = parties.findOne(params.partyId);
-//        p.inviteList.add(params.invitePhone);
-//        parties.save(p);
-//    }
-//
-//    /**8**/
-//    @RequestMapping(path = "/rsvp", method = RequestMethod.POST)
-//    public void rsvp( @RequestBody Params params ){
-//        Party p = parties.findOne(params.partyId);
-//        User u = users.findOne(params.userId);
-//        p.rsvp.put(u.id, params.rsvpStatus);
-//        parties.save(p);
-//    }
-//
-//    /**9**/
-//    @RequestMapping(path = "/update-user", method = RequestMethod.POST)
-//    public void updateUser( @RequestBody User user ){
-//        users.save(user);
-//    }
+     */
+
 
 
 }

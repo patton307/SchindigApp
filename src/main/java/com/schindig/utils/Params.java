@@ -43,7 +43,7 @@ public class Params {
     public String email;
     public String firstName;
     public String lastName;
-    public Integer rsvpStatus;
+    public String rsvpStatus;
 
     public Integer getPartyId() {
 
@@ -137,7 +137,7 @@ public class Params {
 
         return lastName;
     }
-    public Integer getRsvpStatus() {
+    public String getRsvpStatus() {
 
         return rsvpStatus;
     }
