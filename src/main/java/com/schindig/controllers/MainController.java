@@ -82,44 +82,47 @@ public class MainController {
     }
 
     /**5**/
-    @RequestMapping("/create-party")
-    public void createParty(
-            @RequestBody Params params ){
+    @RequestMapping(path = "/create-party", method = RequestMethod.POST)
+    public void createParty( @RequestBody Params params ){
 
         Party p = new Party(
                 params.partyName, params.partyDate, params.street1, params.street2, params.city,
                 params.usState, params.zip, params.wizID, params.inviteList,
-                params.rsvp, params.catalogList, params.stretchName, params.stretchGoal);
+                params.catalogList, params.stretchName, params.stretchGoal);
 
         parties.save(p);
 
     }
 
     /**6**/
-    @RequestMapping("/add-favor")
-    public void addFavor(
-            @RequestBody Params params ){
+    @RequestMapping(path = "/add-favor", method = RequestMethod.POST)
+    public void addFavor( @RequestBody Params params ){
         Catalog c = new Catalog(params.partyFavor);
         catalog.save(c);
 
     }
 
     /**7**/
-    @RequestMapping("/add-invite")
-    public void addInvite(
-            @RequestBody Params params ){
+    @RequestMapping(path = "/add-invite", method = RequestMethod.POST)
+    public void addInvite( @RequestBody Params params ){
         Party p = parties.findOne(params.partyId);
         p.inviteList.add(params.invitePhone);
         parties.save(p);
     }
 
     /**8**/
-    @RequestMapping("/rsvp")
-    public void rsvp(
-            @RequestBody Params params ){
+    @RequestMapping(path = "/rsvp", method = RequestMethod.POST)
+    public void rsvp( @RequestBody Params params ){
         Party p = parties.findOne(params.partyId);
         User u = users.findOne(params.userId);
         p.rsvp.put(u.id, params.rsvpStatus);
     }
+
+    /**9**/
+    @RequestMapping(path = "/update-user", method = RequestMethod.POST)
+    public void updateUser( @RequestBody User user ){
+        users.save(user);
+    }
+
 
 }

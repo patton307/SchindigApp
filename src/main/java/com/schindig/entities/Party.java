@@ -54,7 +54,7 @@ public class Party {
     public Integer stretchGoal;
 
     public Party(){}
-    public Party(String partyName, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Integer wizID, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, HashMap<Integer, Catalog> catalogList, String stretchName, Integer stretchGoal) {
+    public Party(String partyName, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Integer wizID, ArrayList<String> inviteList, HashMap<Integer, Catalog> catalogList, String stretchName, Integer stretchGoal) {
 
         this.partyName = partyName;
         this.partyDate = partyDate;

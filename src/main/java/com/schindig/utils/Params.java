@@ -45,6 +45,100 @@ public class Params {
     public String lastName;
     public String rsvpStatus;
 
+    public Integer getPartyId() {
 
-    
+        return partyId;
+    }
+    public String getPartyName() {
+
+        return partyName;
+    }
+    public LocalDateTime getPartyDate() {
+
+        return partyDate;
+    }
+    public String getStreet1() {
+
+        return street1;
+    }
+    public String getStreet2() {
+
+        return street2;
+    }
+    public Integer getZip() {
+
+        return zip;
+    }
+    public String getUsState() {
+
+        return usState;
+    }
+    public String getCity() {
+
+        return city;
+    }
+    public Integer getWizID() {
+
+        return wizID;
+    }
+    public ArrayList<String> getInviteList() {
+
+        return inviteList;
+    }
+    public HashMap<Integer, String> getRsvp() {
+
+        return rsvp;
+    }
+    public HashMap<Integer, Catalog> getCatalogList() {
+
+        return catalogList;
+    }
+    public String getStretchName() {
+
+        return stretchName;
+    }
+    public Integer getStretchGoal() {
+
+        return stretchGoal;
+    }
+    public String getInvitePhone() {
+
+        return invitePhone;
+    }
+    public String getPartyType() {
+
+        return partyType;
+    }
+    public String getPartyFavor() {
+
+        return partyFavor;
+    }
+    public Integer getUserId() {
+
+        return userId;
+    }
+    public String getUsername() {
+
+        return username;
+    }
+    public String getPhone() {
+
+        return phone;
+    }
+    public String getEmail() {
+
+        return email;
+    }
+    public String getFirstName() {
+
+        return firstName;
+    }
+    public String getLastName() {
+
+        return lastName;
+    }
+    public String getRsvpStatus() {
+
+        return rsvpStatus;
+    }
 }
