@@ -25,7 +25,7 @@ public class Params {
     /**These can be modified later*/
     public ArrayList<String> inviteList;
     public HashMap<Integer, String> rsvp;
-    public HashMap<Integer, Catalog> catalogList;
+    public ArrayList<Catalog> catalogList;
     public String stretchName;
     public Integer stretchGoal;
     public String invitePhone;
@@ -43,7 +43,7 @@ public class Params {
     public String email;
     public String firstName;
     public String lastName;
-    public String rsvpStatus;
+    public Integer rsvpStatus;
 
     public Integer getPartyId() {
 
@@ -89,7 +89,7 @@ public class Params {
 
         return rsvp;
     }
-    public HashMap<Integer, Catalog> getCatalogList() {
+    public ArrayList<Catalog> getCatalogList() {
 
         return catalogList;
     }
@@ -137,7 +137,7 @@ public class Params {
 
         return lastName;
     }
-    public String getRsvpStatus() {
+    public Integer getRsvpStatus() {
 
         return rsvpStatus;
     }

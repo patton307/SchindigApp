@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * Created by Agronis on 12/9/15.
  */
+
 @CrossOrigin
 @RestController
 public class MainController {
@@ -81,24 +82,21 @@ public class MainController {
         return (ArrayList<Catalog>) catalog.findAll();
     }
 
-//    /**5**/
-//    @RequestMapping(path = "/create-party", method = RequestMethod.POST)
-//    public void createParty( @RequestBody Params params ){
-//
-//        Party p = new Party(
-//                params.partyName, params.partyDate, params.street1, params.street2, params.city,
-//                params.usState, params.zip, params.wizID, params.inviteList,
-//                params.catalogList, params.stretchName, params.stretchGoal);
-//
-//        parties.save(p);
-//
-//    }
+    /**5**/
+    @RequestMapping(path = "/create-party", method = RequestMethod.POST)
+    public void createParty( @RequestBody Party party ){
+        parties.save(party);
+    }
 //
 //    /**6**/
 //    @RequestMapping(path = "/add-favor", method = RequestMethod.POST)
 //    public void addFavor( @RequestBody Params params ){
+//        Party p = parties.findOne(params.partyId);
 //        Catalog c = new Catalog(params.partyFavor);
+//        c.useCount += 1;
 //        catalog.save(c);
+//        p.catalogList.add(c);
+//        parties.save(p);
 //
 //    }
 //
@@ -116,6 +114,7 @@ public class MainController {
 //        Party p = parties.findOne(params.partyId);
 //        User u = users.findOne(params.userId);
 //        p.rsvp.put(u.id, params.rsvpStatus);
+//        parties.save(p);
 //    }
 //
 //    /**9**/
