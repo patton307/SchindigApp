@@ -1,31 +1,30 @@
 Christmas, null
 Valentine's Day,null
-4th of July,null
-Hanukah,null
-St. Patrick's Day,null
-Graduation,null
-Bachelorette Party,null
-Bachelor Party,null
-Birthday Party,null
-Anniversary Party,null
-Congratulations,null
+4th of July, null
+Hanukah, null
+St. Patrick's Day, null
+Graduation, What are they graduating from?
+Bachelorette Party, Mild or Wild?
+Bachelor Party, Mild or Wild?
+Birthday Party, How old? Male or Female?
+Anniversary Party, For who/what? How many years?
+Congratulations, For what?
 Divorce,null
 Retirement,null
-Job Promotion,null
-Bon Voyage,null
-Baby Shower,null
+Job Promotion, Into what?
+Bon Voyage, Where are they going?
+Baby Shower, Boy or Girl?
 Bridal Shower,null
-Benefit,null
-Fund Raiser,null
-Costume Party,null
+Benefit, Towards what?
+Fund Raiser, Towards what?
+Costume Party, null
 Housewarming Party,null
 Cocktail Party,null
 Tea Party,null
-Themed Party,null
 Wedding Reception,null
-Family Re-Union,null
-High School Re-Union,null
-College Re-Union,null
+Family Re-Union, How many years has it been?
+High School Re-Union, How many years has it been?
+College Re-Union, How many years has it been?
 Potluck Dinner,null
 Fondue Dinner,null
 Wine Tasting,null
