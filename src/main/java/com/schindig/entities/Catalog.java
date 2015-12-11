@@ -1,4 +1,5 @@
 package com.schindig.entities;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,5 +12,31 @@ public class Catalog {
 
     @GeneratedValue
     @Id
-    Integer id;
+    public Integer id;
+
+    @Column(nullable = false)
+    public String favorName;
+
+    public Integer useCount = 0;
+
+    Catalog(){}
+
+    public Catalog(String favorName) {
+
+        this.favorName = favorName;
+    }
+
+    public String getFavorName() {
+
+        return favorName;
+    }
+    public Integer getUseCount() {
+
+        return useCount;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
 }
