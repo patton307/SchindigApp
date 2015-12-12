@@ -1,6 +1,5 @@
 package com.schindig.utils;
 import com.schindig.entities.Catalog;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;

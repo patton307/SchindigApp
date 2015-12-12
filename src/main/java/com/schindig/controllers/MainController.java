@@ -68,18 +68,78 @@ public class MainController {
 
     }
 
-    /**1**/
-    @RequestMapping(path = "/wizard", method = RequestMethod.GET)
-    public ArrayList<Wizard> getPartyList() {
-        return (ArrayList<Wizard>) wizard.findAll();
+    /**ALL USER RELATED ROUTES**/
+    /**14**/
+    @RequestMapping(path = "/user/update", method = RequestMethod.POST)
+    public User updateUser(@RequestBody User user){
+        users.save(user);
+        user.password = null;
+        return user;
     }
 
-    /**2**/
-    @RequestMapping(path = "/catalog", method = RequestMethod.GET)
-    public ArrayList<Catalog> getCatalogList() {
-        return (ArrayList<Catalog>) catalog.findAll();
+
+
+    /**ALL PARTY RELATED ROUTES**/
+    /**3**/
+    @RequestMapping(path = "/party/create", method = RequestMethod.POST)
+    public Party createParty( @RequestBody Party party ){
+        /**User u = party.host;
+         u.hostCount += 1;
+         users.save(u);*/
+        parties.save(party);
+        return party;
     }
 
+    /**4**/
+    @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
+    public Party addFavor( @RequestBody Party party, @RequestBody Catalog item ){
+        Party p = parties.findOne(party.id);
+        item = new Catalog(item.favorName);
+        item.useCount += 1;
+        catalog.save(item);
+        p.catalogList.add(item);
+        parties.save(p);
+        return p;
+
+    }
+
+    /**5**/
+    @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
+    public Party addInvite( @RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ){
+        party.inviteList.add(invitePhone);
+        parties.save(party);
+        user.inviteCount += 1;
+        users.save(user);
+        return party;
+    }
+
+    /**6**/
+    @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
+    public Party rsvp( @RequestBody Party party, @RequestBody User user, @RequestBody String rsvpStatus){
+        party.rsvp.put(user.id, rsvpStatus);
+        user.invitedCount += 1;
+        if (rsvpStatus.equals("Yes")) {
+            user.partyCount += 1;
+        }
+        users.save(user);
+        parties.save(party);
+        return party;
+    }
+
+    /**7**/
+    @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
+    public Party getParty(@PathVariable("id") int id) {
+        return parties.findOne(id);
+    }
+
+    /**8**/
+    @RequestMapping(path = "/party/update", method = RequestMethod.POST)
+    public Party updateParty(@RequestBody Party party) {
+        parties.save(party);
+        return party;
+    }
+
+    /**9**/
     @RequestMapping(path = "/parties", method = RequestMethod.GET)
     public ArrayList<Party> getAllParties(@RequestBody User user){
         user = users.findOne(user.id);
@@ -93,78 +153,40 @@ public class MainController {
         return partyList;
     }
 
-    /**5**/
-    @RequestMapping(path = "/party/create", method = RequestMethod.POST)
-    public Party createParty( @RequestBody Party party ){
-        /**User u = party.host;
-        u.hostCount += 1;
-        users.save(u);*/
-        parties.save(party);
-        return party;
-    }
-
-    /**6**/
-    @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
-    public Party addFavor( @RequestBody Party party, @RequestBody Catalog item ){
-        Party p = parties.findOne(party.id);
-        item = new Catalog(item.favorName);
-        item.useCount += 1;
-        catalog.save(item);
-        p.catalogList.add(item);
-        parties.save(p);
-        return p;
-
-    }
-
-    /**7**/
-    @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
-    public Party addInvite( @RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ){
-        party.inviteList.add(invitePhone);
-        parties.save(party);
-        user.inviteCount += 1;
-        users.save(user);
-        return party;
-    }
-
-    /**8**/
-    @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
-    public Party rsvp( @RequestBody Party party, @RequestBody User user, @RequestBody String rsvpStatus){
-        party.rsvp.put(user.id, rsvpStatus);
-        parties.save(party);
-        return party;
-    }
-
-    /**9**/
-    @RequestMapping(path = "/user/update", method = RequestMethod.POST)
-    public User updateUser( @RequestBody User user ){
-        users.save(user);
-        user.password = null;
-        return user;
-    }
-
-    @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
-    public Party getParty(@PathVariable("id") int id) {
-        return parties.findOne(id);
-    }
-
-    @RequestMapping(path = "/party/update", method = RequestMethod.POST)
-    public Party updateParty(@RequestBody Party party) {
-        parties.save(party);
-        return party;
-    }
-
-    /** Can't use this until all user methods are in.
-//    @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
-//    public ArrayList<Party> deleteParty(@RequestBody Party party) {
+    /**10**/
+    @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
+    public ArrayList<Party> deleteParty(@RequestBody Party party) {
 //        User u = party.host;
 //        u.hostCount -= 1;
 //        u.inviteCount -= party.inviteList.size();
-//        parties.delete(party.id);
 //        users.save(u);
-//        return (ArrayList<Party>) parties.findAll();
-//    }
-     */
+        parties.delete(party.id);
+        return (ArrayList<Party>) parties.findAll();
+    }
+
+    /**11**/
+    @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
+    public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog favorName) {
+        party.catalogList.remove(favorName);
+        return party;
+    }
 
 
+
+    /**ALL WIZARD RELATED ROUTES**/
+    /**1**/
+    @RequestMapping(path = "/wizard", method = RequestMethod.GET)
+    public ArrayList<Wizard> getPartyList() {
+        return (ArrayList<Wizard>) wizard.findAll();
+    }
+
+
+
+    /**ALL CATALOG SPECIFIC ROUTES**/
+    /**2**/
+    @RequestMapping(path = "/catalog", method = RequestMethod.GET)
+    public ArrayList<Catalog> getCatalogList() {
+        return (ArrayList<Catalog>) catalog.findAll();
+    }
 
 }
