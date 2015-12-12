@@ -1,5 +1,6 @@
 package com.schindig.entities;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,40 +12,94 @@ public class Party {
 
     @GeneratedValue
     @Id
-    Integer id;
+    public Integer id;
 
 //    @OneToMany
-//    User user;
+//    public User host;
 
     @Column(nullable = false)
-    String street1;
+    public String partyName;
 
     @Column(nullable = false)
-    String street2;
+    public LocalDateTime createDate;
 
     @Column(nullable = false)
-    String city;
+    public LocalDateTime partyDate;
 
     @Column(nullable = false)
-    String state;
+    public String street1;
+
+    public String street2;
 
     @Column(nullable = false)
-    Integer zip;
+    public String city;
 
     @Column(nullable = false)
-    Integer wizID;
+    public String usState;
 
-    ArrayList<String> inviteList;
+    @Column(nullable = false)
+    public Integer zip;
 
-    HashMap<Integer, String> rsvp;
+    @OneToOne
+    Wizard wizId;
 
-    HashMap<Integer, Catalog> catalogList;
+    public ArrayList<String> inviteList;
 
-    String stretchName;
-    Integer stretchGoal;
+    public HashMap<Integer, String> rsvp;
 
-    Party(){}
+    public ArrayList<Catalog> catalogList;
 
+    public String stretchName;
+
+    public Integer stretchGoal;
+
+    public Integer pos;
+
+    public Boolean byob = false;
+
+    public Boolean theme = false;
+
+    public String parking = " ";
+
+    public Party(){}
+    public Party(String partyName, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Wizard wizId, ArrayList<String> inviteList, ArrayList<Catalog> catalogList, Integer stretchGoal, String stretchName) {
+
+        this.partyName = partyName;
+        this.createDate = createDate;
+        this.partyDate = partyDate;
+        this.street1 = street1;
+        this.street2 = street2;
+        this.city = city;
+        this.usState = usState;
+        this.zip = zip;
+        this.wizId = wizId;
+        this.inviteList = inviteList;
+        this.catalogList = catalogList;
+        this.stretchGoal = stretchGoal;
+        this.stretchName = stretchName;
+    }
+    public Party(Integer id, String partyName, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Wizard wizId, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer pos, Boolean byob, Boolean theme, String parking) {
+
+        this.id = id;
+        this.partyName = partyName;
+        this.createDate = createDate;
+        this.partyDate = partyDate;
+        this.street1 = street1;
+        this.street2 = street2;
+        this.city = city;
+        this.usState = usState;
+        this.zip = zip;
+        this.wizId = wizId;
+        this.inviteList = inviteList;
+        this.rsvp = rsvp;
+        this.catalogList = catalogList;
+        this.stretchName = stretchName;
+        this.stretchGoal = stretchGoal;
+        this.pos = pos;
+        this.byob = byob;
+        this.theme = theme;
+        this.parking = parking;
+    }
     public Integer getId() {
 
         return id;
@@ -61,17 +116,13 @@ public class Party {
 
         return city;
     }
-    public String getState() {
-
-        return state;
-    }
     public Integer getZip() {
 
         return zip;
     }
-    public Integer getWizID() {
+    public Wizard getWizId() {
 
-        return wizID;
+        return wizId;
     }
     public ArrayList<String> getInviteList() {
 
@@ -81,7 +132,7 @@ public class Party {
 
         return rsvp;
     }
-    public HashMap<Integer, Catalog> getCatalogList() {
+    public ArrayList<Catalog> getCatalogList() {
 
         return catalogList;
     }
@@ -92,5 +143,14 @@ public class Party {
     public Integer getStretchGoal() {
 
         return stretchGoal;
+    }
+    public String getUsState() {
+
+        return usState;
+    }
+    public String getPartyName() {
+
+
+        return partyName;
     }
 }

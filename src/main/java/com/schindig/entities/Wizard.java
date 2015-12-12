@@ -12,12 +12,12 @@ public class Wizard {
 
     @GeneratedValue
     @Id
-    Integer id;
+    public Integer id;
 
     @Column(nullable = false)
-    String partyType;
+    public String partyType;
 
-    String partyMod;
+    public String partyMod = " ";
 
     public Wizard(){}
 
