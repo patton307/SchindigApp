@@ -5,6 +5,8 @@
 
   .controller("EventWizardController", function($scope, $http, $stateParams, $cordovaDatePicker, EventWizardService){
       var vm = this;
+
+      ////GET WIZARD DATA////
       EventWizardService.getWizard().then(function(data){
         $scope.wizardItems = data;
         $scope.get = function(nameId) {
@@ -19,6 +21,23 @@
         };
         $scope.partySubType = $scope.get($stateParams);
       });
+
+
+      /////POST NEW PARTY/////
+      $scope.newWizPartyPost = function(subtype){
+        var item = {partyType: "Christmas", subType: subtype}
+        console.log("posting item: ", item);
+        EventWizardService.newWizPartyPost(item);
+      }
+      // EventWizardService.newWizPartyPost(item).then(function(data){
+      //   console.log('post', data);
+      // });
+
+
+
+
+
+
       // DATE AND TIME PICKER
     var options = {
       date: new Date(),
