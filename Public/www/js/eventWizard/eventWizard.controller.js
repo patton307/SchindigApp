@@ -33,12 +33,11 @@
     };
 
 
-    $scope.datePicker = function() {
-          $cordovaDatePicker.show(options).then(function(date){
-          alert(date);
-
-        });
-      });
+    $scope.showDatePicker = function() {
+   $cordovaDatePicker.show(options).then(function(date){
+       alert(date);
+   });
+ };
 
   //END DATE AND TIME PICKER
 });
