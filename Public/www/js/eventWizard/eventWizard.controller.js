@@ -24,8 +24,8 @@
 
 
       /////POST NEW PARTY/////
-      $scope.newWizPartyPost = function(subtype){
-        var item = {partyType: "Christmas", subType: subtype}
+      $scope.newWizPartyPost = function(subType, partyType){
+        var item = {subType, partyType}
         console.log("posting item: ", item);
         EventWizardService.newWizPartyPost(item);
       }
