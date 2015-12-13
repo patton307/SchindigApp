@@ -20,6 +20,10 @@ public class Party {
 //    @Column(nullable = false)
     public String partyName;
 
+    public String partyType;
+
+    public String subType;
+
 //    @Column(nullable = false)
     public LocalDateTime createDate;
 
@@ -40,9 +44,6 @@ public class Party {
 //    @Column(nullable = false)
     public Integer zip;
 
-    @OneToOne
-    Wizard wizId;
-
     public ArrayList<String> inviteList;
 
     public HashMap<Integer, String> rsvp;
@@ -62,9 +63,11 @@ public class Party {
     public String parking = " ";
 
     public Party(){}
-    public Party(String partyName, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Wizard wizId, ArrayList<String> inviteList, ArrayList<Catalog> catalogList, Integer stretchGoal, String stretchName) {
+    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip) {
 
         this.partyName = partyName;
+        this.partyType = partyType;
+        this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
         this.street1 = street1;
@@ -72,16 +75,12 @@ public class Party {
         this.city = city;
         this.usState = usState;
         this.zip = zip;
-        this.wizId = wizId;
-        this.inviteList = inviteList;
-        this.catalogList = catalogList;
-        this.stretchGoal = stretchGoal;
-        this.stretchName = stretchName;
     }
-    public Party(Integer id, String partyName, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, Wizard wizId, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer pos, Boolean byob, Boolean theme, String parking) {
+    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer pos, Boolean byob, Boolean theme, String parking) {
 
-        this.id = id;
         this.partyName = partyName;
+        this.partyType = partyType;
+        this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
         this.street1 = street1;
@@ -89,7 +88,6 @@ public class Party {
         this.city = city;
         this.usState = usState;
         this.zip = zip;
-        this.wizId = wizId;
         this.inviteList = inviteList;
         this.rsvp = rsvp;
         this.catalogList = catalogList;
@@ -120,9 +118,37 @@ public class Party {
 
         return zip;
     }
-    public Wizard getWizId() {
+    public String getPartyType() {
 
-        return wizId;
+        return partyType;
+    }
+    public String getSubType() {
+
+        return subType;
+    }
+    public LocalDateTime getCreateDate() {
+
+        return createDate;
+    }
+    public LocalDateTime getPartyDate() {
+
+        return partyDate;
+    }
+    public Integer getPos() {
+
+        return pos;
+    }
+    public Boolean getByob() {
+
+        return byob;
+    }
+    public Boolean getTheme() {
+
+        return theme;
+    }
+    public String getParking() {
+
+        return parking;
     }
     public ArrayList<String> getInviteList() {
 
