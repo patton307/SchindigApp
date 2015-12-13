@@ -16,7 +16,7 @@ public class Catalog {
 
     public Integer useCount = 0;
 
-    Catalog(){}
+    public Catalog(){}
     public Catalog(Integer id, String favorName, Integer useCount) {
 
         this.id = id;
@@ -39,4 +39,6 @@ public class Catalog {
 
         return id;
     }
+
+
 }

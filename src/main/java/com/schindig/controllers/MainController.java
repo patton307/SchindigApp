@@ -204,4 +204,23 @@ public class MainController {
         return (ArrayList<Catalog>) catalog.findAll();
     }
 
+    @RequestMapping(path = "/catalog/save", method = RequestMethod.POST)
+    public String catalogItem(@RequestBody Catalog item) {
+        if (!catalog.exists(item.id)) {
+            Catalog c = new Catalog();
+            c.favorName = item.favorName;
+            catalog.save(c);
+        } else {
+            catalog.save(item);
+            return "Item updated.";
+        }
+        return "Item added to database";
+    }
+
+    @RequestMapping(path = "/catalog/remove", method = RequestMethod.POST)
+    public ArrayList<Catalog> deleteCatalogItem(@RequestBody Catalog item) {
+        catalog.delete(item);
+        return (ArrayList<Catalog>) catalog.findAll();
+    }
+
 }
