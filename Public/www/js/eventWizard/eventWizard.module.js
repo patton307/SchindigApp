@@ -4,37 +4,46 @@
   angular
     .module('eventWizard', [
       'ionic',
-      
+
     ])
     .config(function($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise('/wizard/name');
     $stateProvider
       .state('wizard', {
-        url:'/wizard/name-type',
-        templateUrl: "js/eventWizard/views/evtNameType.html",
+        url:'/wizard',
+        templateUrl: "js/eventWizard/views/evtLanding.html",
         controller: 'EventWizardController'
       })
-      .state('name', {
+      .state('wizard', {
+        url:'/wizard',
+        templateUrl: "js/eventWizard/views/evtLanding.html",
+        controller: 'EventWizardController'
+      })
+      .state('wizard.name', {
         url:'/wizard/subtype',
         templateUrl:"js/eventWizard/views/evtSubType.html",
         controller: 'EventWizardController'
       })
-      .state('whenwhere', {
+      .state('wizard.whenwhere', {
         url:"/wizard/whenwhere",
-        templateUrl:"js/eventWizard/views/evtWhenWhere.html"
+        templateUrl:"js/eventWizard/views/evtWhenWhere.html",
+        controller: 'EventWizardController'
       })
-      .state('favors', {
+      .state('wizard.favors', {
         url:"/wizard/favors",
         templateUrl:"js/eventWizard/views/evtFavors.html",
+        controller: 'EventWizardController'
       })
-      .state('stretchgoal', {
+      .state('wizard.stretchgoal', {
         url:"/wizard/strechgoal",
-        templateUrl:"js/eventWizard/views/evtStrechGoal.html"
+        templateUrl:"js/eventWizard/views/evtStrechGoal.html",
+        controller: 'EventWizardController'
       })
-      .state('invites', {
+      .state('wizard.invites', {
         url:"/wizard/invites",
-        templateUrl:"js/eventWizard/views/evtInvites.html"
+        templateUrl:"js/eventWizard/views/evtInvites.html",
+        controller: 'EventWizardController'
       });
 });
 

@@ -9,8 +9,13 @@
         return $http.get('http://localhost:8080/get-wizard');
       };
 
+      var postWizard = function(){
+        return $http.post('http://localhost:8080/post-wizard', newParty);
+      };
+
       return {
-        getWizard: getWizard
+        getWizard: getWizard,
+        postWizard: postWizard
       };
     });
 
