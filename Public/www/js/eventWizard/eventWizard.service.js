@@ -13,7 +13,7 @@
       };
 
       var newWizPartyPost = function(wizardData){
-        return $http.post( wizardPostUrl, newParty);
+        return $http.post( wizardPostUrl, wizardData);
       };
       var getOneWizParty = function (wizID){
         return $http.get ("http://localhost:8080/wizard");

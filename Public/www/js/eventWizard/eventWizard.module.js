@@ -19,8 +19,9 @@
         controller: "EventWizardController"
       })
       .state('whenwhere', {
-        url:"/wizard/whenwhere",
-        templateUrl:"js/eventWizard/views/evtWhenWhere.html"
+        url:"/wizardwhenwhere",
+        templateUrl:"js/eventWizard/views/evtWhenWhere.html",
+        controller: "EventWizardController"
       })
       .state('favors', {
         url:"/wizard/favors",
