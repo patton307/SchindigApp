@@ -5,6 +5,7 @@
 
   .controller("EventWizardController", function($scope, $http, $stateParams, $cordovaDatePicker, EventWizardService){
       var vm = this;
+      var wizardData= {};
       EventWizardService.getWizard().then(function(data){
         $scope.wizardItems = data;
         $scope.get = function(nameId) {
