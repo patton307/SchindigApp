@@ -29,9 +29,6 @@
         console.log("posting item: ", item);
         EventWizardService.newWizPartyPost(item);
       }
-      // EventWizardService.newWizPartyPost(item).then(function(data){
-      //   console.log('post', data);
-      // });
 
 
 
