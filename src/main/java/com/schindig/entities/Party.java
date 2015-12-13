@@ -22,7 +22,7 @@ public class Party {
 
     public String partyType;
 
-    public Integer partyMod;
+    public String subType;
 
 //    @Column(nullable = false)
     public LocalDateTime createDate;
@@ -63,11 +63,11 @@ public class Party {
     public String parking = " ";
 
     public Party(){}
-    public Party(String partyName, String partyType, Integer partyMod, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip) {
+    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip) {
 
         this.partyName = partyName;
         this.partyType = partyType;
-        this.partyMod = partyMod;
+        this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
         this.street1 = street1;
@@ -76,11 +76,11 @@ public class Party {
         this.usState = usState;
         this.zip = zip;
     }
-    public Party(String partyName, String partyType, Integer partyMod, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer pos, Boolean byob, Boolean theme, String parking) {
+    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer pos, Boolean byob, Boolean theme, String parking) {
 
         this.partyName = partyName;
         this.partyType = partyType;
-        this.partyMod = partyMod;
+        this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
         this.street1 = street1;
@@ -122,9 +122,9 @@ public class Party {
 
         return partyType;
     }
-    public Integer getPartyMod() {
+    public String getSubType() {
 
-        return partyMod;
+        return subType;
     }
     public LocalDateTime getCreateDate() {
 
