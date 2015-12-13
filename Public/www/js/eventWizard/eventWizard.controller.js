@@ -27,7 +27,17 @@
         EventWizardService.newWizPartyPost(item).success(function(data){
           console.log('promise return', data);
         });
-      }
+      };
+
+
+      ///POST DATE, TIME AND NAME/////
+     $scope.dateAndTimePost = function(date, title, time){
+       var data = {date, title, time};
+       console.log('raw data', data);
+       EventWizardService.updateWizData(data).success(function(data){
+         console.log('dogdgo', data);
+       });
+     };
 
 });
 
