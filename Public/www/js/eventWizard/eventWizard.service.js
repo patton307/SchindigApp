@@ -13,11 +13,10 @@
       };
 
       var newWizPartyPost = function(item){
-        console.log("posting");
         return $http.post(wizCreateUrl, item);
       };
       var getOneWizParty = function (wizID){
-        return $http.get ("http://localhost:8080/wizard");
+        return $http.get("http://localhost:8080/wizard");
       };
       var updateWizData = function (updatedWizData){
         return $http.put(wizUpdateUrl + '/' + updatedWizData.id, updatedWizData);
