@@ -94,13 +94,18 @@ public class MainController {
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor( @RequestBody Party party, @RequestBody Catalog item ){
         Party p = parties.findOne(party.id);
-        item = new Catalog(item.favorName);
-        item.useCount += 1;
-        catalog.save(item);
-        p.catalogList.add(item);
-        parties.save(p);
-        return p;
-
+        if(!p.catalogList.contains(item)) {
+            item.useCount += 1;
+            p.catalogList.add(item);
+            parties.save(p);
+            return p;
+        } else {
+            item.useCount += 1;
+            Integer pos = p.catalogList.indexOf(item);
+            p.catalogList.set(pos, item);
+            parties.save(p);
+            return p;
+        }
     }
 
     /**5**/
