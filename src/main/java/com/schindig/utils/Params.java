@@ -34,6 +34,7 @@ public class Params {
 
     /**In relation to Catalog items**/
     public String partyFavor;
+    public String favorName;
 
     /**In relation to User items**/
     public Integer userId;

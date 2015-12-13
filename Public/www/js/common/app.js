@@ -30,6 +30,7 @@ angular
       });
     })
     .config(function($stateProvider, $urlRouterProvider) {
+
       $urlRouterProvider.otherwise('/tab/dash');
       $stateProvider
       .state('tab', {
@@ -66,7 +67,7 @@ angular
               controller: 'EventWizardController'
             }
           }
-        })
+        });
 
 });
 

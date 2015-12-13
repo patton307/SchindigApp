@@ -1,5 +1,14 @@
 <ion-view>
- <ion-content>
+
+   <ion-nav-bar class="bar-stable">
+     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+     </ion-nav-back-button>
+   </ion-nav-bar>
+   <div class="bar bar-header bar-royal">
+       <h1 class= "title">Let's Get This Party Started</h1>
+    </div>
+     <ion-content>
+       <ion-padding>
    <input type="search"
            ng-model="search.partyType"
            class="item search"
@@ -10,5 +19,6 @@
               class = "list inset-list">
         {{item.partyType}}
     </ion-item>
+    </ion-padding>
  </ion-content>
 </ion-view>

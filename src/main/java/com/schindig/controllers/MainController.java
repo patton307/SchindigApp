@@ -111,6 +111,39 @@ public class MainController {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @RequestMapping(path = "/user/login", method = RequestMethod.POST)
+    public void login(@RequestBody User user) throws Exception {
+        if (users.findOneByUsername(user.username) == null) {
+            throw new Exception("Username does not exist.");
+        } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
+            throw new Exception("Password is not correct.");
+        }
+    }
+
+
+
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
@@ -126,22 +159,34 @@ public class MainController {
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor( @RequestBody Party party, @RequestBody Catalog item ){
         Party p = parties.findOne(party.id);
-        item = new Catalog(item.favorName);
-        item.useCount += 1;
-        catalog.save(item);
-        p.catalogList.add(item);
-        parties.save(p);
-        return p;
-
+        if(!p.catalogList.contains(item)) {
+            item.useCount += 1;
+            p.catalogList.add(item);
+            parties.save(p);
+            return p;
+        } else {
+            item.useCount += 1;
+            Integer pos = p.catalogList.indexOf(item);
+            p.catalogList.set(pos, item);
+            parties.save(p);
+            return p;
+        }
     }
 
     /**5**/
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
-    public Party addInvite( @RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ){
-        party.inviteList.add(invitePhone);
-        parties.save(party);
-        user.inviteCount += 1;
-        users.save(user);
+    public Party addInvite(@RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ) throws Exception {
+        try {
+            if (!party.inviteList.contains(invitePhone)) {
+                party.inviteList.add(invitePhone);
+                parties.save(party);
+                user.inviteCount += 1;
+                users.save(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("User already invited.");
+        }
         return party;
     }
 
@@ -198,8 +243,10 @@ public class MainController {
 
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog favorName) {
-        party.catalogList.remove(favorName);
+    public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog catalog) {
+        int favor = party.catalogList.indexOf(catalog);
+        party.catalogList.remove(favor);
+        parties.save(party);
         return party;
     }
 
@@ -212,12 +259,44 @@ public class MainController {
         return (ArrayList<Wizard>) wizard.findAll();
     }
 
+    @RequestMapping(path = "/wizard/{id}", method = RequestMethod.POST)
+    public Party wizardPosition(@RequestBody Party party, @PathVariable("id") int id) {
+        party.pos += id + 1;
+        parties.save(party);
+        return party;
+    }
+
+    @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
+    public Integer getWizardPosition(@RequestBody Party party) {
+        Integer pos = party.pos;
+        return pos;
+    }
+
 
 
     /**ALL CATALOG SPECIFIC ROUTES**/
     /**2**/
     @RequestMapping(path = "/catalog", method = RequestMethod.GET)
     public ArrayList<Catalog> getCatalogList() {
+        return (ArrayList<Catalog>) catalog.findAll();
+    }
+
+    @RequestMapping(path = "/catalog/save", method = RequestMethod.POST)
+    public String catalogItem(@RequestBody Catalog item) {
+        if (!catalog.exists(item.id)) {
+            Catalog c = new Catalog();
+            c.favorName = item.favorName;
+            catalog.save(c);
+        } else {
+            catalog.save(item);
+            return "Item updated.";
+        }
+        return "Item added to database";
+    }
+
+    @RequestMapping(path = "/catalog/remove", method = RequestMethod.POST)
+    public ArrayList<Catalog> deleteCatalogItem(@RequestBody Catalog item) {
+        catalog.delete(item);
         return (ArrayList<Catalog>) catalog.findAll();
     }
 
