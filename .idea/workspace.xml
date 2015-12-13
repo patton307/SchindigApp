@@ -5,9 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Wizard.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Wizard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/services/WizardRepo.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/services/WizardRepo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wizard.csv" afterPath="$PROJECT_DIR$/wizard.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -122,8 +120,11 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-              <folding />
+              <caret line="120" column="34" selection-start-line="120" selection-start-column="34" selection-end-line="120" selection-end-column="34" />
+              <folding>
+                <element signature="method#Party#1;class#Party#0" expanded="false" />
+                <element signature="method#Party#2;class#Party#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,22 +132,30 @@
       <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42074364">
-              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.38747555">
+              <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3292#3293#0" expanded="true" />
-                <element signature="e#3326#3327#0" expanded="true" />
-                <element signature="e#3443#3444#0" expanded="true" />
-                <element signature="e#3499#3500#0" expanded="true" />
-                <element signature="e#3620#3621#0" expanded="true" />
-                <element signature="e#3660#3661#0" expanded="true" />
-                <element signature="e#6201#6202#0" expanded="true" />
-                <element signature="e#6243#6244#0" expanded="true" />
-                <element signature="e#7887#7888#0" expanded="true" />
-                <element signature="e#7946#7947#0" expanded="true" />
-                <element signature="e#8557#8558#0" expanded="true" />
-                <element signature="e#8618#8619#0" expanded="true" />
+                <element signature="method#init#0;class#MainController#0" expanded="false" />
+                <element signature="method#updateUser#0;class#MainController#0" expanded="false" />
+                <element signature="method#createUser#0;class#MainController#0" expanded="false" />
+                <element signature="e#3438#3439#0" expanded="true" />
+                <element signature="e#3494#3495#0" expanded="true" />
+                <element signature="method#login#0;class#MainController#0" expanded="false" />
+                <element signature="method#createParty#0;class#MainController#0" expanded="false" />
+                <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
+                <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
+                <element signature="method#rsvp#0;class#MainController#0" expanded="false" />
+                <element signature="e#6196#6197#0" expanded="true" />
+                <element signature="e#6238#6239#0" expanded="true" />
+                <element signature="method#updateParty#0;class#MainController#0" expanded="false" />
+                <element signature="method#getAllParties#0;class#MainController#0" expanded="false" />
+                <element signature="method#deleteParty#0;class#MainController#0" expanded="false" />
+                <element signature="e#7153#7183#0" expanded="false" />
+                <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
+                <element signature="method#wizardPosition#0;class#MainController#0" expanded="false" />
+                <element signature="e#8471#8472#0" expanded="true" />
+                <element signature="e#8532#8533#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -730,7 +739,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/utils/Params.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Catalog.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/services/UserRepo.java" />
@@ -740,6 +748,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Wizard.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/services/WizardRepo.java" />
         <option value="$PROJECT_DIR$/wizard.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
       </list>
     </option>
@@ -797,6 +806,124 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="schindig" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="schindig" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SchindigApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="schindig" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1322,7 +1449,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450033170777</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Moved partyMod into subType arrays.">
+      <created>1450035878276</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1450035878276</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1389,7 +1522,8 @@
     <MESSAGE value="Failsafe for /party/favor" />
     <MESSAGE value="Minor Edit" />
     <MESSAGE value="New Jar" />
-    <option name="LAST_COMMIT_MESSAGE" value="New Jar" />
+    <MESSAGE value="Moved partyMod into subType arrays." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved partyMod into subType arrays." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1408,18 +1542,26 @@
           <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3292#3293#0" expanded="true" />
-            <element signature="e#3326#3327#0" expanded="true" />
-            <element signature="e#3443#3444#0" expanded="true" />
-            <element signature="e#3499#3500#0" expanded="true" />
-            <element signature="e#3620#3621#0" expanded="true" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#6201#6202#0" expanded="true" />
-            <element signature="e#6243#6244#0" expanded="true" />
-            <element signature="e#7887#7888#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8557#8558#0" expanded="true" />
-            <element signature="e#8618#8619#0" expanded="true" />
+            <element signature="method#init#0;class#MainController#0" expanded="false" />
+            <element signature="method#updateUser#0;class#MainController#0" expanded="false" />
+            <element signature="method#createUser#0;class#MainController#0" expanded="false" />
+            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#3494#3495#0" expanded="true" />
+            <element signature="method#login#0;class#MainController#0" expanded="false" />
+            <element signature="method#createParty#0;class#MainController#0" expanded="false" />
+            <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
+            <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
+            <element signature="method#rsvp#0;class#MainController#0" expanded="false" />
+            <element signature="e#6196#6197#0" expanded="true" />
+            <element signature="e#6238#6239#0" expanded="true" />
+            <element signature="method#updateParty#0;class#MainController#0" expanded="false" />
+            <element signature="method#getAllParties#0;class#MainController#0" expanded="false" />
+            <element signature="method#deleteParty#0;class#MainController#0" expanded="false" />
+            <element signature="e#7153#7183#0" expanded="false" />
+            <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
+            <element signature="method#wizardPosition#0;class#MainController#0" expanded="false" />
+            <element signature="e#8471#8472#0" expanded="true" />
+            <element signature="e#8532#8533#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1494,7 +1636,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="16" selection-end-column="16" />
-          <folding />
+          <folding>
+            <element signature="method#Party#1;class#Party#0" expanded="false" />
+            <element signature="method#Party#2;class#Party#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1504,18 +1649,26 @@
           <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3292#3293#0" expanded="true" />
-            <element signature="e#3326#3327#0" expanded="true" />
-            <element signature="e#3443#3444#0" expanded="true" />
-            <element signature="e#3499#3500#0" expanded="true" />
-            <element signature="e#3620#3621#0" expanded="true" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#6201#6202#0" expanded="true" />
-            <element signature="e#6243#6244#0" expanded="true" />
-            <element signature="e#7887#7888#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8557#8558#0" expanded="true" />
-            <element signature="e#8618#8619#0" expanded="true" />
+            <element signature="method#init#0;class#MainController#0" expanded="false" />
+            <element signature="method#updateUser#0;class#MainController#0" expanded="false" />
+            <element signature="method#createUser#0;class#MainController#0" expanded="false" />
+            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#3494#3495#0" expanded="true" />
+            <element signature="method#login#0;class#MainController#0" expanded="false" />
+            <element signature="method#createParty#0;class#MainController#0" expanded="false" />
+            <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
+            <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
+            <element signature="method#rsvp#0;class#MainController#0" expanded="false" />
+            <element signature="e#6196#6197#0" expanded="true" />
+            <element signature="e#6238#6239#0" expanded="true" />
+            <element signature="method#updateParty#0;class#MainController#0" expanded="false" />
+            <element signature="method#getAllParties#0;class#MainController#0" expanded="false" />
+            <element signature="method#deleteParty#0;class#MainController#0" expanded="false" />
+            <element signature="e#7153#7183#0" expanded="false" />
+            <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
+            <element signature="method#wizardPosition#0;class#MainController#0" expanded="false" />
+            <element signature="e#8471#8472#0" expanded="true" />
+            <element signature="e#8532#8533#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1774,14 +1927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/rt.jar!/java/util/ArrayList.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1824,24 +1969,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="34" selection-start-line="120" selection-start-column="34" selection-end-line="120" selection-end-column="34" />
+          <folding>
+            <element signature="method#Party#1;class#Party#0" expanded="false" />
+            <element signature="method#Party#2;class#Party#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42074364">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.38747555">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3292#3293#0" expanded="true" />
-            <element signature="e#3326#3327#0" expanded="true" />
-            <element signature="e#3443#3444#0" expanded="true" />
-            <element signature="e#3499#3500#0" expanded="true" />
-            <element signature="e#3620#3621#0" expanded="true" />
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#6201#6202#0" expanded="true" />
-            <element signature="e#6243#6244#0" expanded="true" />
-            <element signature="e#7887#7888#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8557#8558#0" expanded="true" />
-            <element signature="e#8618#8619#0" expanded="true" />
+            <element signature="method#init#0;class#MainController#0" expanded="false" />
+            <element signature="method#updateUser#0;class#MainController#0" expanded="false" />
+            <element signature="method#createUser#0;class#MainController#0" expanded="false" />
+            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#3494#3495#0" expanded="true" />
+            <element signature="method#login#0;class#MainController#0" expanded="false" />
+            <element signature="method#createParty#0;class#MainController#0" expanded="false" />
+            <element signature="method#addFavor#0;class#MainController#0" expanded="false" />
+            <element signature="method#addInvite#0;class#MainController#0" expanded="false" />
+            <element signature="method#rsvp#0;class#MainController#0" expanded="false" />
+            <element signature="e#6196#6197#0" expanded="true" />
+            <element signature="e#6238#6239#0" expanded="true" />
+            <element signature="method#updateParty#0;class#MainController#0" expanded="false" />
+            <element signature="method#getAllParties#0;class#MainController#0" expanded="false" />
+            <element signature="method#deleteParty#0;class#MainController#0" expanded="false" />
+            <element signature="e#7153#7183#0" expanded="false" />
+            <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
+            <element signature="method#wizardPosition#0;class#MainController#0" expanded="false" />
+            <element signature="e#8471#8472#0" expanded="true" />
+            <element signature="e#8532#8533#0" expanded="true" />
           </folding>
         </state>
       </provider>
