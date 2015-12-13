@@ -13,6 +13,6 @@
    </div>
   <ion-content>
     <h1>EVENT WIZARD - Second PAGE</h1>
-    <ion-item ng-click="newWizPartyPost({partyType:'{{partyType}}',subType:'{{item}}'})" ng-repeat="item in partySubType.subType">{{item}}</ion-item>
+    <ion-item ng-click="newWizPartyPost('{{item}}','{{partySubType.partyType}}')" ng-repeat="item in partySubType.subType">{{item}}</ion-item>
   </ion-content>
 </ion-view>
