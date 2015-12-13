@@ -8,7 +8,6 @@ import com.schindig.services.PartyRepo;
 import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
-import com.schindig.utils.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,9 +46,30 @@ public class MainController {
             String[] lines = fileContent.split("\n");
 
             for (String line : lines) {
+                Wizard wiz = new Wizard();
                 String[] columns = line.split(",");
-                Wizard wiz= new Wizard(columns[0], columns[1]);
-                wizard.save(wiz);
+                String partyType = columns[0];
+                String partyMod = columns[1];
+                if (partyMod==null) {
+                    partyMod = "empty";
+                }
+                Wizard check = wizard.findOneByPartyType(partyType);
+                if (check==null) {
+                    Wizard test = new Wizard();
+                    test.partyType = partyType;
+                    ArrayList<String> subType = new ArrayList<>();
+                    subType.add(partyMod);
+                    test.subType = subType;
+                    wizard.save(test);
+                } else if (check.partyType.equals(partyType)) {
+                    check.subType.add(partyMod);
+                    wizard.save(check);
+                } else {
+                    wiz.partyType = partyType;
+                    wiz.subType.add(partyMod);
+                    wizard.save(wiz);
+                }
+
             }
         }
 
@@ -78,7 +98,7 @@ public class MainController {
         return user;
     }
 
-    @RequestMapping(path = "/user/create-user", method = RequestMethod.POST)
+    @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user) throws Exception {
         if (user.username == null) {
             users.save(user);
@@ -110,39 +130,6 @@ public class MainController {
             throw new Exception("Password is not correct.");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public void login(@RequestBody User user) throws Exception {
-        if (users.findOneByUsername(user.username) == null) {
-            throw new Exception("Username does not exist.");
-        } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
-            throw new Exception("Password is not correct.");
-        }
-    }
-
-
 
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
@@ -244,8 +231,7 @@ public class MainController {
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog catalog) {
-        int favor = party.catalogList.indexOf(catalog);
-        party.catalogList.remove(favor);
+        party.catalogList.remove(catalog);
         parties.save(party);
         return party;
     }
@@ -268,8 +254,7 @@ public class MainController {
 
     @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
     public Integer getWizardPosition(@RequestBody Party party) {
-        Integer pos = party.pos;
-        return pos;
+        return party.pos;
     }
 
 

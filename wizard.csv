@@ -1,12 +1,17 @@
-Christmas, null
+Christmas,Naughty
+Christmas,Nice
 Valentine's Day,null
-4th of July, null
-Hanukkah, null
-St. Patrick's Day, null
+4th of July,null
+Hanukkah,null
+St. Patrick's Day,null
 Graduation, What are they graduating from?
-Bachelorette Party, Mild or Wild?
-Bachelor Party, Mild or Wild?
-Birthday Party, How old? Male or Female?
+Bachelorette Party,Mild
+Bachelorette Party,Wild
+Bachelor Party,Mild
+Bachelor Party,Wild
+Birthday Party,Age
+Birthday Party,Male
+Birthday Party,Female
 Anniversary Party, For who/what? How many years?
 Congratulations, For what?
 Divorce,null
