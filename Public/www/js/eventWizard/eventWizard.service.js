@@ -9,7 +9,8 @@
       }
 
       return {
-        getWizard: getWizard
+        getWizard: getWizard,
+
       }
     });
 
