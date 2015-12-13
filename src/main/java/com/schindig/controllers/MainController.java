@@ -98,7 +98,7 @@ public class MainController {
         return user;
     }
 
-    @RequestMapping(path = "/user/create-user", method = RequestMethod.POST)
+    @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user) throws Exception {
         if (user.username == null) {
             users.save(user);
@@ -231,8 +231,7 @@ public class MainController {
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog catalog) {
-        int favor = party.catalogList.indexOf(catalog);
-        party.catalogList.remove(favor);
+        party.catalogList.remove(catalog);
         parties.save(party);
         return party;
     }
@@ -255,8 +254,7 @@ public class MainController {
 
     @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
     public Integer getWizardPosition(@RequestBody Party party) {
-        Integer pos = party.pos;
-        return pos;
+        return party.pos;
     }
 
 
