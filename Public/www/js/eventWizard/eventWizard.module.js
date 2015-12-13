@@ -4,20 +4,19 @@
   angular
     .module('eventWizard', [
       'ionic',
-      
+
     ])
-    .config(function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/wizard/name')
+    .config(function($stateProvider){
     $stateProvider
       .state('wizard', {
-        url:'/wizard/name-type',
+        url: "/wizard",
         templateUrl: "js/eventWizard/views/evtNameType.html",
-        controller: 'EventWizardController'
+        controller: "EventWizardController"
       })
-      .state('name', {
-        url:'/wizard/subtype',
-        templateUrl:"js/eventWizard/views/evtSubType.html",
-        controller: 'EventWizardController'
+      .state('subtype', {
+        url:"/wizard/:nameId",
+        templateUrl: "js/eventWizard/views/evtSubType.html",
+        controller: "EventWizardController"
       })
       .state('whenwhere', {
         url:"/wizard/whenwhere",
@@ -29,7 +28,7 @@
       })
       .state('stretchgoal', {
         url:"/wizard/strechgoal",
-        templateUrl:"js/eventWizard/views/evtStrechGoal.html"
+        templateUrl:"js/eventWizard/views/evtStretchGoal.html"
       })
       .state('invites', {
         url:"/wizard/invites",
