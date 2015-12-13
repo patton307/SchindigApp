@@ -33,7 +33,7 @@
       .state('invites', {
         url:"/wizard/invites",
         templateUrl:"js/eventWizard/views/evtInvites.html"
-      })
+      });
     });
 
 }());
