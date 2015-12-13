@@ -3,17 +3,21 @@
   angular
   .module("eventWizard")
 
-  .controller("EventWizardController", function($scope, $state, $http, EventWizardService){
+  .controller("EventWizardController", function($scope, $http, $stateParams, EventWizardService){
       var vm = this;
-
       EventWizardService.getWizard().then(function(data){
-        console.log('event controler', data);
-        $scope.wizardItems = data.data;
-      });
-      vm.selectParty = function (){
-          wizardData = {};
-          Event.WizardService.postWizard(wizardData);
+        $scope.wizardItems = data;
+        $scope.get = function(nameId) {
+          var id = parseInt(nameId.nameId);
+          for (var i = 0; i < data.data.length; i++) {
+            if (i === id) {
+              return data.data[i-1];
+            }
+          }
+          return null;
         };
+        $scope.partySubType = $scope.get($stateParams);
+      });
 
   });
 
