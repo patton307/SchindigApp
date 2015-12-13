@@ -46,9 +46,30 @@ public class MainController {
             String[] lines = fileContent.split("\n");
 
             for (String line : lines) {
+                Wizard wiz = new Wizard();
                 String[] columns = line.split(",");
-                Wizard wiz= new Wizard(columns[0], columns[1]);
-                wizard.save(wiz);
+                String partyType = columns[0];
+                String partyMod = columns[1];
+                if (partyMod==null) {
+                    partyMod = "empty";
+                }
+                Wizard check = wizard.findOneByPartyType(partyType);
+                if (check==null) {
+                    Wizard test = new Wizard();
+                    test.partyType = partyType;
+                    ArrayList<String> subType = new ArrayList<>();
+                    subType.add(partyMod);
+                    test.subType = subType;
+                    wizard.save(test);
+                } else if (check.partyType.equals(partyType)) {
+                    check.subType.add(partyMod);
+                    wizard.save(check);
+                } else {
+                    wiz.partyType = partyType;
+                    wiz.subType.add(partyMod);
+                    wizard.save(wiz);
+                }
+
             }
         }
 

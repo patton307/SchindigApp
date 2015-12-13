@@ -11,5 +11,5 @@ public interface WizardRepo extends CrudRepository<Wizard, Integer> {
     @Query("SELECT COUNT(w) FROM Wizard w")
     Integer wizardSize();
 
-    
+    Wizard findOneByPartyType(String type);
 }

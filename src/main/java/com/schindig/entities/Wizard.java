@@ -3,6 +3,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.ArrayList;
 
 /**
  * Created by Agronis on 12/9/15.
@@ -17,10 +18,10 @@ public class Wizard {
 //    @Column(nullable = false)
     public String partyType;
 
-    public String subType = " ";
+    public ArrayList<String> subType;
 
     public Wizard(){}
-    public Wizard(String partyType, String subType) {
+    public Wizard(String partyType, ArrayList<String> subType) {
 
         this.partyType = partyType;
         this.subType = subType;
@@ -29,8 +30,8 @@ public class Wizard {
 
         return id;
     }
-    public String getPartyType() {
+    public ArrayList<String> getSubType() {
 
-        return partyType;
+        return subType;
     }
 }
