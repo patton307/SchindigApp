@@ -30,12 +30,44 @@ angular
       });
     })
     .config(function($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/');
+
+      $urlRouterProvider.otherwise('/tab/dash');
       $stateProvider
-        .state('splash', {
-        url: '/',
+      .state('tab', {
+        url: '/tab',
+        abstract: true,
         templateUrl: 'js/common/views/tabs.html'
-      });
+        })
+
+        // Each tab has its own nav history stack:
+
+      .state('tab.dash', {
+        url: '/dash',
+        views: {
+          'tab-dash': {
+            templateUrl: 'js/common/views/splash.html',
+            controller: 'EventWizardController'
+          }
+        }
+        })
+        .state('tab.chats', {
+          url: '/chats',
+          views: {
+            'tab-chats': {
+              templateUrl: 'js/profile/views/profileMain.html',
+              controller: 'EventWizardController'
+            }
+          }
+        })
+        .state('tab.account', {
+          url: '/account',
+          views: {
+            'tab-account': {
+              templateUrl: 'js/eventWizard/views/evtStretchGoal.html',
+              controller: 'EventWizardController'
+            }
+          }
+        });
 
 });
 

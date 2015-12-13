@@ -15,6 +15,7 @@
             }
           }
           return null;
+
         };
         $scope.partySubType = $scope.get($stateParams);
       });
@@ -35,8 +36,10 @@
     $scope.datePicker = function() {
           $cordovaDatePicker.show(options).then(function(date){
           alert(date);
-  });
-};
+
+        });
+      });
+
   //END DATE AND TIME PICKER
 });
 

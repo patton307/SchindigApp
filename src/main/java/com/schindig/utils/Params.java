@@ -1,6 +1,5 @@
 package com.schindig.utils;
 import com.schindig.entities.Catalog;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +42,7 @@ public class Params {
     public String email;
     public String firstName;
     public String lastName;
-    public Integer rsvpStatus;
+    public String rsvpStatus;
 
     public Integer getPartyId() {
 
@@ -137,7 +136,7 @@ public class Params {
 
         return lastName;
     }
-    public Integer getRsvpStatus() {
+    public String getRsvpStatus() {
 
         return rsvpStatus;
     }

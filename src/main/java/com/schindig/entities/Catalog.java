@@ -1,8 +1,5 @@
 package com.schindig.entities;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Agronis on 12/9/15.
@@ -20,12 +17,16 @@ public class Catalog {
     public Integer useCount = 0;
 
     Catalog(){}
+    public Catalog(Integer id, String favorName, Integer useCount) {
 
+        this.id = id;
+        this.favorName = favorName;
+        this.useCount = useCount;
+    }
     public Catalog(String favorName) {
 
         this.favorName = favorName;
     }
-
     public String getFavorName() {
 
         return favorName;
@@ -34,7 +35,6 @@ public class Catalog {
 
         return useCount;
     }
-
     public Integer getId() {
 
         return id;

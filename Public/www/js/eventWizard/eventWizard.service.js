@@ -9,6 +9,7 @@
       favorUpdateUrl = "http://localhost8080/party/favor";
 
       var getWizard = function() {
+<<<<<<< HEAD
         return $http.get('http://localhost:8080/wizard');
       };
 
@@ -32,6 +33,7 @@
         updateWizData: updateWizData,
         getOneWizParty: getOneWizParty
       };
+
     });
 
 
