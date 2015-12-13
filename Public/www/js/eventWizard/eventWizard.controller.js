@@ -17,20 +17,28 @@
             }
           }
           return null;
-
         };
         $scope.partySubType = $scope.get($stateParams);
       });
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var item = {subType, partyType};
-        console.log("posting item: ", item);
-        EventWizardService.newWizPartyPost(item);
+        var item = {subType, partyType}
+        EventWizardService.newWizPartyPost(item).success(function(data){
+          console.log('promise return', data);
+        });
       };
-      // EventWizardService.newWizPartyPost(item).then(function(data){
-      //   console.log('post', data);
-      // });
+
+
+      ///POST DATE, TIME AND NAME/////
+     $scope.dateAndTimePost = function(date, title, time){
+       var data = {date, title, time};
+       console.log('raw data', data);
+       EventWizardService.updateWizData(data).success(function(data){
+         console.log('dogdgo', data);
+       });
+     };
+
 });
 
 

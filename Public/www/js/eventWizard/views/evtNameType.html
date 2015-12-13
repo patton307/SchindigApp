@@ -15,7 +15,7 @@
            placeholder="Search Party Type">
     <ion-item
               ng-repeat="item in wizardItems.data | filter:search"
-              href="#/wizard/{{item.id}}"
+              href="#/wizard/{{item.wizardID}}"
               class = "list inset-list">
         {{item.partyType}}
     </ion-item>
