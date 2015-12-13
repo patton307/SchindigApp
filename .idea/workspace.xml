@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="00a93b6d-45e7-4b06-8334-f9017a85c63f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
     </list>
@@ -126,11 +125,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="126" column="8" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.41095892">
+              <caret line="219" column="70" selection-start-line="219" selection-start-column="70" selection-end-line="219" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#init#0;class#MainController#0" expanded="false" />
@@ -143,17 +142,17 @@
                 <element signature="e#6967#6968#0" expanded="true" />
                 <element signature="e#7009#7010#0" expanded="true" />
                 <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
-                <element signature="e#9481#9482#0" expanded="true" />
-                <element signature="e#9542#9543#0" expanded="true" />
+                <element signature="e#9480#9481#0" expanded="true" />
+                <element signature="e#9541#9542#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartyRepo.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PartyRepo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/services/PartyRepo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26418787">
+            <state vertical-scroll-proportion="0.0">
               <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
               <folding />
             </state>
@@ -723,8 +722,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Wizard.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
       </list>
     </option>
   </component>
@@ -1508,7 +1507,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450047605102</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Updated JAR">
+      <created>1450048335200</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1450048335200</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1578,7 +1583,8 @@
     <MESSAGE value="Moved partyMod into subType arrays." />
     <MESSAGE value="WE CAN READ DATA" />
     <MESSAGE value="More clarification" />
-    <option name="LAST_COMMIT_MESSAGE" value="More clarification" />
+    <MESSAGE value="Updated JAR" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated JAR" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1607,8 +1613,8 @@
             <element signature="e#6967#6968#0" expanded="true" />
             <element signature="e#7009#7010#0" expanded="true" />
             <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
-            <element signature="e#9481#9482#0" expanded="true" />
-            <element signature="e#9542#9543#0" expanded="true" />
+            <element signature="e#9480#9481#0" expanded="true" />
+            <element signature="e#9541#9542#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1705,8 +1711,8 @@
             <element signature="e#6967#6968#0" expanded="true" />
             <element signature="e#7009#7010#0" expanded="true" />
             <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
-            <element signature="e#9481#9482#0" expanded="true" />
-            <element signature="e#9542#9543#0" expanded="true" />
+            <element signature="e#9480#9481#0" expanded="true" />
+            <element signature="e#9541#9542#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1994,10 +2000,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3522505">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/services/PartyRepo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="8" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41095892">
+          <caret line="219" column="70" selection-start-line="219" selection-start-column="70" selection-end-line="219" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#init#0;class#MainController#0" expanded="false" />
@@ -2010,25 +2032,9 @@
             <element signature="e#6967#6968#0" expanded="true" />
             <element signature="e#7009#7010#0" expanded="true" />
             <element signature="method#deletePartyFavor#0;class#MainController#0" expanded="false" />
-            <element signature="e#9481#9482#0" expanded="true" />
-            <element signature="e#9542#9543#0" expanded="true" />
+            <element signature="e#9480#9481#0" expanded="true" />
+            <element signature="e#9541#9542#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3522505">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/services/PartyRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26418787">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
