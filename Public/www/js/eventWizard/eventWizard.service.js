@@ -7,14 +7,16 @@
       var wizCreateUrl = "http://localhost:8080/party/create";
       var wizUpdateUrl = "http://localhost:8080/party";
       var favorUpdateUrl = "http://localhost8080/party/favor";
-
+      var wizardData = {};
       var getWizard = function() {
         return $http.get('http://localhost:8080/wizard');
       };
 
+
       var newWizPartyPost = function(item){
         console.log("posting");
         return $http.post(wizCreateUrl, item);
+
       };
       var getOneWizParty = function (wizID){
         return $http.get ("http://localhost:8080/wizard");
