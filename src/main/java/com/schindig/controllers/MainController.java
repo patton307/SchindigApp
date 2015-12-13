@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,7 +117,14 @@ public class MainController {
 
     @RequestMapping(path = "/user/show-all", method = RequestMethod.GET)
     public ArrayList<User> getAllUsers() {
-        return (ArrayList<User>) users.findAll();
+        ArrayList<User> temp = (ArrayList<User>) users.findAll();
+                temp = temp.stream()
+                                .map(p -> {
+                                p.password = null;
+                                return p;
+                            })
+                                .collect(Collectors.toCollection(ArrayList<User>::new));
+        return temp;
     }
 
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
@@ -131,6 +139,16 @@ public class MainController {
         } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
             throw new Exception("Password is not correct.");
         }
+    }
+
+    @RequestMapping(path = "/user/update-password", method = RequestMethod.POST)
+    public void updateUserPass(@RequestBody User user) {
+        users.save(user);
+    }
+
+    @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
+    public void logout(HttpSession session) {
+                session.invalidate();
     }
 
     /**ALL PARTY RELATED ROUTES**/
