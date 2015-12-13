@@ -17,7 +17,7 @@ public class Wizard {
     @Column(nullable = false)
     public String partyType;
 
-    public String partyMod;
+    public String partyMod = " ";
 
     public Wizard(){}
 
