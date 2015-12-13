@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -77,7 +78,38 @@ public class MainController {
         return user;
     }
 
+    @RequestMapping(path = "/user/create-user", method = RequestMethod.POST)
+    public void createUser(@RequestBody User user) throws Exception {
+        if (user.username == null) {
+            users.save(user);
+        } else {
+            throw new Exception("Username already exists.  Please enter a different username.");
+        }
+    }
 
+    @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
+    public void deleteUser(@RequestBody User user) {
+        users.delete(user);
+    }
+
+    @RequestMapping(path = "/user/show-all", method = RequestMethod.GET)
+    public ArrayList<User> getAllUsers() {
+        return (ArrayList<User>) users.findAll();
+    }
+
+    @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
+    public User findOneUser(@RequestBody int id) {
+        return users.findOne(id);
+    }
+
+    @RequestMapping(path = "/user/login", method = RequestMethod.POST)
+    public void login(@RequestBody User user) throws Exception {
+            if (users.findOneByUsername(user.username) == null) {
+            throw new Exception("Username does not exist.");
+        } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
+            throw new Exception("Password is not correct.");
+        }
+    }
 
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
