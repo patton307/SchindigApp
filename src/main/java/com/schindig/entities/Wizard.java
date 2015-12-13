@@ -13,7 +13,7 @@ public class Wizard {
 
     @GeneratedValue
     @Id
-    public Integer id;
+    public Integer wizardID;
 
 //    @Column(nullable = false)
     public String partyType;
@@ -26,9 +26,13 @@ public class Wizard {
         this.partyType = partyType;
         this.subType = subType;
     }
-    public Integer getId() {
+    public Integer getWizardID() {
 
-        return id;
+        return wizardID;
+    }
+    public String getPartyType() {
+
+        return partyType;
     }
     public ArrayList<String> getSubType() {
 
