@@ -6,5 +6,7 @@ import org.springframework.data.repository.CrudRepository;
  * Created by Agronis on 12/9/15.
  */
 public interface UserRepo extends CrudRepository<User, Integer> {
+
+    User findOneByUsername(String username);
     
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -79,6 +80,39 @@ public class MainController {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @RequestMapping(path = "/user/login", method = RequestMethod.POST)
+    public void login(@RequestBody User user) throws Exception {
+        if (users.findOneByUsername(user.username) == null) {
+            throw new Exception("Username does not exist.");
+        } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
+            throw new Exception("Password is not correct.");
+        }
+    }
+
+
+
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
@@ -110,11 +144,18 @@ public class MainController {
 
     /**5**/
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
-    public Party addInvite( @RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ){
-        party.inviteList.add(invitePhone);
-        parties.save(party);
-        user.inviteCount += 1;
-        users.save(user);
+    public Party addInvite(@RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ) throws Exception {
+        try {
+            if (!party.inviteList.contains(invitePhone)) {
+                party.inviteList.add(invitePhone);
+                parties.save(party);
+                user.inviteCount += 1;
+                users.save(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("User already invited.");
+        }
         return party;
     }
 
