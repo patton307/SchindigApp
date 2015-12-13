@@ -1,7 +1,13 @@
-
 <ion-view>
  <ion-content>
-    <ion-item show-delete="shouldShowDelete" ng-repeat="item in wizardItems.data | limitTo: 10" href="#/wizard/{{item.id}}" class = "list inset-list">
+   <input type="search"
+           ng-model="search.partyType"
+           class="item search"
+           placeholder="Search Party Type">
+    <ion-item
+              ng-repeat="item in wizardItems.data | filter:search"
+              href="#/wizard/{{item.id}}"
+              class = "list inset-list">
         {{item.partyType}}
     </ion-item>
  </ion-content>
