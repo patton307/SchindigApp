@@ -189,6 +189,12 @@ public class MainController {
         return party;
     }
 
+    @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
+    public Integer getWizardPosition(@RequestBody Party party) {
+        Integer pos = party.pos;
+        return pos;
+    }
+
 
 
     /**ALL CATALOG SPECIFIC ROUTES**/
