@@ -8,7 +8,6 @@ import com.schindig.services.PartyRepo;
 import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
-import com.schindig.utils.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -110,39 +109,6 @@ public class MainController {
             throw new Exception("Password is not correct.");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public void login(@RequestBody User user) throws Exception {
-        if (users.findOneByUsername(user.username) == null) {
-            throw new Exception("Username does not exist.");
-        } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
-            throw new Exception("Password is not correct.");
-        }
-    }
-
-
 
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
