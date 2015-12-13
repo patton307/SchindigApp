@@ -17,16 +17,14 @@ public class Wizard {
 //    @Column(nullable = false)
     public String partyType;
 
-    public String partyMod = " ";
+    public String subType = " ";
 
     public Wizard(){}
-
-    public Wizard(String partyType, String partyMod) {
+    public Wizard(String partyType, String subType) {
 
         this.partyType = partyType;
-        this.partyMod = partyMod;
+        this.subType = subType;
     }
-
     public Integer getId() {
 
         return id;
@@ -34,9 +32,5 @@ public class Wizard {
     public String getPartyType() {
 
         return partyType;
-    }
-    public String getPartyMod() {
-
-        return partyMod;
     }
 }
