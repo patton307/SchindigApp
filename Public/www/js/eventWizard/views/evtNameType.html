@@ -1,0 +1,8 @@
+
+<ion-view name='wizard-nameType'>
+ <ion-content>
+    <ion-item show-delete="shouldShowDelete" ng-repeat="item in wizardItems.data | limitTo: 10" href="#/wizard/{{item.id}}" class = "list inset-list">
+        {{item.partyType}}
+    </ion-item>
+ </ion-content>
+</ion-view>

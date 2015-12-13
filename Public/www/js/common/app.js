@@ -53,7 +53,16 @@ angular
           url: '/chats',
           views: {
             'tab-chats': {
-              templateUrl: 'js/eventWizard/views/evtNameType.html',
+              templateUrl: 'js/profile/views/profileMain.html',
+              controller: 'EventWizardController'
+            }
+          }
+        })
+        .state('tab.account', {
+          url: '/account',
+          views: {
+            'tab-account': {
+              templateUrl: 'js/eventWizard/views/evtStretchGoal.html',
               controller: 'EventWizardController'
             }
           }

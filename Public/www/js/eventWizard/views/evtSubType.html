@@ -1,12 +1,7 @@
-<ion-view>
-  <ion-content>
-    <ion-tabs>
-      <ion-tab title="Account" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/wizard/subType">
-       <ion-nav-view name="wizard-subType"></ion-nav-view>
-     </ion-tab>
-    </ion-tabs>
+<ion-view view-title="{{item.partyType}}">
+  <ion-content ng-controller="EventWizardController">
     <h1>EVENT WIZARD - Second PAGE</h1>
-    <a class='button button-calm icon-left ion-home' href='#/wizard/subType'>View Parties</a>
-
+    <p>{{item.partyType}}</p>
+    <h2>{{item.partyType}}</h2>
   </ion-content>
 </ion-view>
