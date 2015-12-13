@@ -65,8 +65,6 @@ public class MainController {
             }
         }
 
-
-
     }
 
     /**1**/
@@ -123,6 +121,34 @@ public class MainController {
 //    public void updateUser( @RequestBody User user ){
 //        users.save(user);
 //    }
+    /**10**/
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
+    public void createUser (@RequestBody User user) throws Exception {
+
+        if (users.findOneByName(user.username) == null) {
+            users.save(user);
+        } else {
+            throw new Exception("Username already exists.");
+        }
+    }
+
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public String login(User user) {
+
+        User u = users.findOneByName(user.username);
+
+        if (u == null) {
+            return "redirect:/create-user";
+        } else if (!u.password.equals(user.password)) {
+            return "redirect:/login";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+
+
+
 
 
 }
