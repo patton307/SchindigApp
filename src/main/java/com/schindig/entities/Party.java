@@ -17,27 +17,27 @@ public class Party {
 //    @OneToMany
 //    public User host;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public String partyName;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public LocalDateTime createDate;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public LocalDateTime partyDate;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public String street1;
 
     public String street2;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public String city;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public String usState;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public Integer zip;
 
     @OneToOne

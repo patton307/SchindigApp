@@ -166,8 +166,10 @@ public class MainController {
 
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog favorName) {
-        party.catalogList.remove(favorName);
+    public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog catalog) {
+        int favor = party.catalogList.indexOf(catalog);
+        party.catalogList.remove(favor);
+        parties.save(party);
         return party;
     }
 
@@ -178,6 +180,13 @@ public class MainController {
     @RequestMapping(path = "/wizard", method = RequestMethod.GET)
     public ArrayList<Wizard> getPartyList() {
         return (ArrayList<Wizard>) wizard.findAll();
+    }
+
+    @RequestMapping(path = "/wizard/{id}", method = RequestMethod.POST)
+    public Party wizardPosition(@RequestBody Party party, @PathVariable("id") int id) {
+        party.pos += id + 1;
+        parties.save(party);
+        return party;
     }
 
 

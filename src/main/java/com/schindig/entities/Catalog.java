@@ -11,7 +11,7 @@ public class Catalog {
     @Id
     public Integer id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public String favorName;
 
     public Integer useCount = 0;
