@@ -8,13 +8,22 @@ import com.schindig.services.PartyRepo;
 import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
+import com.schindig.utils.Parameters;
 import com.schindig.utils.PartyPar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.CookieGenerator;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.groups.ConvertGroup;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -183,32 +192,32 @@ public class MainController {
 
     /**5**/
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
-    public Party addInvite(@RequestBody PartyPar partypar) throws Exception {
+    public Party addInvite(@RequestBody Parameters parameters) throws Exception {
         try {
-            if (!partypar.part.inviteList.contains(partypar.use.phone)) {
-                partypar.part.inviteList.add(partypar.use.phone);
-                parties.save(partypar.part);
-                partypar.use.inviteCount += 1;
-                users.save(partypar.use);
+            if (!parameters.party.inviteList.contains(parameters.user.phone)) {
+                parameters.party.inviteList.add(parameters.user.phone);
+                parties.save(parameters.party);
+                parameters.user.inviteCount += 1;
+                users.save(parameters.user);
             }
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("User already invited.");
         }
-        return partypar.part;
+        return parameters.party;
     }
 
     /**6**/
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
-    public Party rsvp(@RequestBody PartyPar partypar){
-        partypar.part.rsvp.put(partypar.use.userID, partypar.rsvpStatus);
-        partypar.use.invitedCount += 1;
-        if (partypar.rsvpStatus.equals("Yes")) {
-            partypar.use.partyCount += 1;
+    public Party rsvp(@RequestBody Parameters parameters){
+        parameters.party.rsvp.put(parameters.user.userID, parameters.rsvpStatus);
+        parameters.user.invitedCount += 1;
+        if (parameters.rsvpStatus.equals("Yes")) {
+            parameters.user.partyCount += 1;
         }
-        users.save(partypar.use);
-        parties.save(partypar.part);
-        return partypar.part;
+        users.save(parameters.user);
+        parties.save(parameters.party);
+        return parameters.party;
     }
 
     /**7**/
@@ -218,7 +227,7 @@ public class MainController {
     }
 
     /**8**/
-    @RequestMapping(path = "/party/update", method = RequestMethod.PUT)
+    @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
     public Party updateParty(@RequestBody Party party) {
         parties.save(party);
         return party;
@@ -253,7 +262,7 @@ public class MainController {
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public Party deletePartyFavor(@RequestBody PartyPar partypar) {
-        partypar.part.favorList.remove(favors);
+        partypar.part.catalogList.remove(catalog);
         parties.save(partypar.part);
         return partypar.part;
     }
