@@ -16,25 +16,30 @@
       .state('subtype', {
         url:"/wizard/:nameId",
         templateUrl: "js/eventWizard/views/evtSubType.html",
-        controller: "EventWizardController"
+        controller: "EventWizardController as evtCtrl"
       })
       .state('whenwhere', {
-        url:"/wizardwhenwhere",
+        url:"/wizard/whenwhere",
         templateUrl:"js/eventWizard/views/evtWhenWhere.html",
-        controller: "EventWizardController"
+        controller: "EventWizardController as evtCtrl"
       })
-      .state('favors', {
-        url:"/wizard/favors",
-        templateUrl:"js/eventWizard/views/evtFavors.html",
-      })
-      .state('stretchgoal', {
-        url:"/wizard/strechgoal",
-        templateUrl:"js/eventWizard/views/evtStretchGoal.html"
-      })
-      .state('invites', {
-        url:"/wizard/invites",
-        templateUrl:"js/eventWizard/views/evtInvites.html"
-      });
     });
 
 }());
+
+
+
+
+
+// .state('favors', {
+//   url:"/wizard/favors",
+//   templateUrl:"js/eventWizard/views/evtFavors.html",
+// })
+// .state('stretchgoal', {
+//   url:"/wizard/strechgoal",
+//   templateUrl:"js/eventWizard/views/evtStretchGoal.html"
+// })
+// .state('invites', {
+//   url:"/wizard/invites",
+//   templateUrl:"js/eventWizard/views/evtInvites.html"
+// });

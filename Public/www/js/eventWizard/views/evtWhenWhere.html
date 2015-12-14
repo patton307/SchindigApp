@@ -1,31 +1,23 @@
-
 <ion-view>
-
-
   <ion-nav-bar class="bar-stable">
-    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
-    </ion-nav-back-button>
+
   </ion-nav-bar>
   <div class="bar bar-header bar-royal">
-      <h1 class= "title">Let's Get This Party Started</h1>
-    </div>
+      <h1 class= "title">Where's This Party Going Down?</h1>
+  </div>
   <ion-padding>
     <ion-content>
-    <label class="item item-input">
-       <span class="input-label">Date</span>
-       <input ng-model="date" type="date">
-     </label>
-     <label class="item item-input">
-       <span class="input-label">Pick a Time</span>
-       <input ng-model="time" type="time" name="time" value="">
-     </label>
-     <label class="item item-input">
-       <span class="input-label">Name the Party:</span>
-       <input ng-model="name" type="text" name="name" value="">
-     </label>
-      <button ng-click="dateAndTimePost(date, title, time)" class="button button-large button-energized">
-       Large Button
-      </button>
+      <label class="item item-input">
+         <span class="input-label">Pick a Date and Time: </span>
+         <input ng-model="partyDate" type="datetime-local">
+       </label>
+       <label class="item item-input">
+         <span class="input-label">Name the Party: </span>
+         <input ng-model="partyName">
+       </label>
+        <button ng-click="dateAndTimePost(partyDate, partyName)" class="button button-large button-energized">
+         Large Button
+        </button>
     </ion-content>
   </ion-padding>
 </ion-view>

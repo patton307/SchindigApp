@@ -3,10 +3,10 @@
   angular
   .module("eventWizard")
 
-  .controller("EventWizardController", function($scope, $http, $stateParams, $cordovaDatePicker, EventWizardService){
-      var vm = this;
-      ////GET WIZARD DATA////
+  .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaDatePicker, EventWizardService){
+      var vm = $scope;
 
+      ////GET WIZARD DATA////
       EventWizardService.getWizard().then(function(data){
         $scope.wizardItems = data;
         $scope.get = function(nameId) {
@@ -25,23 +25,27 @@
       $scope.newWizPartyPost = function(subType, partyType){
         var item = {subType, partyType}
         EventWizardService.newWizPartyPost(item).success(function(data){
-          console.log('promise return', data);
+          console.log('newly created party: ', data);
+          localStorage.setItem('partyID', data.partyID);
+          $state.go('whenwhere');
         });
       };
 
-
       ///POST DATE, TIME AND NAME/////
-     $scope.dateAndTimePost = function(date, title, time){
-       var data = {date, title, time};
-       console.log('raw data', data);
-       EventWizardService.updateWizData(data).success(function(data){
-         console.log('dogdgo', data);
+     $scope.dateAndTimePost = function(partyDate, partyName){
+       var partyID = +localStorage.getItem('partyID')
+       localStorage.removeItem('partyID');
+       console.log('partyId in localstorage', partyID);
+       var data = {partyDate:partyDate, partyName:partyName, partyID:partyID};
+       data.partyDate = JSON.stringify(data.partyDate);
+       data.partyDate = JSON.parse(data.partyDate);
+       console.log('updated party data: ', data);
+       EventWizardService.updateWizData(data).success(function(updatedWizData){
+         console.log('dogdgo', updatedWizData);
        });
      };
 
+
 });
-
-
-
 
 }());

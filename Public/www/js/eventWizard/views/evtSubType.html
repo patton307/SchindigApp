@@ -1,6 +1,4 @@
 <ion-view>
-
-
   <ion-nav-bar class="bar-stable">
     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
     </ion-nav-back-button>
@@ -12,8 +10,7 @@
     <ion-padding>
       <ion-item
       ng-click="newWizPartyPost('{{item}}','{{partySubType.partyType}}')"
-      ng-repeat="item in partySubType.subType"
-      href="/#/wizardwhenwhere">
+      ng-repeat="item in partySubType.subType">
         {{item}}
       </ion-item>
     </ion-padding>
