@@ -25,7 +25,7 @@
       $scope.newWizPartyPost = function(subType, partyType){
         var item = {subType, partyType}
         EventWizardService.newWizPartyPost(item).success(function(data){
-          vm.dogData = data[18];
+          vm.dogData = data[0];
           console.log('vm data', vm.dogData);
           return vm.dogData;
         });
