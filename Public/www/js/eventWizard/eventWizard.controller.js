@@ -4,7 +4,7 @@
     .module("eventWizard")
 
     .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaDatePicker, EventWizardService){
-        var vm = $scope;
+        var vm = this;
 
 
         ////GET WIZARD DATA////
@@ -37,7 +37,6 @@
         ///POST DATE, TIME AND NAME/////
        $scope.dateAndTimePost = function(partyDate, partyName){
          var partyID = +localStorage.getItem('partyID');
-         localStorage.removeItem('partyID');
          console.log('partyId in localstorage', partyID);
          var data = {
            partyDate: partyDate,
@@ -55,17 +54,24 @@
 
 
      //STRETCHGOAL POST and SCOPES//
-    //  $scope.fakeStretchData = {stretchGoal:stretchGoal, stretchName:stretchName, stretchStatus:stretchStatus};
+
 
      $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
-       var data ={
-         stretchStatus:stretchStatus, 
-         stretchGoal:stretchGoal,
-         stretchName:stretchName
+       var partyID = +localStorage.getItem('partyData.partyID');
+       var partyName = localStorage.getItem('partyData.partyName');
+       var partyDate = localStorage.getItem('partyData.partyDate');
+       var data = {
+         stretchStatus,
+         stretchGoal,
+         stretchName,
+         partyID,
+         partyDate,
+         partyName
        };
        console.log('updated stretchgoal:', data);
-       EventWizardService.updateWizData(data).success(function(updateWizData){
+       EventWizardService.updateWizData(data).success(function(updatedWizData){
          console.log('new-stretchgoal', updatedWizData);
+         localStorage.setItem('stretchStatus', 'stretchGoal', 'stretchName');
          $state.go('invites');
        });
      };
