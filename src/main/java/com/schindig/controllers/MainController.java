@@ -9,9 +9,12 @@ import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.CookieGenerator;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -157,9 +160,8 @@ public class MainController {
         /**User u = party.host;
          u.hostCount += 1;
          users.save(u);*/
-        session.setAttribute("partyID", party.partyID);
+
         parties.save(party);
-        response.addHeader("partyType", party.partyType);
         return party;
     }
 
@@ -220,14 +222,6 @@ public class MainController {
     /**8**/
     @RequestMapping(path = "/party/update", method = RequestMethod.PUT)
     public Party updateParty(HttpSession session, HttpServletResponse response, @RequestBody Party party, @RequestBody String partyDate) {
-        if (session.getAttribute("partyID") == null) {
-            session.setAttribute("partyID", party.partyID);
-        } else {
-            session.getAttribute("partyID");
-        }
-
-
-        parties.save(party);
         return party;
     }
 
