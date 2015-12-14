@@ -300,6 +300,9 @@ public class MainController {
         if (party.stretchGoal != null) {
             check.stretchGoal = party.stretchGoal;
         }
+        if (party.stretchName != null) {
+            check.stretchName = party.stretchName;
+        }
         parties.save(check);
         return check;
     }
