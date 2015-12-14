@@ -17,24 +17,22 @@
                 return data.data[i-1];
               }
             }
-            return null;
-          };
-          $scope.partySubType = $scope.get($stateParams);
-        });
-
-
-
-        /////POST NEW PARTY/////
-        $scope.newWizPartyPost = function(subType, partyType){
-          var item = {subType, partyType}
-          EventWizardService.newWizPartyPost(item).success(function(data){
-            console.log('newly created party: ', data);
-            localStorage.setItem('partyID', data.partyID);
-            $state.go('whenwhere');
-          });
+          return null;
         };
+        $scope.partySubType = $scope.get($stateParams);
+      });
 
 
+
+      /////POST NEW PARTY/////
+      $scope.newWizPartyPost = function(subType, partyType){
+        var item = {subType, partyType};
+        EventWizardService.newWizPartyPost(item).success(function(data){
+          console.log('newly created party: ', data);
+          localStorage.setItem('partyID', data.partyID);
+          $state.go('whenwhere');
+        });
+      };
 
         ///POST DATE, TIME AND NAME/////
        $scope.dateAndTimePost = function(partyDate, partyName){
@@ -56,6 +54,19 @@
        };
 
 
+     //STRETCHGOAL POST and SCOPES//
+    //  $scope.fakeStretchData = {stretchGoal:stretchGoal, stretchName:stretchName, stretchStatus:stretchStatus};
+
+     $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
+       var data ={stretchStatus:stretchStatus, stretchGoal:stretchGoal, stretchName:stretchName};
+       console.log('updated stretchgoal:', data);
+       EventWizardService.updateWizData(data).success(function(updateWizData){
+         console.log('new-stretchgoal', updatedWizData);
+         $state.go('invites');
+       });
+     };
+
+
 
        /////GET STATIC FAVORS///////
        EventWizardService.getFavors().success(function(data){
@@ -67,8 +78,5 @@
       $scope.favorPost = function(){
         $state.go('stretchgoal');
       };
-
-
-     });
-
+    });
 }());
