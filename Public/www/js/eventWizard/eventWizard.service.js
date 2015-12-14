@@ -8,12 +8,12 @@
       var wizUpdateUrl = "http://localhost:8080/party/update";
       var favorUpdateUrl = "http://localhost8080/party/favor";
       var wizardData = {};
-      
+
       var getWizard = function() {
         return $http.get('http://localhost:8080/wizard');
       };
       var newWizPartyPost = function(item){
-        return $http.post(wizCreateUrl, item);
+        return $http.post(wizCreateUrl, item), $http.get('http://localhost:8080/wizard');
       };
       var getOneWizParty = function (wizID){
         return $http.get("http://localhost:8080/wizard");

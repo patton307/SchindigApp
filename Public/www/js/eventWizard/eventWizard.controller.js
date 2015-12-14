@@ -4,7 +4,8 @@
   .module("eventWizard")
 
   .controller("EventWizardController", function($scope, $http, $stateParams, $cordovaDatePicker, EventWizardService){
-      var vm = this;
+      var vm = $scope;
+
       ////GET WIZARD DATA////
       EventWizardService.getWizard().then(function(data){
         $scope.wizardItems = data;
@@ -24,27 +25,23 @@
       $scope.newWizPartyPost = function(subType, partyType){
         var item = {subType, partyType}
         EventWizardService.newWizPartyPost(item).success(function(data){
-          vm.data = data;
-          if($stateParams.partyID){
-            vm.data = EventWizardService.get
-          }
-          console.log(vm.data);
+          vm.dogData = data[18];
+          console.log('vm data', vm.dogData);
+          return vm.dogData;
         });
       };
-
+      console.log('this is what i need', vm.dogData);
 
       ///POST DATE, TIME AND NAME/////
-     $scope.dateAndTimePost = function(partyDate, partyName){
-       var data = {partyDate, partyName};
+     $scope.dateAndTimePost = function(partyDate, partyName, partyID){
+       var data = {partyDate, partyName, partyID};
        console.log('raw data', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
          console.log('dogdgo', updatedWizData);
        });
      };
 
+
 });
-
-
-
 
 }());
