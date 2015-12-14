@@ -34,8 +34,6 @@ import java.util.stream.Collectors;
 @RestController
 public class MainController {
 
-
-
     @Autowired
     WizardRepo wizard;
 
@@ -226,7 +224,7 @@ public class MainController {
     }
 
     /**8**/
-    @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
+    @RequestMapping(path = "/party/update", method = RequestMethod.PUT)
     public Party updateParty(@RequestBody Party party) {
         parties.save(party);
         return party;
