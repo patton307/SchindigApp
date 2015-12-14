@@ -1,20 +1,28 @@
 package com.schindig.controllers;
-import com.schindig.entities.Catalog;
+import com.schindig.entities.Favor;
 import com.schindig.entities.Party;
 import com.schindig.entities.User;
 import com.schindig.entities.Wizard;
-import com.schindig.services.CatalogRepo;
+import com.schindig.services.FavorRepo;
 import com.schindig.services.PartyRepo;
 import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.CookieGenerator;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.groups.ConvertGroup;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -32,7 +40,7 @@ public class MainController {
     WizardRepo wizard;
 
     @Autowired
-    CatalogRepo catalog;
+    FavorRepo favors;
 
     @Autowired
     PartyRepo parties;
@@ -77,15 +85,15 @@ public class MainController {
             }
         }
 
-        Integer catCheck = catalog.catalogSize();
+        Integer catCheck = favors.favorSize();
         if (catCheck==0) {
             String fileContent = Methods.readFile("catalog.csv");
 
             String[] lines = fileContent.split("\n");
 
             for (String line : lines) {
-                Catalog cat = new Catalog(line);
-                catalog.save(cat);
+                Favor fav = new Favor(line);
+                favors.save(fav);
             }
         }
 
@@ -167,15 +175,15 @@ public class MainController {
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor(@RequestBody Parameters parameters) {
         Party p = parties.findOne(parameters.party.partyID);
-        if (!p.catalogList.contains(parameters.favor)) {
+        if (!p.favorList.contains(parameters.favor)) {
             parameters.favor.useCount += 1;
-            p.catalogList.add((parameters.favor));
+            p.favorList.add(parameters.favor);
             parties.save(p);
             return p;
         } else {
             parameters.favor.useCount +=1;
-            Integer pos = p.catalogList.indexOf(parameters.favor);
-            p.catalogList.set(pos, parameters.favor);
+            Integer pos = p.favorList.indexOf(parameters.favor);
+            p.favorList.set(pos, parameters.favor);
             parties.save(p);
             return p;
         }
@@ -253,7 +261,7 @@ public class MainController {
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public Party deletePartyFavor(@RequestBody Parameters parameters) {
-        parameters.party.catalogList.remove(catalog);
+        parameters.party.favorList.remove(parameters.favor);
         parties.save(parameters.party);
         return parameters.party;
     }
@@ -287,30 +295,30 @@ public class MainController {
 
 
 
-    /**ALL CATALOG SPECIFIC ROUTES**/
+    /**ALL FAVOR SPECIFIC ROUTES**/
     /**2**/
-    @RequestMapping(path = "/catalog", method = RequestMethod.GET)
-    public ArrayList<Catalog> getCatalogList() {
-        return (ArrayList<Catalog>) catalog.findAll();
+    @RequestMapping(path = "/favor", method = RequestMethod.GET)
+    public ArrayList<Favor> getFavorList() {
+        return (ArrayList<Favor>) favors.findAll();
     }
 
-    @RequestMapping(path = "/catalog/save", method = RequestMethod.POST)
-    public String catalogItem(@RequestBody Catalog item) {
-        if (!catalog.exists(item.catalogID)) {
-            Catalog c = new Catalog();
+    @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
+    public String favorItem(@RequestBody Favor item) {
+        if (!favors.exists(item.favorID)) {
+            Favor c = new Favor();
             c.favorName = item.favorName;
-            catalog.save(c);
+            favors.save(c);
         } else {
-            catalog.save(item);
+            favors.save(item);
             return "Item updated.";
         }
         return "Item added to database";
     }
 
-    @RequestMapping(path = "/catalog/remove", method = RequestMethod.POST)
-    public ArrayList<Catalog> deleteCatalogItem(@RequestBody Catalog item) {
-        catalog.delete(item);
-        return (ArrayList<Catalog>) catalog.findAll();
+    @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
+    public ArrayList<Favor> deleteFavorItem(@RequestBody Favor item) {
+        favors.delete(item);
+        return (ArrayList<Favor>) favors.findAll();
     }
 
 

@@ -7,13 +7,13 @@ import com.schindig.entities.User;
 /**
  * Created by landonkail on 12/14/15.
  */
-public class Parameters {
+public class PartyPar {
 
-    public Favor favor;
+    public Favor fav;
 
-    public Party party;
+    public Party part;
 
-    public User user;
+    public User use;
 
     public String rsvpStatus;
 
