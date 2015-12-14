@@ -29,7 +29,7 @@
         abstract: true,
         templateUrl: 'js/common/views/tabs.html'
         })
-
+        
         // Each tab has its own nav history stack:
       .state('tab.dash', {
         url: '/dash',

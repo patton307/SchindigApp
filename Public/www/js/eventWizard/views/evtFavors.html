@@ -7,6 +7,29 @@
       <h1 class= "title">Check/Uncheck Your Favors</h1>
    </div>
   <ion-content>
+    <ul class="list">
+      <div class="item item-divider">
+        Commonly Bought Favors For Christmas Party:
+      </div>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-icecream placeholder-icon"></i>
+          <input
+            type="text"
+            placeholder="Add Your Own">
+        </label>
+      </div>
+      <ion-checkbox
+        id="{{item.catalogID}}"
+        ng-repeat="item in favors"
+        ng-model="filter.blue">{{item.favorName}}
+      </ion-checkbox>
 
+    </ul>
+    <button
+      ng-click="favorPost()"
+      class="button button-full button-positive">
+      Submit Your Favors
+    </button>
   </ion-content>
 </ion-view>
