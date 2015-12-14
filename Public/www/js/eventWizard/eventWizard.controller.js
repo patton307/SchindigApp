@@ -26,7 +26,7 @@
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var item = {subType, partyType};
+        var item = {subType: subType, partyType: partyType};
         EventWizardService.newWizPartyPost(item).success(function(data){
           console.log('newly created party: ', data);
           localStorage.setItem('partyID', data.partyID);
