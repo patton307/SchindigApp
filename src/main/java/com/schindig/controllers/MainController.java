@@ -9,6 +9,7 @@ import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
+import com.schindig.utils.PartyPar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
@@ -19,7 +20,10 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.groups.ConvertGroup;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -160,28 +164,27 @@ public class MainController {
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
-    public Party createParty( @RequestBody Party party, HttpSession session, HttpServletResponse response ){
+    public Party createParty( @RequestBody Party party ){
         /**User u = party.host;
          u.hostCount += 1;
          users.save(u);*/
-        session.setAttribute("partySession", party);
         parties.save(party);
         return party;
     }
 
     /**4**/
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
-    public Party addFavor( @RequestBody Party party, @RequestBody Catalog item ){
-        Party p = parties.findOne(party.partyID);
-        if(!p.catalogList.contains(item)) {
-            item.useCount += 1;
-            p.catalogList.add(item);
+    public Party addFavor(@RequestBody PartyPar partypar) {
+        Party p = parties.findOne(partypar.part.partyID);
+        if (!p.catalogList.contains(partypar.cat)) {
+            partypar.cat.useCount += 1;
+            p.catalogList.add((partypar.cat));
             parties.save(p);
             return p;
         } else {
-            item.useCount += 1;
-            Integer pos = p.catalogList.indexOf(item);
-            p.catalogList.set(pos, item);
+            partypar.cat.useCount +=1;
+            Integer pos = p.catalogList.indexOf(partypar.cat);
+            p.catalogList.set(pos, partypar.cat);
             parties.save(p);
             return p;
         }
@@ -189,32 +192,32 @@ public class MainController {
 
     /**5**/
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
-    public Party addInvite(@RequestBody Party party, @RequestBody User user, @RequestBody String invitePhone ) throws Exception {
+    public Party addInvite(@RequestBody PartyPar partypar) throws Exception {
         try {
-            if (!party.inviteList.contains(invitePhone)) {
-                party.inviteList.add(invitePhone);
-                parties.save(party);
-                user.inviteCount += 1;
-                users.save(user);
+            if (!partypar.part.inviteList.contains(partypar.use.phone)) {
+                partypar.part.inviteList.add(partypar.use.phone);
+                parties.save(partypar.part);
+                partypar.use.inviteCount += 1;
+                users.save(partypar.use);
             }
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("User already invited.");
         }
-        return party;
+        return partypar.part;
     }
 
     /**6**/
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
-    public Party rsvp( @RequestBody Party party, @RequestBody User user, @RequestBody String rsvpStatus){
-        party.rsvp.put(user.userID, rsvpStatus);
-        user.invitedCount += 1;
-        if (rsvpStatus.equals("Yes")) {
-            user.partyCount += 1;
+    public Party rsvp(@RequestBody PartyPar partypar){
+        partypar.part.rsvp.put(partypar.use.userID, partypar.rsvpStatus);
+        partypar.use.invitedCount += 1;
+        if (partypar.rsvpStatus.equals("Yes")) {
+            partypar.use.partyCount += 1;
         }
-        users.save(user);
-        parties.save(party);
-        return party;
+        users.save(partypar.use);
+        parties.save(partypar.part);
+        return partypar.part;
     }
 
     /**7**/
@@ -236,7 +239,7 @@ public class MainController {
         user = users.findOne(user.userID);
         ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
         final User finalUser = user;
-        partyList.stream()
+        partyList = partyList.stream()
                 .filter(party -> {
                     return (party.inviteList.contains(finalUser.phone));
                 })
@@ -258,10 +261,10 @@ public class MainController {
 
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public Party deletePartyFavor(@RequestBody Party party, @RequestBody Catalog catalog) {
-        party.catalogList.remove(catalog);
-        parties.save(party);
-        return party;
+    public Party deletePartyFavor(@RequestBody PartyPar partypar) {
+        partypar.part.catalogList.remove(catalog);
+        parties.save(partypar.part);
+        return partypar.part;
     }
 
     @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
@@ -269,6 +272,7 @@ public class MainController {
         ArrayList<String> stats = new ArrayList<>();
         return stats;
     }
+
 
     /**ALL WIZARD RELATED ROUTES**/
     /**1**/
