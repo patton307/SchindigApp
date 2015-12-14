@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
@@ -154,11 +153,13 @@ public class MainController {
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
-    public Party createParty( @RequestBody Party party ){
+    public Party createParty( @RequestBody Party party, HttpSession session, HttpServletResponse response ){
         /**User u = party.host;
          u.hostCount += 1;
          users.save(u);*/
+        session.setAttribute("partyID", party.partyID);
         parties.save(party);
+        response.addHeader("partyType", party.partyType);
         return party;
     }
 
@@ -218,7 +219,14 @@ public class MainController {
 
     /**8**/
     @RequestMapping(path = "/party/update", method = RequestMethod.PUT)
-    public Party updateParty(@RequestBody Party party, @RequestBody String partyDate) {
+    public Party updateParty(HttpSession session, HttpServletResponse response, @RequestBody Party party, @RequestBody String partyDate) {
+        if (session.getAttribute("partyID") == null) {
+            session.setAttribute("partyID", party.partyID);
+        } else {
+            session.getAttribute("partyID");
+        }
+
+
         parties.save(party);
         return party;
     }
