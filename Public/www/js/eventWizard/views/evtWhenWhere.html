@@ -1,23 +1,21 @@
 <ion-view>
   <ion-nav-bar class="bar-stable">
-    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
-    </ion-nav-back-button>
+
   </ion-nav-bar>
   <div class="bar bar-header bar-royal">
-      <h1 class= "title">Let's Get Some Details</h1>
-    </div>
+      <h1 class= "title">Where's This Party Going Down?</h1>
+  </div>
   <ion-padding>
     <ion-content>
-      <h1>dog{{evtCtrl.data}}</h1>
       <label class="item item-input">
-         <span class="input-label">Pick a Date and Time</span>
+         <span class="input-label">Pick a Date and Time: </span>
          <input ng-model="partyDate" type="datetime-local">
        </label>
        <label class="item item-input">
-         <span class="input-label">Name the Party:</span>
+         <span class="input-label">Name the Party: </span>
          <input ng-model="partyName">
        </label>
-        <button ng-click="dateAndTimePost(partyDate, partyName, 1)" class="button button-large button-energized">
+        <button ng-click="dateAndTimePost(partyDate, partyName)" class="button button-large button-energized">
          Large Button
         </button>
     </ion-content>
