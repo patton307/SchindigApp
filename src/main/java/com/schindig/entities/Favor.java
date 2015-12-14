@@ -5,25 +5,25 @@ import javax.persistence.*;
  * Created by Agronis on 12/9/15.
  */
 @Entity
-public class Catalog {
+public class Favor {
 
     @GeneratedValue
     @Id
-    public Integer catalogID;
+    public Integer favorID;
 
 //    @Column(nullable = false)
     public String favorName;
 
     public Integer useCount = 0;
 
-    public Catalog(){}
-    public Catalog(Integer catalogID, String favorName, Integer useCount) {
+    public Favor(){}
+    public Favor(Integer favorID, String favorName, Integer useCount) {
 
-        this.catalogID = catalogID;
+        this.favorID = favorID;
         this.favorName = favorName;
         this.useCount = useCount;
     }
-    public Catalog(String favorName) {
+    public Favor(String favorName) {
 
         this.favorName = favorName;
     }
@@ -35,8 +35,8 @@ public class Catalog {
 
         return useCount;
     }
-    public Integer getCatalogID() {
+    public Integer getFavorID() {
 
-        return catalogID;
+        return favorID;
     }
 }

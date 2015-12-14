@@ -48,7 +48,7 @@ public class Party {
 
     public HashMap<Integer, String> rsvp;
 
-    public ArrayList<Catalog> catalogList;
+    public ArrayList<Favor> favorList;
 
     public String stretchName;
 
@@ -79,7 +79,7 @@ public class Party {
         this.usState = usState;
         this.zip = zip;
     }
-    public Party(Integer partyID, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String[] parking) {
+    public Party(Integer partyID, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Favor> favorList, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String[] parking) {
 
         this.partyID = partyID;
         this.partyName = partyName;
@@ -94,7 +94,7 @@ public class Party {
         this.zip = zip;
         this.inviteList = inviteList;
         this.rsvp = rsvp;
-        this.catalogList = catalogList;
+        this.favorList = favorList;
         this.stretchName = stretchName;
         this.stretchGoal = stretchGoal;
         this.stretchStatus = stretchStatus;
@@ -156,9 +156,9 @@ public class Party {
 
         return rsvp;
     }
-    public ArrayList<Catalog> getCatalogList() {
+    public ArrayList<Favor> getFavorList() {
 
-        return catalogList;
+        return favorList;
     }
     public String getStretchName() {
 

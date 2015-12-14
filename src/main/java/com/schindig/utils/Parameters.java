@@ -1,6 +1,6 @@
 package com.schindig.utils;
 
-import com.schindig.entities.Catalog;
+import com.schindig.entities.Favor;
 import com.schindig.entities.Party;
 import com.schindig.entities.User;
 
@@ -9,7 +9,7 @@ import com.schindig.entities.User;
  */
 public class Parameters {
 
-    public Catalog favor;
+    public Favor favor;
 
     public Party party;
 
