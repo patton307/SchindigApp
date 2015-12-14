@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.groups.ConvertGroup;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -102,7 +103,29 @@ public class MainController {
     /**ALL USER RELATED ROUTES**/
     /**14**/
     @RequestMapping(path = "/user/update", method = RequestMethod.POST)
-    public User updateUser(@RequestBody User user){
+    public User updateUser(@RequestBody User u){
+        User user = users.findOne(u.userID);
+        if (u.username != null) {
+            user.username = u.username;
+        } else if (u.password != null) {
+            user.password = u.password;
+        } else if (u.email != null) {
+            user.email = u.email;
+        } else if (u.phone != null) {
+            user.phone = u.phone;
+        } else if (u.firstName != null) {
+            user.firstName = u.firstName;
+        } else if (u.lastName != null) {
+            user.lastName = u.lastName;
+        } else if (u.hostCount != null) {
+            user.hostCount = u.hostCount;
+        } else if (u.inviteCount != null) {
+            user.inviteCount = u.inviteCount;
+        } else if (u.invitedCount != null) {
+            user.invitedCount = u.invitedCount;
+        } else if (u.partyCount != null) {
+            user.partyCount = u.partyCount;
+        }
         users.save(user);
         user.password = null;
         return user;
@@ -148,11 +171,6 @@ public class MainController {
         }
     }
 
-    @RequestMapping(path = "/user/update-password", method = RequestMethod.POST)
-    public void updateUserPass(@RequestBody User user) {
-        users.save(user);
-    }
-
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
     public void logout(HttpSession session) {
                 session.invalidate();
@@ -172,49 +190,56 @@ public class MainController {
     /**4**/
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor(@RequestBody Parameters parameters) {
-        Party p = parties.findOne(parameters.party.partyID);
-        if (!p.favorList.contains(parameters.favor)) {
-            parameters.favor.useCount += 1;
-            p.favorList.add(parameters.favor);
-            parties.save(p);
-            return p;
+        Party party = parties.findOne(parameters.party.partyID);
+        Favor favor = favors.findOne(parameters.favor.favorID);
+        if (!party.favorList.contains(parameters.favor)) {
+            favor.useCount += 1;
+            party.favorList.add(favor);
+            parties.save(party);
+            favors.save(favor);
+            return party;
         } else {
-            parameters.favor.useCount +=1;
-            Integer pos = p.favorList.indexOf(parameters.favor);
-            p.favorList.set(pos, parameters.favor);
-            parties.save(p);
-            return p;
+            Integer pos = party.favorList.indexOf(favor);
+            party.favorList.set(pos, favor);
+            parties.save(party);
+            favors.save(favor);
+            return party;
         }
     }
 
     /**5**/
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
     public Party addInvite(@RequestBody Parameters parameters) throws Exception {
+        Party party = parameters.party;
+        User user = parameters.user;
         try {
-            if (!parameters.party.inviteList.contains(parameters.user.phone)) {
-                parameters.party.inviteList.add(parameters.user.phone);
-                parties.save(parameters.party);
-                parameters.user.inviteCount += 1;
-                users.save(parameters.user);
+            if (!party.inviteList.contains(user.phone)) {
+                party.inviteList.add(user.phone);
+                parties.save(party);
+                user.inviteCount += 1;
+                users.save(user);
             }
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("User already invited.");
         }
-        return parameters.party;
+        return party;
     }
 
     /**6**/
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
     public Party rsvp(@RequestBody Parameters parameters){
+        User user = parameters.user;
+        Party party = parameters.party;
+        party.rsvp.put(user.userID, parameters.rsvpStatus);
         parameters.party.rsvp.put(parameters.user.userID, parameters.rsvpStatus);
-        parameters.user.invitedCount += 1;
+        user.invitedCount += 1;
         if (parameters.rsvpStatus.equals("Yes")) {
-            parameters.user.partyCount += 1;
+            user.partyCount += 1;
         }
-        users.save(parameters.user);
-        parties.save(parameters.party);
-        return parameters.party;
+        users.save(user);
+        parties.save(party);
+        return party;
     }
 
     /**7**/
@@ -286,16 +311,22 @@ public class MainController {
 
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public Party deletePartyFavor(@RequestBody Parameters parameters) {
-        parameters.party.favorList.remove(parameters.favor);
-        parties.save(parameters.party);
-        return parameters.party;
+    public Party deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
+        Party party = parties.findOne(parameters.party.partyID);
+        Favor favor = favors.findOne(parameters.favor.favorID);
+        Integer pos = party.favorList.indexOf(favor);
+        if (party.favorList.get(pos) == null) {
+            response.sendError(0, "Favor not found");
+        }
+        party.favorList.remove(favor);
+        parties.save(party);
+        return party;
     }
 
     @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
     public ArrayList<String> partyStats() {
-        ArrayList<String> stats = new ArrayList<>();
-        return stats;
+
+        return new ArrayList<>();
     }
 
 
@@ -303,12 +334,12 @@ public class MainController {
     /**1**/
     @RequestMapping(path = "/wizard", method = RequestMethod.GET)
     public ArrayList<Wizard> getPartyList() {
-        System.out.println(System.getProperties());
         return (ArrayList<Wizard>) wizard.findAll();
     }
 
     @RequestMapping(path = "/wizard/{id}", method = RequestMethod.POST)
-    public Party wizardPosition(@RequestBody Party party, @PathVariable("id") int id) {
+    public Party wizardPosition(@RequestBody Party p, @PathVariable("id") int id) {
+        Party party = parties.findOne(p.partyID);
         party.wizPosition = id + 1;
         parties.save(party);
         return party;
@@ -316,7 +347,7 @@ public class MainController {
 
     @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
     public Integer getWizardPosition(@RequestBody Party party) {
-        return party.wizPosition;
+        return parties.findOne(party.partyID).wizPosition;
     }
 
 
