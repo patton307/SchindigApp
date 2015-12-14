@@ -31,11 +31,11 @@
 
 
       ///POST DATE, TIME AND NAME/////
-     $scope.dateAndTimePost = function(date, title, time){
-       var data = {date, title, time};
+     $scope.dateAndTimePost = function(partyDate, partyName){
+       var data = {partyDate, partyName};
        console.log('raw data', data);
-       EventWizardService.updateWizData(data).success(function(data){
-         console.log('dogdgo', data);
+       EventWizardService.updateWizData(data).success(function(updatedWizData){
+         console.log('dogdgo', updatedWizData);
        });
      };
 
