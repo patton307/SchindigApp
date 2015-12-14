@@ -28,6 +28,13 @@
         console.log("posting item: ", item);
         EventWizardService.newWizPartyPost(item);
       };
+      ///POST DATE, TIME AND NAME/////
+      $scope.dateAndTimePost = function(date ,title, time){
+        var data = {date, time, title};
+        console.log("posting item: ", data);
+        EventWizardService.newWizPartyPost(item);
+      };
+
       // EventWizardService.newWizPartyPost(item).then(function(data){
       //   console.log('post', data);
       // });
