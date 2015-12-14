@@ -14,11 +14,11 @@
       </label>
       <label class="item item-input">
         <span class= "input-label">Whoop that Trick</span>
-        <input ng-model="stretchGoal" type="number">
+        <input ng-model="stretchGoal | currency" type="number">
       </label>
       <label class="item item-input">
         <span class= "input-label">Cough it up Homey</span>
-        <input ng-model="stretchStatus" type="number">
+        <input ng-model="stretchStatus | currency" type="number">
       </label>
 
       <h1>{{stretchName}}</h1>

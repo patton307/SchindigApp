@@ -7,7 +7,7 @@
       var wizCreateUrl = "http://localhost:8080/party/create";
       var wizUpdateUrl = "http://localhost:8080/party/update";
       var favorUpdateUrl = "http://localhost:8080/party/favor";
-      var favorGetUrl = "http://localhost:8080/catalog";
+      var favorGetUrl = "http://localhost:8080/favor";
       var wizardData = {};
 
       var getWizard = function() {
