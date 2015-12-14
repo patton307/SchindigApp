@@ -3,7 +3,7 @@
   angular
     .module("eventWizard")
 
-    .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaDatePicker, EventWizardService){
+    .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaContacts, EventWizardService){
         var vm = this;
 
 
@@ -54,24 +54,17 @@
 
 
      //STRETCHGOAL POST and SCOPES//
-
-
      $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
-       var partyID = +localStorage.getItem('partyData.partyID');
-       var partyName = localStorage.getItem('partyData.partyName');
-       var partyDate = localStorage.getItem('partyData.partyDate');
+       var partyID = +localStorage.getItem('partyID');
        var data = {
-         stretchStatus,
-         stretchGoal,
-         stretchName,
-         partyID,
-         partyDate,
-         partyName
+           stretchStatus,
+           stretchGoal,
+           stretchName,
+           partyID
        };
        console.log('updated stretchgoal:', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
          console.log('new-stretchgoal', updatedWizData);
-         localStorage.setItem('stretchStatus', 'stretchGoal', 'stretchName');
          $state.go('invites');
        });
      };
@@ -88,5 +81,13 @@
       $scope.favorPost = function(){
         $state.go('stretchgoal');
       };
+
+      //CORDOVA CONTACTS AND INVITATIONS //
+      $scope.getAllContacts = function (){
+        $cordovaContacts.then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
+          $scope.contacts = allContacts;
+        });
+      };
+
     });
 }());
