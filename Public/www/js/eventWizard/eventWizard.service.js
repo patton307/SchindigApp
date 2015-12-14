@@ -18,7 +18,7 @@
       var getOneWizParty = function (wizID){
         return $http.get("http://localhost:8080/wizard");
       };
-      var updateWizData = function (updatedWizData){
+      var updateWizData = function(updatedWizData){
         return $http.post(wizUpdateUrl, updatedWizData);
       };
       var postFavorParty = function (postFavor){
