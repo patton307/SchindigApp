@@ -9,7 +9,7 @@
       ProfileService,
       $cordovaGeolocation,
       $ionicPlatform,
-      $cordovaDatePicker,
+      $cordovaContacts,
       $http
     ){
 
@@ -23,8 +23,8 @@
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
           .then(function (position) {
-            var lat  = position.coords.latitude
-            var long = position.coords.longitude
+            var lat  = position.coords.latitude;
+            var long = position.coords.longitude;
             $scope.lat = lat;
             $scope.long = long;
           }, function(err) {
@@ -42,12 +42,12 @@ var url = 'http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart4';
           console.log(data[5].image);
         });
 
-      }
+      };
       $scope.takePicture = function() {
         var options = {
           destinationType: Camera.DestinationType.DATA_URL,
           encodingType: Camera.EncodingType.JPEG
-        }
+        };
         $cordovaCamera.getPicture({})
           .then(function(data) {
             $scope.profilePicture =  data;
@@ -59,11 +59,22 @@ var url = 'http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart4';
        $scope.savePhoto = function(item) {
        var data = {
          'image': item
-       }
-        $http.post(url, data)
-      }
+       };
+        $http.post(url, data);
+      };
+        ///CONTACTS
+      $scope.getAllContacts = function (){
+        $cordovaContacts.then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
+          $scope.contacts = allContacts;
+          console.log(allContacts);
+        });
+      };
+
 
     });
+
+  ///CONTACTS
+
 
 
 

@@ -86,6 +86,7 @@
       $scope.getAllContacts = function (){
         $cordovaContacts.then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
           $scope.contacts = allContacts;
+          console.log(allContacts);
         });
       };
 
