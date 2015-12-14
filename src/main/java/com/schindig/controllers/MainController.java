@@ -227,9 +227,8 @@ public class MainController {
 
     /**8**/
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
-    public Party updateParty(@RequestBody Party party) {
+    public void updateParty(@RequestBody Party party) {
         parties.save(party);
-        return party;
     }
 
     /**9**/
