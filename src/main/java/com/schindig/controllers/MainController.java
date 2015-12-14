@@ -174,17 +174,17 @@ public class MainController {
 
     /**4**/
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
-    public Party addFavor(@RequestBody PartyPar partypar) {
-        Party p = parties.findOne(partypar.part.partyID);
-        if (!p.favorList.contains(partypar.fav)) {
-            partypar.fav.useCount += 1;
-            p.favorList.add((partypar.fav));
+    public Party addFavor(@RequestBody Parameters parameters) {
+        Party p = parties.findOne(parameters.party.partyID);
+        if (!p.favorList.contains(parameters.favor)) {
+            parameters.favor.useCount += 1;
+            p.favorList.add(parameters.favor);
             parties.save(p);
             return p;
         } else {
-            partypar.fav.useCount +=1;
-            Integer pos = p.favorList.indexOf(partypar.fav);
-            p.favorList.set(pos, partypar.fav);
+            parameters.favor.useCount +=1;
+            Integer pos = p.favorList.indexOf(parameters.favor);
+            p.favorList.set(pos, parameters.favor);
             parties.save(p);
             return p;
         }
@@ -261,10 +261,10 @@ public class MainController {
 
     /**11**/
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public Party deletePartyFavor(@RequestBody PartyPar partypar) {
-        partypar.part.catalogList.remove(catalog);
-        parties.save(partypar.part);
-        return partypar.part;
+    public Party deletePartyFavor(@RequestBody Parameters parameters) {
+        parameters.party.favorList.remove(parameters.favor);
+        parties.save(parameters.party);
+        return parameters.party;
     }
 
     @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
