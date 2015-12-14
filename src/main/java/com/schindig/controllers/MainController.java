@@ -11,6 +11,7 @@ import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.CookieGenerator;
 
@@ -29,6 +30,8 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 public class MainController {
+
+
 
     @Autowired
     WizardRepo wizard;
@@ -271,6 +274,7 @@ public class MainController {
     /**1**/
     @RequestMapping(path = "/wizard", method = RequestMethod.GET)
     public ArrayList<Wizard> getPartyList() {
+        System.out.println(System.getProperties());
         return (ArrayList<Wizard>) wizard.findAll();
     }
 
