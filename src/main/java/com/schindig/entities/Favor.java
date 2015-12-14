@@ -17,9 +17,9 @@ public class Favor {
     public Integer useCount = 0;
 
     public Favor(){}
-    public Favor(Integer catalogID, String favorName, Integer useCount) {
+    public Favor(Integer favorID, String favorName, Integer useCount) {
 
-        this.favorID = catalogID;
+        this.favorID = favorID;
         this.favorName = favorName;
         this.useCount = useCount;
     }
@@ -35,7 +35,7 @@ public class Favor {
 
         return useCount;
     }
-    public Integer getCatalogID() {
+    public Integer getFavorID() {
 
         return favorID;
     }
