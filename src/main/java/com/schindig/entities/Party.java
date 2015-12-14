@@ -28,7 +28,7 @@ public class Party {
     public LocalDateTime createDate = LocalDateTime.now();
 
 //    @Column(nullable = false)
-    public LocalDateTime partyDate;
+    public String partyDate;
 
 //    @Column(nullable = false)
     public String street1;
@@ -63,7 +63,7 @@ public class Party {
     public String parking = " ";
 
     public Party(){}
-    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip) {
+    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip) {
 
         this.partyName = partyName;
         this.partyType = partyType;
@@ -76,7 +76,7 @@ public class Party {
         this.usState = usState;
         this.zip = zip;
     }
-    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer position, Boolean byob, Boolean theme, String parking) {
+    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer position, Boolean byob, Boolean theme, String parking) {
 
         this.partyName = partyName;
         this.partyType = partyType;
@@ -130,7 +130,7 @@ public class Party {
 
         return createDate;
     }
-    public LocalDateTime getPartyDate() {
+    public String getPartyDate() {
 
         return partyDate;
     }
