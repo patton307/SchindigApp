@@ -58,7 +58,11 @@
     //  $scope.fakeStretchData = {stretchGoal:stretchGoal, stretchName:stretchName, stretchStatus:stretchStatus};
 
      $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
-       var data ={stretchStatus:stretchStatus, stretchGoal:stretchGoal, stretchName:stretchName};
+       var data ={
+         stretchStatus:stretchStatus, 
+         stretchGoal:stretchGoal,
+         stretchName:stretchName
+       };
        console.log('updated stretchgoal:', data);
        EventWizardService.updateWizData(data).success(function(updateWizData){
          console.log('new-stretchgoal', updatedWizData);
