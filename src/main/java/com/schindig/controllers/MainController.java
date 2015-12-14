@@ -225,8 +225,37 @@ public class MainController {
 
     /**8**/
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
-    public void updateParty(@RequestBody Party party) {
-        parties.save(party);
+    public Party updateParty(@RequestBody Party party) {
+        Party check = parties.findOne(party.partyID);
+        if (party.partyName != null) {
+            check.partyName = party.partyName;
+        } else if (party.partyDate != null) {
+            check.partyDate = party.partyDate;
+        } else if (party.partyType != null) {
+            check.partyType = party.partyType;
+        } else if (party.subType != null) {
+            check.subType = party.subType;
+        } else if (party.street1 != null) {
+            check.street1 = party.street1;
+        } else if (party.street2 != null) {
+            check.street2 = party.street2;
+        } else if (party.zip != null) {
+            check.zip = party.zip;
+        } else if (party.usState != null) {
+            check.usState = party.usState;
+        } else if (party.city != null) {
+            check.city = party.city;
+        } else if (party.inviteList != null) {
+            check.inviteList = party.inviteList;
+        } else if (party.favorList != null) {
+            check.favorList = party.favorList;
+        } else if (party.rsvp != null) {
+            check.rsvp = party.rsvp;
+        } else if (party.stretchGoal != null) {
+            check.stretchGoal = party.stretchGoal;
+        }
+        parties.save(check);
+        return check;
     }
 
     /**9**/
