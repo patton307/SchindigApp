@@ -131,7 +131,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
-    public User findOneUser(@RequestBody int id) {
+    public User findOneUser(@PathVariable("id") int id) {
         return users.findOne(id);
     }
 
@@ -222,13 +222,7 @@ public class MainController {
 
     /**8**/
     @RequestMapping(path = "/party/update", method = RequestMethod.PUT)
-    public Party updateParty(@RequestBody Parameters p) {
-        int i = p.partyID;
-        String s = p.partyName;
-        String y = p.partyDate;
-        Party party = parties.findOne(p.partyID);
-        party.partyName = p.partyName;
-        party.partyDate = p.partyDate;
+    public Party updateParty(@RequestBody Party party) {
         parties.save(party);
         return party;
     }
