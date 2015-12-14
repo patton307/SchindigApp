@@ -34,8 +34,6 @@ import java.util.stream.Collectors;
 @RestController
 public class MainController {
 
-
-
     @Autowired
     WizardRepo wizard;
 
