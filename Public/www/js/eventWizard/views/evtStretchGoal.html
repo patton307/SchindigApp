@@ -1,1 +1,25 @@
-<h1>EVENT WIZARD - STRECHGOAL</h1>
+<ion-view>
+  <ion-nav-bar class="bar-stable">
+
+  </ion-nav-bar>
+  <div class="bar bar-header bar-royal">
+      <h1 class= "title">Get by with a little help from your friends: Stretchgoal</h1>
+  </div>
+  <ion-padding>
+    <ion-content>
+      <label class="item item-input">
+        <span class="input-label">What's the goal?</span>
+        <input ng-model= "fakeStretchData.stretchName" type="text">
+      </label>
+      <label class="item item-input">
+        <span class= "input-label">Whoop that Trick</span>
+        <input ng-model="fakeStretchData.stretchGoal" type="number">
+      </label>
+      <label class="item item-input">
+        <span class= "input-label">Cough it up Homey</span>
+        <input ng-model="fakeStretchData.stretchStatus" type="number">
+      </label>
+
+      <h1>{{stretchName.stretchName}}</h1>
+
+      <progress max={{fakeStretchData.stretchGoal}} value={{fakeStretchData.stretchStatus}}></progress>

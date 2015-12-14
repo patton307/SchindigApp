@@ -23,6 +23,16 @@
         templateUrl:"js/eventWizard/views/evtWhenWhere.html",
         controller: "EventWizardController as evtCtrl"
       })
+      .state('stretchgoal', {
+          url:"/wizard/stretchgoal",
+          templateUrl:"js/eventWizard/views/evtStretchGoal.html",
+          controller:"EventWizardController as evtCtrl"
+      })
+      .state('invites', {
+        url:"/wizard/invites",
+        templateUrl:"js/eventWizard/views/evtInvites.html",
+        controller:"EventWizardController as evtCtrl"
+      });
     });
 
 }());

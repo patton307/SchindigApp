@@ -23,7 +23,7 @@
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var item = {subType, partyType}
+        var item = {subType, partyType};
         EventWizardService.newWizPartyPost(item).success(function(data){
           console.log('newly created party: ', data);
           localStorage.setItem('partyID', data.partyID);
@@ -33,7 +33,7 @@
 
       ///POST DATE, TIME AND NAME/////
      $scope.dateAndTimePost = function(partyDate, partyName){
-       var partyID = +localStorage.getItem('partyID')
+       var partyID = +localStorage.getItem('partyID');
        localStorage.removeItem('partyID');
        console.log('partyId in localstorage', partyID);
        var data = {partyDate:partyDate, partyName:partyName, partyID:partyID};
@@ -44,8 +44,16 @@
          console.log('dogdgo', updatedWizData);
        });
      };
+     //STRETCHGOAL POST and SCOPES//
+    //  $scope.fakeStretchData = {stretchGoal:stretchGoal, stretchName:stretchName, stretchStatus:stretchStatus};
 
-
-});
-
+     $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
+       var data ={stretchStatus:stretchStatus, stretchGoal:stretchGoal, stretchName:stretchName};
+       console.log('updated stretchgoal:', data);
+       EventWizardService.updateWizData(data).success(function(updateWizData){
+         console.log('new-stretchgoal', updatedWizData);
+         $state.go('invites');
+       });
+     };
+   });
 }());
