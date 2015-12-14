@@ -26,7 +26,6 @@
         var item = {subType, partyType}
         EventWizardService.newWizPartyPost(item).success(function(data){
           vm.dogData = data[0];
-          console.log('vm data', vm.dogData);
           return vm.dogData;
         });
       };
@@ -34,9 +33,9 @@
 
       ///POST DATE, TIME AND NAME/////
      $scope.dateAndTimePost = function(partyDate, partyName, partyID){
-       var data = {date:partyDate, name:partyName, id:partyID};
-       data.date = JSON.stringify(data.date);
-       data.date = JSON.parse(data.date);
+       var data = {partyDate:partyDate, partyName:partyName, partyID:partyID};
+       data.partyDate = JSON.stringify(data.partyDate);
+       data.partyDate = JSON.parse(data.partyDate);
        console.log('this is the data', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
          console.log('dogdgo', updatedWizData);
