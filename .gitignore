@@ -100,3 +100,5 @@ bower_components
 
 # H2 Database #
 *.db
+
+.DS_Store
