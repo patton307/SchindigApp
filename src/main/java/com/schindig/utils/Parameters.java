@@ -1,6 +1,6 @@
 package com.schindig.utils;
-import com.schindig.entities.Catalog;
-import java.time.LocalDateTime;
+import com.schindig.entities.Favor;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,7 +29,7 @@ public class Parameters {
      */
     public ArrayList<String> inviteList;
     public HashMap<Integer, String> rsvp;
-    public ArrayList<Catalog> catalogList;
+    public ArrayList<Favor> favorList;
     public String stretchName;
     public Integer stretchGoal;
     public String invitePhone;
@@ -46,7 +46,7 @@ public class Parameters {
 
 
     /**
-     * In relation to Catalog items
+     * In relation to Favor items
      **/
     public String partyFavor;
     public String favorName;
@@ -111,9 +111,9 @@ public class Parameters {
 
         return rsvp;
     }
-    public ArrayList<Catalog> getCatalogList() {
+    public ArrayList<Favor> getFavorList() {
 
-        return catalogList;
+        return favorList;
     }
     public String getStretchName() {
 
