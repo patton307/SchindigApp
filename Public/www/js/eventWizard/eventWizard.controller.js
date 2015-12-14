@@ -30,29 +30,26 @@
         EventWizardService.newWizPartyPost(item).success(function(data){
           console.log('newly created party: ', data);
           localStorage.setItem('partyID', data.partyID);
-          // localStorage.setItem('partyData', JSON.stringify(data));
           $state.go('whenwhere');
         });
       };
 
         ///POST DATE, TIME AND NAME/////
+
        $scope.dateAndTimePost = function(partyDate, partyName){
          var partyID = +localStorage.getItem('partyID');
-        //  var partyData = localStorage.getItem('partyData');
-        //  partyData = JSON.parse(partyData);
          console.log('partyId in localstorage', partyID);
-        //  console.log('partyData in localstorage', partyData);
          var data = {
-             partyDate: partyDate,
-             partyName: partyName,
-             partyID: partyID
+           partyDate: partyDate.toString(),
+           partyName: partyName,
+           partyID: partyID
          };
-         data.partyDate = JSON.stringify(data.partyDate);
-         data.partyDate = JSON.parse(data.partyDate);
+
+        console.log('this is not an object',data.partyDate);
+
          console.log('updated party data: ', data);
          EventWizardService.updateWizData(data).success(function(updatedWizData){
            console.log('promise return of updated wizdata', updatedWizData);
-          //  localStorage.setItem('partyData.partyDate', data.partyDate)
            $state.go('favors');
          });
        };
@@ -62,8 +59,6 @@
 
      $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
        var partyID = +localStorage.getItem('partyID');
-       var partyData = localStorage.getItem('partyData');
-       console.log('this is the stringified data', JSON.parse(partyData));
        console.log(partyID);
        var data ={
          stretchStatus,
@@ -83,7 +78,6 @@
        /////GET STATIC FAVORS///////
        EventWizardService.getFavors().success(function(data){
          $scope.favors = data;
-         console.log(data);
        });
 
       ////POST FAVORS TO PARTY ///////
