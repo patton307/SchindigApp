@@ -8,6 +8,7 @@ import com.schindig.services.PartyRepo;
 import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
+import com.schindig.utils.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.web.bind.annotation.*;
@@ -160,7 +161,7 @@ public class MainController {
         /**User u = party.host;
          u.hostCount += 1;
          users.save(u);*/
-
+        session.setAttribute("partySession", party);
         parties.save(party);
         return party;
     }
@@ -221,7 +222,14 @@ public class MainController {
 
     /**8**/
     @RequestMapping(path = "/party/update", method = RequestMethod.PUT)
-    public Party updateParty(HttpSession session, HttpServletResponse response, @RequestBody Party party, @RequestBody String partyDate) {
+    public Party updateParty(@RequestBody Parameters p) {
+        int i = p.partyID;
+        String s = p.partyName;
+        String y = p.partyDate;
+        Party party = parties.findOne(p.partyID);
+        party.partyName = p.partyName;
+        party.partyDate = p.partyDate;
+        parties.save(party);
         return party;
     }
 
@@ -274,14 +282,14 @@ public class MainController {
 
     @RequestMapping(path = "/wizard/{id}", method = RequestMethod.POST)
     public Party wizardPosition(@RequestBody Party party, @PathVariable("id") int id) {
-        party.position = id + 1;
+        party.wizPosition = id + 1;
         parties.save(party);
         return party;
     }
 
     @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
     public Integer getWizardPosition(@RequestBody Party party) {
-        return party.position;
+        return party.wizPosition;
     }
 
 
