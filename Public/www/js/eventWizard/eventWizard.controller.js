@@ -34,8 +34,10 @@
 
       ///POST DATE, TIME AND NAME/////
      $scope.dateAndTimePost = function(partyDate, partyName, partyID){
-       var data = {partyDate, partyName, partyID};
-       console.log('raw data', data);
+       var data = {date:partyDate, name:partyName, id:partyID};
+       data.date = JSON.stringify(data.date);
+       data.date = JSON.parse(data.date);
+       console.log('this is the data', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
          console.log('dogdgo', updatedWizData);
        });
