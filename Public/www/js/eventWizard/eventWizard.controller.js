@@ -31,8 +31,8 @@
 
 
       ///POST DATE, TIME AND NAME/////
-     $scope.dateAndTimePost = function(partyID, partyDate, partyName){
-       var data = {partyID, partyDate, partyName};
+     $scope.dateAndTimePost = function(partyDate, partyName){
+       var data = {partyDate, partyName};
        console.log('raw data', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
          console.log('dogdgo', updatedWizData);
