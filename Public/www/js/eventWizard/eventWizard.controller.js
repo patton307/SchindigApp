@@ -6,7 +6,6 @@
   .controller("EventWizardController", function($scope, $http, $stateParams, $cordovaDatePicker, EventWizardService){
       var vm = this;
       ////GET WIZARD DATA////
-
       EventWizardService.getWizard().then(function(data){
         $scope.wizardItems = data;
         $scope.get = function(nameId) {
@@ -25,7 +24,11 @@
       $scope.newWizPartyPost = function(subType, partyType){
         var item = {subType, partyType}
         EventWizardService.newWizPartyPost(item).success(function(data){
-          console.log('promise return', data);
+          vm.data = data;
+          if($stateParams.partyID){
+            vm.data = EventWizardService.get
+          }
+          console.log(vm.data);
         });
       };
 
