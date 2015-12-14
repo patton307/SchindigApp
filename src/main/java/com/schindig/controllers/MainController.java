@@ -295,15 +295,15 @@ public class MainController {
 
 
 
-    /**ALL CATALOG SPECIFIC ROUTES**/
+    /**ALL FAVOR SPECIFIC ROUTES**/
     /**2**/
-    @RequestMapping(path = "/catalog", method = RequestMethod.GET)
-    public ArrayList<Favor> getCatalogList() {
+    @RequestMapping(path = "/favor", method = RequestMethod.GET)
+    public ArrayList<Favor> getFavorList() {
         return (ArrayList<Favor>) favors.findAll();
     }
 
-    @RequestMapping(path = "/catalog/save", method = RequestMethod.POST)
-    public String catalogItem(@RequestBody Favor item) {
+    @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
+    public String favorItem(@RequestBody Favor item) {
         if (!favors.exists(item.favorID)) {
             Favor c = new Favor();
             c.favorName = item.favorName;
@@ -315,8 +315,8 @@ public class MainController {
         return "Item added to database";
     }
 
-    @RequestMapping(path = "/catalog/remove", method = RequestMethod.POST)
-    public ArrayList<Favor> deleteCatalogItem(@RequestBody Favor item) {
+    @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
+    public ArrayList<Favor> deleteFavorItem(@RequestBody Favor item) {
         favors.delete(item);
         return (ArrayList<Favor>) favors.findAll();
     }
