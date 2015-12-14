@@ -60,7 +60,7 @@
      $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
        var partyID = +localStorage.getItem('partyID');
        console.log(partyID);
-       var data ={
+       var data = {
          stretchStatus,
          stretchGoal,
          stretchName,
