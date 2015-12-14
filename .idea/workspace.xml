@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00a93b6d-45e7-4b06-8334-f9017a85c63f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/utils/PartyParams.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/utils/UserParams.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/utils/Params.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/utils/Parameters.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/app-0.0.1-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" afterPath="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -120,8 +118,11 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-              <folding />
+              <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+              <folding>
+                <element signature="method#Party#1;class#Party#0" expanded="false" />
+                <element signature="method#Party#2;class#Party#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,12 +130,13 @@
       <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2739726">
-              <caret line="255" column="24" selection-start-line="255" selection-start-column="24" selection-end-line="255" selection-end-column="24" />
+            <state vertical-scroll-proportion="-2.3444228">
+              <caret line="133" column="47" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#init#0;class#MainController#0" expanded="false" />
                 <element signature="method#createUser#0;class#MainController#0" expanded="false" />
+                <element signature="method#getAllUsers#0;class#MainController#0" expanded="false" />
                 <element signature="method#login#0;class#MainController#0" expanded="false" />
               </folding>
             </state>
@@ -167,7 +169,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/utils/Parameters.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="63" selection-end-column="0" />
+              <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -187,7 +189,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+              <caret line="0" column="63" selection-start-line="0" selection-start-column="63" selection-end-line="0" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -724,10 +726,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Wizard.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Public/www/js/eventWizard/eventWizard.service.js" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/utils/Parameters.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/utils/UserParams.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/utils/PartyParams.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java" />
       </list>
@@ -1557,7 +1559,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450099254961</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Reverting back to Parameters&#10;update route works&#10;new jar">
+      <created>1450105232454</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1450105232454</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1613,7 +1621,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Minor edits" />
     <MESSAGE value="Merge branch 'master' of https://github.com/Schindig/SchindigApp&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;" />
     <MESSAGE value="Added route for wizard &amp; catalog, fresh jar." />
     <MESSAGE value="Fixed getters" />
@@ -1638,7 +1645,8 @@
     <MESSAGE value="Changed /update to PUT" />
     <MESSAGE value="Changed partyDate to String type.&#10;New JAR" />
     <MESSAGE value="testing sessions / headers" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing sessions / headers" />
+    <MESSAGE value="Reverting back to Parameters&#10;update route works&#10;new jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reverting back to Parameters&#10;update route works&#10;new jar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1718,7 +1726,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="16" selection-end-column="16" />
-          <folding />
+          <folding>
+            <element signature="method#Party#1;class#Party#0" expanded="false" />
+            <element signature="method#Party#2;class#Party#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1730,6 +1741,7 @@
             <element signature="imports" expanded="true" />
             <element signature="method#init#0;class#MainController#0" expanded="false" />
             <element signature="method#createUser#0;class#MainController#0" expanded="false" />
+            <element signature="method#getAllUsers#0;class#MainController#0" expanded="false" />
             <element signature="method#login#0;class#MainController#0" expanded="false" />
           </folding>
         </state>
@@ -1883,6 +1895,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2001,26 +2014,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/utils/UserParams.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/utils/Parameters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="63" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2035,22 +2032,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/utils/Parameters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="63" selection-start-line="0" selection-start-column="63" selection-end-line="0" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/entities/Party.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding>
+            <element signature="method#Party#1;class#Party#0" expanded="false" />
+            <element signature="method#Party#2;class#Party#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schindig/controllers/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2739726">
-          <caret line="255" column="24" selection-start-line="255" selection-start-column="24" selection-end-line="255" selection-end-column="24" />
+        <state vertical-scroll-proportion="-2.3444228">
+          <caret line="133" column="47" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#init#0;class#MainController#0" expanded="false" />
             <element signature="method#createUser#0;class#MainController#0" expanded="false" />
+            <element signature="method#getAllUsers#0;class#MainController#0" expanded="false" />
             <element signature="method#login#0;class#MainController#0" expanded="false" />
           </folding>
         </state>
