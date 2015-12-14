@@ -3,7 +3,7 @@
   angular
   .module("eventWizard")
 
-  .controller("EventWizardController", function($scope, $http, $stateParams, $cordovaDatePicker, EventWizardService){
+  .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaDatePicker, EventWizardService){
       var vm = $scope;
 
       ////GET WIZARD DATA////
@@ -25,18 +25,21 @@
       $scope.newWizPartyPost = function(subType, partyType){
         var item = {subType, partyType}
         EventWizardService.newWizPartyPost(item).success(function(data){
-          vm.dogData = data[0];
-          return vm.dogData;
+          console.log('newly created party: ', data);
+          localStorage.setItem('partyID', data.partyID);
+          $state.go('whenwhere');
         });
       };
-      console.log('this is what i need', vm.dogData);
 
       ///POST DATE, TIME AND NAME/////
-     $scope.dateAndTimePost = function(partyDate, partyName, partyID){
+     $scope.dateAndTimePost = function(partyDate, partyName){
+       var partyID = +localStorage.getItem('partyID')
+       localStorage.removeItem('partyID');
+       console.log('partyId in localstorage', partyID);
        var data = {partyDate:partyDate, partyName:partyName, partyID:partyID};
        data.partyDate = JSON.stringify(data.partyDate);
        data.partyDate = JSON.parse(data.partyDate);
-       console.log('this is the data', data);
+       console.log('updated party data: ', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
          console.log('dogdgo', updatedWizData);
        });
