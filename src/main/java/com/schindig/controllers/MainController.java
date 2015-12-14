@@ -10,6 +10,11 @@ import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -25,8 +30,6 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 public class MainController {
-
-
 
     @Autowired
     WizardRepo wizard;
@@ -218,7 +221,7 @@ public class MainController {
     }
 
     /**8**/
-    @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
+    @RequestMapping(path = "/party/update", method = RequestMethod.PUT)
     public Party updateParty(@RequestBody Party party) {
         parties.save(party);
         return party;
