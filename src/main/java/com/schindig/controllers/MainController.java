@@ -9,7 +9,6 @@ import com.schindig.services.UserRepo;
 import com.schindig.services.WizardRepo;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
-import com.schindig.utils.PartyPar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
