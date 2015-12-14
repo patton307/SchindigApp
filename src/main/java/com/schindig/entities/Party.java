@@ -12,7 +12,7 @@ public class Party {
 
     @GeneratedValue
     @Id
-    public Integer id;
+    public Integer partyID;
 
 //    @OneToMany
 //    public User host;
@@ -25,7 +25,7 @@ public class Party {
     public String subType;
 
 //    @Column(nullable = false)
-    public LocalDateTime createDate;
+    public LocalDateTime createDate = LocalDateTime.now();
 
 //    @Column(nullable = false)
     public LocalDateTime partyDate;
@@ -54,7 +54,7 @@ public class Party {
 
     public Integer stretchGoal;
 
-    public Integer pos;
+    public Integer position = 1;
 
     public Boolean byob = false;
 
@@ -76,7 +76,7 @@ public class Party {
         this.usState = usState;
         this.zip = zip;
     }
-    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer pos, Boolean byob, Boolean theme, String parking) {
+    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, LocalDateTime partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer position, Boolean byob, Boolean theme, String parking) {
 
         this.partyName = partyName;
         this.partyType = partyType;
@@ -93,18 +93,18 @@ public class Party {
         this.catalogList = catalogList;
         this.stretchName = stretchName;
         this.stretchGoal = stretchGoal;
-        this.pos = pos;
+        this.position = position;
         this.byob = byob;
         this.theme = theme;
         this.parking = parking;
     }
-    public Integer getId() {
-
-        return id;
-    }
     public String getStreet1() {
 
         return street1;
+    }
+    public Integer getPartyID() {
+
+        return partyID;
     }
     public String getStreet2() {
 
@@ -134,9 +134,9 @@ public class Party {
 
         return partyDate;
     }
-    public Integer getPos() {
+    public Integer getPosition() {
 
-        return pos;
+        return position;
     }
     public Boolean getByob() {
 

@@ -12,19 +12,14 @@
         return $http.get('http://localhost:8080/wizard');
       };
 
-
       var newWizPartyPost = function(item){
-        console.log("posting");
         return $http.post(wizCreateUrl, item);
-
       };
       var getOneWizParty = function (wizID){
-        return $http.get ("http://localhost:8080/wizard");
+        return $http.get("http://localhost:8080/wizard");
       };
       var updateWizData = function (updatedWizData){
-        console.log("posting");
-        return $http.put(wizUpdateUrl, updatedWizData);
-
+        return $http.post(wizUpdateUrl, updatedWizData);
       };
       var postFavorParty = function (postFavor){
         return $http.put(favorUpdateUrl + '/' );

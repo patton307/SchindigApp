@@ -3,6 +3,8 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Agronis on 12/9/15.
@@ -13,7 +15,7 @@ public class User {
 
     @GeneratedValue
     @Id
-    public Integer id;
+    public Integer userID;
 
 //    @Column(nullable = false)
 //    @Size(min = 4, message = "Username must be a minimum of 4 characters in length.")
@@ -38,19 +40,21 @@ public class User {
 //    @Size(min = 10, message = "Requires a 10-digit number.")
     public String phone;
 
-    public Integer partyCount;
-    public Integer hostCount;
-    public Integer inviteCount;
-    public Integer invitedCount;
+
+    public HashMap<String, String> stats = new HashMap<>();
+    public Integer partyCount = 0;
+    public Integer hostCount = 0;
+    public Integer inviteCount = 0;
+    public Integer invitedCount = 0;
 
     public User(){}
     public User(Integer id, String username) {
         this.username = username;
-        this.id = id;
+        this.userID = userID;
     }
     public User(Integer id, String username, String firstName, String lastName, String email, String phone) {
 
-        this.id = id;
+        this.userID = userID;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,7 +63,7 @@ public class User {
     }
     public User(Integer id, String username, String firstName, String lastName, String email, String phone, Integer partyCount, Integer hostCount, Integer inviteCount, Integer invitedCount) {
 
-        this.id = id;
+        this.userID = userID;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,5 +73,53 @@ public class User {
         this.hostCount = hostCount;
         this.inviteCount = inviteCount;
         this.invitedCount = invitedCount;
+    }
+    public Integer getUserID() {
+
+        return userID;
+    }
+    public String getUsername() {
+
+        return username;
+    }
+    public String getPassword() {
+
+        return password;
+    }
+    public String getFirstName() {
+
+        return firstName;
+    }
+    public String getLastName() {
+
+        return lastName;
+    }
+    public String getEmail() {
+
+        return email;
+    }
+    public String getPhone() {
+
+        return phone;
+    }
+    public HashMap<String, String> getStats() {
+
+        return stats;
+    }
+    public Integer getPartyCount() {
+
+        return partyCount;
+    }
+    public Integer getHostCount() {
+
+        return hostCount;
+    }
+    public Integer getInviteCount() {
+
+        return inviteCount;
+    }
+    public Integer getInvitedCount() {
+
+        return invitedCount;
     }
 }

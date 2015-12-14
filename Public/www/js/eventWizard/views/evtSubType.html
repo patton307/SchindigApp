@@ -8,11 +8,14 @@
   <div class="bar bar-header bar-royal">
       <h1 class= "title">Let's Get This Party Started</h1>
    </div>
-   <div class="bar bar-subheader bar-assertive">
-     <h2>{{partySubType.partyType}}</h2>
-   </div>
   <ion-content>
-    <h1>EVENT WIZARD - Second PAGE</h1>
-    <ion-item ng-click="newWizPartyPost('{{item}}','{{partySubType.partyType}}')" ng-repeat="item in partySubType.subType">{{item}}</ion-item>
+    <ion-padding>
+      <ion-item
+      ng-click="newWizPartyPost('{{item}}','{{partySubType.partyType}}')"
+      ng-repeat="item in partySubType.subType"
+      href="/#/wizardwhenwhere">
+        {{item}}
+      </ion-item>
+    </ion-padding>
   </ion-content>
 </ion-view>

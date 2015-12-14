@@ -9,7 +9,7 @@ public class Catalog {
 
     @GeneratedValue
     @Id
-    public Integer id;
+    public Integer catalogID;
 
 //    @Column(nullable = false)
     public String favorName;
@@ -17,9 +17,9 @@ public class Catalog {
     public Integer useCount = 0;
 
     public Catalog(){}
-    public Catalog(Integer id, String favorName, Integer useCount) {
+    public Catalog(Integer catalogID, String favorName, Integer useCount) {
 
-        this.id = id;
+        this.catalogID = catalogID;
         this.favorName = favorName;
         this.useCount = useCount;
     }
@@ -35,10 +35,8 @@ public class Catalog {
 
         return useCount;
     }
-    public Integer getId() {
+    public Integer getCatalogID() {
 
-        return id;
+        return catalogID;
     }
-
-
 }
