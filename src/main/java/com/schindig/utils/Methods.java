@@ -1,6 +1,8 @@
 package com.schindig.utils;
 import com.schindig.controllers.MainController;
+import com.schindig.entities.Party;
 import com.schindig.entities.Wizard;
+import com.schindig.services.PartyRepo;
 
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Agronis on 12/9/15.
  */
-public class Methods {
+public class Methods extends MainController {
 
     public static String readFile(String fileName) {
         File f = new File(fileName);
@@ -25,6 +27,10 @@ public class Methods {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void update(Party party, PartyRepo repo) {
+        repo.findOne(party.partyID);
     }
     
 }
