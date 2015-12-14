@@ -54,129 +54,17 @@ public class Party {
 
     public Integer stretchGoal;
 
-    public Integer position = 1;
+    public Integer wizPosition = 1;
 
     public Boolean byob = false;
 
     public Boolean theme = false;
 
-    public String parking = " ";
+    public String[] parking = new String[] {"Valet", "On-Site", "Off-Site"};
 
     public Party(){}
-    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip) {
-
-        this.partyName = partyName;
-        this.partyType = partyType;
-        this.subType = subType;
-        this.createDate = createDate;
-        this.partyDate = partyDate;
-        this.street1 = street1;
-        this.street2 = street2;
-        this.city = city;
-        this.usState = usState;
-        this.zip = zip;
-    }
-    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Catalog> catalogList, String stretchName, Integer stretchGoal, Integer position, Boolean byob, Boolean theme, String parking) {
-
-        this.partyName = partyName;
-        this.partyType = partyType;
-        this.subType = subType;
-        this.createDate = createDate;
-        this.partyDate = partyDate;
-        this.street1 = street1;
-        this.street2 = street2;
-        this.city = city;
-        this.usState = usState;
-        this.zip = zip;
-        this.inviteList = inviteList;
-        this.rsvp = rsvp;
-        this.catalogList = catalogList;
-        this.stretchName = stretchName;
-        this.stretchGoal = stretchGoal;
-        this.position = position;
-        this.byob = byob;
-        this.theme = theme;
-        this.parking = parking;
-    }
-    public String getStreet1() {
-
-        return street1;
-    }
-    public Integer getPartyID() {
-
-        return partyID;
-    }
-    public String getStreet2() {
-
-        return street2;
-    }
-    public String getCity() {
-
-        return city;
-    }
-    public Integer getZip() {
-
-        return zip;
-    }
-    public String getPartyType() {
-
-        return partyType;
-    }
-    public String getSubType() {
-
-        return subType;
-    }
-    public LocalDateTime getCreateDate() {
-
-        return createDate;
-    }
-    public String getPartyDate() {
-
-        return partyDate;
-    }
-    public Integer getPosition() {
-
-        return position;
-    }
-    public Boolean getByob() {
-
-        return byob;
-    }
-    public Boolean getTheme() {
-
-        return theme;
-    }
-    public String getParking() {
-
-        return parking;
-    }
-    public ArrayList<String> getInviteList() {
-
-        return inviteList;
-    }
-    public HashMap<Integer, String> getRsvp() {
-
-        return rsvp;
-    }
-    public ArrayList<Catalog> getCatalogList() {
-
-        return catalogList;
-    }
-    public String getStretchName() {
-
-        return stretchName;
-    }
-    public Integer getStretchGoal() {
-
-        return stretchGoal;
-    }
-    public String getUsState() {
-
-        return usState;
-    }
-    public String getPartyName() {
 
 
-        return partyName;
-    }
+
+
 }
