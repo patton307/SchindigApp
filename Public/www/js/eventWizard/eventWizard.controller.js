@@ -34,25 +34,24 @@
         });
       };
 
-        ///PUT/PATCH DATE, TIME AND NAME/////
+      ///POST DATE, TIME AND NAME/////
+    $scope.dateAndTimePost = function(partyDate, partyName){
+      var partyID = +localStorage.getItem('partyID');
+      console.log('partyId in localstorage', partyID);
+      var data = {
+        partyName: partyName,
+        partyID: partyID,
+        partyDate: partyDate
+      };
+      data.partyDate = JSON.stringify(data.partyDate);
+      data.partyDate = JSON.parse(data.partyDate);
+      console.log('updated party data: ', data);
+      EventWizardService.updateWizData(data).success(function(updatedWizData){
+        console.log('promise return of updated wizdata', updatedWizData);
+        $state.go('favors');
+      });
+    };
 
-       $scope.dateAndTimePost = function(partyDate, partyName){
-         var partyID = +localStorage.getItem('partyID');
-         console.log('partyId in localstorage', partyID);
-         var data = {
-           partyID: partyID,
-           partyDate: partyDate.toString(),
-           partyName: partyName
-         };
-
-        console.log('this is not an object',data.partyDate);
-
-         console.log('updated party data: ', data);
-         EventWizardService.updateWizData(data).success(function(updatedWizData){
-           console.log('promise return of updated wizdata', updatedWizData);
-           $state.go('favors');
-         });
-       };
 
 
      ////STRETCHGOAL POST and SCOPES////
@@ -61,10 +60,10 @@
        var partyID = +localStorage.getItem('partyID');
        console.log(partyID);
        var data = {
-         stretchStatus,
-         stretchGoal,
-         stretchName,
-         partyID
+         stretchStatus: stretchStatus,
+         stretchGoal: stretchGoal,
+         stretchName: stretchName,
+         partyID: partyID
        };
        console.log('updated stretchgoal:', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
