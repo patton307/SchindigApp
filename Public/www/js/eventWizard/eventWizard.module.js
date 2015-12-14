@@ -16,12 +16,12 @@
       .state('subtype', {
         url:"/wizard/:nameId",
         templateUrl: "js/eventWizard/views/evtSubType.html",
-        controller: "EventWizardController"
+        controller: "EventWizardController as evtCtrl"
       })
       .state('whenwhere', {
-        url:"/wizardwhenwhere",
+        url:"/wizard/wizardwhenwhere/:nameId",
         templateUrl:"js/eventWizard/views/evtWhenWhere.html",
-        controller: "EventWizardController"
+        controller: "EventWizardController as evtCtrl"
       })
       .state('favors', {
         url:"/wizard/favors",
