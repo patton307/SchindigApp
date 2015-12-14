@@ -7,7 +7,7 @@
       var wizCreateUrl = "http://localhost:8080/party/create";
       var wizUpdateUrl = "http://localhost:8080/party/update";
       var favorUpdateUrl = "http://localhost:8080/party/favor";
-      var favorGetUrl = "http://localhost:8080/catalog";
+      var favorGetUrl = "http://localhost:8080/favor";
       var wizardData = {};
 
       var getWizard = function() {
@@ -20,7 +20,7 @@
         return $http.get("http://localhost:8080/wizard");
       };
       var updateWizData = function(updatedWizData){
-        return $http.patch(wizUpdateUrl, updatedWizData);
+        return $http.put(wizUpdateUrl, updatedWizData);
       };
       var postFavorParty = function (postFavor){
         return $http.put(favorUpdateUrl + '/' );

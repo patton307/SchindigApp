@@ -34,15 +34,15 @@
         });
       };
 
-        ///POST DATE, TIME AND NAME/////
+        ///PUT/PATCH DATE, TIME AND NAME/////
 
        $scope.dateAndTimePost = function(partyDate, partyName){
          var partyID = +localStorage.getItem('partyID');
          console.log('partyId in localstorage', partyID);
          var data = {
+           partyID: partyID,
            partyDate: partyDate.toString(),
-           partyName: partyName,
-           partyID: partyID
+           partyName: partyName
          };
 
         console.log('this is not an object',data.partyDate);
