@@ -87,8 +87,10 @@
 
       //CORDOVA CONTACTS AND INVITATIONS //
     $scope.getContactList = function() {
-        $cordovaContacts.find({filter: ''}).then(function(result) {
-            $scope.contacts = result;
+         $cordovaContacts.find({filter: ''}).then(function(result) {
+           var newData = JSON.stringify(result);
+            $scope.contacts = newData;
+            console.log(newData);
         },
         function(error) {
             console.log("ERROR: " + error);
