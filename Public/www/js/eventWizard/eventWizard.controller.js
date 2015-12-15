@@ -36,7 +36,7 @@
       };
 
 
-      ///POST DATE, TIME AND NAME/////
+      ///PATCH DATE, TIME AND NAME/////
     $scope.dateAndTimePost = function(partyDate, partyName){
       var partyID = +localStorage.getItem('partyID');
       console.log('partyId in localstorage', partyID);
@@ -56,7 +56,7 @@
 
 
 
-     ////STRETCHGOAL POST and SCOPES////
+     ////STRETCHGOAL PATCH and SCOPES////
 
      $scope.stretchGoalData = function (stretchStatus, stretchGoal, stretchName){
        var partyID = +localStorage.getItem('partyID');
@@ -75,6 +75,26 @@
      };
 
 
+     /////FAVORS PATCH/////
+     vm.favorArray = [];
+     $scope.favorPushArray = function(favorID, favorName){
+       vm.favorArray.push(favorID);
+       console.log(vm.favorArray);
+     };
+     $scope.favorPatch = function (){
+       var partyID = +localStorage.getItem('partyID');
+       console.log(partyID);
+       var data = {
+         partyID: partyID,
+         favorList: vm.favorArray
+       };
+       EventWizardService.updateFavorData(data).success(function(data){
+         console.log('favordata',data);
+       });
+     };
+
+     /////ADD FAVOR TO DATA/////
+     $scope.addFavorToData = function(){};
 
        /////GET STATIC FAVORS///////
        EventWizardService.getFavors().success(function(data){

@@ -22,13 +22,13 @@
       <ion-checkbox
         id="{{item.catalogID}}"
         ng-repeat="item in favors"
-        ng-click=""
-        ng-model="filter.blue">{{item.favorName}}
+        ng-model="favor"
+        ng-click="favorPushArray({{item.favorID}})">{{item.favorName}}
       </ion-checkbox>
 
     </ul>
     <button
-      ng-click="favorPost()"
+      ng-click="favorPatch()"
       class="button button-full button-positive">
       Submit Your Favors
     </button>
