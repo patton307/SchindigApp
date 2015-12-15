@@ -14,8 +14,8 @@ public class Party {
     @Id
     public Integer partyID;
 
-//    @OneToMany
-//    public User host;
+    @ManyToOne
+    public User host;
 
 //    @Column(nullable = false)
     public String partyName;
@@ -79,9 +79,10 @@ public class Party {
         this.usState = usState;
         this.zip = zip;
     }
-    public Party(Integer partyID, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Favor> favorList, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String[] parking) {
 
-        this.partyID = partyID;
+    public Party(User host, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Favor> favorList, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String[] parking) {
+
+        this.host = host;
         this.partyName = partyName;
         this.partyType = partyType;
         this.subType = subType;
@@ -103,7 +104,6 @@ public class Party {
         this.theme = theme;
         this.parking = parking;
     }
-
     public Integer getPartyID() {
 
         return partyID;
@@ -187,5 +187,9 @@ public class Party {
     public String[] getParking() {
 
         return parking;
+    }
+    public User getHost() {
+
+        return host;
     }
 }
