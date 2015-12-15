@@ -77,7 +77,7 @@
 
      /////FAVORS PATCH/////
      vm.favorArray = [];
-     $scope.favorPushArray = function(favorID, favorName){
+     $scope.favorPushArray = function(favorID){
        vm.favorArray.push(favorID);
        console.log(vm.favorArray);
      };
@@ -89,22 +89,25 @@
          favorList: vm.favorArray
        };
        EventWizardService.updateFavorData(data).success(function(data){
-         console.log('favordata',data);
+         console.log('favordata', data);
        });
      };
 
      /////ADD FAVOR TO DATA/////
-     $scope.addFavorToData = function(){};
+     $scope.addFavorToData = function(favor){
+       var favorData = {
+         favorName: favor
+       }
+       EventWizardService.addFavorToData(favorData).success(function(data){
+         console.log('added favor to data', data);
+       });
+     };
 
        /////GET STATIC FAVORS///////
        EventWizardService.getFavors().success(function(data){
          $scope.favors = data;
        });
 
-      ////POST FAVORS TO PARTY ///////
-      $scope.favorPost = function(){
-        $state.go('stretchgoal');
-      };
 
       //CORDOVA CONTACTS AND INVITATIONS //
       $scope.getAllContacts = function (){
