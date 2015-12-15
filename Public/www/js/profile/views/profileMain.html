@@ -30,7 +30,11 @@
     <button ng-click='getAllContacts()' class="button button-block button-assertive">
       CONTACTS
     </button>
-    {{contacts}}
+    <ion-list>
+      <ion-item ng-repeat="contact in contacts">
+          {{contact.displayName}}
+      </ion-item>
+    </ion-list>
   </div>
 </div>
     <div class="geoLocator">

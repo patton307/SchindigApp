@@ -10,6 +10,7 @@
       $cordovaGeolocation,
       $ionicPlatform,
       $cordovaContacts,
+      $ngCordova,
       $http
     ){
 
@@ -64,9 +65,9 @@ var url = 'http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart4';
       };
         ///CONTACTS
       $scope.getAllContacts = function (){
-        $cordovaContacts.then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
-          $scope.contacts = allContacts;
-          console.log(allContacts);
+        $cordovaContacts.find({filter : ''}).then(function(result) { //omitting parameter to .find() causes all contacts to be returned
+          $scope.contacts = result;
+          console.log(result);
         });
       };
 
