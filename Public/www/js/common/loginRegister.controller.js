@@ -14,6 +14,7 @@
           console.log('dog', data);
           $state.go('splash');
         });
+      };
 
       $scope.signUp = function(){
         $state.go('createNewUser');
@@ -34,10 +35,10 @@
           lastName: lastName,
           email: email,
           phone: phone
-        }
+        };
         LoginRegisterService.createUser(userData).success(function(data){
           console.log('create new user',data);
-          $state.go('login')
+          $state.go('login');
         });
       };
 
