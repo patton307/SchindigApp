@@ -3,20 +3,24 @@
     <div class="list">
       <label class="item item-input">
         <span class="input-label">Username</span>
-        <input type="text">
+        <input
+          ng-model="username"
+          type="text">
       </label>
       <label class="item item-input">
         <span class="input-label">Password</span>
-        <input type="password">
+        <input
+          ng-model="password"
+          type="password">
       </label>
     </div>
     <button
-      ng-click="login()"
+      ng-click="login(username, password)"
       class="button button-full button-positive">
      Login
     </button>
     <button
-      ng-click="createNewUser()"
+      ng-click="signUp()"
       class="button button-full button-assertive">
       Create New User
     </button>
