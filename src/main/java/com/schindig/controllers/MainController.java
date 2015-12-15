@@ -12,6 +12,7 @@ import com.schindig.utils.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
+import org.springframework.data.annotation.Transient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.CookieGenerator;
 
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.groups.ConvertGroup;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -188,7 +190,6 @@ public class MainController {
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public void login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User test = users.findOneByUsername(user.username);
-        String pass = test.password;
         try {
             if (users.findOneByUsername(user.username) == null) {
                 response.sendError(401);
