@@ -67,7 +67,7 @@
        };
        console.log('updated stretchgoal:', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
-         console.log('new-stretchgoal', updatedWizData);
+         console.log('new-stretchgoal updated data', updatedWizData);
          $state.go('invites');
        });
      };

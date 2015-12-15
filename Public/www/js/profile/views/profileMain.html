@@ -6,6 +6,11 @@
         <img ng-src="{{profilePicture}}" alt="">
       </div>
     </div>
+    <div class="list card">
+      <div class="item" ng-repeat="contact in contacts">
+        <div class="item">{{contact}}</div>
+      </div>
+    </div>
     <div class="padding">
       <button ng-click='getProfilePicture()'
               class="button button-block button-royal">
@@ -18,6 +23,10 @@
       <button ng-click='savePhoto(profilePicture)'
               class="button button-block button-royal">
         Save Picture
+      </button>
+      <button ng-click='getAllContacts()'
+              class="button button-block button-royal">
+        get contacts
       </button>
     </div>
     <div class="padding">
