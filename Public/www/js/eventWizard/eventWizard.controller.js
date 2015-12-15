@@ -77,13 +77,11 @@
 
      /////FAVORS PATCH/////
      vm.favorArray = [];
-     $scope.favorPushArray = function(favorID){
-       vm.favorArray.push(favorID);
-       console.log(vm.favorArray);
+     $scope.favorPushArray = function(favorData){
+       vm.favorArray.push(favorData);
      };
      $scope.favorPatch = function (){
        var partyID = +localStorage.getItem('partyID');
-       console.log(partyID);
        var data = {
          partyID: partyID,
          favorList: vm.favorArray
