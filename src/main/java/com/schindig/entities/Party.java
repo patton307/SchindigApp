@@ -193,7 +193,7 @@ public class Party {
 
     /*
     @ManyToOne
-    public User userPary;
+    public User userParty;
     */
 
 }
