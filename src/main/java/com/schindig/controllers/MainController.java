@@ -142,10 +142,9 @@ public class MainController {
 
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user) throws Exception {
-        if (user.username == null) {
-            users.save(user);
-        } else {
-            throw new Exception("Username already exists.  Please enter a different username.");
+        User u = users.findOneByUsername(user.username);
+        if (u  == null) {
+            users.save(new User(user));
         }
     }
 

@@ -74,6 +74,14 @@ public class User {
         this.inviteCount = inviteCount;
         this.invitedCount = invitedCount;
     }
+
+    public User(User user) {
+        this.username = user.username;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.email = user.email;
+        this.phone = user.phone;
+    }
     public Integer getUserID() {
 
         return userID;
