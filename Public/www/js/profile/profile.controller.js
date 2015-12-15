@@ -10,13 +10,14 @@
       $cordovaGeolocation,
       $ionicPlatform,
       $cordovaDatePicker,
+      $cordovaContacts,
       $http
     ){
 ///get the contacts//
 $scope.getAllContacts = function() {
-  $cordovaContacts.find().then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
+  $cordovaContacts.find(843).then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
     $scope.contacts = allContacts;
-  }
+  })
 };
 
 //MAKES PHONE VIBRATE///

@@ -4,6 +4,7 @@
   .module('schindig',[
     'ionic',
     'eventWizard',
+    'loginRegister',
     'profile'
     ])
     .run(function($ionicPlatform) {
@@ -22,41 +23,23 @@
     })
     .config(function($stateProvider, $urlRouterProvider) {
 
-      $urlRouterProvider.otherwise('/tab/dash');
+      $urlRouterProvider.otherwise('/login');
       $stateProvider
-      .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: 'js/common/views/tabs.html'
+      .state('login', {
+        url: '/login',
+        templateUrl: 'js/common/views/login.html',
+        controller: 'LoginRegisterController'
         })
-        
         // Each tab has its own nav history stack:
-      .state('tab.dash', {
-        url: '/dash',
-        views: {
-          'tab-dash': {
-            templateUrl: 'js/common/views/splash.html',
-            controller: 'EventWizardController'
-          }
-        }
+      .state('splash', {
+        url: '/splash',
+        templateUrl: 'js/common/views/splash.html',
+        controller: 'EventWizardController'
         })
-        .state('tab.chats', {
-          url: '/chats',
-          views: {
-            'tab-chats': {
-              templateUrl: 'js/profile/views/profileMain.html',
-              controller: 'EventWizardController'
-            }
-          }
-        })
-        .state('tab.account', {
-          url: '/account',
-          views: {
-            'tab-account': {
-              templateUrl: 'js/eventWizard/views/evtStretchGoal.html',
-              controller: 'EventWizardController'
-            }
-          }
-        });
+      .state('createNewUser', {
+        url: '/createNewUser',
+        templateUrl: 'js/common/views/createNewUser.html',
+        controller: 'LoginRegisterController'
+      })
       });
 }());

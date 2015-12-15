@@ -1,0 +1,43 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <div class="bar bar-header bar-royal">
+      <h1 class= "title">Let's Get This Account Started</h1>
+   </div>
+  <ion-content>
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Username</span>
+        <input type="text" placeholder="Username">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Password</span>
+        <input type="password" placeholder="Password">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Confirm Password</span>
+        <input type="password" placeholder="Confirm Password">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Name</span>
+        <input type="text" placeholder="Full Name">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Email</span>
+        <input type="email" placeholder="example@website.com">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Party-Role</span>
+        <input type="email" placeholder="Socialite, Drunk, Flirt...">
+      </label>
+    </div>
+
+    <button
+      ng-click="login()"
+      class="button button-full button-positive">
+      Create New User
+    </button>
+  </ion-content>
+</ion-view>
