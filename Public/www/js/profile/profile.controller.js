@@ -9,16 +9,9 @@
       ProfileService,
       $cordovaGeolocation,
       $ionicPlatform,
-      $cordovaDatePicker,
       $cordovaContacts,
       $http
     ){
-///get the contacts//
-$scope.getAllContacts = function() {
-  $cordovaContacts.find(843).then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
-    $scope.contacts = allContacts;
-  })
-};
 
 //MAKES PHONE VIBRATE///
       $scope.vibrate = function() {
@@ -29,8 +22,8 @@ $scope.getAllContacts = function() {
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
           .then(function (position) {
-            var lat  = position.coords.latitude
-            var long = position.coords.longitude
+            var lat  = position.coords.latitude;
+            var long = position.coords.longitude;
             $scope.lat = lat;
             $scope.long = long;
           }, function(err) {
@@ -48,12 +41,12 @@ $scope.getAllContacts = function() {
           console.log(data[5].image);
         });
 
-      }
+      };
       $scope.takePicture = function() {
         var options = {
           destinationType: Camera.DestinationType.DATA_URL,
           encodingType: Camera.EncodingType.JPEG
-        }
+        };
         $cordovaCamera.getPicture({})
           .then(function(data) {
             $scope.profilePicture =  data;
@@ -65,11 +58,22 @@ $scope.getAllContacts = function() {
        $scope.savePhoto = function(item) {
        var data = {
          'image': item
-       }
-        $http.post(url, data)
-      }
+       };
+        $http.post(url, data);
+      };
+        ///CONTACTS
+      $scope.getAllContacts = function (){
+        $cordovaContacts.find({filter : ''}).then(function(result) { //omitting parameter to .find() causes all contacts to be returned
+          $scope.contacts = result;
+          console.log(result);
+        });
+      };
+
 
     });
+
+  ///CONTACTS
+
 
 
 

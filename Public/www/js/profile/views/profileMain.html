@@ -34,6 +34,18 @@
         Vibrate
       </button>
     </div>
+  </div>
+  <div class="padding">
+    <button ng-click='getAllContacts()' class="button button-block button-assertive">
+      CONTACTS
+    </button>
+    <ion-list>
+      <ion-item ng-repeat="contact in contacts">
+          {{contact.displayName}}
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
     <div class="geoLocator">
       <p class="latitude">Latitude: {{lat}}</p>
       <p class="longitude">Longitude: {{long}}</p>

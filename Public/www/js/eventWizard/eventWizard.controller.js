@@ -3,7 +3,8 @@
   angular
     .module("eventWizard")
 
-    .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaDatePicker, EventWizardService){
+
+    .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaContacts, EventWizardService){
         var vm = this;
 
 
@@ -33,6 +34,7 @@
           $state.go('whenwhere');
         });
       };
+
 
       ///POST DATE, TIME AND NAME/////
     $scope.dateAndTimePost = function(partyDate, partyName){
@@ -83,5 +85,14 @@
       $scope.favorPost = function(){
         $state.go('stretchgoal');
       };
+
+      //CORDOVA CONTACTS AND INVITATIONS //
+      $scope.getAllContacts = function (){
+        $cordovaContacts.then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
+          $scope.contacts = allContacts;
+          console.log(allContacts);
+        });
+      };
+
     });
 }());
