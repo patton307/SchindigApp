@@ -10,10 +10,8 @@
       $cordovaGeolocation,
       $ionicPlatform,
       $cordovaContacts,
-      $ngCordova,
       $http
     ){
-
 
 //MAKES PHONE VIBRATE///
       $scope.vibrate = function() {
@@ -34,7 +32,7 @@
 
 
 //TAKE PICTURE AND SET IT TO {{PROFILEPICTURE}}//
-var url = 'http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart4';
+      var url = 'http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart4';
 
       $scope.getProfilePicture = function(){
         var profilePicture = $http.get('http://tiny-tiny.herokuapp.com/collections/ng-shoppingcart4')
