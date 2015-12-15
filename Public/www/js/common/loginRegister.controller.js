@@ -9,16 +9,23 @@
         var loginData = {
           username: username,
           password: password
-        }
+        };
         LoginRegisterService.login(loginData).success(function(data){
           console.log('dog', data);
-          $state.go('splash')
-        })
+          $state.go('splash');
+        });
       };
 
       $scope.signUp = function(){
-        $state.go('createNewUser')
+        $state.go('createNewUser');
       };
+
+      //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION
+      $scope.invite = function (){
+        $state.go('invites');
+      };
+
+      //DELETE TO TOP COMMENT
 
       $scope.createNewUser = function(username, password, firstName, lastName, email, phone){
         var userData = {
