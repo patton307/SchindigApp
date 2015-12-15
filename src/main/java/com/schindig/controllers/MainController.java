@@ -47,6 +47,9 @@ public class MainController {
     @Autowired
     UserRepo users;
 
+    ArrayList<String> partyTypes = parties.partyTypes();
+    ArrayList<String> subTypes = parties.subTypes();
+
     @PostConstruct
     public void init() {
 
@@ -217,6 +220,10 @@ public class MainController {
         Favor favor = favors.findOne(parameters.favor.favorID);
         if (!party.favorList.contains(parameters.favor)) {
             favor.useCount += 1;
+            if (!favor.generic) {
+                favor.partyTypeKey = partyTypes.indexOf(party.partyType);
+                favor.subTypeKey = subTypes.indexOf(party.subType);
+            }
             party.favorList.add(favor);
             parties.save(party);
             favors.save(favor);
