@@ -182,7 +182,7 @@ public class MainController {
         try {
             if (users.findOneByUsername(user.username) == null) {
                 response.addHeader("Error", "User not found");
-            } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
+            } else if (!user.password.equals(users.findOneByUsername(user.username).password)) {
                 response.addHeader("Error", "Invalid credentials");
             }
         } catch (Exception e) {
