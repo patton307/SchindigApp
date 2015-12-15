@@ -179,11 +179,14 @@ public class MainController {
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public void login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
+        User test = users.findOneByUsername(user.username);
+        String pass = test.password;
         try {
             if (users.findOneByUsername(user.username) == null) {
-                response.addHeader("Error", "User not found");
-            } else if (!user.password.equals(users.findOneByUsername(user.username).password)) {
-                response.addHeader("Error", "Invalid credentials");
+                response.sendError(401);
+            }
+            if (!user.password.equals(test.password)) {
+                response.sendError(403);
             }
         } catch (Exception e) {
             e.printStackTrace();
