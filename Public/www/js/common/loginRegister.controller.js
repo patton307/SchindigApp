@@ -11,8 +11,16 @@
         })
       }
 
-      $scope.createNewUser = function(){
-        LoginRegisterService.getData().success(function(data){
+      $scope.createNewUser = function(username, password, firstName, lastName, email, phone){
+        var userData = {
+          username: username,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone
+        }
+        LoginRegisterService.createUser(userData).success(function(data){
           console.log(data);
           $state.go('createNewUser')
         })

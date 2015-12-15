@@ -10,32 +10,50 @@
     <div class="list">
       <label class="item item-input item-stacked-label">
         <span class="input-label">Username</span>
-        <input type="text" placeholder="Username">
+        <input
+          ng-model="username"
+          type="text"
+          placeholder="Username">
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Password</span>
-        <input type="password" placeholder="Password">
+        <input
+          ng-model="password"
+          type="password"
+          placeholder="Password">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">Confirm Password</span>
-        <input type="password" placeholder="Confirm Password">
+        <span class="input-label">First Name</span>
+        <input
+          ng-model="firstName"
+          type="text"
+          placeholder="First Name">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">Name</span>
-        <input type="text" placeholder="Full Name">
+        <span class="input-label">Last Name</span>
+        <input
+          ng-model="lastName"
+          type="text"
+          placeholder="Last Name">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Phone Number</span>
+        <input
+          ng-model="phone"
+          type="text"
+          placeholder="Phone Number">
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Email</span>
-        <input type="email" placeholder="example@website.com">
-      </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Party-Role</span>
-        <input type="email" placeholder="Socialite, Drunk, Flirt...">
+        <input
+          ng-model="email"
+          type="email"
+          placeholder="example@website.com">
       </label>
     </div>
 
     <button
-      ng-click="login()"
+      ng-click="createNewUser(username, password, firstName, lastName, email, phone)"
       class="button button-full button-positive">
       Create New User
     </button>
