@@ -380,6 +380,14 @@ public class MainController {
         return party;
     }
 
+    @RequestMapping(path = "/party/favor/add", method = RequestMethod.POST)
+    public void addPartyFavor(@RequestBody Favor favor) {
+        Favor f = new Favor();
+        f.useCount += 1;
+        f.favorName = favor.favorName;
+        favors.save(f);
+    }
+
     @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
     public ArrayList<String> partyStats() {
 
