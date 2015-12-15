@@ -101,6 +101,7 @@
        });
      };
 
+
        /////GET STATIC FAVORS///////
        EventWizardService.getFavors().success(function(data){
          $scope.favors = data;
@@ -108,12 +109,16 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
-      $scope.getAllContacts = function (){
-        $cordovaContacts.then(function(allContacts) { //omitting parameter to .find() causes all contacts to be returned
-          $scope.contacts = allContacts;
-          console.log(allContacts);
+    $scope.getContactList = function() {
+         $cordovaContacts.find({filter: ''}).then(function(result) {
+           var newData = JSON.stringify(result);
+            $scope.contacts = newData;
+            console.log(newData);
+        },
+        function(error) {
+            console.log("ERROR: " + error);
         });
-      };
+    };
 
     });
 }());
