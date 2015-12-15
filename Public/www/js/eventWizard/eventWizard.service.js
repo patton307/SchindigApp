@@ -4,7 +4,7 @@
   angular
     .module('eventWizard')
     .factory('EventWizardService', function($http, $state){
-      var ip = 'http://10.0.10.67';
+      var ip = 'http://10.0.10.32';
       var wizCreateUrl = ip + ":8080/party/create";
       var wizUpdateUrl = ip + ":8080/party/update";
       var favorUpdateUrl = ip + ":8080/party/favor";

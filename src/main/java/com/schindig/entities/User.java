@@ -17,6 +17,7 @@ public class User {
     @Id
     public Integer userID;
 
+
 //    @Column(nullable = false)
 //    @Size(min = 4, message = "Username must be a minimum of 4 characters in length.")
     public String username;
@@ -77,6 +78,7 @@ public class User {
 
     public User(User user) {
         this.username = user.username;
+        this.password = user.password;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.email = user.email;

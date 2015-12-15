@@ -14,7 +14,6 @@
           console.log('dog', data);
           $state.go('splash');
         });
-      };
 
       $scope.signUp = function(){
         $state.go('createNewUser');
