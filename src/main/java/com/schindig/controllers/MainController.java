@@ -96,8 +96,14 @@ public class MainController {
             }
         }
 
-
-
+        User admin = new User();
+        admin.username = "admin";
+        admin.password = "";
+        admin.firstName = "Admin";
+        admin.lastName = "Nimda";
+        admin.phone = "1234";
+        admin.email = "blah@blah.com";
+        users.save(admin);
     }
 
     /**ALL USER RELATED ROUTES**/
@@ -141,12 +147,12 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
-    public void createUser(@RequestBody User user) throws Exception {
-        if (user.username == null) {
-            users.save(user);
-        } else {
-            throw new Exception("Username already exists.  Please enter a different username.");
+    public void createUser(@RequestBody User user, HttpSession session, HttpServletResponse response) throws Exception {
+        User u = users.findOneByUsername(user.username);
+        if (u  == null) {
+            users.save(new User(user));
         }
+        session.setAttribute("username", user.username);
     }
 
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
@@ -154,7 +160,7 @@ public class MainController {
         users.delete(user);
     }
 
-    @RequestMapping(path = "/user/show-all", method = RequestMethod.GET)
+    @RequestMapping(path = "/user/all", method = RequestMethod.GET)
     public ArrayList<User> getAllUsers() {
         ArrayList<User> temp = (ArrayList<User>) users.findAll();
                 temp = temp.stream()
@@ -172,12 +178,17 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public void login(@RequestBody User user) throws Exception {
+    public void login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
+        try {
             if (users.findOneByUsername(user.username) == null) {
-            throw new Exception("Username does not exist.");
-        } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
-            throw new Exception("Password is not correct.");
+                response.addHeader("Error", "User not found");
+            } else if (user.password.equals(users.findOneByUsername(user.username).password)) {
+                response.addHeader("Error", "Invalid credentials");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        session.setAttribute("username", user.username);
     }
 
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)

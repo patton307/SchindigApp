@@ -48,11 +48,11 @@ public class User {
     public Integer invitedCount = 0;
 
     public User(){}
-    public User(Integer id, String username) {
+    public User(Integer userID, String username) {
         this.username = username;
         this.userID = userID;
     }
-    public User(Integer id, String username, String firstName, String lastName, String email, String phone) {
+    public User(Integer userID, String username, String firstName, String lastName, String email, String phone) {
 
         this.userID = userID;
         this.username = username;
@@ -61,7 +61,7 @@ public class User {
         this.email = email;
         this.phone = phone;
     }
-    public User(Integer id, String username, String firstName, String lastName, String email, String phone, Integer partyCount, Integer hostCount, Integer inviteCount, Integer invitedCount) {
+    public User(Integer userID, String username, String firstName, String lastName, String email, String phone, Integer partyCount, Integer hostCount, Integer inviteCount, Integer invitedCount) {
 
         this.userID = userID;
         this.username = username;
@@ -73,6 +73,14 @@ public class User {
         this.hostCount = hostCount;
         this.inviteCount = inviteCount;
         this.invitedCount = invitedCount;
+    }
+
+    public User(User user) {
+        this.username = user.username;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.email = user.email;
+        this.phone = user.phone;
     }
     public Integer getUserID() {
 
