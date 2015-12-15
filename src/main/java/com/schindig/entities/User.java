@@ -130,4 +130,14 @@ public class User {
 
         return invitedCount;
     }
+
+    // Database Connection
+
+    /*
+    @OneToMany
+    public Favor favorUser;
+
+    @OneToMany
+    public Party partyUser;
+    */
 }

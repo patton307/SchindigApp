@@ -188,4 +188,12 @@ public class Party {
 
         return parking;
     }
+
+    // Database Connections
+
+    /*
+    @ManyToOne
+    public User userPary;
+    */
+
 }
