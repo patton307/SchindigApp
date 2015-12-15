@@ -192,4 +192,12 @@ public class Party {
 
         return host;
     }
+
+    // Database Connections
+
+    /*
+    @ManyToOne
+    public User userParty;
+    */
+
 }

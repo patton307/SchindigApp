@@ -66,4 +66,10 @@ public class Favor {
 
         return favorID;
     }
+
+    // Database Connection
+
+    /*
+    @ManyToOne Party partyFavor;
+    */
 }
