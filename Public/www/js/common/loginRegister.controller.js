@@ -4,12 +4,20 @@
   angular
     .module('loginRegister')
     .controller('LoginRegisterController', function($http, $scope, $state, $stateParams, LoginRegisterService){
-      $scope.login = function(){
-        LoginRegisterService.getData().success(function(data){
-          console.log(data);
+      $scope.login = function(username, password){
+        var loginData = {
+          username: username,
+          password: password
+        }
+        LoginRegisterService.login(loginData).success(function(data){
+          console.log('dog', data);
           $state.go('splash')
         })
-      }
+      };
+
+      $scope.signUp = function(){
+        $state.go('createNewUser')
+      };
 
       $scope.createNewUser = function(username, password, firstName, lastName, email, phone){
         var userData = {
@@ -21,11 +29,11 @@
           phone: phone
         }
         LoginRegisterService.createUser(userData).success(function(data){
-          console.log(data);
-          $state.go('createNewUser')
-        })
-      }
+          console.log('create new user',data);
+          $state.go('login')
+        });
+      };
 
-    })
+    });
 
 }());

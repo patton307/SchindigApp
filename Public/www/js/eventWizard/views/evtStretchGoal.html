@@ -8,23 +8,23 @@
     <ion-content>
       <label class="item item-input">
         <span class="input-label">What's the goal?</span>
-        <input ng-model= "stretchName.stretchName" type="text">
+        <input ng-model= "stretchName" type="text">
       </label>
       <label class="item item-input">
         <span class= "input-label">Whoop that Trick</span>
-        <input ng-model="stretchGoal.stretchGoal" type="number">
+        <input ng-model="stretchGoal" type="number">
       </label>
       <label class="item item-input">
         <span class= "input-label">Cough it up Homey</span>
-        <input ng-model="stretchStatus.stretchStatus" type="number">
+        <input ng-model="stretchStatus" type="number">
       </label>
-      <h1>{{stretchName.stretchName}}</h1>
+      <h1>{{stretchName}}</h1>
       <progress
-        max={{stretchGoal.stretchGoal}}
-        value={{stretchStatus.stretchStatus}}>
+        max={{stretchGoal}}
+        value={{stretchStatus}}>
       </progress>
       <button
-        ng-click="stretchGoalData(stretchStatus.stretchStatus, stretchGoal.stretchGoal, stretchName.stretchName)"
+        ng-click="stretchGoalData(stretchStatus, stretchGoal, stretchName)"
         class="button button-full button-positive">
        Submit Stretch Goal
       </button>
