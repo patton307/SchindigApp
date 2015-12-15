@@ -10,9 +10,14 @@
           username: username,
           password: password
         }
-        LoginRegisterService.login(loginData).success(function(data){
+        LoginRegisterService.login(loginData)
+        .success(function(data){
           console.log('dog', data);
           $state.go('splash')
+        })
+        .error(function(data){
+          console.log('error', data);
+          $state.go('login')
         })
       };
 
