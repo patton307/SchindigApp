@@ -51,7 +51,6 @@
           .then(function(data) {
             $scope.profilePicture =  data;
           }, function(error){
-
           });
       };
 

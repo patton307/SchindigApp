@@ -5,9 +5,12 @@
     .module('loginRegister')
 
     .factory('LoginRegisterService', function($http, $state){
-      var registerUrl = 'http://localhost:8080/user/create'
-      var getData = function(){
-        return $http.get('http://localhost:8080/wizard');
+      var ip = 'http://10.0.10.67';
+      var registerUrl = ip + ':8080/user/create';
+      var loginUrl = ip + ':8080/user/login';
+
+      var login = function(loginData) {
+        return $http.post(loginUrl, loginData)
       };
       var createUser = function(data) {
         return $http.post(registerUrl, data)
@@ -15,7 +18,7 @@
 
       return {
         createUser: createUser,
-        getData: getData
+        login: login
       }
     });
 
