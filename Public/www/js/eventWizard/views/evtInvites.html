@@ -1,14 +1,24 @@
-<ion-view name= "">
+<ion-view>
 
   <ion-nav-bar class="bar-stable">
     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
     </ion-nav-back-button>
   </ion-nav-bar>
   <div class="bar bar-header bar-royal">
-      <h1 class= "title">Let's Get This Party Started</h1>
+      <h1 class= "title">Let the People Know!</h1>
    </div>
   <ion-content>
-
-<h1>EVENT WIZARD - EVENT INVITES</h1>
-
+  <ion-padding>
+    <input
+            type="search"
+            ng-model="search.partyType"
+            class="item search"
+            placeholder="Search Party Type">
+  </ion-padding>
+  <ion-list>
+    <ion-item>
+      {{contacts}}
+    </ion-item>
+  </ion-list>
 </ion-content>
+</ion-view>

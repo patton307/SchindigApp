@@ -4,14 +4,16 @@
   angular
     .module('eventWizard')
     .factory('EventWizardService', function($http, $state){
-      var wizCreateUrl = "http://localhost:8080/party/create";
-      var wizUpdateUrl = "http://localhost:8080/party/update";
-      var favorUpdateUrl = "http://localhost:8080/party/favor";
-      var favorGetUrl = "http://localhost:8080/favor";
+      var ip = 'http://10.0.10.67';
+      var wizCreateUrl = ip + ":8080/party/create";
+      var wizUpdateUrl = ip + ":8080/party/update";
+      var favorUpdateUrl = ip + ":8080/party/favor";
+      var favorGetUrl = ip + ":8080/favor";
+      var getWizardUrl = ip + ":8080/wizard"
       var wizardData = {};
 
       var getWizard = function() {
-        return $http.get('http://localhost:8080/wizard');
+        return $http.get(getWizardUrl);
       };
       var newWizPartyPost = function(item){
         return $http.post(wizCreateUrl, item);
