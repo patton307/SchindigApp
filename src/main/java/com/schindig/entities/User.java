@@ -17,6 +17,7 @@ public class User {
     @Id
     public Integer userID;
 
+
 //    @Column(nullable = false)
 //    @Size(min = 4, message = "Username must be a minimum of 4 characters in length.")
     public String username;

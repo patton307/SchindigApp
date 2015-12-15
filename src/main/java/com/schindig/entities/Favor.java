@@ -14,7 +14,13 @@ public class Favor {
 //    @Column(nullable = false)
     public String favorName;
 
+    public Boolean generic = false;
+
     public Integer useCount = 0;
+
+    public Integer partyTypeKey = 0;
+
+    public Integer subTypeKey = 0;
 
     public Favor(){}
     public Favor(Integer favorID, String favorName, Integer useCount) {
@@ -22,6 +28,27 @@ public class Favor {
         this.favorID = favorID;
         this.favorName = favorName;
         this.useCount = useCount;
+    }
+
+    public Favor(Integer subTypeKey, Integer partyTypeKey, Integer useCount, Boolean generic, String favorName) {
+
+        this.subTypeKey = subTypeKey;
+        this.partyTypeKey = partyTypeKey;
+        this.useCount = useCount;
+        this.generic = generic;
+        this.favorName = favorName;
+    }
+    public Boolean getGeneric() {
+
+        return generic;
+    }
+    public Integer getPartyTypeKey() {
+
+        return partyTypeKey;
+    }
+    public Integer getSubTypeKey() {
+
+        return subTypeKey;
     }
     public Favor(String favorName) {
 
