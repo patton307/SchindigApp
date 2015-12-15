@@ -381,7 +381,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/favor/add", method = RequestMethod.POST)
-    public Favor addPartyFavor(@RequestBody Favor favor) {
+    public void addPartyFavor(@RequestBody Favor favor) {
         Favor f = new Favor();
         f.useCount += 1;
         f.favorName = favor.favorName;
