@@ -9,9 +9,13 @@
       var wizUpdateUrl = ip + ":8080/party/update";
       var favorUpdateUrl = ip + ":8080/party/favor";
       var favorGetUrl = ip + ":8080/favor";
-      var getWizardUrl = ip + ":8080/wizard"
+      var addFavorToDataUrl = ip + ":8080/party/favor/add";
+      var getWizardUrl = ip + ":8080/wizard";
       var wizardData = {};
 
+      var addFavorToData = function(favor) {
+        return $http.post(addFavorToDataUrl, favor)
+      };
       var getWizard = function() {
         return $http.get(getWizardUrl);
       };
@@ -23,6 +27,9 @@
       };
       var updateWizData = function(updatedWizData){
         return $http.patch(wizUpdateUrl, updatedWizData);
+      };
+      var updateFavorData = function(updatedFavorData){
+        return $http.patch(wizUpdateUrl, updatedFavorData);
       };
       var postFavorParty = function (postFavor){
         return $http.put(favorUpdateUrl + '/' );
@@ -36,7 +43,9 @@
         newWizPartyPost: newWizPartyPost,
         updateWizData: updateWizData,
         getOneWizParty: getOneWizParty,
-        getFavors: getFavors
+        getFavors: getFavors,
+        updateFavorData: updateFavorData,
+        addFavorToData: addFavorToData
       };
 
     });
