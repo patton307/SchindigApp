@@ -11,24 +11,31 @@
       <div class="item item-divider">
         Commonly Bought Favors For Christmas Party:
       </div>
-      <div class="list list-inset">
-        <label class="item item-input">
-          <i class="icon ion-icecream placeholder-icon"></i>
-          <input
-            type="text"
-            placeholder="Add Your Own">
-        </label>
+      <div class="list">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input
+              ng-model="newFavor"
+              type="text"
+              placeholder="Add Your Own">
+          </label>
+          <button
+            ng-click="addFavorToData(newFavor)"
+            class="button button-small">
+            Submit new Favor
+          </button>
+        </div>
       </div>
       <ion-checkbox
         id="{{item.catalogID}}"
         ng-repeat="item in favors"
-        ng-click=""
-        ng-model="filter.blue">{{item.favorName}}
+        ng-model="favor"
+        ng-click="favorPushArray({{item}})">{{item.favorName}}
       </ion-checkbox>
 
     </ul>
     <button
-      ng-click="favorPost()"
+      ng-click="favorPatch()"
       class="button button-full button-positive">
       Submit Your Favors
     </button>
