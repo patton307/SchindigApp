@@ -14,7 +14,7 @@ public class Party {
     @Id
     public Integer partyID;
 
-    @OneToMany
+    @ManyToOne
     public User host;
 
 //    @Column(nullable = false)

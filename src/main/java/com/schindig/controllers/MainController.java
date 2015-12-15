@@ -47,9 +47,6 @@ public class MainController {
     @Autowired
     UserRepo users;
 
-    ArrayList<String> partyTypes = parties.partyTypes();
-    ArrayList<String> subTypes = parties.subTypes();
-
     @PostConstruct
     public void init() {
 
@@ -115,6 +112,7 @@ public class MainController {
         admin.email = "blah@blah.com";
         users.save(admin);
     }
+
 
     /**ALL USER RELATED ROUTES**/
     /**14**/
@@ -223,9 +221,11 @@ public class MainController {
     /**4**/
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor(@RequestBody Parameters parameters) {
+        ArrayList<String> partyTypes = parties.partyTypes();
+        ArrayList<String> subTypes = parties.subTypes();
         Party party = parties.findOne(parameters.party.partyID);
         Favor favor = favors.findOne(parameters.favor.favorID);
-        if (!party.favorList.contains(parameters.favor)) {
+        if (!party.favorList.contains(favor)) {
             favor.useCount += 1;
             if (!favor.generic) {
                 favor.partyTypeKey = partyTypes.indexOf(party.partyType);
@@ -287,8 +287,13 @@ public class MainController {
 
     /**8**/
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
-    public Party updateParty(@RequestBody Party party) {
+    public Party updateParty(@RequestBody Party party, HttpSession session) {
+        String username = (String) session.getAttribute("username");
         Party check = parties.findOne(party.partyID);
+        if (party.host != null) {
+            check.host = users.findOneByUsername(username);
+        }
+
         if (party.partyName != null) {
             check.partyName = party.partyName;
         }
