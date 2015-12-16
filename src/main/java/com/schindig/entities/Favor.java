@@ -22,6 +22,7 @@ public class Favor {
 
     public Integer subTypeKey = 0;
 
+
     public Favor(){}
     public Favor(Integer favorID, String favorName, Integer useCount) {
 
