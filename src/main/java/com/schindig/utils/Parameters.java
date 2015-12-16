@@ -17,5 +17,8 @@ public class Parameters {
 
     public String rsvpStatus;
 
+    public Integer partyID;
+    public String favorName;
+
 
 }

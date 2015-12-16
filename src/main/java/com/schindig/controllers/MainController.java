@@ -382,11 +382,21 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/favor/add", method = RequestMethod.POST)
-    public void addPartyFavor(@RequestBody Favor favor) {
+    public void addPartyFavor(@RequestBody Parameters params) {
         Favor f = new Favor();
+        Party p = parties.findOne(params.partyID);
+        ArrayList<String> partyTypes = parties.partyTypes();
+        ArrayList<String> subTypes = parties.subTypes();
+        if (!f.generic) {
+            f.partyTypeKey = partyTypes.indexOf(p.partyType);
+            f.subTypeKey = subTypes.indexOf(p.subType);
+        }
+        if (f.favorName == null) {
+            f.favorName = params.favorName;
+        }
         f.useCount += 1;
-        f.favorName = favor.favorName;
         favors.save(f);
+
     }
 
     @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
