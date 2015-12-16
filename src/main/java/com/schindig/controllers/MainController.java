@@ -219,7 +219,7 @@ public class MainController {
         return party;
     }
 
-
+    /*
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor(@RequestBody Parameters parameters) {
         ArrayList<String> partyTypes = parties.partyTypes();
@@ -244,9 +244,9 @@ public class MainController {
             return party;
         }
     }
+    */
 
-
-
+    /*
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
     public Party addInvite(@RequestBody Parameters parameters) throws Exception {
         Party party = parameters.party;
@@ -264,6 +264,7 @@ public class MainController {
         }
         return party;
     }
+    */
 
 
     /**6**/
@@ -343,7 +344,7 @@ public class MainController {
         return check;
     }
 
-
+    /*
     @RequestMapping(path = "/parties", method = RequestMethod.GET)
     public ArrayList<Party> getAllParties(@RequestBody User user){
         user = users.findOne(user.userID);
@@ -356,7 +357,7 @@ public class MainController {
                 .collect(Collectors.toCollection(ArrayList<Party>::new));
         return partyList;
     }
-
+    */
 
     /**10**/
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
@@ -370,7 +371,7 @@ public class MainController {
         return (ArrayList<Party>) parties.findAll();
     }
 
-
+    /*
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public Party deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
         Party party = parties.findOne(parameters.party.partyID);
@@ -383,7 +384,7 @@ public class MainController {
         parties.save(party);
         return party;
     }
-
+    */
 
     @RequestMapping(path = "/party/favor/add", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters params) {
