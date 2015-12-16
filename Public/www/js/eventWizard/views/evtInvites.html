@@ -6,21 +6,14 @@
   <div class="bar bar-header bar-royal">
       <h1 class= "title">Let the People Know!</h1>
    </div>
-  <ion-content>
+  <ion-content ng-init="getContactList()">
     <ion-padding>
-      <button
-      ng-click="getContactList()"
-      class="button button-full button-positive">
-      Get Contacts
-    </button>
     <ion-list>
-<<<<<<< HEAD
-      <ion-item ng-repeat="contactName in contactNames">
-        {{contactName.name.formatted}}
-=======
-      <ion-item ng-repeat="contact in contactName">
+      <ion-item
+      ng-repeat="contact in contactName"
+      ng-click="contactInfoForSMS('{{contact.name.formatted}}', '{{contact.phoneNumbers[0].value}}','{{contact.emails[0].value}}')"
+      ng-model="contactModel = {}">
         {{contact.name.formatted}}
->>>>>>> 70f2caab4518a690c707040c633d718037cad17a
       </ion-item>
     </ion-list>
   </ion-content>

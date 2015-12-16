@@ -117,31 +117,34 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
-<<<<<<< HEAD
 
-    $scope.getContactList = function() {
-         $cordovaContacts.find({}).then(function(result) {
-            var stringData = JSON.stringify(result);
-            var parseData = JSON.parse(stringData);
-            $scope.contactNames = parseData;
-        },
-        function(error) {
-            console.log("ERROR: " + error);
-        });
-    };
-
-=======
       $scope.getContactList = function() {
-            $cordovaContacts
-            .find({})
-            .then(function(result) {
-              var stringData = JSON.stringify(result);
-              var parseData = JSON.parse(stringData);
-              $scope.contactName = parseData;
-           }, function(error){
-             console.log('error', error);
-           });
-       };
->>>>>>> 70f2caab4518a690c707040c633d718037cad17a
+                $cordovaContacts
+                .find({})
+                .then(function(result) {
+                  var stringData = JSON.stringify(result);
+                  var parseData = JSON.parse(stringData);
+                  $scope.contactName = parseData;
+                  return parseData;
+               }, function(error){
+                 console.log('error', error);
+               });
+           };
+           
+       $scope.contactInfoForSMS = function(name, phone, email){
+         var partyID = +localStorage.getItem('partyID');
+         var data = {
+           inviteName: name,
+           invitePhone: phone,
+           inviteEmail: email,
+           partyID: partyID
+         };
+         EventWizardService.postInviteData(data).success(function(postedInviteData){
+           console.log('new-stretchgoal updated data', postedInviteData);
+           $state.go('');
+       });
+     };
+
+
     });
 }());
