@@ -1,0 +1,71 @@
+[
+   {
+      "id":1,
+      "rawId":null,
+      "displayName":null,
+      "name":{
+         "givenName":"Kate",
+         "formatted":"Kate Bell",
+         "middleName":null,
+         "familyName":"Bell",
+         "honorificPrefix":null,
+         "honorificSuffix":null
+      },
+      "nickname":null,
+      "phoneNumbers":[
+         {
+            "type":"mobile",
+            "value":"(555) 564-8583",
+            "id":0,
+            "pref":false
+         },
+         {
+            "type":"other",
+            "value":"(415) 555-3695",
+            "id":1,
+            "pref":false
+         }
+      ],
+      "emails":[
+         {
+            "type":"work",
+            "value":"kate-bell@mac.com",
+            "id":0,
+            "pref":false
+         },
+         {
+            "type":"work",
+            "value":"www.icloud.com",
+            "id":1,
+            "pref":false
+         }
+      ],
+      "addresses":[
+         {
+            "postalCode":"94010",
+            "type":"work",
+            "id":0,
+            "locality":"Hillsborough",
+            "pref":"false",
+            "streetAddress":"165 Davis Street",
+            "region":"CA",
+            "country":null
+         }
+      ],
+      "ims":null,
+      "organizations":[
+         {
+            "name":"Creative Consulting",
+            "title":"Producer",
+            "type":null,
+            "pref":"false",
+            "department":null
+         }
+      ],
+      "birthday":254145600000,
+      "note":null,
+      "photos":null,
+      "categories":null,
+      "urls":null
+   }
+]
