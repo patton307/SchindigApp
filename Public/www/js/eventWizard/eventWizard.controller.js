@@ -83,9 +83,10 @@
 
      /////FAVORS PATCH/////
      vm.favorArray = [];
-     $scope.favorPushArray = function(favorData){
-       vm.favorArray.push(favorData);
-     };
+
+     $scope.isChecked = false;
+
+
      $scope.favorPatch = function (){
        var partyID = +localStorage.getItem('partyID');
        var data = {
@@ -123,7 +124,9 @@
             .then(function(result) {
               var stringData = JSON.stringify(result);
               var parseData = JSON.parse(stringData);
+
               $scope.contactName = parseData;
+              console.log($scope.contactName[0].name);
            }, function(error){
              console.log('error', error);
            });
