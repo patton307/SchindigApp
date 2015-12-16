@@ -39,29 +39,5 @@ public class Methods extends MainController {
         repo.findOne(party.partyID);
     }
 
-    public static Cookie bakeCookie(HttpSession session, User user, UserRepo repo){
-        User u = repo.findOne(user.userID);
-        Cookie cookie = new Cookie("User", u.username+":"+session.getId());
-        cookie.setMaxAge(21600);
-        cookie.setHttpOnly(true);
-        if (u.cookie == cookie) {
-            u.cookie = new Cookie("User", user.username+":"+session.getId());
-            u.cookie.setMaxAge(21600);
-            u.cookie.setHttpOnly(true);
-            repo.save(u);
-            return u.cookie;
-        }
-        return cookie;
-    }
-
-    public static Boolean eatCookie(Cookie cookie, User user, UserRepo repo) {
-        if (repo.findOne(user.userID).cookie != cookie) {
-            String[] check = cookie.getValue().split(":");
-            String[] userCheck = user.cookie.getValue().split(":");
-            if (!check[0].equals(user.username) || (check[0].equals(user.username) && (check[1].equals(userCheck[1])))) {
-                return false;
-            }
-        } return true;
-    }
     
 }

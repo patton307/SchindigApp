@@ -1,6 +1,7 @@
 package com.schindig.utils;
 
 import com.schindig.entities.*;
+import org.hibernate.mapping.Array;
 import org.springframework.data.annotation.Transient;
 
 import java.util.ArrayList;
@@ -12,17 +13,19 @@ public class Parameters {
 
     public Favor favor;
 
-    public FavorList favorlist;
-
-    public InviteList invitelist;
-
     public Party party;
 
     public User user;
 
+    public Invite invites;
+
+    public FavorList favorList;
+
     public String rsvpStatus;
 
     public ArrayList<Favor> favorDump;
+
+
 
 
 }

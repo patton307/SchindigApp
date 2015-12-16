@@ -7,7 +7,8 @@
         <h2>{{hostedParties.partyName}}</h2>
         <p>{{hostedParties.createDate.month}}</p>
       </div>
-
+      <label>Check me to check both: <input type="checkbox" ng-model="master"></label><br/>
+      <input id="checkSlave" type="checkbox" ng-checked="master" aria-label="Slave input">
       <div class="item item-body">
         <img class="full-image">
         <p>

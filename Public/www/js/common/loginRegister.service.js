@@ -11,11 +11,9 @@
 
       var login = function(loginData) {
         return $http.post(loginUrl, loginData)
-          .then(function(data){
+          .success(function(data){
           console.log('success', data);
           $state.go('splash')
-        }, function(data){
-          console.log('failure', data);
         })
       };
       var createUser = function(data) {
