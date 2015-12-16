@@ -2,9 +2,15 @@
   'use strict';
   angular
     .module("eventWizard")
-
-
-    .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaContacts, EventWizardService){
+    .controller("EventWizardController", function(
+      $scope,
+      $http,
+      $state,
+      $stateParams,
+      $cordovaContacts,
+      $ionicPlatform,
+      EventWizardService
+    ){
         var vm = this;
 
 
@@ -86,15 +92,17 @@
          partyID: partyID,
          favorList: vm.favorArray
        };
-       EventWizardService.updateFavorData(data).success(function(data){
+       EventWizardService.updateWizData(data).success(function(data){
          console.log('favordata', data);
        });
      };
 
      /////ADD FAVOR TO DATA/////
      $scope.addFavorToData = function(favor){
+       var partyID = +localStorage.getItem('partyID');
        var favorData = {
-         favorName: favor
+         favorName: favor,
+         partyID: partyID
        }
        EventWizardService.addFavorToData(favorData).success(function(data){
          console.log('added favor to data', data);
@@ -109,16 +117,16 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
-    $scope.getContactList = function() {
-         $cordovaContacts.find({filter: ''}).then(function(result) {
-           var newData = JSON.stringify(result);
-            $scope.contacts = newData;
-            console.log(newData);
-        },
-        function(error) {
-            console.log("ERROR: " + error);
-        });
-    };
-
+      $scope.getContactList = function() {
+            $cordovaContacts
+            .find({})
+            .then(function(result) {
+              var stringData = JSON.stringify(result);
+              var parseData = JSON.parse(stringData);
+              $scope.contactName = parseData;
+           }, function(error){
+             console.log('error', error);
+           });
+       };
     });
 }());
