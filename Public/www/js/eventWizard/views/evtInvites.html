@@ -13,10 +13,14 @@
       class="button button-full button-positive">
       Get Contacts
     </button>
-    <ion-list>
-      <ion-item ng-repeat="contact in contactName">
+    <ion-list ng-repeat="contact in contactName">
+      <ion-item>
         {{contact.name.formatted}}
       </ion-item>
+      <ion-item>
+        {{contact.phoneNumbers[0].value}}
+      </ion-item>
     </ion-list>
+    </ion-padding>
   </ion-content>
 </ion-view>

@@ -5,7 +5,8 @@
     .module('manageParty')
     .factory('ManagePartyService', function($http, $state){
       var ip = 'http://localhost';
-      var viewHostedParties = ip + ':8080/party/1';
+      var viewHostedParties = ip + ':8080/party/2';
+
 
       var getHostedParties = function(){
         console.log('dog');

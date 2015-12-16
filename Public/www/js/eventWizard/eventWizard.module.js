@@ -4,7 +4,8 @@
   angular
     .module('eventWizard', [
       'ionic',
-      'ngCordova'
+      'ngCordova',
+      'underscore'
     ])
     .config(function($stateProvider){
     $stateProvider
