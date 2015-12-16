@@ -39,7 +39,7 @@ public class MainController {
     FavorListRepo favlists;
 
     @Autowired
-    InviteListRepo invites;
+    InviteRepo invites;
 
     @PostConstruct
     public void init() {
@@ -122,9 +122,9 @@ public class MainController {
             parties.save(p);
         }
 
-        InviteList invite = invites.findOne(1);
+        Invite invite = invites.findOne(1);
         if (invite == null) {
-            InviteList i = new InviteList();
+            Invite i = new Invite();
             i.party = parties.findOne(1);
             i.user = users.findOne(1);
             invites.save(i);
@@ -279,21 +279,13 @@ public class MainController {
 
 
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
-    public Party addInvite(@RequestBody Parameters parameters) throws Exception {
-        Party party = parameters.party;
-        User user = parameters.user;
-//        try {
-//            if (!party.inviteList.contains(user.phone)) {
-//                party.inviteList.add(user.phone);
-//                parties.save(party);
-//                user.inviteCount += 1;
-//                users.save(user);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            throw new Exception("User already invited.");
-//        }
-        return party;
+    public void addInvite(@RequestBody Parameters parameters) throws Exception {
+        Party party = parties.findOne(parameters.party.partyID);
+        User user = users.findOne(parameters.user.userID);
+        Invite invite = new Invite(
+                user, party, parameters.invites.phone, parameters.invites.email
+        );
+        invites.save(invite);
     }
 
 
@@ -423,7 +415,7 @@ public class MainController {
     @RequestMapping(path = "/party/favor/add", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters params) {
         Favor f = new Favor();
-        Party p = parties.findOne(params.partyID);
+        Party p = parties.findOne(params.party.partyID);
         ArrayList<String> partyTypes = parties.partyTypes();
         ArrayList<String> subTypes = parties.subTypes();
         if (!f.generic) {
@@ -431,7 +423,7 @@ public class MainController {
             f.subTypeKey = subTypes.indexOf(p.subType);
         }
         if (f.favorName == null) {
-            f.favorName = params.favorName;
+            f.favorName = params.favor.favorName;
         }
         f.useCount += 1;
         favors.save(f);

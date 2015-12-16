@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by landonkail on 12/16/15.
  */
 @Entity
-public class InviteList {
+public class Invite {
 
     @GeneratedValue
     @Id
@@ -18,12 +18,12 @@ public class InviteList {
     @OneToOne
     public Party party;
 
-    String phone;
+    public String phone;
 
-    String email;
+    public String email;
 
 
-    public InviteList(Integer inviteID, User user, Party party, String phone, String email) {
+    public Invite(Integer inviteID, User user, Party party, String phone, String email) {
         this.inviteID = inviteID;
         this.user = user;
         this.party = party;
@@ -31,9 +31,16 @@ public class InviteList {
         this.email = email;
     }
 
-    public InviteList() {
+    public Invite() {
     }
 
+    public Invite(User user, Party party, String phone, String email) {
+
+        this.user = user;
+        this.party = party;
+        this.phone = phone;
+        this.email = email;
+    }
     public Integer getInviteID() {
         return inviteID;
     }
