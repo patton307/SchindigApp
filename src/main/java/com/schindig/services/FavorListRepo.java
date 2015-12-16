@@ -10,6 +10,6 @@ import java.util.List;
  * Created by landonkail on 12/16/15.
  */
 public interface FavorListRepo extends CrudRepository<FavorList, Integer> {
-    List<FavorList> findAllByParty(Integer id);
+//    List<FavorList> findAllByParty(Integer id);
 
 }
