@@ -56,7 +56,7 @@ public class Party {
 
     public Boolean theme = false;
 
-   public String[] parking = new String[] {"Valet", "On-Site", "Off-Site"};
+    public String parking;
 
     public Party(){}
 
@@ -74,7 +74,7 @@ public class Party {
         this.zip = zip;
     }
 
-    public Party(User host, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String[] parking) {
+    public Party(User host, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String parking) {
 
         this.host = host;
         this.partyName = partyName;
@@ -164,7 +164,7 @@ public class Party {
 
         return theme;
     }
-    public String[] getParking() {
+    public String getParking() {
 
         return parking;
     }

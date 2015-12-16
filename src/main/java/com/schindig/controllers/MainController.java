@@ -3,7 +3,6 @@ import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -361,16 +360,6 @@ public class MainController {
         if (party.city != null) {
             check.city = party.city;
         }
-
-        /*
-        if (party.favorList != null) {
-            check.favorList = new ArrayList<>();
-            check.favorList.addAll(party.favorList.stream().collect(Collectors.toList()));
-        }
-        */
-        if (party.rsvp != null) {
-            check.rsvp = party.rsvp;
-        }
         if (party.stretchGoal != null) {
             check.stretchGoal = party.stretchGoal;
         }
@@ -384,28 +373,19 @@ public class MainController {
     }
 
 
-//    @RequestMapping(path = "/parties", method = RequestMethod.GET)
-//    public ArrayList<Party> getAllParties(@RequestBody User user){
-//        user = users.findOne(user.userID);
-//        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
-//        final User finalUser = user;
-////        partyList = partyList.stream()
-////                .filter(party -> {
-////                    return (party.inviteList.contains(finalUser.phone));
-////                })
-////                .collect(Collectors.toCollection(ArrayList<Party>::new));
-////        return partyList;
-//    }
+    @RequestMapping(path = "/parties", method = RequestMethod.GET)
+    public List<Party> getAllParties(@RequestBody User user){
+        User u = users.findOne(user.userID);
+        return invites.findInvite(u);
+    }
 
 
     /**10**/
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
     public ArrayList<Party> deleteParty(@RequestBody Party party) {
-//        User u = party.host;
-//        u.hostCount -= 1;
-//        u.inviteCount -= party.inviteList.size();
-//        users.save(u);
-//        updateStats(u);
+        User u = party.host;
+        u.hostCount -= 1;
+        users.save(u);
         parties.delete(party.partyID);
         return (ArrayList<Party>) parties.findAll();
     }
@@ -499,28 +479,28 @@ public class MainController {
     }
 
 
-    public void updateUserStats(User user) {
-        HashMap<String, String> stats = user.stats;
-            if (stats.get("partyCount")==null) {
-                stats.put("partyCount", String.valueOf(user.partyCount));
-            } else {
-                stats.replace("partyCount", String.valueOf(user.partyCount));
-            }
-            if (stats.get("hostCount") == null) {
-                stats.put("hostCount", String.valueOf(user.hostCount));
-            } else {
-                stats.replace("hostCount", String.valueOf(user.hostCount));
-            }
-            if (stats.get("inviteCount") == null) {
-                stats.put("inviteCount", String.valueOf(user.inviteCount));
-            } else {
-                stats.replace("inviteCount", String.valueOf(user.inviteCount));
-            }
-            if (stats.get("invitedCount") == null) {
-                stats.put("invitedCount", String.valueOf(user.invitedCount));
-            } else {
-                stats.replace("invitedCount", String.valueOf(user.invitedCount));
-            }
-
-        }
-    }
+//    public void updateUserStats(User user) {
+//        HashMap<String, String> stats = user.stats;
+//            if (stats.get("partyCount")==null) {
+//                stats.put("partyCount", String.valueOf(user.partyCount));
+//            } else {
+//                stats.replace("partyCount", String.valueOf(user.partyCount));
+//            }
+//            if (stats.get("hostCount") == null) {
+//                stats.put("hostCount", String.valueOf(user.hostCount));
+//            } else {
+//                stats.replace("hostCount", String.valueOf(user.hostCount));
+//            }
+//            if (stats.get("inviteCount") == null) {
+//                stats.put("inviteCount", String.valueOf(user.inviteCount));
+//            } else {
+//                stats.replace("inviteCount", String.valueOf(user.inviteCount));
+//            }
+//            if (stats.get("invitedCount") == null) {
+//                stats.put("invitedCount", String.valueOf(user.invitedCount));
+//            } else {
+//                stats.replace("invitedCount", String.valueOf(user.invitedCount));
+//            }
+//
+//        }
+//    }
