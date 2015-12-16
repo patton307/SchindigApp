@@ -1,4 +1,6 @@
 package com.schindig.entities;
+import org.springframework.data.annotation.Transient;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class Wizard {
 //    @Column(nullable = false)
     public String partyType;
 
+    @Transient
     public ArrayList<String> subType;
 
     public Wizard(){}

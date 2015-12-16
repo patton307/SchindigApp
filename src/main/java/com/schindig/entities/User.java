@@ -41,7 +41,7 @@ public class User {
 //    @Size(min = 10, message = "Requires a 10-digit number.")
     public String phone;
 
-
+    @Transient
     public HashMap<String, String> stats = new HashMap<>();
     public Integer partyCount = 0;
     public Integer hostCount = 0;

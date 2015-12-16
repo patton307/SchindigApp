@@ -8,17 +8,16 @@
       <h1 class= "title">Let the People Know!</h1>
    </div>
   <ion-content>
-  <ion-padding>
-    <input
-            type="search"
-            ng-model="search.partyType"
-            class="item search"
-            placeholder="Search Party Type">
-  </ion-padding>
-  <ion-list>
-    <ion-item>
-      {{contacts}}
-    </ion-item>
-  </ion-list>
-</ion-content>
+    <ion-padding>
+      <button
+      ng-click="getContactList()"
+      class="button button-full button-positive">
+      Get Contacts
+    </button>
+    <ion-list>
+      <ion-item ng-repeat="contact in contacts">
+        {{contact.displayName}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
 </ion-view>
