@@ -22,6 +22,8 @@ public class Invite {
 
     public String email;
 
+    public String rsvpStatus;
+
 
     public Invite(Integer inviteID, User user, Party party, String phone, String email) {
         this.inviteID = inviteID;
@@ -34,12 +36,17 @@ public class Invite {
     public Invite() {
     }
 
-    public Invite(User user, Party party, String phone, String email) {
+    public Invite(String rsvpStatus) {
+
+        this.rsvpStatus = rsvpStatus;
+    }
+    public Invite(User user, Party party, String phone, String email, String rsvpStatus) {
 
         this.user = user;
         this.party = party;
         this.phone = phone;
         this.email = email;
+        this.rsvpStatus = rsvpStatus;
     }
     public Integer getInviteID() {
         return inviteID;

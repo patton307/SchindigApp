@@ -42,10 +42,6 @@ public class User {
 //    @Size(min = 10, message = "Requires a 10-digit number.")
     public String phone;
 
-    public Cookie cookie;
-
-    @Transient
-    public HashMap<String, String> stats = new HashMap<>();
     public Integer partyCount = 0;
     public Integer hostCount = 0;
     public Integer inviteCount = 0;
@@ -114,10 +110,6 @@ public class User {
     public String getPhone() {
 
         return phone;
-    }
-    public HashMap<String, String> getStats() {
-
-        return stats;
     }
     public Integer getPartyCount() {
 

@@ -11,4 +11,6 @@ import java.util.List;
 public interface InviteRepo extends CrudRepository<Invite, Integer> {
 //    List<InviteList> findAllByParty(Integer party);
 
+    Invite findByUserId(Integer id);
+
 }

@@ -283,7 +283,7 @@ public class MainController {
         Party party = parties.findOne(parameters.party.partyID);
         User user = users.findOne(parameters.user.userID);
         Invite invite = new Invite(
-                user, party, parameters.invites.phone, parameters.invites.email
+                user, party, parameters.invites.phone, parameters.invites.email, "Undecided"
         );
         invites.save(invite);
     }
@@ -291,18 +291,31 @@ public class MainController {
 
     /**6**/
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
-    public Party rsvp(@RequestBody Parameters parameters){
+    public void rsvp(@RequestBody Parameters parameters){
         User user = parameters.user;
-        Party party = parameters.party;
-        party.rsvp.put(user.userID, parameters.rsvpStatus);
-        parameters.party.rsvp.put(parameters.user.userID, parameters.rsvpStatus);
         user.invitedCount += 1;
-        if (parameters.rsvpStatus.equals("Yes")) {
-            user.partyCount += 1;
+        switch (parameters.rsvpStatus) {
+            case "Yes": {
+                user.partyCount += 1;
+                Invite i = invites.findByUserId(user.userID);
+                i.rsvpStatus = "Yes";
+                invites.save(i);
+                break;
+            }
+            case "Maybe": {
+                Invite i = invites.findByUserId(user.userID);
+                i.rsvpStatus = "Maybe";
+                invites.save(i);
+                break;
+            }
+            case "No": {
+                Invite i = invites.findByUserId(user.userID);
+                i.rsvpStatus = "Yes";
+                invites.save(i);
+                break;
+            }
         }
         users.save(user);
-        parties.save(party);
-        return party;
     }
 
     /**7**/
