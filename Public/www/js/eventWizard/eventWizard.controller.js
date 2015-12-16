@@ -108,7 +108,7 @@
        var favorData = {
          favorName: favor,
          partyID: partyID
-       }
+       };
        EventWizardService.addFavorToData(favorData).success(function(data){
          console.log('added favor to data', data);
        });
@@ -122,18 +122,33 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
-      $scope.getContactList = function() {
-            $cordovaContacts
-            .find({})
-            .then(function(result) {
-              var stringData = JSON.stringify(result);
-              var parseData = JSON.parse(stringData);
 
-              $scope.contactName = parseData;
-              console.log($scope.contactName[0].name);
-           }, function(error){
-             console.log('error', error);
-           });
-       };
+      $scope.getContactList = function() {
+                $cordovaContacts
+                .find({})
+                .then(function(result) {
+                  var stringData = JSON.stringify(result);
+                  var parseData = JSON.parse(stringData);
+                  $scope.contactName = parseData;
+                  return parseData;
+               }, function(error){
+                 console.log('error', error);
+               });
+           };
+
+       $scope.contactInfoForSMS = function(name, phone, email){
+         var partyID = +localStorage.getItem('partyID');
+         var data = {
+           inviteName: name,
+           invitePhone: phone,
+           inviteEmail: email,
+           partyID: partyID
+         };
+         EventWizardService.postInviteData(data).success(function(postedInviteData){
+           console.log('new-stretchgoal updated data', postedInviteData);
+           $state.go('');
+       });
+     };
+
     });
 }());
