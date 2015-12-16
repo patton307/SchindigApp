@@ -16,7 +16,7 @@ public interface InviteRepo extends CrudRepository<Invite, Integer> {
 
 //    List<Invite> findAllByUserId(Integer id);
 
-//    Invite findByUserId(Integer id);
+    Invite findByUser(Integer id);
 
 //    @Query("SELECT i FROM Invite i WHERE party =?, user =?")
 //    Integer findInvite(Party party, User user);

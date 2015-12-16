@@ -264,16 +264,16 @@ public class MainController {
 
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters parameters) {
-        Favor fav = favors.findOne(parameters.favor.favorID);
-        Party party = parties.findOne(parameters.party.partyID);
-        FavorList favors = new FavorList(fav, party);
-        favlists.save(favors);
+        for (Favor favor : parameters.favorDump) {
+            Favor fav = favors.findOne(parameters.favor.favorID);
+            Party party = parties.findOne(parameters.party.partyID);
+            FavorList favors = new FavorList(fav, party);
+            favlists.save(favors);
+        }
     }
-
 
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
     public void addInvite(@RequestBody Parameters parameters) throws Exception {
-
         Party party = parties.findOne(parameters.party.partyID);
         User user = users.findOne(parameters.user.userID);
         Invite invite = new Invite(
@@ -282,54 +282,42 @@ public class MainController {
         invites.save(invite);
     }
 
+    @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
+    public void rsvp(@RequestBody Parameters parameters) {
 
-    /**
-     * 6
-     **/
-//    @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
-//    public void rsvp(@RequestBody Parameters parameters) {
-//
-//        User user = parameters.user;
-//        user.invitedCount += 1;
-//        switch (parameters.rsvpStatus) {
-//            case "Yes": {
-//                user.partyCount += 1;
-//                Invite i = invites.findByUserId(user.userID);
-//                i.rsvpStatus = "Yes";
-//                invites.save(i);
-//                break;
-//            }
-//            case "Maybe": {
-//                Invite i = invites.findByUserId(user.userID);
-//                i.rsvpStatus = "Maybe";
-//                invites.save(i);
-//                break;
-//            }
-//            case "No": {
-//                Invite i = invites.findByUserId(user.userID);
-//                i.rsvpStatus = "Yes";
-//                invites.save(i);
-//                break;
-//            }
-//        }
-//        users.save(user);
-//    }
+        User user = parameters.user;
+        user.invitedCount += 1;
+        switch (parameters.rsvpStatus) {
+            case "Yes": {
+                user.partyCount += 1;
+                Invite i = invites.findByUser(user.userID);
+                i.rsvpStatus = "Yes";
+                invites.save(i);
+                break;
+            }
+            case "Maybe": {
+                Invite i = invites.findByUser(user.userID);
+                i.rsvpStatus = "Maybe";
+                invites.save(i);
+                break;
+            }
+            case "No": {
+                Invite i = invites.findByUser(user.userID);
+                i.rsvpStatus = "Yes";
+                invites.save(i);
+                break;
+            }
+        }
+        users.save(user);
+    }
 
-    /**
-     * 7
-     **/
     @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
     public Party getParty(@PathVariable("id") int id) {
-
         return parties.findOne(id);
     }
 
-    /**
-     * 8
-     **/
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
     public Party updateParty(@RequestBody Party party, HttpSession session) {
-
         String username = (String) session.getAttribute("username");
         Party check = parties.findOne(party.partyID);
         if (party.userID != null) {
@@ -372,7 +360,6 @@ public class MainController {
         parties.save(check);
         return check;
     }
-
 
     @RequestMapping(path = "/parties", method = RequestMethod.GET)
     public List<Party> getAllParties(@RequestBody User user) {
