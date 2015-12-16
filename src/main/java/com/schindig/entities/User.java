@@ -2,6 +2,7 @@ package com.schindig.entities;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.servlet.http.Cookie;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +41,8 @@ public class User {
 //    @Column(nullable = false)
 //    @Size(min = 10, message = "Requires a 10-digit number.")
     public String phone;
+
+    public Cookie cookie;
 
     @Transient
     public HashMap<String, String> stats = new HashMap<>();

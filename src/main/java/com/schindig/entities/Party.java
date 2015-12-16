@@ -69,94 +69,6 @@ public class Party {
 
     public Party(){}
 
-    public void setPartyID(Integer partyID) {
-
-        this.partyID = partyID;
-    }
-    public void setHost(User host) {
-
-        this.host = host;
-    }
-    public void setPartyName(String partyName) {
-
-        this.partyName = partyName;
-    }
-    public void setPartyType(String partyType) {
-
-        this.partyType = partyType;
-    }
-    public void setSubType(String subType) {
-
-        this.subType = subType;
-    }
-    public void setCreateDate(LocalDateTime createDate) {
-
-        this.createDate = createDate;
-    }
-    public void setPartyDate(String partyDate) {
-
-        this.partyDate = partyDate;
-    }
-    public void setStreet1(String street1) {
-
-        this.street1 = street1;
-    }
-    public void setStreet2(String street2) {
-
-        this.street2 = street2;
-    }
-    public void setCity(String city) {
-
-        this.city = city;
-    }
-    public void setUsState(String usState) {
-
-        this.usState = usState;
-    }
-    public void setZip(Integer zip) {
-
-        this.zip = zip;
-    }
-    public void setInviteList(ArrayList<String> inviteList) {
-
-        this.inviteList = inviteList;
-    }
-    public void setRsvp(HashMap<Integer, String> rsvp) {
-
-        this.rsvp = rsvp;
-    }
-    public void setFavorList(ArrayList<Favor> favorList) {
-
-        this.favorList = favorList;
-    }
-    public void setStretchName(String stretchName) {
-
-        this.stretchName = stretchName;
-    }
-    public void setStretchGoal(Integer stretchGoal) {
-
-        this.stretchGoal = stretchGoal;
-    }
-    public void setStretchStatus(Integer stretchStatus) {
-
-        this.stretchStatus = stretchStatus;
-    }
-    public void setWizPosition(Integer wizPosition) {
-
-        this.wizPosition = wizPosition;
-    }
-    public void setByob(Boolean byob) {
-
-        this.byob = byob;
-    }
-    public void setTheme(Boolean theme) {
-
-        this.theme = theme;
-    }
-    public void setParking(String[] parking) {
-
-        this.parking = parking;
-    }
     public Party(String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip) {
 
         this.partyName = partyName;
@@ -283,6 +195,7 @@ public class Party {
 
         return host;
     }
+
 
     // Database Connections
 

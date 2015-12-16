@@ -14,16 +14,17 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.data.annotation.Transient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.util.CookieGenerator;
+import org.springframework.web.util.WebUtils;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import javax.validation.groups.ConvertGroup;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -105,14 +106,17 @@ public class MainController {
             }
         }
 
-        User admin = new User();
-        admin.username = "admin";
-        admin.password = "";
-        admin.firstName = "Admin";
-        admin.lastName = "Nimda";
-        admin.phone = "1234";
-        admin.email = "blah@blah.com";
-        users.save(admin);
+        User admin = users.findOneByUsername("admin");
+        if (admin==null) {
+            User newAdmin = new User();
+            newAdmin.username = "admin";
+            newAdmin.password = "pass";
+            newAdmin.firstName = "Admin";
+            newAdmin.lastName = "Nimda";
+            newAdmin.phone = "1234";
+            newAdmin.email = "blah@blah.com";
+            users.save(newAdmin);
+        }
     }
 
 
@@ -157,12 +161,12 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
-    public void createUser(@RequestBody User user, HttpSession session, HttpServletResponse response) throws Exception {
+    public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User u = users.findOneByUsername(user.username);
         if (u  == null) {
             users.save(new User(user));
         }
-        session.setAttribute("username", user.username);
+        //response.addCookie(Methods.bakeCookie(session, user, users));
     }
 
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
@@ -190,6 +194,7 @@ public class MainController {
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public void login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User test = users.findOneByUsername(user.username);
+        //response.addCookie(Methods.bakeCookie(session, test, users));
         try {
             if (users.findOneByUsername(user.username) == null) {
                 response.sendError(401);
@@ -200,6 +205,7 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         session.setAttribute("username", user.username);
     }
 
@@ -211,10 +217,20 @@ public class MainController {
     /**ALL PARTY RELATED ROUTES**/
     /**3**/
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
-    public Party createParty( @RequestBody Party party ){
-        /**User u = party.host;
-         u.hostCount += 1;
-         users.save(u);*/
+    public Party createParty(@RequestBody Parameters params, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+//        String sessionID = (String) request.getSession().getId();
+//        Cookie[] chip = request.getCookies();
+//        String[] currentCookie = chip[0].getValue().split(":");
+//        String username = currentCookie[0];
+        String username = (String) session.getAttribute("username");
+        User user = users.findOneByUsername(username);
+//        if (Methods.eatCookie(chip[0], user, users)) {
+//            response.sendError(403);
+//        }
+        Party party = new Party();
+        params.party.host = user;
+        user.hostCount += 1;
+        users.save(user);
         parties.save(party);
         return party;
     }
@@ -291,6 +307,7 @@ public class MainController {
     public Party updateParty(@RequestBody Party party, HttpSession session) {
         String username = (String) session.getAttribute("username");
         Party check = parties.findOne(party.partyID);
+        check.host = users.findOneByUsername(username);
         if (party.host != null) {
             check.host = users.findOneByUsername(username);
         }
@@ -326,7 +343,8 @@ public class MainController {
             check.inviteList = party.inviteList;
         }
         if (party.favorList != null) {
-            check.favorList = party.favorList;
+            check.favorList = new ArrayList<>();
+            check.favorList.addAll(party.favorList.stream().collect(Collectors.toList()));
         }
         if (party.rsvp != null) {
             check.rsvp = party.rsvp;
@@ -338,6 +356,8 @@ public class MainController {
             check.stretchName = party.stretchName;
         }
         parties.save(check);
+        Party p  = parties.findOne(1);
+        System.out.println(p.favorList.size());
         return check;
     }
 
