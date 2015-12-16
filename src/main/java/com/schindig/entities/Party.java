@@ -14,8 +14,7 @@ public class Party {
     @Id
     public Integer partyID;
 
-    @ManyToOne
-    public User host;
+    public Integer userID;
 
 //    @Column(nullable = false)
     public String partyName;
@@ -44,8 +43,6 @@ public class Party {
 //    @Column(nullable = false)
     public Integer zip;
 
-    public HashMap<Integer, String> rsvp = new HashMap<>();
-
     public String stretchName;
 
     public Integer stretchGoal;
@@ -58,92 +55,10 @@ public class Party {
 
     public Boolean theme = false;
 
-   public String[] parking = new String[] {"Valet", "On-Site", "Off-Site"};
+    public String parking;
 
     public Party(){}
 
-    public void setPartyID(Integer partyID) {
-
-        this.partyID = partyID;
-    }
-    public void setHost(User host) {
-
-        this.host = host;
-    }
-    public void setPartyName(String partyName) {
-
-        this.partyName = partyName;
-    }
-    public void setPartyType(String partyType) {
-
-        this.partyType = partyType;
-    }
-    public void setSubType(String subType) {
-
-        this.subType = subType;
-    }
-    public void setCreateDate(LocalDateTime createDate) {
-
-        this.createDate = createDate;
-    }
-    public void setPartyDate(String partyDate) {
-
-        this.partyDate = partyDate;
-    }
-    public void setStreet1(String street1) {
-
-        this.street1 = street1;
-    }
-    public void setStreet2(String street2) {
-
-        this.street2 = street2;
-    }
-    public void setCity(String city) {
-
-        this.city = city;
-    }
-    public void setUsState(String usState) {
-
-        this.usState = usState;
-    }
-    public void setZip(Integer zip) {
-
-        this.zip = zip;
-    }
-
-    public void setRsvp(HashMap<Integer, String> rsvp) {
-
-        this.rsvp = rsvp;
-    }
-
-    public void setStretchName(String stretchName) {
-
-        this.stretchName = stretchName;
-    }
-    public void setStretchGoal(Integer stretchGoal) {
-
-        this.stretchGoal = stretchGoal;
-    }
-    public void setStretchStatus(Integer stretchStatus) {
-
-        this.stretchStatus = stretchStatus;
-    }
-    public void setWizPosition(Integer wizPosition) {
-
-        this.wizPosition = wizPosition;
-    }
-    public void setByob(Boolean byob) {
-
-        this.byob = byob;
-    }
-    public void setTheme(Boolean theme) {
-
-        this.theme = theme;
-    }
-    public void setParking(String[] parking) {
-
-        this.parking = parking;
-    }
     public Party(String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip) {
 
         this.partyName = partyName;
@@ -158,9 +73,9 @@ public class Party {
         this.zip = zip;
     }
 
-    public Party(User host, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, ArrayList<String> inviteList, HashMap<Integer, String> rsvp, ArrayList<Favor> favorList, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String[] parking) {
+    public Party(Integer userID, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String parking) {
 
-        this.host = host;
+        this.userID = userID;
         this.partyName = partyName;
         this.partyType = partyType;
         this.subType = subType;
@@ -171,7 +86,6 @@ public class Party {
         this.city = city;
         this.usState = usState;
         this.zip = zip;
-        this.rsvp = rsvp;
         this.stretchName = stretchName;
         this.stretchGoal = stretchGoal;
         this.stretchStatus = stretchStatus;
@@ -225,11 +139,6 @@ public class Party {
         return zip;
     }
 
-    public HashMap<Integer, String> getRsvp() {
-
-        return rsvp;
-    }
-
     public String getStretchName() {
 
         return stretchName;
@@ -254,13 +163,13 @@ public class Party {
 
         return theme;
     }
-    public String[] getParking() {
+    public String getParking() {
 
         return parking;
     }
-    public User getHost() {
+    public Integer getUserID() {
 
-        return host;
+        return userID;
     }
 
 
