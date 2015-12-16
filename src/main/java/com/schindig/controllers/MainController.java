@@ -257,10 +257,13 @@ public class MainController {
 
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public void addFavor(@RequestBody Parameters parameters) {
-        Favor fav = favors.findOne(parameters.favor.favorID);
-        Party party = parties.findOne(parameters.party.partyID);
-        FavorList favors = new FavorList(fav, party);
-        favlists.save(favors);
+        for (Favor favor : parameters.favorDump) {
+            Favor fav = favors.findOne(parameters.favor.favorID);
+            Party party = parties.findOne(parameters.party.partyID);
+            FavorList favors = new FavorList(fav, party);
+            favlists.save(favors);
+        }
+
     }
 
 
