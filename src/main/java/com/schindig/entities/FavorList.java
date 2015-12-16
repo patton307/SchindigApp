@@ -10,24 +10,27 @@ public class FavorList {
 
     @GeneratedValue
     @Id
-    public Integer favorlistID;
+    public Integer listID;
 
-    @ManyToOne
-    public Favor favlist;
+    @OneToOne
+    public Favor favor;
 
-    public FavorList(Integer favorlistID, Favor favlist) {
-        this.favorlistID = favorlistID;
-        this.favlist = favlist;
+    @OneToOne
+    public Party party;
+
+    public FavorList(Integer listID, Favor favor) {
+        this.listID = listID;
+        this.favor = favor;
     }
 
     public FavorList() {
     }
 
-    public Integer getFavorlistID() {
-        return favorlistID;
+    public Integer getListID() {
+        return listID;
     }
 
-    public Favor getFavlist() {
-        return favlist;
+    public Favor getFavor() {
+        return favor;
     }
 }

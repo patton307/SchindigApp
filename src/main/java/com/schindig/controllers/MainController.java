@@ -1,8 +1,5 @@
 package com.schindig.controllers;
-import com.schindig.entities.Favor;
-import com.schindig.entities.Party;
-import com.schindig.entities.User;
-import com.schindig.entities.Wizard;
+import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
@@ -42,7 +39,7 @@ public class MainController {
     FavorListRepo favlists;
 
     @Autowired
-    InviteListRepo invitelists;
+    InviteListRepo invites;
 
     @PostConstruct
     public void init() {
@@ -110,6 +107,35 @@ public class MainController {
             newAdmin.phone = "1234";
             newAdmin.email = "blah@blah.com";
             users.save(newAdmin);
+        }
+
+        Party party = parties.findOne(1);
+        if (party == null) {
+            Party p = new Party();
+            p.host = users.findOne(1);
+            p.partyName = "Party Name";
+            p.partyDate = "party Date";
+            p.street1 = "Street One";
+            p.street2 = "Street Two";
+            p.city = "City";
+            p.zip = 12345;
+            parties.save(p);
+        }
+
+        InviteList invite = invites.findOne(1);
+        if (invite == null) {
+            InviteList i = new InviteList();
+            i.party = parties.findOne(1);
+            i.user = users.findOne(1);
+            invites.save(i);
+        }
+
+        FavorList favlist = favlists.findOne(1);
+        if (favlist == null) {
+            FavorList f = new FavorList();
+            f.favor = favors.findOne(1);
+            f.party = parties.findOne(1);
+            favlists.save(f);
         }
     }
 

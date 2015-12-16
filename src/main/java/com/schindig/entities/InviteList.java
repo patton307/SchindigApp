@@ -10,9 +10,10 @@ public class InviteList {
 
     @GeneratedValue
     @Id
-    public Integer invitelistID;
+    public Integer inviteID;
 
-    public Integer userID;
+    @OneToOne
+    public User user;
 
     @OneToOne
     public Party party;
@@ -22,9 +23,9 @@ public class InviteList {
     String email;
 
 
-    public InviteList(Integer invitelistID, Integer userID, Party party, String phone, String email) {
-        this.invitelistID = invitelistID;
-        this.userID = userID;
+    public InviteList(Integer inviteID, User user, Party party, String phone, String email) {
+        this.inviteID = inviteID;
+        this.user = user;
         this.party = party;
         this.phone = phone;
         this.email = email;
@@ -33,12 +34,12 @@ public class InviteList {
     public InviteList() {
     }
 
-    public Integer getInvitelistID() {
-        return invitelistID;
+    public Integer getInviteID() {
+        return inviteID;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
     public Party getParty() {
