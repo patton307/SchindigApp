@@ -1,9 +1,15 @@
 package com.schindig.utils;
 import com.schindig.controllers.MainController;
 import com.schindig.entities.Party;
+import com.schindig.entities.User;
 import com.schindig.entities.Wizard;
 import com.schindig.services.PartyRepo;
+import com.schindig.services.UserRepo;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.web.util.CookieGenerator;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -32,5 +38,6 @@ public class Methods extends MainController {
     public void update(Party party, PartyRepo repo) {
         repo.findOne(party.partyID);
     }
+
     
 }

@@ -15,6 +15,10 @@
       ng-model="contactModel = {}">
         {{contact.name.formatted}}
       </ion-item>
+      <ion-item>
+        {{contact.phoneNumbers[0].value}}
+      </ion-item>
     </ion-list>
+    </ion-padding>
   </ion-content>
 </ion-view>

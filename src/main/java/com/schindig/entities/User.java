@@ -2,6 +2,7 @@ package com.schindig.entities;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.servlet.http.Cookie;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,8 +42,6 @@ public class User {
 //    @Size(min = 10, message = "Requires a 10-digit number.")
     public String phone;
 
-    @Transient
-    public HashMap<String, String> stats = new HashMap<>();
     public Integer partyCount = 0;
     public Integer hostCount = 0;
     public Integer inviteCount = 0;
@@ -111,10 +110,6 @@ public class User {
     public String getPhone() {
 
         return phone;
-    }
-    public HashMap<String, String> getStats() {
-
-        return stats;
     }
     public Integer getPartyCount() {
 

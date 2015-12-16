@@ -1,8 +1,10 @@
 package com.schindig.utils;
 
-import com.schindig.entities.Favor;
-import com.schindig.entities.Party;
-import com.schindig.entities.User;
+import com.schindig.entities.*;
+import org.hibernate.mapping.Array;
+import org.springframework.data.annotation.Transient;
+
+import java.util.ArrayList;
 
 /**
  * Created by landonkail on 12/14/15.
@@ -15,10 +17,15 @@ public class Parameters {
 
     public User user;
 
+    public Invite invites;
+
+    public FavorList favorList;
+
     public String rsvpStatus;
 
-    public Integer partyID;
-    public String favorName;
+    public ArrayList<Favor> favorDump;
+
+
 
 
 }
