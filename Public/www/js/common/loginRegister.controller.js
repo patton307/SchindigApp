@@ -10,7 +10,7 @@
           username: username,
           password: password
         };
-        LoginRegisterService.login(loginData).success(function(data){
+        LoginRegisterService.login(loginData).then(function(data){
           console.log('dog', data);
           $state.go('splash');
         });
@@ -23,6 +23,9 @@
       //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION
       $scope.invite = function (){
         $state.go('invites');
+      };
+      $scope.dog = function (){
+        $state.go('hostedParty');
       };
 
       //DELETE TO TOP COMMENT

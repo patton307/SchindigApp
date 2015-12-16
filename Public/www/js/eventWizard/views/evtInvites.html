@@ -1,5 +1,4 @@
 <ion-view>
-
   <ion-nav-bar class="bar-stable">
     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
     </ion-nav-back-button>
@@ -15,8 +14,13 @@
       Get Contacts
     </button>
     <ion-list>
+<<<<<<< HEAD
       <ion-item ng-repeat="contactName in contactNames">
         {{contactName.name.formatted}}
+=======
+      <ion-item ng-repeat="contact in contactName">
+        {{contact.name.formatted}}
+>>>>>>> 70f2caab4518a690c707040c633d718037cad17a
       </ion-item>
     </ion-list>
   </ion-content>

@@ -2,9 +2,15 @@
   'use strict';
   angular
     .module("eventWizard")
-
-
-    .controller("EventWizardController", function($scope, $http, $state, $stateParams, $cordovaContacts, EventWizardService){
+    .controller("EventWizardController", function(
+      $scope,
+      $http,
+      $state,
+      $stateParams,
+      $cordovaContacts,
+      $ionicPlatform,
+      EventWizardService
+    ){
         var vm = this;
 
 
@@ -77,26 +83,26 @@
 
      /////FAVORS PATCH/////
      vm.favorArray = [];
-     $scope.favorPushArray = function(favorID){
-       vm.favorArray.push(favorID);
-       console.log(vm.favorArray);
+     $scope.favorPushArray = function(favorData){
+       vm.favorArray.push(favorData);
      };
      $scope.favorPatch = function (){
        var partyID = +localStorage.getItem('partyID');
-       console.log(partyID);
        var data = {
          partyID: partyID,
          favorList: vm.favorArray
        };
-       EventWizardService.updateFavorData(data).success(function(data){
+       EventWizardService.updateWizData(data).success(function(data){
          console.log('favordata', data);
        });
      };
 
      /////ADD FAVOR TO DATA/////
      $scope.addFavorToData = function(favor){
+       var partyID = +localStorage.getItem('partyID');
        var favorData = {
-         favorName: favor
+         favorName: favor,
+         partyID: partyID
        };
        EventWizardService.addFavorToData(favorData).success(function(data){
          console.log('added favor to data', data);
@@ -111,6 +117,7 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
+<<<<<<< HEAD
 
     $scope.getContactList = function() {
          $cordovaContacts.find({}).then(function(result) {
@@ -123,5 +130,18 @@
         });
     };
 
+=======
+      $scope.getContactList = function() {
+            $cordovaContacts
+            .find({})
+            .then(function(result) {
+              var stringData = JSON.stringify(result);
+              var parseData = JSON.parse(stringData);
+              $scope.contactName = parseData;
+           }, function(error){
+             console.log('error', error);
+           });
+       };
+>>>>>>> 70f2caab4518a690c707040c633d718037cad17a
     });
 }());
