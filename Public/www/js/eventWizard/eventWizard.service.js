@@ -32,8 +32,8 @@
       var updateFavorData = function(updatedFavorData){
         return $http.patch(wizUpdateUrl, updatedFavorData);
       };
-      var postFavorParty = function (postFavor){
-        return $http.put(favorUpdateUrl + '/' );
+      var updatePartyFavorList = function (data){
+        return $http.post(favorUpdateUrl, data);
       };
       var getFavors = function () {
         return $http.get(favorGetUrl);

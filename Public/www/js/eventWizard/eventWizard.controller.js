@@ -97,7 +97,7 @@
          partyID: partyID,
          favorDump: vm.favorArray
        };
-       EventWizardService.updateWizData(data).success(function(data){
+       EventWizardService.updatePartyFavorList(data).success(function(data){
          console.log('favordata', data);
        });
      };
