@@ -23,6 +23,11 @@ public class FavorList {
         this.favor = favor;
     }
 
+    public FavorList(Favor favor, Party party) {
+
+        this.favor = favor;
+        this.party = party;
+    }
     public FavorList() {
     }
 
