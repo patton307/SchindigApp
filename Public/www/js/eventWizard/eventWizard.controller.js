@@ -97,7 +97,7 @@
      $scope.addFavorToData = function(favor){
        var favorData = {
          favorName: favor
-       }
+       };
        EventWizardService.addFavorToData(favorData).success(function(data){
          console.log('added favor to data', data);
        });
@@ -111,11 +111,12 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
+
     $scope.getContactList = function() {
-         $cordovaContacts.find({filter: ''}).then(function(result) {
-           var newData = JSON.stringify(result);
-            $scope.contacts = newData;
-            console.log(newData);
+         $cordovaContacts.find({}).then(function(result) {
+            var stringData = JSON.stringify(result);
+            var parseData = JSON.parse(stringData);
+            $scope.contactNames = parseData;
         },
         function(error) {
             console.log("ERROR: " + error);
