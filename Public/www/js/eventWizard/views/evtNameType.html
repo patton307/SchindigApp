@@ -8,15 +8,14 @@
     </div>
      <ion-content>
        <ion-padding>
-   <input
-           type="search"
+   <input type="search"
            ng-model="search.partyType"
            class="item search"
            placeholder="Search Party Type">
     <ion-item
-            ng-repeat="item in wizardItems.data | filter:search"
-            href="#/wizard/{{item.wizardID}}"
-            class = "list inset-list">
+              ng-repeat="item in wizardItems.data | filter:search"
+              href="#/wizard/{{item.wizardID}}"
+              class = "list inset-list">
         {{item.partyType}}
     </ion-item>
     </ion-padding>

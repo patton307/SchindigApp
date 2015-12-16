@@ -10,7 +10,9 @@ import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -251,26 +253,37 @@ public class MainController {
      **/
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
     public Party createParty(@RequestBody Parameters params, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
-
-        String username = (String) session.getAttribute("username");
-        User user = users.findOneByUsername(username);
-        Party party = new Party();
-        params.party.userID = user.userID;
-        user.hostCount += 1;
-        users.save(user);
-        parties.save(party);
-        return party;
+//        User user = users.findOneByUsername(username);
+        Party p = new Party();
+//        params.party.userID = user.userID;
+//        user.hostCount += 1;
+//        users.save(user);
+        parties.save(p);
+        return p;
     }
 
 
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters parameters) {
-        for (Favor favor : parameters.favorDump) {
-            Favor fav = favors.findOne(parameters.favor.favorID);
-            Party party = parties.findOne(parameters.party.partyID);
+        for (int i = 0; i < parameters.favorDump.size(); i++) {
+            Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
+            Party party = parties.findOne(parameters.partyID);
             FavorList favors = new FavorList(fav, party);
             favlists.save(favors);
         }
+    }
+
+    @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
+    public ArrayList<Favor> getFavors(@PathVariable("id") int id) {
+        ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
+        favorList = favorList.stream()
+                .filter(f -> f.party.partyID == id)
+                .collect(Collectors.toCollection(ArrayList<FavorList>::new));
+        ArrayList<Favor> newList = favorList.stream()
+                .map(favor -> favor.favor)
+                .collect(Collectors.toCollection(ArrayList::new));
+        return newList;
+
     }
 
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
