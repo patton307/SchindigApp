@@ -5,7 +5,8 @@
     'ionic',
     'eventWizard',
     'loginRegister',
-    'profile'
+    'profile',
+    'manageParty'
     ])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
