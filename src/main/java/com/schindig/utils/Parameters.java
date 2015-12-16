@@ -1,8 +1,6 @@
 package com.schindig.utils;
 
-import com.schindig.entities.Favor;
-import com.schindig.entities.Party;
-import com.schindig.entities.User;
+import com.schindig.entities.*;
 import org.springframework.data.annotation.Transient;
 
 /**
@@ -12,15 +10,16 @@ public class Parameters {
 
     public Favor favor;
 
-    @Transient
+    public FavorList favorlist;
+
+    public InviteList invitelist;
+
     public Party party;
 
     public User user;
 
     public String rsvpStatus;
 
-    public Integer partyID;
-    public String favorName;
 
 
 }

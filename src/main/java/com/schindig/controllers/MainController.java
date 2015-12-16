@@ -256,29 +256,11 @@ public class MainController {
 
 
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
-    public Party addFavor(@RequestBody Parameters parameters) {
-        ArrayList<String> partyTypes = parties.partyTypes();
-        ArrayList<String> subTypes = parties.subTypes();
+    public void addFavor(@RequestBody Parameters parameters) {
+        Favor fav = favors.findOne(parameters.favor.favorID);
         Party party = parties.findOne(parameters.party.partyID);
-        Favor favor = favors.findOne(parameters.favor.favorID);
-//        if (!party.favorList.contains(favor)) {
-//            favor.useCount += 1;
-//            if (!favor.generic) {
-//                favor.partyTypeKey = partyTypes.indexOf(party.partyType);
-//                favor.subTypeKey = subTypes.indexOf(party.subType);
-//            }
-//            party.favorList.add(favor);
-//            parties.save(party);
-//            favors.save(favor);
-//            return party;
-//        } else {
-//            Integer pos = party.favorList.indexOf(favor);
-//            party.favorList.set(pos, favor);
-//            parties.save(party);
-//            favors.save(favor);
-//            return party;
-//        }
-        return parameters.party;
+        FavorList favors = new FavorList(fav, party);
+        favlists.save(favors);
     }
 
 
