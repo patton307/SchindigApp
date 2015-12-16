@@ -122,7 +122,7 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
-
+        vm.contactData = [];
       $scope.getContactList = function() {
                 $cordovaContacts
                 .find({})
@@ -130,12 +130,14 @@
                   var stringData = JSON.stringify(result);
                   var parseData = JSON.parse(stringData);
                   $scope.contactName = parseData;
-                  return parseData;
+                  vm.contactData = parseData;
                }, function(error){
                  console.log('error', error);
                });
            };
-
+        var mappedContactData = _.map(contactData, function(idx, val, arr){
+          return {inviteName: el.name.formatted, invitePhone: el.phoneNumbers[0].value, inviteEmail: el.emails[0].value}
+        });
        $scope.contactInfoForSMS = function(name, phone, email){
          var partyID = +localStorage.getItem('partyID');
          var data = {
