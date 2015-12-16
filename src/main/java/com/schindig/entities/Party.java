@@ -44,14 +44,7 @@ public class Party {
 //    @Column(nullable = false)
     public Integer zip;
 
-    @Transient
-    public ArrayList<String> inviteList = new ArrayList<>();
-
-    @Transient
     public HashMap<Integer, String> rsvp = new HashMap<>();
-
-    @Transient
-    public ArrayList<Favor> favorList = new ArrayList<>();
 
     public String stretchName;
 
@@ -65,7 +58,7 @@ public class Party {
 
     public Boolean theme = false;
 
-    public String[] parking = new String[] {"Valet", "On-Site", "Off-Site"};
+   public String[] parking = new String[] {"Valet", "On-Site", "Off-Site"};
 
     public Party(){}
 
@@ -117,18 +110,12 @@ public class Party {
 
         this.zip = zip;
     }
-    public void setInviteList(ArrayList<String> inviteList) {
 
-        this.inviteList = inviteList;
-    }
     public void setRsvp(HashMap<Integer, String> rsvp) {
 
         this.rsvp = rsvp;
     }
-    public void setFavorList(ArrayList<Favor> favorList) {
 
-        this.favorList = favorList;
-    }
     public void setStretchName(String stretchName) {
 
         this.stretchName = stretchName;
@@ -184,9 +171,7 @@ public class Party {
         this.city = city;
         this.usState = usState;
         this.zip = zip;
-        this.inviteList = inviteList;
         this.rsvp = rsvp;
-        this.favorList = favorList;
         this.stretchName = stretchName;
         this.stretchGoal = stretchGoal;
         this.stretchStatus = stretchStatus;
@@ -239,18 +224,12 @@ public class Party {
 
         return zip;
     }
-    public ArrayList<String> getInviteList() {
 
-        return inviteList;
-    }
     public HashMap<Integer, String> getRsvp() {
 
         return rsvp;
     }
-    public ArrayList<Favor> getFavorList() {
 
-        return favorList;
-    }
     public String getStretchName() {
 
         return stretchName;

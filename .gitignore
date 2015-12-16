@@ -102,3 +102,5 @@ bower_components
 *.db
 
 .DS_Store
+
+*.gradle
