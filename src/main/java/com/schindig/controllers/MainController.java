@@ -239,15 +239,8 @@ public class MainController {
     /**3**/
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
     public Party createParty(@RequestBody Parameters params, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
-//        String sessionID = (String) request.getSession().getId();
-//        Cookie[] chip = request.getCookies();
-//        String[] currentCookie = chip[0].getValue().split(":");
-//        String username = currentCookie[0];
         String username = (String) session.getAttribute("username");
         User user = users.findOneByUsername(username);
-//        if (Methods.eatCookie(chip[0], user, users)) {
-//            response.sendError(403);
-//        }
         Party party = new Party();
         params.party.host = user;
         user.hostCount += 1;

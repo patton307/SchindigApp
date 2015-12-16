@@ -10,6 +10,6 @@ import java.util.List;
  * Created by landonkail on 12/16/15.
  */
 public interface InviteListRepo extends CrudRepository<InviteList, Integer> {
-//    List<InviteList> findAllByParty(Party party);
+    List<InviteList> findAllByParty(Integer party);
 
 }
