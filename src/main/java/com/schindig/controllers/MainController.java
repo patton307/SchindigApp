@@ -3,21 +3,14 @@ import com.schindig.entities.Favor;
 import com.schindig.entities.Party;
 import com.schindig.entities.User;
 import com.schindig.entities.Wizard;
-import com.schindig.services.FavorRepo;
-import com.schindig.services.PartyRepo;
-import com.schindig.services.UserRepo;
-import com.schindig.services.WizardRepo;
+import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
-import org.springframework.data.annotation.Transient;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.CookieGenerator;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.groups.ConvertGroup;
@@ -48,6 +41,12 @@ public class MainController {
 
     @Autowired
     UserRepo users;
+
+    @Autowired
+    FavorListRepo favlists;
+
+    @Autowired
+    InviteListRepo invitelists;
 
     @PostConstruct
     public void init() {
@@ -188,7 +187,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public void login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
+    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User test = users.findOneByUsername(user.username);
         try {
             if (users.findOneByUsername(user.username) == null) {
@@ -201,6 +200,7 @@ public class MainController {
             e.printStackTrace();
         }
         session.setAttribute("username", user.username);
+        return test.userID;
     }
 
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
@@ -219,7 +219,7 @@ public class MainController {
         return party;
     }
 
-    /**4**/
+
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor(@RequestBody Parameters parameters) {
         ArrayList<String> partyTypes = parties.partyTypes();
@@ -245,7 +245,8 @@ public class MainController {
         }
     }
 
-    /**5**/
+
+
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
     public Party addInvite(@RequestBody Parameters parameters) throws Exception {
         Party party = parameters.party;
@@ -263,6 +264,7 @@ public class MainController {
         }
         return party;
     }
+
 
     /**6**/
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
@@ -322,12 +324,12 @@ public class MainController {
         if (party.city != null) {
             check.city = party.city;
         }
-        if (party.inviteList != null) {
-            check.inviteList = party.inviteList;
-        }
+
+        /*
         if (party.favorList != null) {
             check.favorList = party.favorList;
         }
+        */
         if (party.rsvp != null) {
             check.rsvp = party.rsvp;
         }
@@ -341,7 +343,7 @@ public class MainController {
         return check;
     }
 
-    /**9**/
+
     @RequestMapping(path = "/parties", method = RequestMethod.GET)
     public ArrayList<Party> getAllParties(@RequestBody User user){
         user = users.findOne(user.userID);
@@ -355,6 +357,7 @@ public class MainController {
         return partyList;
     }
 
+
     /**10**/
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
     public ArrayList<Party> deleteParty(@RequestBody Party party) {
@@ -367,7 +370,7 @@ public class MainController {
         return (ArrayList<Party>) parties.findAll();
     }
 
-    /**11**/
+
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public Party deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
         Party party = parties.findOne(parameters.party.partyID);
@@ -380,6 +383,7 @@ public class MainController {
         parties.save(party);
         return party;
     }
+
 
     @RequestMapping(path = "/party/favor/add", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters params) {
