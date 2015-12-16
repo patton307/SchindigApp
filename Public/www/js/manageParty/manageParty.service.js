@@ -4,7 +4,7 @@
   angular
     .module('manageParty')
     .factory('ManagePartyService', function($http, $state){
-      var ip = 'http://10.0.10.67';
+      var ip = 'http://192.168.1.66';
       var viewHostedParties = ip + ':8080/party/1';
 
       var getHostedParties = function(){
