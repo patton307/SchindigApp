@@ -85,13 +85,17 @@
      vm.favorArray = [];
 
      $scope.isChecked = false;
-
-
-     $scope.favorPatch = function (){
+     $scope.pushToFavorArray = function(data){
+      //  var $element.find('true');
+      var myElements = document.getElementsByClassName('true');
+       _.each(myElements, function(el,idx,array){
+         var parsed = JSON.parse(el.id);
+         vm.favorArray.push(parsed);
+       });
        var partyID = +localStorage.getItem('partyID');
        var data = {
          partyID: partyID,
-         favorList: vm.favorArray
+         favorDump: vm.favorArray
        };
        EventWizardService.updateWizData(data).success(function(data){
          console.log('favordata', data);

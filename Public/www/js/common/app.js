@@ -6,7 +6,8 @@
     'eventWizard',
     'loginRegister',
     'profile',
-    'manageParty'
+    'manageParty',
+    'underscore'
     ])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
@@ -40,5 +41,10 @@
         controller: 'EventWizardController'
         })
 
-      });
+      })
+      angular
+        .module('underscore', [])
+        .factory('_', function ($window) {
+          return $window._;
+        });
 }());
