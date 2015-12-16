@@ -195,6 +195,7 @@ public class MainController {
 
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
     public void deleteUser(@RequestBody User user) {
+        user = users.findOneByUsername(user.username);
 
         users.delete(user);
     }
