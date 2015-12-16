@@ -14,8 +14,7 @@ public class Party {
     @Id
     public Integer partyID;
 
-    @ManyToOne
-    public User host;
+    public Integer userID;
 
 //    @Column(nullable = false)
     public String partyName;
@@ -74,9 +73,9 @@ public class Party {
         this.zip = zip;
     }
 
-    public Party(User host, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String parking) {
+    public Party(Integer userID, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String parking) {
 
-        this.host = host;
+        this.userID = userID;
         this.partyName = partyName;
         this.partyType = partyType;
         this.subType = subType;
@@ -168,9 +167,9 @@ public class Party {
 
         return parking;
     }
-    public User getHost() {
+    public Integer getUserID() {
 
-        return host;
+        return userID;
     }
 
 
