@@ -3,30 +3,18 @@ import com.schindig.entities.Favor;
 import com.schindig.entities.Party;
 import com.schindig.entities.User;
 import com.schindig.entities.Wizard;
-import com.schindig.services.FavorRepo;
-import com.schindig.services.PartyRepo;
-import com.schindig.services.UserRepo;
-import com.schindig.services.WizardRepo;
+import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
-import org.springframework.data.annotation.Transient;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.util.CookieGenerator;
-import org.springframework.web.util.WebUtils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.*;
-import javax.validation.groups.ConvertGroup;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.Serializable;
-import java.net.HttpCookie;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -49,6 +37,12 @@ public class MainController {
 
     @Autowired
     UserRepo users;
+
+    @Autowired
+    FavorListRepo favlists;
+
+    @Autowired
+    InviteListRepo invitelists;
 
     @PostConstruct
     public void init() {
@@ -192,7 +186,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public void login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
+    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User test = users.findOneByUsername(user.username);
         //response.addCookie(Methods.bakeCookie(session, test, users));
         try {
@@ -207,6 +201,7 @@ public class MainController {
         }
 
         session.setAttribute("username", user.username);
+        return test.userID;
     }
 
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
@@ -235,50 +230,53 @@ public class MainController {
         return party;
     }
 
-    /**4**/
+
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public Party addFavor(@RequestBody Parameters parameters) {
         ArrayList<String> partyTypes = parties.partyTypes();
         ArrayList<String> subTypes = parties.subTypes();
         Party party = parties.findOne(parameters.party.partyID);
         Favor favor = favors.findOne(parameters.favor.favorID);
-        if (!party.favorList.contains(favor)) {
-            favor.useCount += 1;
-            if (!favor.generic) {
-                favor.partyTypeKey = partyTypes.indexOf(party.partyType);
-                favor.subTypeKey = subTypes.indexOf(party.subType);
-            }
-            party.favorList.add(favor);
-            parties.save(party);
-            favors.save(favor);
-            return party;
-        } else {
-            Integer pos = party.favorList.indexOf(favor);
-            party.favorList.set(pos, favor);
-            parties.save(party);
-            favors.save(favor);
-            return party;
-        }
+//        if (!party.favorList.contains(favor)) {
+//            favor.useCount += 1;
+//            if (!favor.generic) {
+//                favor.partyTypeKey = partyTypes.indexOf(party.partyType);
+//                favor.subTypeKey = subTypes.indexOf(party.subType);
+//            }
+//            party.favorList.add(favor);
+//            parties.save(party);
+//            favors.save(favor);
+//            return party;
+//        } else {
+//            Integer pos = party.favorList.indexOf(favor);
+//            party.favorList.set(pos, favor);
+//            parties.save(party);
+//            favors.save(favor);
+//            return party;
+//        }
+        return parameters.party;
     }
 
-    /**5**/
+
+
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
     public Party addInvite(@RequestBody Parameters parameters) throws Exception {
         Party party = parameters.party;
         User user = parameters.user;
-        try {
-            if (!party.inviteList.contains(user.phone)) {
-                party.inviteList.add(user.phone);
-                parties.save(party);
-                user.inviteCount += 1;
-                users.save(user);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("User already invited.");
-        }
+//        try {
+//            if (!party.inviteList.contains(user.phone)) {
+//                party.inviteList.add(user.phone);
+//                parties.save(party);
+//                user.inviteCount += 1;
+//                users.save(user);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new Exception("User already invited.");
+//        }
         return party;
     }
+
 
     /**6**/
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
@@ -339,13 +337,13 @@ public class MainController {
         if (party.city != null) {
             check.city = party.city;
         }
-        if (party.inviteList != null) {
-            check.inviteList = party.inviteList;
-        }
+
+        /*
         if (party.favorList != null) {
             check.favorList = new ArrayList<>();
             check.favorList.addAll(party.favorList.stream().collect(Collectors.toList()));
         }
+        */
         if (party.rsvp != null) {
             check.rsvp = party.rsvp;
         }
@@ -357,23 +355,24 @@ public class MainController {
         }
         parties.save(check);
         Party p  = parties.findOne(1);
-        System.out.println(p.favorList.size());
+//        System.out.println(p.favorList.size());
         return check;
     }
 
-    /**9**/
-    @RequestMapping(path = "/parties", method = RequestMethod.GET)
-    public ArrayList<Party> getAllParties(@RequestBody User user){
-        user = users.findOne(user.userID);
-        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
-        final User finalUser = user;
-        partyList = partyList.stream()
-                .filter(party -> {
-                    return (party.inviteList.contains(finalUser.phone));
-                })
-                .collect(Collectors.toCollection(ArrayList<Party>::new));
-        return partyList;
-    }
+
+//    @RequestMapping(path = "/parties", method = RequestMethod.GET)
+//    public ArrayList<Party> getAllParties(@RequestBody User user){
+//        user = users.findOne(user.userID);
+//        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
+//        final User finalUser = user;
+////        partyList = partyList.stream()
+////                .filter(party -> {
+////                    return (party.inviteList.contains(finalUser.phone));
+////                })
+////                .collect(Collectors.toCollection(ArrayList<Party>::new));
+////        return partyList;
+//    }
+
 
     /**10**/
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
@@ -387,19 +386,20 @@ public class MainController {
         return (ArrayList<Party>) parties.findAll();
     }
 
-    /**11**/
+
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public Party deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
         Party party = parties.findOne(parameters.party.partyID);
         Favor favor = favors.findOne(parameters.favor.favorID);
-        Integer pos = party.favorList.indexOf(favor);
-        if (party.favorList.get(pos) == null) {
-            response.sendError(0, "Favor not found");
-        }
-        party.favorList.remove(favor);
+//        Integer pos = party.favorList.indexOf(favor);
+//        if (party.favorList.get(pos) == null) {
+//            response.sendError(0, "Favor not found");
+//        }
+//        party.favorList.remove(favor);
         parties.save(party);
         return party;
     }
+
 
     @RequestMapping(path = "/party/favor/add", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters params) {
