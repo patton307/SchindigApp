@@ -9,7 +9,9 @@
       $stateParams,
       $cordovaContacts,
       $ionicPlatform,
-      EventWizardService
+      EventWizardService,
+      $ionicPopup,
+      $timeout
     ){
         var vm = this;
 
@@ -29,11 +31,31 @@
         $scope.partySubType = $scope.get($stateParams);
       });
 
+      //////showSubtype()//////
+      $scope.showSubtype = function(partyType){
+        if(partyType.subType[0] === 'null'){
+          return
+          console.log('null');
+
+        } else {
+          console.log(partyType);
+          return partyType
+
+        }
+      }
+
 
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var item = {subType: subType, partyType: partyType};
+        var rawUserID = +localStorage.getItem('userID')
+        var item = {
+          party: {
+            subType: subType,
+            partyType: partyType
+          },
+          userID: rawUserID
+        };
         EventWizardService.newWizPartyPost(item).success(function(data){
           console.log('newly created party: ', data);
           localStorage.setItem('partyID', data.partyID);
@@ -47,12 +69,14 @@
       var partyID = +localStorage.getItem('partyID');
       console.log('partyId in localstorage', partyID);
       var data = {
-        partyName: partyName,
-        partyID: partyID,
-        partyDate: partyDate
+        party: {
+          partyName: partyName,
+          partyID: partyID,
+          partyDate: partyDate
+        }
       };
-      data.partyDate = JSON.stringify(data.partyDate);
-      data.partyDate = JSON.parse(data.partyDate);
+      data.party.partyDate = JSON.stringify(data.party.partyDate);
+      data.party.partyDate = JSON.parse(data.party.partyDate);
       console.log('updated party data: ', data);
       EventWizardService.updateWizData(data).success(function(updatedWizData){
         console.log('promise return of updated wizdata', updatedWizData);
@@ -90,6 +114,7 @@
       var myElements = document.getElementsByClassName('true');
        _.each(myElements, function(el,idx,array){
          var parsed = JSON.parse(el.id);
+         console.log(parsed);
          vm.favorArray.push(parsed);
        });
        var partyID = +localStorage.getItem('partyID');
@@ -97,7 +122,7 @@
          partyID: partyID,
          favorDump: vm.favorArray
        };
-       EventWizardService.updateWizData(data).success(function(data){
+       EventWizardService.updatePartyFavorList(data).success(function(data){
          console.log('favordata', data);
        });
      };
@@ -130,25 +155,72 @@
                   var stringData = JSON.stringify(result);
                   var parseData = JSON.parse(stringData);
                   $scope.contactName = parseData;
-                  return parseData;
+                  vm.contactData = parseData;
                }, function(error){
                  console.log('error', error);
                });
            };
+           vm.contactArray = [];
+           $scope.isChecked = false;
+           $scope.pushToContactArray = function(data){
+            //  var $element.find('true');
+            var myElements = document.getElementsByClassName('true');
+             _.each(myElements, function(el,idx,array){
+               vm.contactArray.push(el.id);
+             });
+             console.log('parsed',vm.contactArray);
 
-       $scope.contactInfoForSMS = function(name, phone, email){
-         var partyID = +localStorage.getItem('partyID');
-         var data = {
-           inviteName: name,
-           invitePhone: phone,
-           inviteEmail: email,
-           partyID: partyID
+          //    var partyID = +localStorage.getItem('partyID');
+          //    var data = {
+          //      partyID: partyID,
+          //      contactDump: contactArray
+          //    };
+          //    EventWizardService.postInviteData(data).success(function(data){
+          //      console.log('new-stretchgoal updated data', data);
+          //      $state.go('');
+          //  });
          };
-         EventWizardService.postInviteData(data).success(function(postedInviteData){
-           console.log('new-stretchgoal updated data', postedInviteData);
-           $state.go('');
-       });
-     };
+
+         ///CONTACT DOM STUFF
+         $scope.showConfirm = function() {
+           var confirmPopup = $ionicPopup.confirm({
+             title: 'Send Invitations',
+             template: 'Are you ready to send out Invites and Create your Party?'
+           });
+           confirmPopup.then(function(res){
+             if(res){
+               var partyID = +localStorage.getItem('partyID');
+              //  var data = {
+              //    partyID: partyID,
+              //    contactDump: vm.contactArray
+              //  };
+               var contactData = {
+                 party: {
+                   partyID:partyID
+                 },
+                 invite: {
+
+                 }
+               }
+               EventWizardService.updateWizData(contactData).success(function(data){
+                 console.log('invite list', data);
+                 $state.go('');
+               });
+             }
+             else {
+               alert("There was an error");
+             }
+           });
+         };
+
+        // var mappedContactData = _.map(contactData, function(idx, val, arr){
+        //   return {inviteName: el.name.formatted, invitePhone: el.phoneNumbers[0].value, inviteEmail: el.emails[0].value};
+        // });
+
+      //  $scope.contactInfoForSMS = function(name, phone, email){
+      //    var partyID = +localStorage.getItem('partyID');
+      //
+      //    };
 
     });
 }());

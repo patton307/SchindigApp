@@ -5,7 +5,7 @@
     .module('loginRegister')
 
     .factory('LoginRegisterService', function($http, $state){
-      var ip = 'http://dd';
+      var ip = 'http://192.168.0.135';
       var registerUrl = ip + ':8080/user/create';
       var loginUrl = ip + ':8080/user/login';
 

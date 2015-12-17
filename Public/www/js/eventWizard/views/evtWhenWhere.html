@@ -16,15 +16,22 @@
          <span class="input-label">Pick a Date and Time: </span>
          <input ng-model="partyDate" type="datetime-local">
        </label>
-       <label class="item item-input">
-         <span class="input-label">Name the Party: </span>
-         <input ng-model="partyName">
-       </label>
         <button
           ng-click="dateAndTimePost(partyDate, partyName)"
           class="button button-full button-positive">
          Submit Date and Name
         </button>
+      <ul class="list">
+        <li class="item item-toggle">
+            BYOB?
+          <label class="toggle toggle-green">
+            <input type="checkbox">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+         </li>
+       </ul>
     </ion-content>
   </ion-padding>
 </ion-view>

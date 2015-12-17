@@ -1,27 +1,23 @@
 <ion-view>
   <ion-content>
     <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Username</span>
-        <input
-          ng-model="username"
-          type="text">
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Username: </strong></span>
+        <input ng-model="username" type="text" placeholder="Enter Your Username">
       </label>
-      <label class="item item-input">
-        <span class="input-label">Password</span>
-        <input
-          ng-model="password"
-          type="password">
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Password: </strong></span>
+        <input ng-model="partyName" ng-model="password" type="password" placeholder="Enter Your Password">
       </label>
     </div>
     <button
       ng-click="login(username, password)"
       class="button button-full button-positive">
-     Login
+       Login
     </button>
     <button
       ng-click="signUp()"
-      class="button button-full button-assertive">
+      class="button button-full button-assertive animate-fade-slide-in-right">
       Create New User
     </button>
     <button

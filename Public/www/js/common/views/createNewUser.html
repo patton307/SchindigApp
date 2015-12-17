@@ -7,53 +7,55 @@
       <h1 class= "title">Let's Get This Account Started</h1>
    </div>
   <ion-content>
-    <div class="list">
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Username</span>
+    <ion-list class="list">
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Username: </strong></span>
         <input
+          required="string"
           ng-model="username"
           type="text"
           placeholder="Username">
       </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Password</span>
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Password: </strong></span>
         <input
+          required="string"
           ng-model="password"
           type="password"
           placeholder="Password">
       </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">First Name</span>
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>First Name: </strong></span>
         <input
           ng-model="firstName"
           type="text"
           placeholder="First Name">
       </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Last Name</span>
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Last Name: </strong></span>
         <input
           ng-model="lastName"
           type="text"
           placeholder="Last Name">
       </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Phone Number</span>
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Phone Number: </strong></span>
         <input
           ng-model="phone"
-          type="text"
+          type="number"
           placeholder="Phone Number">
       </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Email</span>
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Email: </strong></span>
         <input
           ng-model="email"
           type="email"
           placeholder="example@website.com">
       </label>
-    </div>
+    </ion-list>
     <button
       ng-click="createNewUser(username, password, firstName, lastName, email, phone)"
-      class="button button-full button-positive">
+      class="button button-full button-positive" data-ink-color="#CD3385" data-ink-opactiy=".8">
       Create New User
     </button>
   </ion-content>
