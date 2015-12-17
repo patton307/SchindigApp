@@ -8,7 +8,8 @@
     'profile',
     'manageParty',
     'underscore',
-    'ionic-material'
+    'ionic-material',
+    'ion-google-place'
   ])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {

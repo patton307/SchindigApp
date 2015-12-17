@@ -9,7 +9,7 @@
       'profile',
       'manageParty',
       'underscore',
-      'ionic-material'
+      'ion-google-place'
     ])
     .config(function($stateProvider){
     $stateProvider

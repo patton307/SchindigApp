@@ -12,6 +12,7 @@
       var addFavorToDataUrl = ip + ":8080/party/favor/add";
       var getWizardUrl = ip + ":8080/wizard";
       var invitePostUrl = ip + ":8080/party/invite";
+      var testJSONUrl = "./jsonthingythatwearelookingat.json";
 
 
       var getWizard = function() {
@@ -45,6 +46,9 @@
       var postInviteData = function(inviteData){
         return $http.post(invitePostUrl, inviteData);
       };
+      var getFakeData = function(fakeData){
+        return $http.get(testJSONUrl);
+      };
 
       return {
         getWizard: getWizard,
@@ -55,7 +59,8 @@
         updateFavorData: updateFavorData,
         addFavorToData: addFavorToData,
         postInviteData: postInviteData,
-        updatePartyFavorList: updatePartyFavorList
+        updatePartyFavorList: updatePartyFavorList,
+        getFakeData: getFakeData
       };
 
     });

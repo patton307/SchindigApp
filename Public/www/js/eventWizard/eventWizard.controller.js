@@ -34,21 +34,19 @@
       //////showSubtype()//////
       $scope.showSubtype = function(partyType){
         if(partyType.subType[0] === 'null'){
-          return
-          console.log('null');
-
+          return console.log('null');
         } else {
           console.log(partyType);
-          return partyType
+          return partyType;
 
         }
-      }
+      };
 
 
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var rawUserID = +localStorage.getItem('userID')
+        var rawUserID = +localStorage.getItem('userID');
         var item = {
           party: {
             subType: subType,
@@ -61,11 +59,12 @@
 
 
       ///PATCH DATE, TIME AND NAME/////
-    $scope.dateAndTimePost = function(partyDate, partyName){
+    $scope.dateAndTimePost = function(partyDate, partyName, party){
       var partyID = +localStorage.getItem('partyID');
       console.log('partyId in localstorage', partyID);
       var data = {
         party: {
+          // location: partyLocation,
           partyName: partyName,
           partyID: partyID,
           partyDate: partyDate
@@ -137,12 +136,6 @@
      };
 
 
-       /////GET STATIC FAVORS///////
-       EventWizardService.getFavors().success(function(data){
-         $scope.favors = data;
-       });
-
-
       //CORDOVA CONTACTS AND INVITATIONS //
       $scope.getContactList = function() {
                 $cordovaContacts
@@ -152,9 +145,6 @@
                   var stringData = JSON.stringify(result);
                   var parseData = JSON.parse(stringData);
                   $scope.contactName = parseData;
-                  console.log($scope.contactName[0].name.formatted);
-                  // console.log('dogdoo', $scope.contactName);
-                  // console.log('catdog',$scope.contactName[0]);
                }, function(error){
                  console.log('error', error);
                });
@@ -214,4 +204,5 @@
            });
          };
     });
+
 }());

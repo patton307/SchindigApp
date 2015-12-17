@@ -13,17 +13,17 @@
         return $http.post(loginUrl, loginData)
           .success(function(data){
           console.log('success', data);
-          $state.go('splash')
-        })
+          $state.go('splash');
+        });
       };
       var createUser = function(data) {
-        return $http.post(registerUrl, data)
+        return $http.post(registerUrl, data);
       };
 
       return {
         createUser: createUser,
         login: login
-      }
+      };
     });
 
 }());
