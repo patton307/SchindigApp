@@ -3,7 +3,15 @@
 
   angular
     .module('loginRegister')
-    .controller('LoginRegisterController', function($http, $scope, $state, $stateParams, LoginRegisterService){
+    .controller('LoginRegisterController', function(
+      $http,
+      $scope,
+      $state,
+      $stateParams,
+      LoginRegisterService
+    )
+
+      {
 
       $scope.login = function(username, password){
         var loginData = {
