@@ -22,11 +22,12 @@ public class Invite {
 
     public String email;
 
-    public String rsvpStatus;
+    public String rsvpStatus = "Undecided";
 
     public String name;
 
     public Boolean invite = false;
+
 
 
     public Invite(Integer inviteID, User user, Party party, String phone, String email) {
@@ -37,6 +38,14 @@ public class Invite {
         this.email = email;
     }
 
+    public Invite(Party party, String phone, String email, String name, Boolean invite) {
+
+        this.party = party;
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+        this.invite = invite;
+    }
     public Invite() {
     }
 
@@ -86,4 +95,5 @@ public class Invite {
     public String getEmail() {
         return email;
     }
+
 }
