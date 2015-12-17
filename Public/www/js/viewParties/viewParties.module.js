@@ -13,5 +13,10 @@
           templateUrl: 'js/viewParties/views/allParties.html',
           controller: 'ViewPartyController'
         })
-    })
+        .state('invitedParty', {
+          url:'/invitedParty',
+          templateUrl: 'js/manageParty/views/viewInvitedParty.html',
+          controller: 'ManagePartyController'
+        });
+    });
 }());

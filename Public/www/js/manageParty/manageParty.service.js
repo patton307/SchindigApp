@@ -18,10 +18,6 @@
           });
       };
 
-      var getInvitedParties = function(){
-        return $http.get(viewInvitedPartiesURL);
-      };
-
       var updatedHostedParties = function (data){
         return $http.patch(updatedHostedPartiesURL, data)
           .success(function(data){
@@ -33,7 +29,6 @@
 
       return {
         getHostedParties: getHostedParties,
-        getInvitedParties: getInvitedParties,
         updatedHostedParties: updatedHostedParties
       };
 
