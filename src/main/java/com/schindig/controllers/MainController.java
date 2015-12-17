@@ -14,11 +14,8 @@ import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -83,7 +80,6 @@ public class MainController {
                     wiz.subType.add(partyMod);
                     wizard.save(wiz);
                 }
-
             }
         }
 
@@ -103,6 +99,50 @@ public class MainController {
                 fav.generic = genericCheck;
                 favors.save(fav);
             }
+        }
+
+        ArrayList<User> testUsers = (ArrayList<User>) users.findAll();
+        if (testUsers.size() < 5) {
+            User john = new User();
+            john.username = "johnj843";
+            john.password = "john";
+            john.firstName = "John";
+            john.lastName = "Smith";
+            john.phone = "1234";
+            john.email = "john@email.com";
+            users.save(john);
+            User michelle = new User();
+            michelle.username = "michelle843";
+            michelle.password = "michelle";
+            michelle.firstName = "Michelle";
+            michelle.lastName = "Bart";
+            michelle.phone = "0983";
+            michelle.email = "michelle@email.com";
+            users.save(michelle);
+            User taylor = new User();
+            taylor.username = "taylor234";
+            taylor.password = "taylor";
+            taylor.firstName = "Taylor";
+            taylor.lastName = "Rad";
+            taylor.phone = "1234";
+            taylor.email = "taylor@email.com";
+            users.save(taylor);
+            User will = new User();
+            will.username = "will999";
+            will.password = "will";
+            will.firstName = "Will";
+            will.lastName = "James";
+            will.phone = "88800000";
+            will.email = "will@email.com";
+            users.save(will);
+            User landon = new User();
+            landon.username = "landon731";
+            landon.password = "landon";
+            landon.firstName = "Landon";
+            landon.lastName = "Rodgers";
+            landon.phone = "44433111";
+            landon.email = "landon@email.com";
+            users.save(landon);
         }
 
         User admin = users.findOneByUsername("admin");
@@ -183,7 +223,6 @@ public class MainController {
 
 
     /**ALL USER RELATED ROUTES**/
-    /**************/
     @RequestMapping(path = "/user/update", method = RequestMethod.POST)
     public User updateUser(@RequestBody User u) {
 
@@ -222,7 +261,6 @@ public class MainController {
         user.password = null;
         return user;
     }
-    /**************/
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
 
@@ -231,13 +269,11 @@ public class MainController {
             users.save(new User(user));
         }
     }
-    /**************/
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
     public void deleteUser(@RequestBody User user) {
         users.delete(user);
     }
 
-    /**************/
     @RequestMapping(path = "/user/all", method = RequestMethod.GET)
     public ArrayList<User> getAllUsers() {
 
@@ -251,14 +287,12 @@ public class MainController {
         return temp;
     }
 
-    /**************/
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public User findOneUser(@PathVariable("id") int id) {
         User u = users.findOne(id);
         u.password = null;
         return u;
     }
-    /**************/
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User test = users.findOneByUsername(user.username);
@@ -276,11 +310,24 @@ public class MainController {
         session.setAttribute("username", user.username);
         return test.userID;
     }
-    /**************/
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
     public void logout(HttpSession session) {
         session.invalidate();
     }
+
+    /*
+    @RequestMapping(path = "/user/search", method = RequestMethod.GET)
+    public ArrayList<User> userSearch(@RequestBody User user) {
+        ArrayList<User> allresults = (ArrayList<User>) users.findAll();
+        ArrayList<User> results = allresults.stream()
+                .filter(u -> u.username.equalsIgnoreCase(user.username) ||
+                u.firstName.equalsIgnoreCase(user.firstName) ||
+                u.lastName.equalsIgnoreCase(user.lastName) ||
+                u.email.equalsIgnoreCase(user.email))
+                .collect(Collectors.toCollection(ArrayList<User>::new));
+        return results;
+    }
+    */
 
     /**ALL PARTY RELATED ROUTES**/
 
@@ -295,7 +342,6 @@ public class MainController {
         return p;
     }
 
-    /**************/
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters parameters) {
         for (int i = 0; i < parameters.favorDump.size(); i++) {
@@ -305,7 +351,7 @@ public class MainController {
             favlists.save(favors);
         }
     }
-    /**************/
+
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
     public ArrayList<Favor> getFavors(@PathVariable("id") int id) {
         ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
@@ -319,7 +365,16 @@ public class MainController {
 
     }
 
-    /**************/
+    @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
+    public void addInvite(@RequestBody Parameters parameters) throws Exception {
+        Party party = parties.findOne(parameters.party.partyID);
+        User user = users.findOne(parameters.user.userID);
+        Invite invite = new Invite(
+                user, party, parameters.invites.phone, parameters.invites.email, "Undecided", parameters.invites.name
+        );
+        invites.save(invite);
+    }
+
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
     public void rsvp(@RequestBody Parameters parameters) {
 
@@ -348,7 +403,6 @@ public class MainController {
         }
         users.save(user);
     }
-    /**************/
     @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
     public Party getParty(@PathVariable("id") int id) {
         return parties.findOne(id);
@@ -412,9 +466,9 @@ public class MainController {
         parties.save(check);
         return check;
     }
-    /**************/
+
     @RequestMapping(path = "/parties/host", method = RequestMethod.POST)
-    public ArrayList<Party> getAllHost(@RequestBody User user) {
+    public ArrayList<Party> getAllHosted(@RequestBody User user) {
         User u = users.findOne(user.userID);
         ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
         partyList = (ArrayList<Party>) partyList.stream()
@@ -422,6 +476,7 @@ public class MainController {
                 .collect(Collectors.toCollection(ArrayList<Party>::new));
         return partyList;
     }
+
     @RequestMapping(path = "/parties/user", method = RequestMethod.POST)
     public ArrayList<Party> getAllParties(@RequestBody User user) {
         User u = users.findOne(user.userID);
@@ -443,7 +498,7 @@ public class MainController {
         }
         return partyList;
     }
-    /**************/
+
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
     public List<Party> deleteParty(@RequestBody Party party, HttpServletResponse response) throws IOException {
         User u = users.findOne(party.userID);
@@ -459,14 +514,10 @@ public class MainController {
 
 
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public Party deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
-
-        Party party = parties.findOne(parameters.party.partyID);
-        Favor favor = favors.findOne(parameters.favor.favorID);
-
-        parties.save(party);
-        return party;
+    public void deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
+        parameters.favorListDump.forEach(favlists::delete);
     }
+
 
 //    @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
 //    public ArrayList<String> partyStats() {
@@ -476,12 +527,12 @@ public class MainController {
 
 
     /**ALL WIZARD RELATED ROUTES**/
-    /**************/
+
     @RequestMapping(path = "/wizard", method = RequestMethod.GET)
     public ArrayList<Wizard> getPartyList() {
         return (ArrayList<Wizard>) wizard.findAll();
     }
-    /**************/
+
     @RequestMapping(path = "/wizard/{id}", method = RequestMethod.POST)
     public Party wizardPosition(@RequestBody Party p, @PathVariable("id") int id) {
         Party party = parties.findOne(p.partyID);
@@ -489,7 +540,7 @@ public class MainController {
         parties.save(party);
         return party;
     }
-    /**************/
+
     @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
     public Integer getWizardPosition(@RequestBody Party party) {
         return parties.findOne(party.partyID).wizPosition;
@@ -497,14 +548,14 @@ public class MainController {
 
 
     /**ALL FAVOR SPECIFIC ROUTES**/
-    /**************/
+
     @RequestMapping(path = "/favor", method = RequestMethod.GET)
     public ArrayList<Favor> getFavorList() {
         return (ArrayList<Favor>) favors.findAll();
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
-    public String favorItem(@RequestBody Favor favor) {
+    public String addFavorItem(@RequestBody Favor favor) {
         if (!favors.exists(favor.favorID)) {
             Favor c = new Favor();
             c.favorName = favor.favorName;
@@ -516,13 +567,11 @@ public class MainController {
         return "Item added to database";
     }
 
-    /**************/
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
     public ArrayList<Favor> deleteFavorItem(@RequestBody Favor item) {
         favors.delete(item);
         return (ArrayList<Favor>) favors.findAll();
     }
-
 }
 
 

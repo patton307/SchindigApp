@@ -18,16 +18,12 @@ public class FavorList {
     @OneToOne
     public Party party;
 
-    public FavorList(Integer listID, Favor favor) {
-        this.listID = listID;
-        this.favor = favor;
-    }
-
     public FavorList(Favor favor, Party party) {
-
         this.favor = favor;
         this.party = party;
     }
+
+
     public FavorList() {
     }
 

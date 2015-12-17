@@ -6,6 +6,7 @@
       'ionic',
       'ngCordova',
       'underscore',
+      'ion-google-place'
     ])
     .config(function($stateProvider){
     $stateProvider

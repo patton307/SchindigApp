@@ -1,0 +1,26 @@
+<ion-view>
+  <ion-content>
+    <div
+      class="list card">
+      <div class="item item-avatar">
+        <h2>{{parties.partyName}}</h2>
+        <p>{{parties.createDate.month}}</p>
+      </div>
+      <label>Check me to check both: <input type="checkbox" ng-model="master"></label><br/>
+      <input id="checkSlave" type="checkbox" ng-checked="master" aria-label="Slave input">
+      <div class="item item-body">
+        <img class="full-image">
+        <p>
+          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+          the content is from a card-body consisting of an image and paragraph text. The footer
+          consists of tabs, icons aligned left, within the card-footer.
+        </p>
+        <p>
+          <a href="#" class="subdued">1 Like</a>
+          <a href="#" class="subdued">5 Comments</a>
+        </p>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

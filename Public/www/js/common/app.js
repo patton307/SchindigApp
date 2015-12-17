@@ -7,10 +7,10 @@
     'loginRegister',
     'profile',
     'manageParty',
-    'underscore'
+    'underscore',
+    'ionic-material',
+    'ion-google-place'
   ])
-
-
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {

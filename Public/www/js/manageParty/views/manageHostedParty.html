@@ -1,0 +1,34 @@
+<ion-view title="Manage Your Party">
+  <ion-content>
+    <div class= 'list'>
+      <label class="item item-input item-floating-label">
+       <span class="input-label"><strong>Party Name: </strong></span>
+       <input type="text" value="{{}}">
+     </label>
+   </div>
+   <div class= 'list'>
+   <label class="item item-input item-floating-label">
+      <span class="input-label">Change Party Location: </span>
+      <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="location"></ion-google-place>
+   </label>
+    <label class="item item-input item-floating-label">
+       <span class="input-label">Pick a Date and Time: </span>
+       <input ng-model="partyDate" type="datetime-local" value="{{}}">
+    </label>
+    </div>
+    <div class="list">
+      <label class="item item-input item-floating-label">
+        <span class= "input-label">StretchGoal</span>
+        <input type="text" value"{{}}">
+      </label>
+    </div>
+    <div>
+      <label for="">
+        <span>
+        </span>
+        <input type="text" value"{{}}">
+      </label>
+    </div>
+
+  </ion-content>
+</ion-view>
