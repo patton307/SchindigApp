@@ -26,7 +26,6 @@
 
       $scope.signUp = function(){
         $state.go('createNewUser');
-        ionicMaterialMotion.ripple();
       };
 
       //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION

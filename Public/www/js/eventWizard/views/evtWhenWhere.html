@@ -8,11 +8,11 @@
   </div>
   <ion-padding>
     <ion-content>
-      <label class="item item-input">
+      <label class=""item item-input item-floating-label"">
          <span class="input-label">Where the Party At?: </span>
-         <input type="text">
+         <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="location"></ion-google-place>
        </label>
-      <label class="item item-input">
+      <label class=""item item-input item-floating-label"">
          <span class="input-label">Pick a Date and Time: </span>
          <input ng-model="partyDate" type="datetime-local">
        </label>
