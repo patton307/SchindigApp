@@ -143,9 +143,7 @@ public class MainController {
 
 
     /**ALL USER RELATED ROUTES**/
-    /**
-     * 14
-     **/
+    /**************/
     @RequestMapping(path = "/user/update", method = RequestMethod.POST)
     public User updateUser(@RequestBody User u) {
 
@@ -184,7 +182,7 @@ public class MainController {
         user.password = null;
         return user;
     }
-
+    /**************/
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
 
@@ -192,15 +190,14 @@ public class MainController {
         if (u == null) {
             users.save(new User(user));
         }
-        //response.addCookie(Methods.bakeCookie(session, user, users));
     }
-
+    /**************/
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
     public void deleteUser(@RequestBody User user) {
-
         users.delete(user);
     }
 
+    /**************/
     @RequestMapping(path = "/user/all", method = RequestMethod.GET)
     public ArrayList<User> getAllUsers() {
 
@@ -214,17 +211,17 @@ public class MainController {
         return temp;
     }
 
+    /**************/
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public User findOneUser(@PathVariable("id") int id) {
-
-        return users.findOne(id);
+        User u = users.findOne(id);
+        u.password = null;
+        return u;
     }
-
+    /**************/
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
-
         User test = users.findOneByUsername(user.username);
-        //response.addCookie(Methods.bakeCookie(session, test, users));
         try {
             if (users.findOneByUsername(user.username) == null) {
                 response.sendError(401);
@@ -239,29 +236,26 @@ public class MainController {
         session.setAttribute("username", user.username);
         return test.userID;
     }
-
+    /**************/
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
     public void logout(HttpSession session) {
-
         session.invalidate();
     }
 
     /**ALL PARTY RELATED ROUTES**/
-    /**
-     * 3
-     **/
+
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
     public Party createParty(@RequestBody Parameters params, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
-//        User user = users.findOneByUsername(username);
-        Party p = new Party();
-//        params.party.userID = user.userID;
-//        user.hostCount += 1;
-//        users.save(user);
+        User user = users.findOne(params.userID);
+        Party p = params.party;
+        p.userID = user.userID;
+        user.hostCount += 1;
+        users.save(user);
         parties.save(p);
         return p;
     }
 
-
+    /**************/
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public void addPartyFavor(@RequestBody Parameters parameters) {
         for (int i = 0; i < parameters.favorDump.size(); i++) {
@@ -271,7 +265,7 @@ public class MainController {
             favlists.save(favors);
         }
     }
-
+    /**************/
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
     public ArrayList<Favor> getFavors(@PathVariable("id") int id) {
         ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
@@ -284,17 +278,17 @@ public class MainController {
         return newList;
 
     }
-
+    /**************/
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
     public void addInvite(@RequestBody Parameters parameters) throws Exception {
         Party party = parties.findOne(parameters.party.partyID);
         User user = users.findOne(parameters.user.userID);
         Invite invite = new Invite(
-                user, party, parameters.invites.phone, parameters.invites.email, "Undecided"
+                user, party, parameters.invites.phone, parameters.invites.email, "Undecided", parameters.invites.name
         );
         invites.save(invite);
     }
-
+    /**************/
     @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
     public void rsvp(@RequestBody Parameters parameters) {
 
@@ -323,73 +317,79 @@ public class MainController {
         }
         users.save(user);
     }
-
+    /**************/
     @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
     public Party getParty(@PathVariable("id") int id) {
         return parties.findOne(id);
     }
 
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
-    public Party updateParty(@RequestBody Party party, HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        Party check = parties.findOne(party.partyID);
-        if (party.userID != null) {
-            check.userID = users.findOne(party.userID).userID;
+    public Party updateParty(@RequestBody Parameters parameters, HttpSession session) {
+//        String username = (String) session.getAttribute("username");
+        Party check = parties.findOne(parameters.party.partyID);
+        if (parameters.party.partyName != null) {
+            check.partyName = parameters.party.partyName;
         }
-
-        if (party.partyName != null) {
-            check.partyName = party.partyName;
+        if (parameters.party.partyDate != null) {
+            check.partyDate = parameters.party.partyDate;
         }
-        if (party.partyDate != null) {
-            check.partyDate = party.partyDate;
+        if (parameters.party.partyType != null) {
+            check.partyType = parameters.party.partyType;
         }
-        if (party.partyType != null) {
-            check.partyType = party.partyType;
+        if (parameters.party.subType != null) {
+            check.subType = parameters.party.subType;
         }
-        if (party.subType != null) {
-            check.subType = party.subType;
+        if (parameters.party.street1 != null) {
+            check.street1 = parameters.party.street1;
         }
-        if (party.street1 != null) {
-            check.street1 = party.street1;
+        if (parameters.party.street2 != null) {
+            check.street2 = parameters.party.street2;
         }
-        if (party.street2 != null) {
-            check.street2 = party.street2;
+        if (parameters.party.zip != null) {
+            check.zip = parameters.party.zip;
         }
-        if (party.zip != null) {
-            check.zip = party.zip;
+        if (parameters.party.usState != null) {
+            check.usState = parameters.party.usState;
         }
-        if (party.usState != null) {
-            check.usState = party.usState;
+        if (parameters.party.city != null) {
+            check.city = parameters.party.city;
         }
-        if (party.city != null) {
-            check.city = party.city;
+        if (parameters.party.stretchGoal != null) {
+            check.stretchGoal = parameters.party.stretchGoal;
         }
-        if (party.stretchGoal != null) {
-            check.stretchGoal = party.stretchGoal;
+        if (parameters.party.stretchName != null) {
+            check.stretchName = parameters.party.stretchName;
         }
-        if (party.stretchName != null) {
-            check.stretchName = party.stretchName;
+        if (parameters.party.themeCheck) {
+            check.themeCheck = true;
+            check.theme = parameters.party.theme;
+        }
+        if (parameters.party.byob) {
+            check.byob = true;
+        }
+        if (parameters.party.parking != null) {
+            check.parking = parameters.party.parking;
         }
         parties.save(check);
         return check;
     }
-
-    @RequestMapping(path = "/parties", method = RequestMethod.GET)
-    public List<Party> getAllParties(@RequestBody User user) {
+    /**************/
+    @RequestMapping(path = "/parties/host", method = RequestMethod.POST)
+    public ArrayList<Party> getAllParties(@RequestBody User user) {
         User u = users.findOne(user.userID);
-        return invites.findInvite(u);
+        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
+        partyList = (ArrayList<Party>) partyList.stream()
+                .filter(p -> p.userID == u.userID)
+                .collect(Collectors.toCollection(ArrayList<Party>::new));
+        return partyList;
     }
-
+    /**************/
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
     public List<Party> deleteParty(@RequestBody Party party, HttpServletResponse response) throws IOException {
         User u = users.findOne(party.userID);
         Party p = parties.findOne(party.partyID);
-        try {
-            if (p.userID!=u.userID) {
-                response.sendError(403);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (p.userID != u.userID) {
+            response.sendError(403);
         }
         u.hostCount -= 1;
         users.save(u);
@@ -403,11 +403,7 @@ public class MainController {
 
         Party party = parties.findOne(parameters.party.partyID);
         Favor favor = favors.findOne(parameters.favor.favorID);
-//        Integer pos = party.favorList.indexOf(favor);
-//        if (party.favorList.get(pos) == null) {
-//            response.sendError(0, "Favor not found");
-//        }
-//        party.favorList.remove(favor);
+
         parties.save(party);
         return party;
     }
@@ -420,14 +416,12 @@ public class MainController {
 
 
     /**ALL WIZARD RELATED ROUTES**/
-    /**
-     * 1
-     **/
+    /**************/
     @RequestMapping(path = "/wizard", method = RequestMethod.GET)
     public ArrayList<Wizard> getPartyList() {
         return (ArrayList<Wizard>) wizard.findAll();
     }
-
+    /**************/
     @RequestMapping(path = "/wizard/{id}", method = RequestMethod.POST)
     public Party wizardPosition(@RequestBody Party p, @PathVariable("id") int id) {
         Party party = parties.findOne(p.partyID);
@@ -435,7 +429,7 @@ public class MainController {
         parties.save(party);
         return party;
     }
-
+    /**************/
     @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
     public Integer getWizardPosition(@RequestBody Party party) {
         return parties.findOne(party.partyID).wizPosition;
@@ -443,6 +437,7 @@ public class MainController {
 
 
     /**ALL FAVOR SPECIFIC ROUTES**/
+    /**************/
     @RequestMapping(path = "/favor", method = RequestMethod.GET)
     public ArrayList<Favor> getFavorList() {
         return (ArrayList<Favor>) favors.findAll();
@@ -461,12 +456,14 @@ public class MainController {
         return "Item added to database";
     }
 
+    /**************/
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
     public ArrayList<Favor> deleteFavorItem(@RequestBody Favor item) {
 
         favors.delete(item);
         return (ArrayList<Favor>) favors.findAll();
     }
+
 }
 
 

@@ -27,6 +27,8 @@ public class Parameters {
 
     public Integer partyID;
 
+    public Integer userID;
+
 
 
 

@@ -21,6 +21,8 @@ public class Party {
 
     public String partyType;
 
+    public String description;
+
     public String subType;
 
 //    @Column(nullable = false)
@@ -53,16 +55,20 @@ public class Party {
 
     public Boolean byob = false;
 
-    public Boolean theme = false;
+    public Boolean themeCheck = false;
+
+    public String theme;
 
     public String parking;
 
     public Party(){}
 
-    public Party(String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip) {
+    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip) {
 
+        this.userID = userID;
         this.partyName = partyName;
         this.partyType = partyType;
+        this.description = description;
         this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
@@ -72,12 +78,12 @@ public class Party {
         this.usState = usState;
         this.zip = zip;
     }
-
-    public Party(Integer userID, String partyName, String partyType, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean theme, String parking) {
+    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean themeCheck, String theme, String parking) {
 
         this.userID = userID;
         this.partyName = partyName;
         this.partyType = partyType;
+        this.description = description;
         this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
@@ -91,8 +97,13 @@ public class Party {
         this.stretchStatus = stretchStatus;
         this.wizPosition = wizPosition;
         this.byob = byob;
+        this.themeCheck = themeCheck;
         this.theme = theme;
         this.parking = parking;
+    }
+    public String getDescription() {
+
+        return description;
     }
     public Integer getPartyID() {
 
@@ -159,7 +170,7 @@ public class Party {
 
         return byob;
     }
-    public Boolean getTheme() {
+    public String getTheme() {
 
         return theme;
     }
@@ -171,8 +182,10 @@ public class Party {
 
         return userID;
     }
+    public Boolean getThemeCheck() {
 
-
+        return themeCheck;
+    }
     // Database Connections
 
     /*
