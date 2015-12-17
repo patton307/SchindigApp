@@ -25,6 +25,10 @@ public class Parameters {
 
     public ArrayList<Favor> favorDump;
 
+    public Integer partyID;
+
+    public Integer userID;
+
 
 
 
