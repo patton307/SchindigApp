@@ -8,8 +8,7 @@
       $scope,
       $state,
       $stateParams,
-      ManagePartyServices
-
+      ManagePartyService
     ){
       var vm = this;
       var rawUserID = +localStorage.getItem('userID')

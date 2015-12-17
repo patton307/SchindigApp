@@ -160,19 +160,16 @@
                  console.log('error', error);
                });
            };
-
-
            vm.contactArray = [];
-           console.log(vm.contactArray);
            $scope.isChecked = false;
            $scope.pushToContactArray = function(data){
             //  var $element.find('true');
             var myElements = document.getElementsByClassName('true');
              _.each(myElements, function(el,idx,array){
-               var parsed = JSON.parse(el.id);
-               vm.contactArray.push(parsed);
-               console.log(parsed);
+               vm.contactArray.push(el.id);
              });
+             console.log('parsed',vm.contactArray);
+
           //    var partyID = +localStorage.getItem('partyID');
           //    var data = {
           //      partyID: partyID,
@@ -193,12 +190,20 @@
            confirmPopup.then(function(res){
              if(res){
                var partyID = +localStorage.getItem('partyID');
-               var data = {
-                 partyID: partyID,
-                 contactDump: vm.contactArray
-               };
-               EventWizardService.postInviteData(data).success(function(data){
-                 console.log('new-stretchgoal updated data', data);
+              //  var data = {
+              //    partyID: partyID,
+              //    contactDump: vm.contactArray
+              //  };
+               var contactData = {
+                 party: {
+                   partyID:partyID
+                 },
+                 invite: {
+
+                 }
+               }
+               EventWizardService.updateWizData(contactData).success(function(data){
+                 console.log('invite list', data);
                  $state.go('');
                });
              }
