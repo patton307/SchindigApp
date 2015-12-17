@@ -39,5 +39,5 @@ public class Methods extends MainController {
         repo.findOne(party.partyID);
     }
 
-    
+
 }

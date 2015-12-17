@@ -247,6 +247,18 @@ public class MainController {
         session.invalidate();
     }
 
+    @RequestMapping(path = "/user/search", method = RequestMethod.GET)
+    public ArrayList<User> userSearch(@RequestBody User user) {
+        ArrayList<User> allresults = (ArrayList<User>) users.findAll();
+        ArrayList<User> results = allresults.stream()
+                .filter(u -> u.username.equalsIgnoreCase(user.username) ||
+                u.firstName.equalsIgnoreCase(user.firstName) ||
+                u.lastName.equalsIgnoreCase(user.lastName) ||
+                u.email.equalsIgnoreCase(user.email))
+                .collect(Collectors.toCollection(ArrayList<User>::new));
+        return results;
+    }
+
     /**ALL PARTY RELATED ROUTES**/
     /**
      * 3
@@ -400,18 +412,10 @@ public class MainController {
 
 
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public Party deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
-
-        Party party = parties.findOne(parameters.party.partyID);
-        Favor favor = favors.findOne(parameters.favor.favorID);
-//        Integer pos = party.favorList.indexOf(favor);
-//        if (party.favorList.get(pos) == null) {
-//            response.sendError(0, "Favor not found");
-//        }
-//        party.favorList.remove(favor);
-        parties.save(party);
-        return party;
+    public void deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
+        parameters.favorListDump.forEach(favlists::delete);
     }
+
 
 //    @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
 //    public ArrayList<String> partyStats() {

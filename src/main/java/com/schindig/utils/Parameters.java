@@ -24,7 +24,7 @@ public class Parameters {
     public String rsvpStatus;
 
     public ArrayList<Favor> favorDump;
-
+    public ArrayList<FavorList> favorListDump;
     public Integer partyID;
 
 
