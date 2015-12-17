@@ -24,6 +24,10 @@ public class Invite {
 
     public String rsvpStatus;
 
+    public String name;
+
+    public Boolean invite = false;
+
 
     public Invite(Integer inviteID, User user, Party party, String phone, String email) {
         this.inviteID = inviteID;
@@ -40,13 +44,28 @@ public class Invite {
 
         this.rsvpStatus = rsvpStatus;
     }
-    public Invite(User user, Party party, String phone, String email, String rsvpStatus) {
+
+    public Invite(User user, Party party, String phone, String email, String rsvpStatus, String name) {
 
         this.user = user;
         this.party = party;
         this.phone = phone;
         this.email = email;
         this.rsvpStatus = rsvpStatus;
+        this.name = name;
+    }
+
+    public Boolean getInvite() {
+
+        return invite;
+    }
+    public String getRsvpStatus() {
+
+        return rsvpStatus;
+    }
+    public String getName() {
+
+        return name;
     }
     public Integer getInviteID() {
         return inviteID;
