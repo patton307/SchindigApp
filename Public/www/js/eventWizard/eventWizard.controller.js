@@ -34,21 +34,19 @@
       //////showSubtype()//////
       $scope.showSubtype = function(partyType){
         if(partyType.subType[0] === 'null'){
-          return
-          console.log('null');
-
+          return console.log('null');
         } else {
           console.log(partyType);
-          return partyType
+          return partyType;
 
         }
-      }
+      };
 
 
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var rawUserID = +localStorage.getItem('userID')
+        var rawUserID = +localStorage.getItem('userID');
         var item = {
           party: {
             subType: subType,
@@ -65,11 +63,12 @@
 
 
       ///PATCH DATE, TIME AND NAME/////
-    $scope.dateAndTimePost = function(partyDate, partyName){
+    $scope.dateAndTimePost = function(partyDate, partyName, party){
       var partyID = +localStorage.getItem('partyID');
       console.log('partyId in localstorage', partyID);
       var data = {
         party: {
+          // location: partyLocation,
           partyName: partyName,
           partyID: partyID,
           partyDate: partyDate
@@ -140,12 +139,6 @@
      };
 
 
-       /////GET STATIC FAVORS///////
-       EventWizardService.getFavors().success(function(data){
-         $scope.favors = data;
-       });
-
-
       //CORDOVA CONTACTS AND INVITATIONS //
 
       $scope.getContactList = function() {
@@ -155,7 +148,6 @@
                   var stringData = JSON.stringify(result);
                   var parseData = JSON.parse(stringData);
                   $scope.contactName = parseData;
-                  vm.contactData = parseData;
                }, function(error){
                  console.log('error', error);
                });
@@ -201,7 +193,7 @@
                  invite: {
 
                  }
-               }
+               };
                EventWizardService.updateWizData(contactData).success(function(data){
                  console.log('invite list', data);
                  $state.go('');
@@ -212,15 +204,6 @@
              }
            });
          };
-
-        // var mappedContactData = _.map(contactData, function(idx, val, arr){
-        //   return {inviteName: el.name.formatted, invitePhone: el.phoneNumbers[0].value, inviteEmail: el.emails[0].value};
-        // });
-
-      //  $scope.contactInfoForSMS = function(name, phone, email){
-      //    var partyID = +localStorage.getItem('partyID');
-      //
-      //    };
-
     });
+
 }());

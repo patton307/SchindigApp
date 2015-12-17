@@ -5,20 +5,39 @@
     .module('manageParty')
     .factory('ManagePartyService', function($http, $state){
       var vm = this;
-      var ip = 'http://192.168.0.135';
-      var viewHostedParties = ip + ':8080/party/host';
+      var ip = 'http://localhost';
+      var viewHostedPartiesURL = ip + ':8080/party/host';
+      var viewInvitedPartiesURL = ip +':8080/parties/user';
+      var updatedHostedPartiesURL = ip + ':8080/party/update';
 
       var getHostedParties = function(userID){
         console.log('dog');
-        return $http.post(viewHostedParties, userID)
+        return $http.post(viewHostedPartiesURL, userID)
           .success(function(data){
             console.log('succes view', data);
-          })
+          });
       };
 
+      var getInvitedParties = function(){
+        return $http.get(viewInvitedPartiesURL);
+      };
+
+      var updatedHostedParties = function (data){
+        return $http.patch(updatedHostedPartiesURL, data)
+          .success(function(data){
+            console.log('success updateParty', data);
+          });
+      };
+
+
+
       return {
-        getHostedParties: getHostedParties
-      }
+        getHostedParties: getHostedParties,
+        getInvitedParties: getInvitedParties,
+        updatedHostedParties: updatedHostedParties
+      };
+
+
     });
 
 }());
