@@ -9,7 +9,9 @@
       $stateParams,
       $cordovaContacts,
       $ionicPlatform,
-      EventWizardService
+      EventWizardService,
+      $ionicPopup,
+      $timeout
     ){
         var vm = this;
 
@@ -122,7 +124,7 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
-        vm.contactData = [];
+
       $scope.getContactList = function() {
                 $cordovaContacts
                 .find({})
@@ -136,6 +138,7 @@
                });
            };
 
+
            vm.contactArray = [];
            console.log(vm.contactArray);
            $scope.isChecked = false;
@@ -147,22 +150,44 @@
                vm.contactArray.push(parsed);
                console.log(parsed);
              });
-             var partyID = +localStorage.getItem('partyID');
-             var data = {
-               partyID: partyID,
-               contactDump: contactArray
-             };
-             EventWizardService.postInviteData(data).success(function(data){
-               console.log('new-stretchgoal updated data', data);
-               $state.go('');
+          //    var partyID = +localStorage.getItem('partyID');
+          //    var data = {
+          //      partyID: partyID,
+          //      contactDump: contactArray
+          //    };
+          //    EventWizardService.postInviteData(data).success(function(data){
+          //      console.log('new-stretchgoal updated data', data);
+          //      $state.go('');
+          //  });
+         };
+
+         ///CONTACT DOM STUFF
+         $scope.showConfirm = function() {
+           var confirmPopup = $ionicPopup.confirm({
+             title: 'Send Invitations',
+             template: 'Are you ready to send out Invites and Create your Party?'
+           });
+           confirmPopup.then(function(res){
+             if(res){
+               var partyID = +localStorage.getItem('partyID');
+               var data = {
+                 partyID: partyID,
+                 contactDump: vm.contactArray
+               };
+               EventWizardService.postInviteData(data).success(function(data){
+                 console.log('new-stretchgoal updated data', data);
+                 $state.go('');
+               });
+             }
+             else {
+               alert("There was an error");
+             }
            });
          };
 
         // var mappedContactData = _.map(contactData, function(idx, val, arr){
         //   return {inviteName: el.name.formatted, invitePhone: el.phoneNumbers[0].value, inviteEmail: el.emails[0].value};
         // });
-
-
 
       //  $scope.contactInfoForSMS = function(name, phone, email){
       //    var partyID = +localStorage.getItem('partyID');

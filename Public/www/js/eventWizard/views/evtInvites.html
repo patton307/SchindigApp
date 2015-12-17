@@ -9,7 +9,7 @@
   <ion-content ng-init="getContactList()">
     <ion-padding>
       <button
-        ng-click="pushToContactArray()"
+        ng-click="pushToContactArray();showConfirm()"
         class="button button-full button-positive">
         INVITE!
       </button>
