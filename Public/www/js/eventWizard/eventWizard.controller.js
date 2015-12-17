@@ -56,11 +56,7 @@
           },
           userID: rawUserID
         };
-        EventWizardService.newWizPartyPost(item).success(function(data){
-          console.log('newly created party: ', data);
-          localStorage.setItem('partyID', data.partyID);
-          $state.go('whenwhere');
-        });
+        EventWizardService.newWizPartyPost(item)
       };
 
 
@@ -92,10 +88,12 @@
        var partyID = +localStorage.getItem('partyID');
        console.log(partyID);
        var data = {
-         stretchStatus: stretchStatus,
-         stretchGoal: stretchGoal,
-         stretchName: stretchName,
-         partyID: partyID
+         party: {
+           stretchStatus: stretchStatus,
+           stretchGoal: stretchGoal,
+           stretchName: stretchName,
+           partyID: partyID
+         }
        };
        console.log('updated stretchgoal:', data);
        EventWizardService.updateWizData(data).success(function(updatedWizData){
@@ -107,14 +105,12 @@
 
      /////FAVORS PATCH/////
      vm.favorArray = [];
-
      $scope.isChecked = false;
      $scope.pushToFavorArray = function(data){
       //  var $element.find('true');
       var myElements = document.getElementsByClassName('true');
        _.each(myElements, function(el,idx,array){
          var parsed = JSON.parse(el.id);
-         console.log(parsed);
          vm.favorArray.push(parsed);
        });
        var partyID = +localStorage.getItem('partyID');
@@ -124,6 +120,7 @@
        };
        EventWizardService.updatePartyFavorList(data).success(function(data){
          console.log('favordata', data);
+         $state.go('stretchgoal');
        });
      };
 
@@ -147,39 +144,34 @@
 
 
       //CORDOVA CONTACTS AND INVITATIONS //
-
       $scope.getContactList = function() {
                 $cordovaContacts
                 .find({})
                 .then(function(result) {
+                  // console.log('get result', result);
                   var stringData = JSON.stringify(result);
                   var parseData = JSON.parse(stringData);
                   $scope.contactName = parseData;
-                  vm.contactData = parseData;
+                  console.log($scope.contactName[0].name.formatted);
+                  // console.log('dogdoo', $scope.contactName);
+                  // console.log('catdog',$scope.contactName[0]);
                }, function(error){
                  console.log('error', error);
                });
            };
-           vm.contactArray = [];
-           $scope.isChecked = false;
-           $scope.pushToContactArray = function(data){
-            //  var $element.find('true');
-            var myElements = document.getElementsByClassName('true');
-             _.each(myElements, function(el,idx,array){
-               vm.contactArray.push(el.id);
-             });
-             console.log('parsed',vm.contactArray);
+       $scope.isChecked = false;
+       vm.contactArray = [];
+       $scope.pushToContactArray = function(){
+          var myElements = document.getElementsByClassName('true');
+           _.each(myElements, function(el,idx,array){
+             var parsed = JSON.parse(el.id);
+             vm.contactArray.push(parsed);
+           });
+           console.log('this should be the contact array',vm.contactArray[0].name.formatted);
 
-          //    var partyID = +localStorage.getItem('partyID');
-          //    var data = {
-          //      partyID: partyID,
-          //      contactDump: contactArray
-          //    };
-          //    EventWizardService.postInviteData(data).success(function(data){
-          //      console.log('new-stretchgoal updated data', data);
-          //      $state.go('');
-          //  });
-         };
+     };
+
+
 
          ///CONTACT DOM STUFF
          $scope.showConfirm = function() {
@@ -190,21 +182,30 @@
            confirmPopup.then(function(res){
              if(res){
                var partyID = +localStorage.getItem('partyID');
-              //  var data = {
-              //    partyID: partyID,
-              //    contactDump: vm.contactArray
-              //  };
-               var contactData = {
-                 party: {
-                   partyID:partyID
-                 },
-                 invite: {
+               var contactData;
+               var data;
+               vm.contactDataArray=[];
 
+               _.each(vm.contactArray, function(el,idx,array){
+                 console.log('what the fuck is this',el.name.formatted);
+                //  console.log('name', el.name.formatted);
+                //  console.log('phone number', el.phoneNumbers[0].value);
+                //  console.log('email',el.emails[0].value);
+                contactData = {
+                  name: el.name.formatted,
+                  phone: el.phoneNumbers[0].value,
+                  email: el.emails[0].value
+               }
+               vm.contactDataArray.push(contactData);
+               data = {
+                 inviteDump: vm.contactDataArray,
+                 party: {
+                   partyID: partyID
                  }
                }
-               EventWizardService.updateWizData(contactData).success(function(data){
+             });
+               EventWizardService.updateWizData(data).success(function(data){
                  console.log('invite list', data);
-                 $state.go('');
                });
              }
              else {
@@ -212,15 +213,5 @@
              }
            });
          };
-
-        // var mappedContactData = _.map(contactData, function(idx, val, arr){
-        //   return {inviteName: el.name.formatted, invitePhone: el.phoneNumbers[0].value, inviteEmail: el.emails[0].value};
-        // });
-
-      //  $scope.contactInfoForSMS = function(name, phone, email){
-      //    var partyID = +localStorage.getItem('partyID');
-      //
-      //    };
-
     });
 }());

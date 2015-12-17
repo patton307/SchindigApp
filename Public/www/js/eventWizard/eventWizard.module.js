@@ -4,8 +4,12 @@
   angular
     .module('eventWizard', [
       'ionic',
-      'ngCordova',
+      'eventWizard',
+      'loginRegister',
+      'profile',
+      'manageParty',
       'underscore',
+      'ionic-material'
     ])
     .config(function($stateProvider){
     $stateProvider

@@ -4,7 +4,7 @@
   angular
     .module('eventWizard')
     .factory('EventWizardService', function($http, $state){
-      var ip = 'http://192.168.0.135';
+      var ip = 'http://10.0.10.32';
       var wizCreateUrl = ip + ":8080/party/create";
       var wizUpdateUrl = ip + ":8080/party/update";
       var favorUpdateUrl = ip + ":8080/party/favor";
@@ -18,7 +18,11 @@
         return $http.get(getWizardUrl);
       };
       var newWizPartyPost = function(item){
-        return $http.post(wizCreateUrl, item);
+        return $http.post(wizCreateUrl, item).success(function(data){
+          console.log('newly created party: ', data);
+          localStorage.setItem('partyID', data.partyID);
+          $state.go('whenwhere');
+        });;
       };
       var getOneWizParty = function (wizID){
         return $http.get(getWizardUrl);

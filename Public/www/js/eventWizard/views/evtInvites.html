@@ -4,29 +4,28 @@
     </ion-nav-back-button>
   </ion-nav-bar>
   <div class="bar bar-header bar-royal">
-      <h1 class= "title">Let the People Know!</h1>
+      <h1 class= "title">Invite your friends</h1>
    </div>
   <ion-content ng-init="getContactList()">
-    <ion-padding>
-      <button
-        ng-click="pushToContactArray();showConfirm()"
-        class="button button-full button-positive">
-        INVITE!
-      </button>
-      <ion-list>
-        <ion-checkbox
-        ng-click="isChecked =!isChecked"
-        ng-repeat="contact in contactName"
+    <button
+      ng-click="pushToContactArray();showConfirm()"
+      class="button button-full button-positive">
+      invite contacts
+    </button>
+    <ul class="list">
+      <ion-checkbox
+        ng-repeat="item in contactName"
+        ng-click="isChecked = !isChecked"
         >
-          <ion-item
-        ng-model="isChecked"
-        id="{{contact}}"
-        ng-class="isChecked ? 'true' : 'false'"
-        >
-        {{contact.name.formatted}}
-          </ion-item>
-        </ion-checkbox>
-      </ion-list>
-    </ion-padding>
+        <ion-item
+          ng-model="isChecked"
+          id="{{item}}"
+          ng-class="isChecked ? 'true' : 'false'">
+          {{item.name.formatted}}
+        </ion-item>
+      </ion-checkbox>
+
+    </ul>
+
   </ion-content>
 </ion-view>
