@@ -8,7 +8,7 @@
       $scope,
       $state,
       $stateParams,
-      ManagePartyService
+      ManagePartyServices
 
     ){
       var vm = this;
@@ -19,7 +19,7 @@
         })
         .error(function(data){
           console.log('error');
-        })
+        });
     });
 
 

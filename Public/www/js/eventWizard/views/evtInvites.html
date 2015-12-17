@@ -8,17 +8,25 @@
    </div>
   <ion-content ng-init="getContactList()">
     <ion-padding>
-    <ion-list>
-      <ion-item
-      ng-repeat="contact in contactName"
-      ng-click="contactInfoForSMS('{{contact.name.formatted}}', '{{contact.phoneNumbers[0].value}}','{{contact.emails[0].value}}')"
-      ng-model="contactModel = {}">
+      <button
+        ng-click="pushToContactArray()"
+        class="button button-full button-positive">
+        INVITE!
+      </button>
+      <ion-list>
+        <ion-checkbox
+        ng-click="isChecked =!isChecked"
+        ng-repeat="contact in contactName"
+        >
+          <ion-item
+        ng-model="isChecked"
+        id="{{contact}}"
+        ng-class="isChecked ? 'true' : 'false'"
+        >
         {{contact.name.formatted}}
-      </ion-item>
-      <ion-item>
-        {{contact.phoneNumbers[0].value}}
-      </ion-item>
-    </ion-list>
+          </ion-item>
+        </ion-checkbox>
+      </ion-list>
     </ion-padding>
   </ion-content>
 </ion-view>

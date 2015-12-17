@@ -8,7 +8,9 @@
     'profile',
     'manageParty',
     'underscore'
-    ])
+  ])
+
+
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -39,9 +41,9 @@
         url: '/splash',
         templateUrl: 'js/common/views/splash.html',
         controller: 'EventWizardController'
-        })
+      });
 
-      })
+    });
       angular
         .module('underscore', [])
         .factory('_', function ($window) {

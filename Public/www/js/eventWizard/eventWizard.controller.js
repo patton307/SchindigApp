@@ -135,22 +135,39 @@
                  console.log('error', error);
                });
            };
-        var mappedContactData = _.map(contactData, function(idx, val, arr){
-          return {inviteName: el.name.formatted, invitePhone: el.phoneNumbers[0].value, inviteEmail: el.emails[0].value}
-        });
-       $scope.contactInfoForSMS = function(name, phone, email){
-         var partyID = +localStorage.getItem('partyID');
-         var data = {
-           inviteName: name,
-           invitePhone: phone,
-           inviteEmail: email,
-           partyID: partyID
+
+           vm.contactArray = [];
+           console.log(vm.contactArray);
+           $scope.isChecked = false;
+           $scope.pushToContactArray = function(data){
+            //  var $element.find('true');
+            var myElements = document.getElementsByClassName('true');
+             _.each(myElements, function(el,idx,array){
+               var parsed = JSON.parse(el.id);
+               vm.contactArray.push(parsed);
+               console.log(parsed);
+             });
+             var partyID = +localStorage.getItem('partyID');
+             var data = {
+               partyID: partyID,
+               contactDump: contactArray
+             };
+             EventWizardService.postInviteData(data).success(function(data){
+               console.log('new-stretchgoal updated data', data);
+               $state.go('');
+           });
          };
-         EventWizardService.postInviteData(data).success(function(postedInviteData){
-           console.log('new-stretchgoal updated data', postedInviteData);
-           $state.go('');
-       });
-     };
+
+        // var mappedContactData = _.map(contactData, function(idx, val, arr){
+        //   return {inviteName: el.name.formatted, invitePhone: el.phoneNumbers[0].value, inviteEmail: el.emails[0].value};
+        // });
+
+
+
+      //  $scope.contactInfoForSMS = function(name, phone, email){
+      //    var partyID = +localStorage.getItem('partyID');
+      //
+      //    };
 
     });
 }());
