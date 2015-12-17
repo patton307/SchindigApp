@@ -7,10 +7,9 @@
     'loginRegister',
     'profile',
     'manageParty',
-    'underscore'
+    'underscore',
+    'ionic-material'
   ])
-
-
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {

@@ -31,11 +31,31 @@
         $scope.partySubType = $scope.get($stateParams);
       });
 
+      //////showSubtype()//////
+      $scope.showSubtype = function(partyType){
+        if(partyType.subType[0] === 'null'){
+          return
+          console.log('null');
+
+        } else {
+          console.log(partyType);
+          return partyType
+
+        }
+      }
+
 
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var item = {subType: subType, partyType: partyType};
+        var rawUserID = +localStorage.getItem('userID')
+        var item = {
+          party: {
+            subType: subType,
+            partyType: partyType
+          },
+          userID: rawUserID
+        };
         EventWizardService.newWizPartyPost(item).success(function(data){
           console.log('newly created party: ', data);
           localStorage.setItem('partyID', data.partyID);
@@ -49,12 +69,14 @@
       var partyID = +localStorage.getItem('partyID');
       console.log('partyId in localstorage', partyID);
       var data = {
-        partyName: partyName,
-        partyID: partyID,
-        partyDate: partyDate
+        party: {
+          partyName: partyName,
+          partyID: partyID,
+          partyDate: partyDate
+        }
       };
-      data.partyDate = JSON.stringify(data.partyDate);
-      data.partyDate = JSON.parse(data.partyDate);
+      data.party.partyDate = JSON.stringify(data.party.partyDate);
+      data.party.partyDate = JSON.parse(data.party.partyDate);
       console.log('updated party data: ', data);
       EventWizardService.updateWizData(data).success(function(updatedWizData){
         console.log('promise return of updated wizdata', updatedWizData);
@@ -92,6 +114,7 @@
       var myElements = document.getElementsByClassName('true');
        _.each(myElements, function(el,idx,array){
          var parsed = JSON.parse(el.id);
+         console.log(parsed);
          vm.favorArray.push(parsed);
        });
        var partyID = +localStorage.getItem('partyID');
@@ -99,7 +122,7 @@
          partyID: partyID,
          favorDump: vm.favorArray
        };
-       EventWizardService.updateWizData(data).success(function(data){
+       EventWizardService.updatePartyFavorList(data).success(function(data){
          console.log('favordata', data);
        });
      };
@@ -137,19 +160,16 @@
                  console.log('error', error);
                });
            };
-
-
            vm.contactArray = [];
-           console.log(vm.contactArray);
            $scope.isChecked = false;
            $scope.pushToContactArray = function(data){
             //  var $element.find('true');
             var myElements = document.getElementsByClassName('true');
              _.each(myElements, function(el,idx,array){
-               var parsed = JSON.parse(el.id);
-               vm.contactArray.push(parsed);
-               console.log(parsed);
+               vm.contactArray.push(el.id);
              });
+             console.log('parsed',vm.contactArray);
+
           //    var partyID = +localStorage.getItem('partyID');
           //    var data = {
           //      partyID: partyID,
@@ -170,12 +190,20 @@
            confirmPopup.then(function(res){
              if(res){
                var partyID = +localStorage.getItem('partyID');
-               var data = {
-                 partyID: partyID,
-                 contactDump: vm.contactArray
-               };
-               EventWizardService.postInviteData(data).success(function(data){
-                 console.log('new-stretchgoal updated data', data);
+              //  var data = {
+              //    partyID: partyID,
+              //    contactDump: vm.contactArray
+              //  };
+               var contactData = {
+                 party: {
+                   partyID:partyID
+                 },
+                 invite: {
+
+                 }
+               }
+               EventWizardService.updateWizData(contactData).success(function(data){
+                 console.log('invite list', data);
                  $state.go('');
                });
              }
