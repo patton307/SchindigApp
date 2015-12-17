@@ -8,11 +8,11 @@
       $scope,
       $state,
       $stateParams,
-      ManagePartyService
+      ManagePartyServices
 
     ){
       var vm = this;
-        var rawUserID = +localStorage.getItem('userID')
+      var rawUserID = +localStorage.getItem('userID')
       $scope.getHostedParties = function(){
 
         var userID = {

@@ -3,6 +3,6 @@
 
   angular
     .module('loginRegister',[
-      'ionic'
+      'ionic',
     ])
 }());
