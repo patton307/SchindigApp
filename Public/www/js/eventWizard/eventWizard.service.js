@@ -50,7 +50,8 @@
         getFavors: getFavors,
         updateFavorData: updateFavorData,
         addFavorToData: addFavorToData,
-        postInviteData: postInviteData
+        postInviteData: postInviteData,
+        updatePartyFavorList: updatePartyFavorList
       };
 
     });

@@ -90,6 +90,7 @@
       var myElements = document.getElementsByClassName('true');
        _.each(myElements, function(el,idx,array){
          var parsed = JSON.parse(el.id);
+         console.log(parsed);
          vm.favorArray.push(parsed);
        });
        var partyID = +localStorage.getItem('partyID');
