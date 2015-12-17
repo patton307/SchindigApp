@@ -9,7 +9,9 @@
       $stateParams,
       $cordovaContacts,
       $ionicPlatform,
-      EventWizardService
+      EventWizardService,
+      ionicMaterialInk,
+      ionicMaterialMotion
     ){
         var vm = this;
 
@@ -29,11 +31,31 @@
         $scope.partySubType = $scope.get($stateParams);
       });
 
+      //////showSubtype()//////
+      $scope.showSubtype = function(partyType){
+        if(partyType.subType[0] === 'null'){
+          return
+          console.log('null');
+
+        } else {
+          console.log(partyType);
+          return partyType
+
+        }
+      }
+
 
 
       /////POST NEW PARTY/////
       $scope.newWizPartyPost = function(subType, partyType){
-        var item = {subType: subType, partyType: partyType};
+        var rawUserID = +localStorage.getItem('userID')
+        var item = {
+          party: {
+            subType: subType,
+            partyType: partyType
+          },
+          userID: rawUserID
+        };
         EventWizardService.newWizPartyPost(item).success(function(data){
           console.log('newly created party: ', data);
           localStorage.setItem('partyID', data.partyID);
@@ -47,12 +69,14 @@
       var partyID = +localStorage.getItem('partyID');
       console.log('partyId in localstorage', partyID);
       var data = {
-        partyName: partyName,
-        partyID: partyID,
-        partyDate: partyDate
+        party: {
+          partyName: partyName,
+          partyID: partyID,
+          partyDate: partyDate
+        }
       };
-      data.partyDate = JSON.stringify(data.partyDate);
-      data.partyDate = JSON.parse(data.partyDate);
+      data.party.partyDate = JSON.stringify(data.party.partyDate);
+      data.party.partyDate = JSON.parse(data.party.partyDate);
       console.log('updated party data: ', data);
       EventWizardService.updateWizData(data).success(function(updatedWizData){
         console.log('promise return of updated wizdata', updatedWizData);

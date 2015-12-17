@@ -3,21 +3,25 @@
 
   angular
     .module('loginRegister')
-    .controller('LoginRegisterController', function($http, $scope, $state, $stateParams, LoginRegisterService){
+    .controller('LoginRegisterController', function($timeout, ionicMaterialInk, ionicMaterialMotion, $http, $scope, $state, $stateParams, LoginRegisterService){
+
 
       $scope.login = function(username, password){
         var loginData = {
           username: username,
           password: password
         };
+
         LoginRegisterService.login(loginData).then(function(data){
           console.log('dog', data);
+          localStorage.setItem('userID', data.data);
           $state.go('splash');
         });
       };
 
       $scope.signUp = function(){
         $state.go('createNewUser');
+        ionicMaterialMotion.ripple();
       };
 
       //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION

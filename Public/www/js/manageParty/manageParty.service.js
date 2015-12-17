@@ -4,13 +4,17 @@
   angular
     .module('manageParty')
     .factory('ManagePartyService', function($http, $state){
-      var ip = 'http://localhost';
-      var viewHostedParties = ip + ':8080/party/2';
+      var vm = this;
+      var ip = 'http://10.0.10.32';
+      var viewHostedParties = ip + ':8080/parties';
 
 
-      var getHostedParties = function(){
+      var getHostedParties = function(userID){
         console.log('dog');
-        return $http.get(viewHostedParties)
+        return $http.post(viewHostedParties, userID)
+          .success(function(data){
+            console.log('succes view', data);
+          })
       };
 
       return {

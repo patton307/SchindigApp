@@ -7,7 +7,8 @@
     'loginRegister',
     'profile',
     'manageParty',
-    'underscore'
+    'underscore',
+    'ionic-material'
     ])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
