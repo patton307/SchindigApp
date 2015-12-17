@@ -74,7 +74,6 @@ public class MainController {
                     wiz.subType.add(partyMod);
                     wizard.save(wiz);
                 }
-
             }
         }
 
@@ -449,16 +448,6 @@ public class MainController {
         parameters.favorListDump.forEach(favlists::delete);
     }
 
-    @RequestMapping(path = "/party/search", method = RequestMethod.GET)
-    public ArrayList<Party> partySearch(@RequestBody Party party) {
-        ArrayList<Party> allResults = (ArrayList<Party>) parties.findAll();
-
-        ArrayList<Party> results = allResults.stream()
-                .filter(p -> p.partyName.equalsIgnoreCase(party.partyName) ||
-                p.)
-    }
-
-
 
 //    @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
 //    public ArrayList<String> partyStats() {
@@ -468,12 +457,12 @@ public class MainController {
 
 
     /**ALL WIZARD RELATED ROUTES**/
-    /**************/
+
     @RequestMapping(path = "/wizard", method = RequestMethod.GET)
     public ArrayList<Wizard> getPartyList() {
         return (ArrayList<Wizard>) wizard.findAll();
     }
-    /**************/
+
     @RequestMapping(path = "/wizard/{id}", method = RequestMethod.POST)
     public Party wizardPosition(@RequestBody Party p, @PathVariable("id") int id) {
         Party party = parties.findOne(p.partyID);
@@ -481,7 +470,7 @@ public class MainController {
         parties.save(party);
         return party;
     }
-    /**************/
+
     @RequestMapping(path = "/wizard/pos", method = RequestMethod.GET)
     public Integer getWizardPosition(@RequestBody Party party) {
         return parties.findOne(party.partyID).wizPosition;
@@ -489,7 +478,7 @@ public class MainController {
 
 
     /**ALL FAVOR SPECIFIC ROUTES**/
-    /**************/
+
     @RequestMapping(path = "/favor", method = RequestMethod.GET)
     public ArrayList<Favor> getFavorList() {
         return (ArrayList<Favor>) favors.findAll();
