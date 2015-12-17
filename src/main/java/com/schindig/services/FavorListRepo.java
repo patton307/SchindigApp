@@ -12,5 +12,6 @@ import java.util.List;
  */
 public interface FavorListRepo extends CrudRepository<FavorList, Integer> {
 
+    List<FavorList> findByParty(Integer id);
 
 }
