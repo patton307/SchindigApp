@@ -4,7 +4,10 @@
   angular
     .module('eventWizard', [
       'ionic',
-      'ngCordova',
+      'eventWizard',
+      'loginRegister',
+      'profile',
+      'manageParty',
       'underscore',
       'ion-google-place'
     ])
