@@ -8,7 +8,8 @@
       $scope,
       $state,
       $stateParams,
-      ManagePartyService
+      ManagePartyService,
+      ViewPartyService
 
     ){
       var vm = this;
@@ -19,8 +20,16 @@
         })
         .error(function(data){
           console.log('error');
-        })
-    });
+        });
+
+        ViewPartyService.getUserParties()
+          .success(function(data){
+            console.log('parties/user routeData', data);
+          })
+          .error(function(data){
+            console.log('couldnotgetdata');
+          });
+        });
 
 
 }());

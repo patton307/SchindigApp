@@ -63,25 +63,22 @@
 
 
       ///PATCH DATE, TIME AND NAME/////
-    $scope.dateAndTimePost = function(partyDate, partyName, party){
-      var partyID = +localStorage.getItem('partyID');
-      console.log('partyId in localstorage', partyID);
-      var data = {
-        party: {
-          // location: partyLocation,
-          partyName: partyName,
-          partyID: partyID,
-          partyDate: partyDate
-        }
+      $scope.dateAndTimePost = function(partyDate, location){
+        var partyID = +localStorage.getItem('partyID');
+        var data = {
+          party: {
+            // location: partyLocation,
+            location: location,
+            partyID: partyID,
+            partyDate: partyDate
+          }
+        };
+        data.party.partyDate = JSON.stringify(data.party.partyDate);
+        data.party.partyDate = JSON.parse(data.party.partyDate);
+        EventWizardService.updateWizData(data).success(function(updatedWizData){
+          $state.go('favors');
+        });
       };
-      data.party.partyDate = JSON.stringify(data.party.partyDate);
-      data.party.partyDate = JSON.parse(data.party.partyDate);
-      console.log('updated party data: ', data);
-      EventWizardService.updateWizData(data).success(function(updatedWizData){
-        console.log('promise return of updated wizdata', updatedWizData);
-        $state.go('favors');
-      });
-    };
 
 
 
@@ -104,40 +101,38 @@
      };
 
 
-     /////FAVORS PATCH/////
-     vm.favorArray = [];
+     ////GET FAVORS////
+     EventWizardService.getFavors().then(function(data){
+       $scope.favors = data.data;
+     });
 
-     $scope.isChecked = false;
-     $scope.pushToFavorArray = function(data){
-      //  var $element.find('true');
-      var myElements = document.getElementsByClassName('true');
-       _.each(myElements, function(el,idx,array){
-         var parsed = JSON.parse(el.id);
-         console.log(parsed);
-         vm.favorArray.push(parsed);
-       });
-       var partyID = +localStorage.getItem('partyID');
-       var data = {
-         partyID: partyID,
-         favorDump: vm.favorArray
-       };
-       EventWizardService.updatePartyFavorList(data).success(function(data){
-         console.log('favordata', data);
-       });
-     };
+    /////FAVORS PATCH/////
+    vm.favorArray = [];
+    $scope.isChecked = false;
+    $scope.pushToFavorArray = function(data){
+     var myElements = document.getElementsByClassName('true');
+      _.each(myElements, function(el,idx,array){
+        var parsed = JSON.parse(el.id);
+        vm.favorArray.push(parsed);
+      });
+      var partyID = +localStorage.getItem('partyID');
+      var data = {
+        partyID: partyID,
+        favorDump: vm.favorArray
+      };
+      EventWizardService.updatePartyFavorList(data);
+      $state.go('stretchgoal');
+    };
 
-     /////ADD FAVOR TO DATA/////
-     $scope.addFavorToData = function(favor){
-       var partyID = +localStorage.getItem('partyID');
-       var favorData = {
-         favorName: favor,
-         partyID: partyID
-       };
-       EventWizardService.addFavorToData(favorData).success(function(data){
-         console.log('added favor to data', data);
-       });
-     };
-
+    /////ADD FAVOR TO DATA/////
+    $scope.addFavorToData = function(favor){
+      var partyID = +localStorage.getItem('partyID');
+      var favorData = {
+        favorName: favor,
+        partyID: partyID
+      };
+      EventWizardService.addFavorToData(favorData);
+    };
 
       //CORDOVA CONTACTS AND INVITATIONS //
 

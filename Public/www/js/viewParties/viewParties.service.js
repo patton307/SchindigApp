@@ -1,8 +1,8 @@
 (function() {
   'use strict';
   angular
-  .module('manageParty')
-  .factory('viewPartyService', function($http, $state){
+  .module('viewParty')
+  .factory('ViewPartyService', function($http, $state){
     var vm = this;
     var ip = 'http://localhost';
     var viewHostedPartiesURL = ip + ':8080/party/host';
@@ -23,11 +23,16 @@
         });
     };
 
+    var getUserParties = function (){
+      $http.get (viewInvitedPartiesURL);
+    };
+
 
 
     return {
       getHostedParties: getHostedParties,
-      updatedHostedParties: updatedHostedParties
+      updatedHostedParties: updatedHostedParties,
+      getUserParties: getUserParties
     };
   });
 
