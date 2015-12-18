@@ -4,8 +4,8 @@
   angular
     .module('eventWizard', [
       'ionic',
-      'eventWizard',
       'loginRegister',
+      'ngCordova',
       'profile',
       'manageParty',
       'underscore',

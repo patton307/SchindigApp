@@ -19,7 +19,7 @@
         return $http.get(getWizardUrl);
       };
       var newWizPartyPost = function(item){
-        return $http.post(wizCreateUrl, item)
+        return $http.post(wizCreateUrl, item);
       };
       var getOneWizParty = function (wizID){
         return $http.get(getWizardUrl);
@@ -35,6 +35,7 @@
         return $http.patch(wizUpdateUrl, updatedFavorData);
       };
       var updatePartyFavorList = function (data){
+        $state.go('invites');
         return $http.post(favorUpdateUrl, data);
       };
       var getFavors = function () {

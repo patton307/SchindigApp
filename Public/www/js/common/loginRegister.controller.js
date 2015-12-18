@@ -17,11 +17,7 @@
           password: password
         };
 
-        LoginRegisterService.login(loginData).then(function(data){
-          console.log('dog', data);
-          localStorage.setItem('userID', data.data);
-          $state.go('splash');
-        });
+        LoginRegisterService.login(loginData)
       };
 
       $scope.signUp = function(){
@@ -51,7 +47,7 @@
           console.log('create new user',data);
           $state.go('login');
         });
-      };
+    };
 
     });
 

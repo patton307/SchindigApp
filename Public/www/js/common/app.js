@@ -9,7 +9,7 @@
     'manageParty',
     'underscore',
     'ionic-material',
-    'ion-google-place'
+    'ion-google-place',
   ])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
@@ -39,8 +39,7 @@
         // Each tab has its own nav history stack:
       .state('splash', {
         url: '/splash',
-        templateUrl: 'js/common/views/splash.html',
-        controller: 'EventWizardController'
+        templateUrl: 'js/common/views/splash.html'
       });
 
     });

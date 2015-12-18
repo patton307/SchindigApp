@@ -11,10 +11,12 @@
 
       var login = function(loginData) {
         return $http.post(loginUrl, loginData)
-          .success(function(data){
-          console.log('success', data);
-          $state.go('splash');
-        });
+          .then(function(data){
+            console.log('Login Success: ', data);
+            localStorage.setItem('userID', data.data);
+            console.log(data.data);
+            $state.go('splash');
+          });
       };
       var createUser = function(data) {
         return $http.post(registerUrl, data);
