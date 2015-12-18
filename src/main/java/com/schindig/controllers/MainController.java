@@ -3,6 +3,7 @@ import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
+import com.schindig.utils.PasswordHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -266,7 +267,14 @@ public class MainController {
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User u = users.findOneByUsername(user.username);
         if (u == null) {
-            users.save(new User(user));
+            User newUser = new User();
+            newUser.username = user.username;
+            newUser.firstName = user.firstName;
+            newUser.lastName = user.lastName;
+            newUser.email = user.email;
+            newUser.phone = user.phone;
+            newUser.password = PasswordHash.createHash(user.password);
+            users.save(newUser);
         }
     }
 
