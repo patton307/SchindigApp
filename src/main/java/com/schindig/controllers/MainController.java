@@ -261,14 +261,15 @@ public class MainController {
         user.password = null;
         return user;
     }
+
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
-
         User u = users.findOneByUsername(user.username);
         if (u == null) {
             users.save(new User(user));
         }
     }
+
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
     public void deleteUser(@RequestBody User user) {
         users.delete(user);
@@ -276,7 +277,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/all", method = RequestMethod.GET)
     public ArrayList<User> getAllUsers() {
-
         ArrayList<User> temp = (ArrayList<User>) users.findAll();
         temp = temp.stream()
                 .map(p -> {
@@ -293,6 +293,7 @@ public class MainController {
         u.password = null;
         return u;
     }
+
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User test = users.findOneByUsername(user.username);
@@ -310,24 +311,11 @@ public class MainController {
         session.setAttribute("username", user.username);
         return test.userID;
     }
+
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
     public void logout(HttpSession session) {
         session.invalidate();
     }
-
-    /*
-    @RequestMapping(path = "/user/search", method = RequestMethod.GET)
-    public ArrayList<User> userSearch(@RequestBody User user) {
-        ArrayList<User> allresults = (ArrayList<User>) users.findAll();
-        ArrayList<User> results = allresults.stream()
-                .filter(u -> u.username.equalsIgnoreCase(user.username) ||
-                u.firstName.equalsIgnoreCase(user.firstName) ||
-                u.lastName.equalsIgnoreCase(user.lastName) ||
-                u.email.equalsIgnoreCase(user.email))
-                .collect(Collectors.toCollection(ArrayList<User>::new));
-        return results;
-    }
-    */
 
     /**ALL PARTY RELATED ROUTES**/
 
@@ -358,10 +346,9 @@ public class MainController {
         favorList = favorList.stream()
                 .filter(f -> f.party.partyID == id)
                 .collect(Collectors.toCollection(ArrayList<FavorList>::new));
-        ArrayList<Favor> newList = favorList.stream()
+        return favorList.stream()
                 .map(favor -> favor.favor)
                 .collect(Collectors.toCollection(ArrayList::new));
-        return newList;
 
     }
 
@@ -403,6 +390,7 @@ public class MainController {
         }
         users.save(user);
     }
+
     @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
     public Party getParty(@PathVariable("id") int id) {
         return parties.findOne(id);
@@ -512,19 +500,10 @@ public class MainController {
         return invites.findInvite(u);
     }
 
-
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public void deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
         parameters.favorListDump.forEach(favlists::delete);
     }
-
-
-//    @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
-//    public ArrayList<String> partyStats() {
-//
-//        return new ArrayList<>();
-//    }
-
 
     /**ALL WIZARD RELATED ROUTES**/
 
@@ -545,7 +524,6 @@ public class MainController {
     public Integer getWizardPosition(@RequestBody Party party) {
         return parties.findOne(party.partyID).wizPosition;
     }
-
 
     /**ALL FAVOR SPECIFIC ROUTES**/
 
@@ -574,7 +552,25 @@ public class MainController {
     }
 }
 
+//    @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
+//    public ArrayList<String> partyStats() {
+//
+//        return new ArrayList<>();
+//    }
 
+/*
+    @RequestMapping(path = "/user/search", method = RequestMethod.GET)
+    public ArrayList<User> userSearch(@RequestBody User user) {
+        ArrayList<User> allresults = (ArrayList<User>) users.findAll();
+        ArrayList<User> results = allresults.stream()
+                .filter(u -> u.username.equalsIgnoreCase(user.username) ||
+                u.firstName.equalsIgnoreCase(user.firstName) ||
+                u.lastName.equalsIgnoreCase(user.lastName) ||
+                u.email.equalsIgnoreCase(user.email))
+                .collect(Collectors.toCollection(ArrayList<User>::new));
+        return results;
+    }
+    */
 //    public void updateUserStats(User user) {
 //        HashMap<String, String> stats = user.stats;
 //            if (stats.get("partyCount")==null) {
