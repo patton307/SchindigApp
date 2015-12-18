@@ -267,12 +267,7 @@ public class MainController {
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User u = users.findOneByUsername(user.username);
         if (u == null) {
-            User newUser = new User();
-            newUser.username = user.username;
-            newUser.firstName = user.firstName;
-            newUser.lastName = user.lastName;
-            newUser.email = user.email;
-            newUser.phone = user.phone;
+            User newUser = user;
             newUser.password = PasswordHash.createHash(user.password);
             users.save(newUser);
         }
