@@ -331,13 +331,17 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
-    public void addPartyFavor(@RequestBody Parameters parameters) {
+    public ArrayList<Favor> addPartyFavor(@RequestBody Parameters parameters) {
+        ArrayList<Favor> newDump = new ArrayList<>();
         for (int i = 0; i < parameters.favorDump.size(); i++) {
             Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
             Party party = parties.findOne(parameters.partyID);
-            FavorList favors = new FavorList(fav, party);
-            favlists.save(favors);
+            FavorList favorList = new FavorList(fav, party);
+            favlists.save(favorList);
+            Favor favor = favors.findOne(fav.favorID);
+            newDump.add(favor);
         }
+        return newDump;
     }
 
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
@@ -398,7 +402,8 @@ public class MainController {
 
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
     public Party updateParty(@RequestBody Parameters parameters, HttpSession session) {
-//        String username = (String) session.getAttribute("username");
+        Object current = session.getAttribute("User");
+        session.setAttribute("User", current);
         Party check = parties.findOne(parameters.party.partyID);
         if (parameters.party.partyName != null) {
             check.partyName = parameters.party.partyName;
@@ -444,11 +449,11 @@ public class MainController {
             check.parking = parameters.party.parking;
         }
         if (parameters.inviteDump != null) {
-//            User user = users.findOne(check.userID);
+            User user = users.findOne(check.userID);
             for (int i = 0; i < parameters.inviteDump.size(); i++) {
                 Invite invite = parameters.inviteDump.get(i);
                 Methods.newInvite(invite, invites, check);
-//                user.invitedCount += 1;
+                user.invitedCount += 1;
             }
         }
         parties.save(check);
