@@ -27,11 +27,11 @@
       $scope.signUp = function(){
         $state.go('createNewUser');
       };
-
-      //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION
-      $scope.invite = function (){
+      $scope.invite=function(){
         $state.go('invites');
       };
+      //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION
+
       $scope.dog = function (){
         $state.go('hostedParty');
       };

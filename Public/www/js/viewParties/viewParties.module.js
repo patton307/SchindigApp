@@ -15,8 +15,8 @@
         })
         .state('invitedParty', {
           url:'/invitedParty',
-          templateUrl: 'js/manageParty/views/viewInvitedParty.html',
-          controller: 'ManagePartyController'
+          templateUrl: 'js/manageParty/views/invitedParty.html',
+          controller: 'ViewPartyController'
         });
     });
 }());
