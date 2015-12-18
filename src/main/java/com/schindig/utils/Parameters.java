@@ -24,12 +24,13 @@ public class Parameters {
     public String rsvpStatus;
 
     public ArrayList<Favor> favorDump;
+
+    public ArrayList<Invite> inviteDump;
+
     public ArrayList<FavorList> favorListDump;
+
     public Integer partyID;
 
     public Integer userID;
-
-
-
 
 }
