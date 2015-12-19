@@ -35,7 +35,6 @@
         return $http.patch(wizUpdateUrl, updatedFavorData);
       };
       var updatePartyFavorList = function (data){
-        $state.go('invites');
         return $http.post(favorUpdateUrl, data);
       };
       var getFavors = function () {

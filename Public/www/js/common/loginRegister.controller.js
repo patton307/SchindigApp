@@ -16,16 +16,13 @@
           username: username,
           password: password
         };
-
-        LoginRegisterService.login(loginData)
+        LoginRegisterService.login(loginData);
       };
 
       $scope.signUp = function(){
         $state.go('createNewUser');
       };
-      $scope.invite=function(){
-        $state.go('invites');
-      };
+
       //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION
 
       $scope.dog = function (){

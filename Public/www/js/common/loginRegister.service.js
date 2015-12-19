@@ -4,17 +4,16 @@
   angular
     .module('loginRegister')
 
-    .factory('LoginRegisterService', function($http, $state){
+    .factory('LoginRegisterService', function($http, $state, $q){
       var ip = 'http://localhost';
       var registerUrl = ip + ':8080/user/create';
       var loginUrl = ip + ':8080/user/login';
 
       var login = function(loginData) {
         return $http.post(loginUrl, loginData)
-          .then(function(data){
+          .success(function(data){
             console.log('Login Success: ', data);
-            localStorage.setItem('userID', data.data);
-            console.log(data.data);
+            localStorage.setItem('userID', data);
             $state.go('splash');
           });
       };
