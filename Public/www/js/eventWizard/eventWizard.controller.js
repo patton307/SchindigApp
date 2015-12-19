@@ -26,22 +26,29 @@
         return null;
       };
       $scope.partySubType = $scope.get($stateParams);
+      console.log('does this exist',$scope.partySubType);
     });
 
     //////showSubtype()//////
-    $scope.showSubtype = function(partyType){
-      if(partyType.subType[0] === 'null'){
-        return console.log('null');
-      } else {
-        return partyType;
+    // $scope.showSubtype = function(partyType){
+    //   if(partyType.subType[0] === 'null'){
+    //     return console.log('null');
+    //   } else {
+    //     console.log('this is in the showSubType Function',partyType);
+    //     return partyType;
+    //   }
+    // };
 
-      }
-    };
     /////POST NEW PARTY/////
+
     $scope.partyType='none';
+    $scope.subType='none';
     $scope.getValue = function(value){
-      alert(value);
-      $scope.partyType = value
+      var newVal = JSON.parse(value);
+      console.log(newVal);
+      $scope.partyType = newVal.partyType;
+      $scope.subType = newVal.subType;
+      console.log($scope.subType);
     };
     $scope.newWizPartyPost = function(partyType, partyName, description){
       console.log(partyType);
@@ -75,11 +82,11 @@
         var vm = this;
 
       ///PATCH DATE, TIME AND NAME/////
-    $scope.dateAndTimePost = function(partyDate, location, subType){
+    $scope.dateAndTimePost = function(partyDate, location, description){
       var partyID = +localStorage.getItem('partyID');
       var data = {
         party: {
-          subType: subType,
+          description: description,
           location: location,
           partyID: partyID,
           partyDate: partyDate
@@ -160,8 +167,7 @@
               _.each(vm.contactArray, function(el,idx,array){
                contactData = {
                  name: el.name.formatted,
-                 phone: el.phoneNumbers[0].value,
-                 email: el.emails[0].value
+                 phone: el.phoneNumbers[0].value
               }
               vm.contactDataArray.push(contactData);
               data = {
@@ -227,7 +233,4 @@
         EventWizardService.addFavorToData(favorData)
       };
     });
-
-
-
 }());

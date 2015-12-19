@@ -42,20 +42,16 @@
           <div class="input-label">
             <strong>What Kind of Party?</strong>
           </div>
-          <!-- <select ng-model="partyType" ng-options="item as item.partyType for item in wizardItems.data"></select>
-          <select ng-options="size as size.partyType for size in wizardItems.data"
-             ng-model="selectedItem" ng-change="update()"></select> -->
           <select ng-model="partyType" ng-change='getValue(partyType)'>
-            <option ng-repeat="item in wizardItems.data" value='{{item.partyType}}'>{{item.partyType}}</option>
+            <option ng-repeat="item in wizardItems.data" value='{{item}}'>{{item.partyType}}</option>
           </select>
         </ion-item>
+        <item-item>
+          <ion-radio ng-model="subType" ng-repeat="item in subType" ng-value="'{{item}}'">{{item}}</ion-radio>
+        </item-item>
         <label class="item item-input item-floating-label">
           <span class="input-label"><strong>Party Name: </strong></span>
           <input ng-model="partyName" type="text" placeholder="Name that party">
-        </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label"><strong>Party Description: </strong></span>
-          <input ng-model="partyDescription" type="text" placeholder="Tell Us About Your Party">
         </label>
        <button
          ng-click="newWizPartyPost(partyType, partyName, partyDescription)"

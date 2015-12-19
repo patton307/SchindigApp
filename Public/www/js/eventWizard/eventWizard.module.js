@@ -18,11 +18,6 @@
         templateUrl: "js/eventWizard/views/evtNameType.html",
         controller: "WizardLandingController"
       })
-      .state('subtype', {
-        url:"/wizard/:nameId",
-        templateUrl: "js/eventWizard/views/evtSubType.html",
-        controller: "EventWizardController as evtCtrl"
-      })
       .state('whenwhere', {
         url:"/wizard/whenwhere",
         templateUrl: "js/eventWizard/views/evtWhenWhere.html",

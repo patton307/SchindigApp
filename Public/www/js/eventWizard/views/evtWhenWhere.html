@@ -8,25 +8,20 @@
   </div>
   <ion-padding>
     <ion-content>
-      <ion-item class="item-input item-select">
-       <div class="input-label">
-         <strong>Select a <strong>Christmas</strong> SubType</strong>
-       </div>
-       <select class="form-control postType" name="subType" ng-model="subType">
-         <option value="">Naughty</option>
-         <option value="">Nice</option>
-       </select>
-     </ion-item>
-      <label item item-input item-floating-label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Party Description: </strong></span>
+        <input ng-model="description" type="text" placeholder="Tell Us About Your Party">
+      </label>
+      <label class="item item-input">
          <span class="input-label">Where the Party At? </span>
          <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="location"></ion-google-place>
       </label>
-      <label item item-input item-floating-label>
+      <label class="item item-input">
          <span class="input-label">Date and Time: </span>
          <input placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
        </label>
         <button
-          ng-click="dateAndTimePost(partyDate, location, subType)"
+          ng-click="dateAndTimePost(partyDate, location, description)"
           class="button button-full button-positive">
          Submit Date and Location
         </button>
