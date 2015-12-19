@@ -38,6 +38,11 @@
       }
     };
     /////POST NEW PARTY/////
+    $scope.partyType='none';
+    $scope.getValue = function(value){
+      alert(value);
+      $scope.partyType = value
+    };
     $scope.newWizPartyPost = function(partyType, partyName, description){
       console.log(partyType);
       var rawUserID = +localStorage.getItem('userID');
@@ -105,11 +110,6 @@
        });
      };
     })
-
-
-
-
-
 
     .controller('ContactsController', function(
       $scope,
@@ -198,7 +198,7 @@
 
       /////FAVORS PATCH/////
       vm.favorArray = [];
-      $scope.isChecked = false;
+      $scope.favorCheck = false;
       $scope.pushToFavorArray = function(data){
        var myElements = document.getElementsByClassName('yes');
         _.each(myElements, function(el,idx,array){

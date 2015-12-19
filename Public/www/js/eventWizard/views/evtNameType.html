@@ -45,7 +45,7 @@
           <!-- <select ng-model="partyType" ng-options="item as item.partyType for item in wizardItems.data"></select>
           <select ng-options="size as size.partyType for size in wizardItems.data"
              ng-model="selectedItem" ng-change="update()"></select> -->
-          <select class="form-control postType" name="partyType" ng-model="partyType">
+          <select ng-model="partyType" ng-change='getValue(partyType)'>
             <option ng-repeat="item in wizardItems.data" value='{{item.partyType}}'>{{item.partyType}}</option>
           </select>
         </ion-item>
