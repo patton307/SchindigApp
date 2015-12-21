@@ -101,10 +101,11 @@ public class MainController {
             for (String line : lines) {
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                Boolean genericCheck = Boolean.valueOf(columns[1]);
+                //Boolean genericCheck = Boolean.valueOf(columns[1]);
                 Favor fav = new Favor(line);
                 fav.favorName = favor;
-                fav.generic = genericCheck;
+
+                //fav.generic = genericCheck;
                 favors.save(fav);
             }
         }
@@ -112,27 +113,27 @@ public class MainController {
         ArrayList<User> testUsers = (ArrayList<User>) users.findAll();
         if (testUsers.size() < 1) {
             User newAdmin = new User();
-            newAdmin.username = "admin";
-            newAdmin.password =  "pass";
-            newAdmin.firstName = "Admin";
-            newAdmin.lastName = "Nimda";
-            newAdmin.phone = "admin";
-            newAdmin.email = "admin";
+            newAdmin.username = "john843";
+            newAdmin.password =  "john";
+            newAdmin.firstName = "John";
+            newAdmin.lastName = "Smith";
+            newAdmin.phone = "3214324567";
+            newAdmin.email = "john@email.com";
             users.save(newAdmin);
             User newAdmin2 = new User();
-            newAdmin2.username = "test";
-            newAdmin2.password = "pass";
-            newAdmin2.firstName = "Admin";
-            newAdmin2.lastName = "Nimda";
-            newAdmin2.phone = "test";
-            newAdmin2.email = "test";
+            newAdmin2.username = "michelle843";
+            newAdmin2.password = "michelle";
+            newAdmin2.firstName = "Michelle";
+            newAdmin2.lastName = "Bart";
+            newAdmin2.phone = "9874325687";
+            newAdmin2.email = "michelle@email.com";
             users.save(newAdmin);
             User taylor = new User();
             taylor.username = "taylor234";
             taylor.password = "taylor";
             taylor.firstName = "Taylor";
             taylor.lastName = "Rad";
-            taylor.phone = "1234";
+            taylor.phone = "1234456789";
             taylor.email = "taylor@email.com";
             users.save(taylor);
             User will = new User();
@@ -140,7 +141,7 @@ public class MainController {
             will.password = "will";
             will.firstName = "Will";
             will.lastName = "James";
-            will.phone = "88800000";
+            will.phone = "2312456578";
             will.email = "will@email.com";
             users.save(will);
             User landon = new User();
@@ -148,7 +149,7 @@ public class MainController {
             landon.password = "landon";
             landon.firstName = "Landon";
             landon.lastName = "Rodgers";
-            landon.phone = "44433111";
+            landon.phone = "4443311189";
             landon.email = "landon@email.com";
             users.save(landon);
         }
@@ -157,24 +158,32 @@ public class MainController {
         if (party == null) {
             Party p = new Party();
             p.userID = users.findOne(1).userID;
-            p.partyName = "Party Name";
-            p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
+            p.partyName = "Dave's Big Bash";
+            p.partyDate = "5/1/2016";
+            p.street1 = "171 Moultrie";
+            p.street2 = "";
+            p.city = "Charleston";
+            p.usState = "SC";
+            p.zip = 29409;
+            p.description = "We are going to be getting crunk";
+            p.stretchGoal = 20;
+            p.parking = "off-site";
             parties.save(p);
         }
         Party party2 = parties.findOne(2);
         if (party == null) {
             Party p = new Party();
             p.userID = users.findOne(2).userID;
-            p.partyName = "Party Name";
-            p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
+            p.partyName = "The Best Super Bowl ever";
+            p.partyDate = "2/9/2016";
+            p.street1 = "17 Princess";
+            p.street2 = "";
+            p.city = "Charleston";
+            p.usState = "SC";
+            p.zip = 29401;
+            p.description = "Going to be a great super bowl";
+            p.stretchGoal = 100;
+            p.parking = "on-site";
             parties.save(p);
         }
 
@@ -183,8 +192,8 @@ public class MainController {
             Invite i = new Invite();
             i.party = parties.findOne(2);
             i.user = users.findOne(1);
-            i.phone = "admin";
-            i.email = "admin";
+            i.phone = i.user.phone;
+            i.email = i.user.email;
             invites.save(i);
         }
         Invite invite2 = invites.findOne(2);
@@ -192,8 +201,8 @@ public class MainController {
             Invite i = new Invite();
             i.party = parties.findOne(2);
             i.user = users.findOne(1);
-            i.phone = "admin";
-            i.email = "admin";
+            i.phone = i.user.phone;
+            i.email = i.user.email;
             invites.save(i);
         }
         Invite invite3 = invites.findOne(3);
@@ -201,8 +210,8 @@ public class MainController {
             Invite i = new Invite();
             i.party = parties.findOne(1);
             i.user = users.findOne(2);
-            i.phone = "test";
-            i.email = "test";
+            i.phone = i.user.phone;
+            i.email = i.user.email;
             invites.save(i);
         }
         Invite invite4 = invites.findOne(4);
@@ -210,8 +219,8 @@ public class MainController {
             Invite i = new Invite();
             i.party = parties.findOne(1);
             i.user = users.findOne(2);
-            i.phone = "test";
-            i.email = "test";
+            i.phone = i.user.phone;
+            i.email = i.user.email;
             invites.save(i);
         }
 
@@ -518,6 +527,12 @@ public class MainController {
         parameters.favorListDump.forEach(favlists::delete);
     }
 
+    @RequestMapping(path = "/party/all", method = RequestMethod.GET)
+    public ArrayList<Party> getAllParties() {
+        ArrayList<Party> par = (ArrayList<Party>) parties.findAll();
+        return par;
+    }
+
     /**ALL WIZARD RELATED ROUTES**/
 
     @RequestMapping(path = "/wizard", method = RequestMethod.GET)
@@ -563,6 +578,15 @@ public class MainController {
         favors.delete(item);
         return (ArrayList<Favor>) favors.findAll();
     }
+
+    /**All INVITE SPECIFIC ROUTES**/
+
+    @RequestMapping(path = "invite/all", method = RequestMethod.GET)
+    public ArrayList<Invite> getAllInvites() {
+        ArrayList<Invite> allInvites = (ArrayList<Invite>) invites.findAll();
+        return allInvites;
+    }
+
 }
 
 //    @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
