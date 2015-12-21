@@ -4,8 +4,8 @@
   angular
     .module('loginRegister')
 
-    .factory('LoginRegisterService', function($http, $state, $q){
-      var ip = 'http://10.0.10.29';
+    .factory('LoginRegisterService', function($http, $state){
+      var ip = 'http://10.0.10.72';
       var registerUrl = ip + ':8080/user/create';
       var loginUrl = ip + ':8080/user/login';
 
