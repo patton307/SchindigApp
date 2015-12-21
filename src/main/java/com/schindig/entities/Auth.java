@@ -19,16 +19,19 @@ public class Auth {
 
     public String token;
 
-    public String publicKey;
-
-    public String privateKey;
-
-    public Auth(String device, String token, String publicKey, String privateKey) {
-
+    public Auth(User user, String device, String token) {
+        this.user = user;
         this.device = device;
         this.token = token;
-        this.publicKey = publicKey;
-        this.privateKey = privateKey;
+    }
+
+    public User getUser() {
+
+        return user;
+    }
+    public void setUser(User user) {
+
+        this.user = user;
     }
     public Integer getId() {
 
@@ -53,21 +56,5 @@ public class Auth {
     public void setToken(String token) {
 
         this.token = token;
-    }
-    public String getPublicKey() {
-
-        return publicKey;
-    }
-    public void setPublicKey(String publicKey) {
-
-        this.publicKey = publicKey;
-    }
-    public String getPrivateKey() {
-
-        return privateKey;
-    }
-    public void setPrivateKey(String privateKey) {
-
-        this.privateKey = privateKey;
     }
 }
