@@ -8,15 +8,19 @@
     ])
     .config(function($stateProvider){
       $stateProvider
-        // .state('allParites', {
-        //   url: '/allParties',
-        //   templateUrl: 'js/viewParties/views/allParties.html',
-        //   controller: 'ViewPartyController'
-        // })
+
+        .state('allParties', {
+          url:'/allParties',
+          templateUrl: 'js/viewParties/views/allParties.html',
+          controller: 'ViewPartyController'
+        })
         .state('invitedParty', {
-          url:'/invitedParty',
+          url:'invitedParty/:partyID',
           templateUrl: 'js/viewParties/views/invitedParty.html',
           controller: 'ViewPartyController'
         });
+
+
+
     });
 }());

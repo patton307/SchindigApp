@@ -1,26 +1,42 @@
 <ion-view view-title="Parties">
   <ion-content>
-    <div
-      class="list card">
-      <div class="item item-avatar">
-        <h2>{{parties.partyName}}</h2>
-        <p>{{parties.createDate.month}}</p>
+    <div class= "list">
+      <div class="item item-divider">
+        Parties you are Hosting
       </div>
-      <label>Check me to check both: <input type="checkbox" ng-model="master"></label><br/>
-      <input id="checkSlave" type="checkbox" ng-checked="master" aria-label="Slave input">
-      <div class="item item-body">
-        <img class="full-image">
-        <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
-        <p>
-          <a href="#" class="subdued">1 Like</a>
-          <a href="#" class="subdued">5 Comments</a>
-        </p>
+      <div ng-repeat= "hostParty in hostedParties track by $index" class="card">
+        <div class="item item-divider">
+        {{hostParty.partyName}}
+        </div>
+        <div class="item item-text-wrap">
+        {{invParty.description}}
+        {{invParty.street1}}
+        {{invParty.street2}},
+        {{invParty.city}}
+        {{invParty.zip}}
+        </div>
+        <div class="item item-divider">
+        {{hostParty.partyDate | date}}
+        </div>
       </div>
-
+      <div class="item item-divider">
+        Parties Invited To
+      </div>
+      <div ng-repeat= "invParty in invitedParties track by $index" ng-model='invParty' ng-click="getOneInvParty(invParty)" class="card">
+        <div ui-sref= "invitedParty({partyID: invParty.partyID})" class="item item-divider">
+        {{invParty.partyName}}
+        </div>
+        <div class="item item-text-wrap">
+        {{invParty.description}}
+        </div>
+        <div class="item item-divider">
+        {{invParty.partyDate | date}}&nbsp&nbsp&nbsp&nbsp&nbsp
+        {{invParty.street1}}
+        {{invParty.street2}},
+        {{invParty.city}}
+        {{invParty.zip}}
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>

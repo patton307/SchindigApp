@@ -1,0 +1,20 @@
+<ion-view view-title="Parties">
+  <ion-content ng-init="loadOneInvParty(); loadOneFavor() ">
+    <h1>{{invPartyOne.partyName}}</h1>
+    <h2>{{favor.favorName}}</h2>
+    <ion-list>
+      <ion-item ng-repeat="favor in onePartyFavor">
+      <ion-checkbox
+        ng-repeat="item in favors"
+        ng-click="favorCheck = !favorCheck"
+        >
+        <ion-item
+          ng-model="favorCheck"
+          id="{{item}}"
+          ng-class="favorCheck ? 'yes' : 'no'">
+          {{favor.favorName}}
+        </ion-item>
+      </ion-checkbox>
+    </ion-list>
+  </ion-content>
+</ion-view>

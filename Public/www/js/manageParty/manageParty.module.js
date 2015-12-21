@@ -9,8 +9,8 @@
     ])
     .config(function($stateProvider){
       $stateProvider
-        .state('splash.manageHostedParty', {
-          url: '/manageHostedParty',
+        .state('manageParty', {
+          url: '/manageParty',
           templateUrl: 'js/manageParty/views/manageHostedParty.html',
           controller: 'ManagePartyController'
         });
