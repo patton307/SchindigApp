@@ -103,4 +103,4 @@ bower_components
 
 .DS_Store
 
-*.gradle
+.gradle

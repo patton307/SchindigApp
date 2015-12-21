@@ -18,5 +18,8 @@ public interface PartyRepo extends CrudRepository<Party, Integer> {
 
     @Query("SELECT DISTINCT subType FROM Party")
     ArrayList<String> subTypes();
+
+    @Query("SELECT DISTINCT subType FROM Party WHERE partyType = ?")
+    ArrayList<String> partySubType(String subType);
 }
 

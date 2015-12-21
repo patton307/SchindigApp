@@ -1,9 +1,10 @@
 package com.schindig.controllers;
+import com.schindig.PasswordHash;
 import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
-import com.schindig.utils.PasswordHash;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,8 +16,12 @@ import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -47,9 +52,14 @@ public class MainController {
     @Autowired
     InviteRepo invites;
 
-    @PostConstruct
-    public void init() {
+    @Autowired
+    AuthRepo auth;
 
+    @PostConstruct
+    public void init() throws InvalidKeySpecException, NoSuchAlgorithmException {
+
+        String randomString = RandomStringUtils.random(10);
+        String randomNumber = RandomStringUtils.randomNumeric(9);
         Integer wizCheck = wizard.wizardSize();
         if (wizCheck == 0) {
             String fileContent = Methods.readFile("wizard.csv");
@@ -102,126 +112,182 @@ public class MainController {
             }
         }
 
-        ArrayList<User> testUsers = (ArrayList<User>) users.findAll();
-        if (testUsers.size() < 5) {
-            User max = new User();
-            max.username = "maxwellsmart84";
-            max.password = "max";
-            max.firstName = "Max";
-            max.lastName = "Krause";
-            max.phone = "7733205069";
-            max.email = "maxwellsmart84@gmail.com";
-            users.save(max);
-            User landon = new User();
-            landon.username = "landonk";
-            landon.password = "landon";
-            landon.firstName = "Landon";
-            landon.lastName = "Kail";
-            landon.phone = "7316161838";
-            landon.email = "patton307@gmail.com";
-            users.save(landon);
-            User blake = new User();
-            blake.username = "blake182";
-            blake.password = "blake";
-            blake.firstName = "Blake";
-            blake.lastName = "Guilloud";
-            blake.phone = "8438126962";
-            blake.email = "fbguillo@gmail.com";
-            users.save(blake);
-            User josh = new User();
-            josh.username = "Agronis";
-            josh.password = "josh";
-            josh.firstName = "Josh";
-            josh.lastName = "Roberson";
-            josh.phone = "8439019708";
-            josh.email = "agronis@icould.com";
-            users.save(josh);
-            User holden = new User();
-            holden.username = "holden1214";
-            holden.password = "holden";
-            holden.firstName = "Holden";
-            holden.lastName = "Hughes";
-            holden.phone = "8434253940";
-            holden.email = "holdenmh121489@gmail.com";
-            users.save(holden);
+//        ArrayList<User> testUsers = (ArrayList<User>) users.findAll();
+//        if (testUsers.size() < 5) {
+//            User john = new User();
+//            john.username = "johnj843";
+//            john.password = "john";
+//            john.firstName = "John";
+//            john.lastName = "Smith";
+//            john.phone = "1234";
+//            john.email = "john@email.com";
+//            users.save(john);
+//            User michelle = new User();
+//            michelle.username = "michelle843";
+//            michelle.password = "michelle";
+//            michelle.firstName = "Michelle";
+//            michelle.lastName = "Bart";
+//            michelle.phone = "0983";
+//            michelle.email = "michelle@email.com";
+//            users.save(michelle);
+//            User taylor = new User();
+//            taylor.username = "taylor234";
+//            taylor.password = "taylor";
+//            taylor.firstName = "Taylor";
+//            taylor.lastName = "Rad";
+//            taylor.phone = "1234";
+//            taylor.email = "taylor@email.com";
+//            users.save(taylor);
+//            User will = new User();
+//            will.username = "will999";
+//            will.password = "will";
+//            will.firstName = "Will";
+//            will.lastName = "James";
+//            will.phone = "88800000";
+//            will.email = "will@email.com";
+//            users.save(will);
+//            User landon = new User();
+//            landon.username = "landon731";
+//            landon.password = "landon";
+//            landon.firstName = "Landon";
+//            landon.lastName = "Rodgers";
+//            landon.phone = "44433111";
+//            landon.email = "landon@email.com";
+//            users.save(landon);
+//        }
+//
+//        User admin = users.findOneByUsername("admin");
+//        if (admin == null) {
+//            User newAdmin = new User();
+//            newAdmin.username = "admin";
+//            newAdmin.password = "pass";
+//            newAdmin.firstName = "Admin";
+//            newAdmin.lastName = "Nimda";
+//            newAdmin.phone = "1234";
+//            newAdmin.email = "blah@blah.com";
+//            users.save(newAdmin);
+//        }
+//        User Admin = users.findOneByUsername("Admin");
+//        if (Admin == null) {
+//            User newAdmin = new User();
+//            newAdmin.username = "Admin";
+//            newAdmin.password = "Pass";
+//            newAdmin.firstName = "Admin";
+//            newAdmin.lastName = "Nimda";
+//            newAdmin.phone = "1234";
+//            newAdmin.email = "blah@blah.com";
+//            users.save(newAdmin);
+//        }
+//
+//        Party party = parties.findOne(1);
+//        if (party == null) {
+//            Party p = new Party();
+//            p.userID = users.findOne(1).userID;
+//            p.partyName = "Party Name";
+//            p.partyDate = "party Date";
+//            p.street1 = "Street One";
+//            p.street2 = "Street Two";
+//            p.city = "City";
+//            p.zip = 12345;
+//            parties.save(p);
+//        }
+//        Party party2 = parties.findOne(2);
+//        if (party == null) {
+//            Party p = new Party();
+//            p.userID = users.findOne(1).userID;
+//            p.partyName = "Party Name";
+//            p.partyDate = "party Date";
+//            p.street1 = "Street One";
+//            p.street2 = "Street Two";
+//            p.city = "City";
+//            p.zip = 12345;
+//            parties.save(p);
+//        }
+//
+//        Invite invite = invites.findOne(1);
+//        if (invite == null) {
+//            Invite i = new Invite();
+//            i.party = parties.findOne(1);
+//            i.user = users.findOne(1);
+//            i.phone = "238504333";
+//            i.email = "aksldjf@alsdkfj.com";
+//            invites.save(i);
+//        }
+//        Invite invite2 = invites.findOne(2);
+//        if (invite == null) {
+//            Invite i = new Invite();
+//            i.party = parties.findOne(1);
+//            i.user = users.findOne(1);
+//            i.phone = "238504333";
+//            i.email = "aksldjf@alsdkfj.com";
+//            invites.save(i);
+//        }
+//
+//        FavorList favlist = favlists.findOne(1);
+//        if (favlist == null) {
+//            FavorList f = new FavorList();
+//            f.favor = favors.findOne(1);
+//            f.party = parties.findOne(1);
+//            favlists.save(f);
+//        }
+//
         }
 
-        User admin = users.findOneByUsername("admin");
-        if (admin == null) {
-            User newAdmin = new User();
-            newAdmin.username = "admin";
-            newAdmin.password = "pass";
-            newAdmin.firstName = "Admin";
-            newAdmin.lastName = "Nimda";
-            newAdmin.phone = "1234";
-            newAdmin.email = "blah@blah.com";
-            users.save(newAdmin);
-        }
-        User Admin = users.findOneByUsername("Admin");
-        if (Admin == null) {
-            User newAdmin = new User();
-            newAdmin.username = "Admin";
-            newAdmin.password = "Pass";
-            newAdmin.firstName = "Admin";
-            newAdmin.lastName = "Nimda";
-            newAdmin.phone = "1234";
-            newAdmin.email = "blah@blah.com";
-            users.save(newAdmin);
-        }
 
-        Party party = parties.findOne(1);
-        if (party == null) {
-            Party p = new Party();
-            p.userID = users.findOne(1).userID;
-            p.partyName = "Party Name";
-            p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
-            parties.save(p);
-        }
-        Party party2 = parties.findOne(2);
-        if (party == null) {
-            Party p = new Party();
-            p.userID = users.findOne(1).userID;
-            p.partyName = "Party Name";
-            p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
-            parties.save(p);
-        }
 
-        Invite invite = invites.findOne(1);
-        if (invite == null) {
-            Invite i = new Invite();
-            i.party = parties.findOne(1);
-            i.user = users.findOne(1);
-            i.phone = "238504333";
-            i.email = "aksldjf@alsdkfj.com";
-            invites.save(i);
-        }
-        Invite invite2 = invites.findOne(2);
-        if (invite == null) {
-            Invite i = new Invite();
-            i.party = parties.findOne(1);
-            i.user = users.findOne(1);
-            i.phone = "238504333";
-            i.email = "aksldjf@alsdkfj.com";
-            invites.save(i);
-        }
+    @RequestMapping("/test")
+    public void appLoad(@RequestBody Parameters p, HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException {
+//        return Methods.initApp(p.device, auth);
+        String randomString = RandomStringUtils.random(10);
+        String randomNumber = RandomStringUtils.randomNumeric(9);
+        ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
+        if (userBuild == null) {
+            String fileContent = Methods.readFile("users.csv");
 
-        FavorList favlist = favlists.findOne(1);
-        if (favlist == null) {
-            FavorList f = new FavorList();
-            f.favor = favors.findOne(1);
-            f.party = parties.findOne(1);
-            favlists.save(f);
+            String[] lines = fileContent.split("\n");
+
+            for (String line : lines) {
+                String[] columns = line.split(",");
+                User u = new User();
+                u.username = columns[0];
+                u.password = PasswordHash.createHash(columns[1]);
+                u.firstName = columns[2];
+                u.lastName = columns[3];
+                u.email = randomString.concat(columns[4]);
+                u.phone = randomNumber;
+                userBuild.add(u);
+                users.save(u);
+            }
         }
+        ArrayList<String> partyType = parties.partyTypes();
+        Random pos = new Random();
+        String[] choice = new String[]{"Yes, No, Maybe"};
+        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
+        ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
+        if (partyList == null) {
+            assert userBuild != null;
+            for (User user : userBuild) {
+                Party P = new Party(user.userID, randomString, partyType.get(pos.nextInt()), randomString,
+                        randomString, LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), randomString,
+                        randomString, randomString, randomString, Integer.valueOf(randomString), randomNumber,
+                        Integer.valueOf(randomNumber), Integer.valueOf(randomNumber), true, true, randomString, randomString);
+                for (Favor f : fav) {
+                    FavorList newList = new FavorList(f, P);
+                    favlists.save(newList);
+                }
+                userBuild.stream().filter(u -> u != user).forEach(u -> {
+                    if (invites.findInviteCount(P) < 5) {
+                        Invite inv = new Invite(user, P, user.phone, user.email, choice[pos.nextInt()], user.firstName + user.lastName);
+                        parties.save(P);
+                        assert partyList != null;
+                        partyList.add(P);
+                        invites.save(inv);
+                    }
+                });
+            }
+        }
+        response.addHeader("Well?", "Success");
     }
-
 
     /**ALL USER RELATED ROUTES**/
     @RequestMapping(path = "/user/update", method = RequestMethod.POST)
@@ -267,9 +333,8 @@ public class MainController {
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User u = users.findOneByUsername(user.username);
         if (u == null) {
-            User newUser = user;
-            newUser.password = PasswordHash.createHash(user.password);
-            users.save(newUser);
+            user.password = PasswordHash.createHash(user.password);
+            users.save(user);
         }
     }
 
@@ -298,20 +363,18 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
+    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
         User test = users.findOneByUsername(user.username);
         try {
             if (users.findOneByUsername(user.username) == null) {
                 response.sendError(401);
             }
-            if (!user.password.equals(test.password)) {
+            if (PasswordHash.validatePassword(user.password, test.password)) {
                 response.sendError(403);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        session.setAttribute("username", user.username);
         return test.userID;
     }
 
