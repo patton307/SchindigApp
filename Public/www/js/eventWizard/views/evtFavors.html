@@ -28,16 +28,15 @@
       </div>
       <ion-checkbox
         ng-repeat="item in favors"
-        ng-click="isChecked = !isChecked"
+        ng-click="favorCheck = !favorCheck"
         >
         <ion-item
-          ng-model="isChecked"
+          ng-model="favorCheck"
           id="{{item}}"
-          ng-class="isChecked ? 'true' : 'false'">
+          ng-class="favorCheck ? 'yes' : 'no'">
           {{item.favorName}}
         </ion-item>
       </ion-checkbox>
-
     </ul>
     <button
       ng-click="pushToFavorArray()"
