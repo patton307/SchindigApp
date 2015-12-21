@@ -58,8 +58,6 @@ public class MainController {
     @PostConstruct
     public void init() throws InvalidKeySpecException, NoSuchAlgorithmException {
 
-        String randomString = RandomStringUtils.random(10);
-        String randomNumber = RandomStringUtils.randomNumeric(9);
         Integer wizCheck = wizard.wizardSize();
         if (wizCheck == 0) {
             String fileContent = Methods.readFile("wizard.csv");
@@ -112,181 +110,51 @@ public class MainController {
             }
         }
 
-//        ArrayList<User> testUsers = (ArrayList<User>) users.findAll();
-//        if (testUsers.size() < 5) {
-//            User john = new User();
-//            john.username = "johnj843";
-//            john.password = "john";
-//            john.firstName = "John";
-//            john.lastName = "Smith";
-//            john.phone = "1234";
-//            john.email = "john@email.com";
-//            users.save(john);
-//            User michelle = new User();
-//            michelle.username = "michelle843";
-//            michelle.password = "michelle";
-//            michelle.firstName = "Michelle";
-//            michelle.lastName = "Bart";
-//            michelle.phone = "0983";
-//            michelle.email = "michelle@email.com";
-//            users.save(michelle);
-//            User taylor = new User();
-//            taylor.username = "taylor234";
-//            taylor.password = "taylor";
-//            taylor.firstName = "Taylor";
-//            taylor.lastName = "Rad";
-//            taylor.phone = "1234";
-//            taylor.email = "taylor@email.com";
-//            users.save(taylor);
-//            User will = new User();
-//            will.username = "will999";
-//            will.password = "will";
-//            will.firstName = "Will";
-//            will.lastName = "James";
-//            will.phone = "88800000";
-//            will.email = "will@email.com";
-//            users.save(will);
-//            User landon = new User();
-//            landon.username = "landon731";
-//            landon.password = "landon";
-//            landon.firstName = "Landon";
-//            landon.lastName = "Rodgers";
-//            landon.phone = "44433111";
-//            landon.email = "landon@email.com";
-//            users.save(landon);
-//        }
-//
-//        User admin = users.findOneByUsername("admin");
-//        if (admin == null) {
-//            User newAdmin = new User();
-//            newAdmin.username = "admin";
-//            newAdmin.password = "pass";
-//            newAdmin.firstName = "Admin";
-//            newAdmin.lastName = "Nimda";
-//            newAdmin.phone = "1234";
-//            newAdmin.email = "blah@blah.com";
-//            users.save(newAdmin);
-//        }
-//        User Admin = users.findOneByUsername("Admin");
-//        if (Admin == null) {
-//            User newAdmin = new User();
-//            newAdmin.username = "Admin";
-//            newAdmin.password = "Pass";
-//            newAdmin.firstName = "Admin";
-//            newAdmin.lastName = "Nimda";
-//            newAdmin.phone = "1234";
-//            newAdmin.email = "blah@blah.com";
-//            users.save(newAdmin);
-//        }
-//
-//        Party party = parties.findOne(1);
-//        if (party == null) {
-//            Party p = new Party();
-//            p.userID = users.findOne(1).userID;
-//            p.partyName = "Party Name";
-//            p.partyDate = "party Date";
-//            p.street1 = "Street One";
-//            p.street2 = "Street Two";
-//            p.city = "City";
-//            p.zip = 12345;
-//            parties.save(p);
-//        }
-//        Party party2 = parties.findOne(2);
-//        if (party == null) {
-//            Party p = new Party();
-//            p.userID = users.findOne(1).userID;
-//            p.partyName = "Party Name";
-//            p.partyDate = "party Date";
-//            p.street1 = "Street One";
-//            p.street2 = "Street Two";
-//            p.city = "City";
-//            p.zip = 12345;
-//            parties.save(p);
-//        }
-//
-//        Invite invite = invites.findOne(1);
-//        if (invite == null) {
-//            Invite i = new Invite();
-//            i.party = parties.findOne(1);
-//            i.user = users.findOne(1);
-//            i.phone = "238504333";
-//            i.email = "aksldjf@alsdkfj.com";
-//            invites.save(i);
-//        }
-//        Invite invite2 = invites.findOne(2);
-//        if (invite == null) {
-//            Invite i = new Invite();
-//            i.party = parties.findOne(1);
-//            i.user = users.findOne(1);
-//            i.phone = "238504333";
-//            i.email = "aksldjf@alsdkfj.com";
-//            invites.save(i);
-//        }
-//
-//        FavorList favlist = favlists.findOne(1);
-//        if (favlist == null) {
-//            FavorList f = new FavorList();
-//            f.favor = favors.findOne(1);
-//            f.party = parties.findOne(1);
-//            favlists.save(f);
-//        }
-//
+        String randomString = RandomStringUtils.randomAlphabetic(10);
+        String randomNumber = RandomStringUtils.randomNumeric(9);
+        ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
+
+        String fileContent = Methods.readFile("users.csv");
+
+        String[] lines = fileContent.split("\n");
+
+        for (String line : lines) {
+            String[] columns = line.split(",");
+            User u = new User();
+            u.username = columns[0];
+            u.password = PasswordHash.createHash(columns[1]);
+            u.firstName = columns[2];
+            u.lastName = columns[3];
+            u.email = randomString.concat(columns[4]);
+            u.phone = randomNumber;
+            userBuild.add(u);
+            users.save(u);
         }
+
+        ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
+        for (User user : userBuild) {
+            Party P = new Party(user.userID, randomString, randomString, randomString,
+                    randomString, LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), randomString,
+                    randomString, randomString, randomString, Integer.valueOf(randomNumber), randomNumber,
+                    Integer.valueOf(randomNumber), Integer.valueOf(randomNumber), true, true, randomString, randomString);
+            parties.save(P);
+            for (Favor f : fav) {
+                FavorList newList = new FavorList(f, P);
+                favlists.save(newList);
+            }
+            for (User u : userBuild) {
+                Invite inv = new Invite(u, P, u.phone, u.email, "Maybe", u.firstName + u.lastName);
+                invites.save(inv);
+            }
+        }
+
+    }
 
 
 
     @RequestMapping("/test")
-    public void appLoad(@RequestBody Parameters p, HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public void appLoad(HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException {
 //        return Methods.initApp(p.device, auth);
-        String randomString = RandomStringUtils.random(10);
-        String randomNumber = RandomStringUtils.randomNumeric(9);
-        ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
-        if (userBuild == null) {
-            String fileContent = Methods.readFile("users.csv");
-
-            String[] lines = fileContent.split("\n");
-
-            for (String line : lines) {
-                String[] columns = line.split(",");
-                User u = new User();
-                u.username = columns[0];
-                u.password = PasswordHash.createHash(columns[1]);
-                u.firstName = columns[2];
-                u.lastName = columns[3];
-                u.email = randomString.concat(columns[4]);
-                u.phone = randomNumber;
-                userBuild.add(u);
-                users.save(u);
-            }
-        }
-        ArrayList<String> partyType = parties.partyTypes();
-        Random pos = new Random();
-        String[] choice = new String[]{"Yes, No, Maybe"};
-        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
-        ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
-        if (partyList == null) {
-            assert userBuild != null;
-            for (User user : userBuild) {
-                Party P = new Party(user.userID, randomString, partyType.get(pos.nextInt()), randomString,
-                        randomString, LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), randomString,
-                        randomString, randomString, randomString, Integer.valueOf(randomString), randomNumber,
-                        Integer.valueOf(randomNumber), Integer.valueOf(randomNumber), true, true, randomString, randomString);
-                for (Favor f : fav) {
-                    FavorList newList = new FavorList(f, P);
-                    favlists.save(newList);
-                }
-                userBuild.stream().filter(u -> u != user).forEach(u -> {
-                    if (invites.findInviteCount(P) < 5) {
-                        Invite inv = new Invite(user, P, user.phone, user.email, choice[pos.nextInt()], user.firstName + user.lastName);
-                        parties.save(P);
-                        assert partyList != null;
-                        partyList.add(P);
-                        invites.save(inv);
-                    }
-                });
-            }
-        }
-        response.addHeader("Well?", "Success");
     }
 
     /**ALL USER RELATED ROUTES**/
@@ -369,7 +237,7 @@ public class MainController {
             if (users.findOneByUsername(user.username) == null) {
                 response.sendError(401);
             }
-            if (PasswordHash.validatePassword(user.password, test.password)) {
+            if (!test.password.equals(user.password)) {
                 response.sendError(403);
             }
         } catch (Exception e) {
@@ -542,14 +410,14 @@ public class MainController {
         ArrayList<Invite> inviteList = (ArrayList<Invite>) invites.findAll();
         ArrayList<Party> partyList = new ArrayList();
         for (Invite invite : inviteList) {
-            String[] nameSplit = invite.name.split(" ");
-            if (invite.user == u) {
-                partyList.add(invite.party);
-            } else if (u.firstName.equals(nameSplit[0])) {
-                partyList.add(invite.party);
-            } else if (u.lastName.equals(nameSplit[1])) {
-                partyList.add(invite.party);
-            } else if (u.email.equals(invite.email)) {
+//            String[] nameSplit = invite.name.split(" ");
+//            if (invite.user == u) {
+//                partyList.add(invite.party);
+//            } else if (u.firstName.equals(nameSplit[0])) {
+//                partyList.add(invite.party);
+//            } else if (u.lastName.equals(nameSplit[1])) {
+//                partyList.add(invite.party);
+            if (u.email.equals(invite.email)) {
                 partyList.add(invite.party);
             } else if (u.phone.equals(invite.phone)) {
                 partyList.add(invite.party);

@@ -34,6 +34,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.stream.Collectors;
 
 /**
  * Created by Agronis on 12/9/15.
@@ -131,25 +132,52 @@ public class Methods extends MainController {
     }
 
 
-    public static void encrypt(User user, AuthRepo auth, Auth a) throws NoSuchAlgorithmException, NoSuchProviderException {
-        KeyGenerator keyGen = KeyGenerator.getInstance(a.device+user.username+user.password,"AES");
+    public static Boolean encrypt(User user, AuthRepo repo, String device, String action) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        ArrayList<Auth> authUsers = repo.findByUser(user);
+        final Cipher cipher = Cipher.getInstance("RSA");
+
+        // Generate token key
+        KeyGenerator keyGen = KeyGenerator.getInstance(device.concat(user.username).concat(user.password),"AES");
         keyGen.init(256);
         SecretKey token = keyGen.generateKey();
         String secret = Base64.getEncoder().encodeToString(token.getEncoded());
 
+        // Generate Pair of keys based on Token
         KeyPairGenerator keyPair = KeyPairGenerator.getInstance(secret, "RSA");
         keyPair.initialize(256);
         KeyPair pair = keyPair.generateKeyPair();
 
-        String publicKey = Base64.getEncoder().encodeToString(pair.getPublic().getEncoded());
-        String privateKey = Base64.getEncoder().encodeToString(pair.getPrivate().getEncoded());
+        cipher.init(Cipher.ENCRYPT_MODE, pair.getPublic());
+        byte[] encryptedBytes = cipher.doFinal(secret.getBytes());
+        String privateKey = new String(Base64.getEncoder().encode(encryptedBytes));
 
-        Auth authenticated = new Auth(a.device, secret, publicKey, privateKey);
-        auth.save(authenticated);
+        cipher.init(Cipher.DECRYPT_MODE, pair.getPrivate());
+        byte[] ciphertextBytes = Base64.getDecoder().decode(privateKey.getBytes());
+        byte[] decryptedBytes = cipher.doFinal(ciphertextBytes);
+        String decrypted = new String(decryptedBytes);
 
+        System.out.println(device);
+        System.out.println(secret);
+//        System.out.println(publicKey);
+        System.out.println();
+
+        if (action.equals("login")) {
+            Auth auth = repo.findByDevice(device);
+            if (auth != null) {
+                Auth authenticated = new Auth(user, device, secret);
+                repo.save(authenticated);
+            } else if (action.equals("validate")) {
+                Auth check = repo.findByDevice(device);
+                if (!check.token.equals(decrypted)) {
+                    return false;
+                }
+
+            }
+        }
+        return true;
     }
 
-    public static Boolean validate(User user, String device, AuthRepo arepo) {
+    public static Boolean isAlive(User user, String device, AuthRepo arepo) {
         ArrayList<Auth> deviceList = arepo.findByUser(user);
         for (Auth a : deviceList) {
             if (a.device.equals(device)) {
@@ -159,19 +187,16 @@ public class Methods extends MainController {
         return false;
     }
 
-    public static Boolean decrypt(User user, String device, AuthRepo arepo){
-        Auth a = arepo.findByDevice(device);
-        String token = a.token;
-        String publicKey = a.publicKey;
-        String privateKey = a.privateKey;
-        byte[] decodedToken = Base64.getDecoder().decode(publicKey);
-        SecretKey originalToken = new SecretKeySpec(decodedToken, 0, decodedToken.length, "AES");
-        byte[] decodedPublic = Base64.getDecoder().decode(publicKey);
-        SecretKey originalPublic = new SecretKeySpec(decodedPublic, 0, decodedPublic.length, "RSA");
-        byte[] decodedPrivate = Base64.getDecoder().decode(publicKey);
-        SecretKey originalPrivate = new SecretKeySpec(decodedPrivate, 0, decodedPrivate.length, "RSA");
-        return null;
-    }
+//    public static Boolean validate(User user, String device, AuthRepo arepo) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException {
+//        final Cipher cipher = Cipher.getInstance("RSA");
+//        Auth a = arepo.findByDevice(device);
+//        String token = a.token;
+//        String privateKey = a.privateKey;
+//        cipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
+//        byte[] ciphertextBytes = Base64.getDecoder().decode(chipertext.getBytes());
+//        byte[] decryptedBytes = cipher.doFinal(ciphertextBytes);
+//        String decryptedString = new String(decryptedBytes);
+//    }
 
 }
     
