@@ -1,4 +1,4 @@
-<ion-view>
+<!-- <ion-view>
    <ion-nav-bar class="bar-stable">
      <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
      </ion-nav-back-button>
@@ -8,10 +8,6 @@
     </div>
      <ion-content>
        <ion-padding>
-         <!-- <label class="item item-input">
-           <span type="text" class="input-label">Name the Party: </span>
-           <input ng-model="partyName">
-         </label> -->
          <label class="item item-input item-floating-label">
           <span class="input-label"><strong>Party Name: </strong></span>
           <input type="text" placeholder="Name that party">
@@ -30,9 +26,9 @@
           </ion-item>
     </ion-padding>
  </ion-content>
-</ion-view>
+</ion-view> -->
 
-<!-- <ion-view>
+<ion-view>
    <ion-nav-bar class="bar-stable">
      <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
      </ion-nav-back-button>
@@ -42,34 +38,26 @@
     </div>
      <ion-content>
        <ion-padding>
+         <ion-item class="item-input item-select">
+          <div class="input-label">
+            <strong>What Kind of Party?</strong>
+          </div>
+          <select ng-model="partyType" ng-change='getValue(partyType)'>
+            <option ng-repeat="item in wizardItems.data" value='{{item}}'>{{item.partyType}}</option>
+          </select>
+        </ion-item>
+        <item-item>
+          <ion-radio ng-model="subType" ng-repeat="item in subType" ng-value="'{{item}}'">{{item}}</ion-radio>
+        </item-item>
         <label class="item item-input item-floating-label">
           <span class="input-label"><strong>Party Name: </strong></span>
           <input ng-model="partyName" type="text" placeholder="Name that party">
         </label>
-
-        <label class="item item-input item-floating-label">
-          <span class="input-label"><strong>Party Type: </strong></span>
-          <input ng-model="search.partyType" type="text" placeholder="Search Party Type">
-        </label>
-         <ion-list ng-repeat="item in wizardItems.data | filter:search"  class="list">
-             <ion-radio name="content" ng-model="content" value="first" for="first">{{item.partyType}}</ion-radio>
-           <div class="wrapper">
-             <ion-radio ng-show="content == 'first'">{{item.subType[0]}}</ion-radio>
-             <ion-radio ng-show="content == 'first'">{{item.subType[1]}}</ion-radio>
-           </div>
-         </ion-list>
-         <ion-list ng-repeat="item in wizardItems.data | filter:search"  class="list">
-           <div type="input" id="subType" value="checkMe"name="content" class="item" type="radio" ng-model="subType">
-             {{item.partyType}}
-           </div>
-           <a ng-show="subType=='checkMe'" class="item item-divider">
-             {{item.subType[0]}}
-           </a>
-           <a ng-show="subType=='checkMe'" class="item item-divider">
-             {{item.subType[1]}}
-           </a>
-         </ion-list>
-
+       <button
+         ng-click="newWizPartyPost(partyType, partyName, partyDescription)"
+         class="button button-full button-positive">
+        Submit Party Name and Type
+       </button>
     </ion-padding>
  </ion-content>
-</ion-view> -->
+</ion-view>

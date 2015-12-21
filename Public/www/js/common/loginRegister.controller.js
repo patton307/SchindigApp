@@ -16,20 +16,13 @@
           username: username,
           password: password
         };
-
-        LoginRegisterService.login(loginData).then(function(data){
-          console.log('dog', data);
-          localStorage.setItem('userID', data.data);
-          $state.go('splash');
-        });
+        LoginRegisterService.login(loginData);
       };
 
       $scope.signUp = function(){
         $state.go('createNewUser');
       };
-      $scope.invite=function(){
-        $state.go('invites');
-      };
+
       //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION
 
       $scope.dog = function (){
@@ -51,7 +44,7 @@
           console.log('create new user',data);
           $state.go('login');
         });
-      };
+    };
 
     });
 
