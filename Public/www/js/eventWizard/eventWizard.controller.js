@@ -11,6 +11,7 @@
       EventWizardService
     ){
       var vm = this;
+
       ////GET WIZARD DATA////
       EventWizardService.getWizard().then(function(data){
         $scope.wizardItems = data;
@@ -19,7 +20,6 @@
           var id = parseInt(nameId.nameId);
           for (var i = 0; i < data.data.length; i++) {
             if (i === id) {
-              console.log('wizard data',data.data[i]);
               return data.data[i-1];
             }
           }
@@ -28,7 +28,20 @@
       $scope.partySubType = $scope.get($stateParams);
       console.log('does this exist',$scope.partySubType);
     });
+
+    //////showSubtype()//////
+    // $scope.showSubtype = function(partyType){
+    //   if(partyType.subType[0] === 'null'){
+    //     return console.log('null');
+    //   } else {
+    //     console.log('this is in the showSubType Function',partyType);
+    //     return partyType;
+    //   }
+    // };
+
     /////POST NEW PARTY/////
+
+
     $scope.partyType='none';
     $scope.subType='none';
     $scope.getValue = function(value){
@@ -68,6 +81,8 @@
       $timeout
     ){
         var vm = this;
+
+
       ///PATCH DATE, TIME AND NAME/////
     $scope.dateAndTimePost = function(partyDate, location, description){
       var partyID = +localStorage.getItem('partyID');
@@ -86,7 +101,11 @@
         $state.go('stretchgoal');
       });
     };
+
+
      ////STRETCHGOAL PATCH and SCOPES////
+
+
      $scope.stretchGoalData = function (stretchGoal, stretchName){
        var partyID = +localStorage.getItem('partyID');
        var data = {
@@ -102,6 +121,9 @@
        });
      };
     })
+
+
+
     .controller('ContactsController', function(
       $scope,
       $http,
@@ -112,6 +134,7 @@
       $ionicPopup
     ){
       var vm = this;
+
        //CORDOVA CONTACTS AND INVITATIONS //
        $scope.getContactList = function() {
                  $cordovaContacts
@@ -125,6 +148,7 @@
                 });
             };
         $scope.isChecked = false;
+
         ////PUSH TO CONTACT ARRAY////
         vm.contactArray = [];
         $scope.pushToContactArray = function(){
@@ -150,18 +174,18 @@
                contactData = {
                  name: el.name.formatted,
                  phone: el.phoneNumbers[0].value
-              }
+              };
               vm.contactDataArray.push(contactData);
               data = {
                 inviteDump: vm.contactDataArray,
                 party: {
                   partyID: partyID
                 }
-              }
+              };
             });
               EventWizardService.updateWizData(data).then(function(data){
                 console.log('contacts have been sent', data);
-                $state.go('splash')
+                $state.go('home');
               });
             }
             else {
@@ -170,6 +194,7 @@
           });
         };
     })
+
     .controller('FavorsController', function(
       $scope,
       $http,
@@ -182,6 +207,7 @@
        EventWizardService.getFavors().then(function(data){
          $scope.favors = data.data;
        });
+
       /////FAVORS PATCH/////
       vm.favorArray = [];
       $scope.favorCheck = false;
@@ -202,6 +228,8 @@
           $state.go('invites');
         });
       };
+
+
       /////ADD FAVOR TO DATA/////
       $scope.addFavorToData = function(favor){
         var partyID = +localStorage.getItem('partyID');
@@ -209,6 +237,7 @@
           favorName: favor,
           partyID: partyID
         };
+        EventWizardService.addFavorToData(favorData);
         EventWizardService.addFavorToData(favorData);
       };
     });

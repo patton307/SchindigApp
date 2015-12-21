@@ -25,8 +25,9 @@
         LoginRegisterService.login(loginData).then(function(data){
           console.log('dog', data);
           localStorage.setItem('userID', data.data);
-          $state.go('tab.home');
+          $state.go('home');
         });
+        LoginRegisterService.login(loginData);
       };
 
       $scope.signUp = function(){
@@ -54,7 +55,7 @@
           console.log('create new user',data);
           $state.go('login');
         });
-      };
+    };
 
     });
 

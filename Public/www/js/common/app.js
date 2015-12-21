@@ -11,7 +11,7 @@
     'manageParty',
     'underscore',
     'ionic-material',
-    'ion-google-place'
+    'ion-google-place',
   ])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
@@ -37,10 +37,10 @@
         url: '/createNewUser',
         templateUrl: 'js/common/views/createNewUser.html',
         controller: 'LoginRegisterController'
+
       });
-
-
     });
+
       angular
         .module('underscore', [])
         .factory('_', function ($window) {

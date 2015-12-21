@@ -8,6 +8,16 @@
   </div>
   <ion-padding>
     <ion-content>
+      <ion-toggle toggle-class="toggle-calm">Themed Party?</ion-toggle>
+      <ion-toggle toggle-class="toggle-calm">BYOB</ion-toggle>
+      <ion-item class="item-input item-select">
+       <div class="input-label">
+         <strong>Parking?</strong>
+       </div>
+       <select>
+         <option>Parking Options go here</option>
+       </select>
+     </ion-item>
       <label class="item item-input item-floating-label">
         <span class="input-label">What's the goal?</span>
         <input placeholder="What is the Goal?" ng-model= "stretchName" type="text">
@@ -16,17 +26,19 @@
         <span class= "input-label">How much is this going to cost?</span>
         <input placeholder="How Much is This Going to Cost" ng-model="stretchGoal" type="number">
       </label>
-      <label class="item item-input item-floating-label">
+
+      <!-- MAY INCORPORATE LATER -->
+      <!-- <label class="item item-input item-floating-label">
         <span class= "input-label">Would you like to pitch in some starter cash?</span>
         <input placeholder="Would you like to pitch in some cash?" ng-model="stretchStatus" type="number">
       </label>
         <h1>{{stretchName}}</h1>
-      <progress
+      <!-- <progress
         max={{stretchGoal}}
         value={{stretchStatus}}>
-      </progress>
+      </progress> -->
       <button
-        ng-click="stretchGoalData(stretchStatus, stretchGoal, stretchName)"
+        ng-click="stretchGoalData(stretchGoal, stretchName)"
         class="button button-full button-positive">
        Submit Stretchgoooooooal
       </button>
