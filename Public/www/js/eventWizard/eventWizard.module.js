@@ -11,12 +11,14 @@
       'underscore',
       'ion-google-place'
     ])
-    .config(function($stateProvider){
+    .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
+
       .state('wizard', {
         url: "/wizard",
         templateUrl: "js/eventWizard/views/evtNameType.html",
         controller: "WizardLandingController"
+
       })
       .state('whenwhere', {
         url:"/wizard/whenwhere",

@@ -8,14 +8,25 @@
       $scope,
       $state,
       $stateParams,
-      LoginRegisterService
+      LoginRegisterService,
+      $cordovaDevice
     )
       {
+
+        //CORDOVA DEVICE//
+        console.log($cordovaDevice.getUUID());
+
+        //LOGIN USER AND ROUTE
       $scope.login = function(username, password){
         var loginData = {
           username: username,
           password: password
         };
+        LoginRegisterService.login(loginData).then(function(data){
+          console.log('dog', data);
+          localStorage.setItem('userID', data.data);
+          $state.go('home');
+        });
         LoginRegisterService.login(loginData);
       };
 
