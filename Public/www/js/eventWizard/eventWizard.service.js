@@ -11,15 +11,14 @@
       var favorGetUrl = ip + ":8080/favor";
       var addFavorToDataUrl = ip + ":8080/party/favor/add";
       var getWizardUrl = ip + ":8080/wizard";
-      var invitePostUrl = ip + ":8080/party/invite";
-      var testJSONUrl = "./jsonthingythatwearelookingat.json";
+      var invitePostUrl = ip + ":8080/party/update";
 
 
       var getWizard = function() {
         return $http.get(getWizardUrl);
       };
       var newWizPartyPost = function(item){
-        return $http.post(wizCreateUrl, item)
+        return $http.post(wizCreateUrl, item);
       };
       var getOneWizParty = function (wizID){
         return $http.get(getWizardUrl);
@@ -41,10 +40,7 @@
         return $http.get(favorGetUrl);
       };
       var postInviteData = function(inviteData){
-        return $http.post(invitePostUrl, inviteData);
-      };
-      var getFakeData = function(fakeData){
-        return $http.get(testJSONUrl);
+        return $http.patch(invitePostUrl, inviteData);
       };
 
       return {
@@ -56,8 +52,7 @@
         updateFavorData: updateFavorData,
         addFavorToData: addFavorToData,
         postInviteData: postInviteData,
-        updatePartyFavorList: updatePartyFavorList,
-        getFakeData: getFakeData
+        updatePartyFavorList: updatePartyFavorList
       };
 
     });

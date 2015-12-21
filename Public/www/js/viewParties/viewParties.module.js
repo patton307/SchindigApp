@@ -8,10 +8,15 @@
     ])
     .config(function($stateProvider){
       $stateProvider
-        .state('viewParites', {
-          url: '/viewParties',
-          templateUrl: 'js/viewParties/views/allParties.html',
+        // .state('allParites', {
+        //   url: '/allParties',
+        //   templateUrl: 'js/viewParties/views/allParties.html',
+        //   controller: 'ViewPartyController'
+        // })
+        .state('invitedParty', {
+          url:'/invitedParty',
+          templateUrl: 'js/viewParties/views/invitedParty.html',
           controller: 'ViewPartyController'
-        })
-    })
+        });
+    });
 }());

@@ -12,13 +12,15 @@
       var login = function(loginData) {
         return $http.post(loginUrl, loginData)
           .success(function(data){
-          console.log('success', data);
-          $state.go('splash');
-        });
+            console.log('Login Success: ', data);
+            localStorage.setItem('userID', data);
+            $state.go('home');
+          });
       };
       var createUser = function(data) {
         return $http.post(registerUrl, data);
       };
+
 
       return {
         createUser: createUser,

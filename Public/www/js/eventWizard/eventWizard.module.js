@@ -4,33 +4,25 @@
   angular
     .module('eventWizard', [
       'ionic',
-      'eventWizard',
       'loginRegister',
+      'ngCordova',
       'profile',
       'manageParty',
       'underscore',
       'ion-google-place'
     ])
-    .config(function($stateProvider){
+    .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
+
       .state('wizard', {
         url: "/wizard",
         templateUrl: "js/eventWizard/views/evtNameType.html",
-        controller: "EventWizardController"
-      })
-      .state('subtype', {
-        url:"/wizard/:nameId",
-        templateUrl: "js/eventWizard/views/evtSubType.html",
-        controller: "EventWizardController as evtCtrl"
+        controller: "WizardLandingController"
+
       })
       .state('whenwhere', {
         url:"/wizard/whenwhere",
         templateUrl: "js/eventWizard/views/evtWhenWhere.html",
-        controller: "EventWizardController as evtCtrl"
-      })
-      .state('favors', {
-        url:"/wizard/favors",
-        templateUrl: "js/eventWizard/views/evtFavors.html",
         controller: "EventWizardController as evtCtrl"
       })
       .state('stretchgoal', {
@@ -38,11 +30,15 @@
         templateUrl:"js/eventWizard/views/evtStretchGoal.html",
         controller: "EventWizardController as evtCtrl"
       })
+      .state('favors', {
+        url:"/wizard/favors",
+        templateUrl: "js/eventWizard/views/evtFavors.html",
+        controller: "FavorsController as fvrCtrl"
+      })
       .state('invites', {
         url:"/wizard/invites",
         templateUrl:"js/eventWizard/views/evtInvites.html",
-        controller:"EventWizardController as evtCtrl"
-
+        controller:"ContactsController as ctcCtrl"
       });
     });
 

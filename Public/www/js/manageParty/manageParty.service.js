@@ -18,9 +18,14 @@
           });
       };
 
-      var getInvitedParties = function(){
-        return $http.get(viewInvitedPartiesURL);
+
+      var getInvitedParties = function(userID){
+        return $http.get(viewInvitedPartiesURL, userID)
+          .success(function(data){
+            console.log('succes your', data);
+        });
       };
+
 
       var updatedHostedParties = function (data){
         return $http.patch(updatedHostedPartiesURL, data)
@@ -33,7 +38,6 @@
 
       return {
         getHostedParties: getHostedParties,
-        getInvitedParties: getInvitedParties,
         updatedHostedParties: updatedHostedParties
       };
 

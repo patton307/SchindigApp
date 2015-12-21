@@ -8,30 +8,23 @@
   </div>
   <ion-padding>
     <ion-content>
-      <label class=""item item-input item-floating-label"">
-         <span class="input-label">Where the Party At?: </span>
+      <label class="item item-input item-floating-label">
+        <span class="input-label"><strong>Party Description: </strong></span>
+        <input ng-model="description" type="text" placeholder="Tell Us About Your Party">
+      </label>
+      <label class="item item-input">
+         <span class="input-label">Where the Party At? </span>
          <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="location"></ion-google-place>
-       </label>
-      <label class=""item item-input item-floating-label"">
-         <span class="input-label">Pick a Date and Time: </span>
-         <input ng-model="partyDate" type="datetime-local">
+      </label>
+      <label class="item item-input">
+         <span class="input-label">Date and Time: </span>
+         <input placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
        </label>
         <button
-          ng-click="dateAndTimePost(partyDate, partyName)"
+          ng-click="dateAndTimePost(partyDate, location, description)"
           class="button button-full button-positive">
-         Submit Date and Name
+         Submit Date and Location
         </button>
-      <ul class="list">
-        <li class="item item-toggle">
-            BYOB?
-          <label class="toggle toggle-green">
-            <input type="checkbox">
-            <div class="track">
-              <div class="handle"></div>
-            </div>
-          </label>
-         </li>
-       </ul>
     </ion-content>
   </ion-padding>
 </ion-view>
