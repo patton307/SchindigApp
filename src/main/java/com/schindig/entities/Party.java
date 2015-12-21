@@ -78,7 +78,7 @@ public class Party {
         this.usState = usState;
         this.zip = zip;
     }
-    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Integer wizPosition, Boolean byob, Boolean themeCheck, String theme, String parking) {
+    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Boolean byob, Boolean themeCheck, String theme, String parking) {
 
         this.userID = userID;
         this.partyName = partyName;
@@ -95,12 +95,15 @@ public class Party {
         this.stretchName = stretchName;
         this.stretchGoal = stretchGoal;
         this.stretchStatus = stretchStatus;
-        this.wizPosition = wizPosition;
         this.byob = byob;
         this.themeCheck = themeCheck;
         this.theme = theme;
         this.parking = parking;
     }
+
+
+
+
     public String getDescription() {
 
         return description;
@@ -186,11 +189,88 @@ public class Party {
 
         return themeCheck;
     }
-    // Database Connections
+    public void setPartyID(Integer partyID) {
 
-    /*
-    @ManyToOne
-    public User userParty;
-    */
+        this.partyID = partyID;
+    }
+    public void setUserID(Integer userID) {
 
+        this.userID = userID;
+    }
+    public void setPartyName(String partyName) {
+
+        this.partyName = partyName;
+    }
+    public void setPartyType(String partyType) {
+
+        this.partyType = partyType;
+    }
+    public void setDescription(String description) {
+
+        this.description = description;
+    }
+    public void setSubType(String subType) {
+
+        this.subType = subType;
+    }
+    public void setCreateDate(LocalDateTime createDate) {
+
+        this.createDate = createDate;
+    }
+    public void setPartyDate(String partyDate) {
+
+        this.partyDate = partyDate;
+    }
+    public void setStreet1(String street1) {
+
+        this.street1 = street1;
+    }
+    public void setStreet2(String street2) {
+
+        this.street2 = street2;
+    }
+    public void setCity(String city) {
+
+        this.city = city;
+    }
+    public void setUsState(String usState) {
+
+        this.usState = usState;
+    }
+    public void setZip(Integer zip) {
+
+        this.zip = zip;
+    }
+    public void setStretchName(String stretchName) {
+
+        this.stretchName = stretchName;
+    }
+    public void setStretchGoal(Integer stretchGoal) {
+
+        this.stretchGoal = stretchGoal;
+    }
+    public void setStretchStatus(Integer stretchStatus) {
+
+        this.stretchStatus = stretchStatus;
+    }
+    public void setWizPosition(Integer wizPosition) {
+
+        this.wizPosition = wizPosition;
+    }
+    public void setByob(Boolean byob) {
+
+        this.byob = byob;
+    }
+    public void setThemeCheck(Boolean themeCheck) {
+
+        this.themeCheck = themeCheck;
+    }
+    public void setTheme(String theme) {
+
+        this.theme = theme;
+    }
+    public void setParking(String parking) {
+
+        this.parking = parking;
+    }
 }

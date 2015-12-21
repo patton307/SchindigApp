@@ -1,28 +1,39 @@
 package com.schindig.utils;
 import com.schindig.AppConfig;
 import com.schindig.controllers.MainController;
-import com.schindig.entities.Invite;
-import com.schindig.entities.Party;
-import com.schindig.entities.User;
-import com.schindig.entities.Wizard;
+import com.schindig.entities.*;
+import com.schindig.services.AuthRepo;
 import com.schindig.services.InviteRepo;
 import com.schindig.services.PartyRepo;
 import com.schindig.services.UserRepo;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
+import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.web.util.CookieGenerator;
 
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 
 /**
  * Created by Agronis on 12/9/15.
@@ -113,5 +124,55 @@ public class Methods extends MainController {
         }
         System.out.println("---Done---");
     }
-    
+
+    public static Boolean initApp(String device, AuthRepo arepo) {
+        Auth a = arepo.findByDevice(device);
+        return a != null;
+    }
+
+
+    public static void encrypt(User user, AuthRepo auth, Auth a) throws NoSuchAlgorithmException, NoSuchProviderException {
+        KeyGenerator keyGen = KeyGenerator.getInstance(a.device+user.username+user.password,"AES");
+        keyGen.init(256);
+        SecretKey token = keyGen.generateKey();
+        String secret = Base64.getEncoder().encodeToString(token.getEncoded());
+
+        KeyPairGenerator keyPair = KeyPairGenerator.getInstance(secret, "RSA");
+        keyPair.initialize(256);
+        KeyPair pair = keyPair.generateKeyPair();
+
+        String publicKey = Base64.getEncoder().encodeToString(pair.getPublic().getEncoded());
+        String privateKey = Base64.getEncoder().encodeToString(pair.getPrivate().getEncoded());
+
+        Auth authenticated = new Auth(a.device, secret, publicKey, privateKey);
+        auth.save(authenticated);
+
+    }
+
+    public static Boolean validate(User user, String device, AuthRepo arepo) {
+        ArrayList<Auth> deviceList = arepo.findByUser(user);
+        for (Auth a : deviceList) {
+            if (a.device.equals(device)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Boolean decrypt(User user, String device, AuthRepo arepo){
+        Auth a = arepo.findByDevice(device);
+        String token = a.token;
+        String publicKey = a.publicKey;
+        String privateKey = a.privateKey;
+        byte[] decodedToken = Base64.getDecoder().decode(publicKey);
+        SecretKey originalToken = new SecretKeySpec(decodedToken, 0, decodedToken.length, "AES");
+        byte[] decodedPublic = Base64.getDecoder().decode(publicKey);
+        SecretKey originalPublic = new SecretKeySpec(decodedPublic, 0, decodedPublic.length, "RSA");
+        byte[] decodedPrivate = Base64.getDecoder().decode(publicKey);
+        SecretKey originalPrivate = new SecretKeySpec(decodedPrivate, 0, decodedPrivate.length, "RSA");
+        return null;
+    }
+
 }
+    
+
