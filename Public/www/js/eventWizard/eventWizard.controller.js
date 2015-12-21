@@ -30,7 +30,7 @@
     });
 
     /////POST NEW PARTY/////
-    
+
     $scope.partyType='none';
     $scope.subType='none';
     $scope.getValue = function(value){
@@ -71,6 +71,7 @@
     ){
         var vm = this;
 
+
       ///PATCH DATE, TIME AND NAME/////
     $scope.dateAndTimePost = function(partyDate, location, description){
       var partyID = +localStorage.getItem('partyID');
@@ -90,7 +91,9 @@
       });
     };
 
+
      ////STRETCHGOAL PATCH and SCOPES////
+
 
      $scope.stretchGoalData = function (stretchGoal, stretchName){
        var partyID = +localStorage.getItem('partyID');
@@ -107,6 +110,8 @@
        });
      };
     })
+
+
 
     .controller('ContactsController', function(
       $scope,
@@ -158,18 +163,18 @@
                contactData = {
                  name: el.name.formatted,
                  phone: el.phoneNumbers[0].value
-              }
+              };
               vm.contactDataArray.push(contactData);
               data = {
                 inviteDump: vm.contactDataArray,
                 party: {
                   partyID: partyID
                 }
-              }
+              };
             });
               EventWizardService.updateWizData(data).then(function(data){
                 console.log('contacts have been sent', data);
-                $state.go('splash')
+                $state.go('home');
               });
             }
             else {
@@ -213,6 +218,7 @@
         });
       };
 
+
       /////ADD FAVOR TO DATA/////
       $scope.addFavorToData = function(favor){
         var partyID = +localStorage.getItem('partyID');
@@ -220,7 +226,8 @@
           favorName: favor,
           partyID: partyID
         };
-        EventWizardService.addFavorToData(favorData)
+        EventWizardService.addFavorToData(favorData);
+        EventWizardService.addFavorToData(favorData);
       };
     });
 }());

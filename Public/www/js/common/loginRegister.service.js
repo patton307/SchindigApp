@@ -14,12 +14,13 @@
           .success(function(data){
             console.log('Login Success: ', data);
             localStorage.setItem('userID', data);
-            $state.go('splash');
+            $state.go('home');
           });
       };
       var createUser = function(data) {
         return $http.post(registerUrl, data);
       };
+
 
       return {
         createUser: createUser,
