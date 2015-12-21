@@ -236,57 +236,9 @@ public class MainController {
 
 
     @RequestMapping("/test")
-    public void appLoad(@RequestBody Parameters p, HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException {
-//        return Methods.initApp(p.device, auth);
-        String randomString = RandomStringUtils.random(10);
-        String randomNumber = RandomStringUtils.randomNumeric(9);
-        ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
-        if (userBuild == null) {
-            String fileContent = Methods.readFile("users.csv");
-
-            String[] lines = fileContent.split("\n");
-
-            for (String line : lines) {
-                String[] columns = line.split(",");
-                User u = new User();
-                u.username = columns[0];
-                u.password = PasswordHash.createHash(columns[1]);
-                u.firstName = columns[2];
-                u.lastName = columns[3];
-                u.email = randomString.concat(columns[4]);
-                u.phone = randomNumber;
-                userBuild.add(u);
-                users.save(u);
-            }
-        }
-        ArrayList<String> partyType = parties.partyTypes();
-        Random pos = new Random();
-        String[] choice = new String[]{"Yes, No, Maybe"};
-        ArrayList<Party> partyList = (ArrayList<Party>) parties.findAll();
-        ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
-        if (partyList == null) {
-            assert userBuild != null;
-            for (User user : userBuild) {
-                Party P = new Party(user.userID, randomString, partyType.get(pos.nextInt()), randomString,
-                        randomString, LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), randomString,
-                        randomString, randomString, randomString, Integer.valueOf(randomString), randomNumber,
-                        Integer.valueOf(randomNumber), Integer.valueOf(randomNumber), true, true, randomString, randomString);
-                for (Favor f : fav) {
-                    FavorList newList = new FavorList(f, P);
-                    favlists.save(newList);
-                }
-                userBuild.stream().filter(u -> u != user).forEach(u -> {
-                    if (invites.findInviteCount(P) < 5) {
-                        Invite inv = new Invite(user, P, user.phone, user.email, choice[pos.nextInt()], user.firstName + user.lastName);
-                        parties.save(P);
-                        assert partyList != null;
-                        partyList.add(P);
-                        invites.save(inv);
-                    }
-                });
-            }
-        }
-        response.addHeader("Well?", "Success");
+    public ArrayList<Favor> appLoad() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        ArrayList<Favor> getFavors = (ArrayList<Favor>) favors.findAll();
+        return getFavors;
     }
 
     /**ALL USER RELATED ROUTES**/

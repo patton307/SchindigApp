@@ -1,32 +1,10 @@
-Disposable Plates,true
-Disposable Silverware,true
-Balloons,true
-Beverage Napkins,true
-Tablecloth,true
-Confetti,true
-Party Hats,true
-Party Blowers,true
-Streamers,true
-Wine,true
-Beer,true
-Liquor,true
-Cake,true
-Chips,true
-Dip,true
-Salsa,true
-Guacamole,true
-Cheesecake,true
-Ice Cream,true
-Pie,true
-Garbage Bags,true
-Cooler,true
-Paper Towels,true
-Toilet Paper,true
-Charcoal,true
-Bug Spray,true
-Citronella,true
-
--Bar-
+Garbage Bags
+Cooler
+Paper Towels
+Toilet Paper
+Charcoal
+Bug Spray
+Citronella
 Glasses
 Wine Glasses
 Champagne Glasses
@@ -156,6 +134,9 @@ Bacon Wrapped Asparagus
 Cookies
 Brownies
 Pie
+Ice Cream
+Cheesecake
+
 
 
 
@@ -171,6 +152,8 @@ Pledge Cleanup
 Birthday Cake
 Cupcakes
 Birthday Hats
+Balloons
+
 
 
 
