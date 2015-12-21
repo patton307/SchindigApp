@@ -1,27 +1,24 @@
 package com.schindig.controllers;
-import com.schindig.PasswordHash;
 import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -56,7 +53,7 @@ public class MainController {
     AuthRepo auth;
 
     @PostConstruct
-    public void init() {
+    public void init() throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, InvalidKeyException {
         Integer wizCheck = wizard.wizardSize();
         if (wizCheck == 0) {
             String fileContent = Methods.readFile("wizard.csv");
@@ -128,7 +125,7 @@ public class MainController {
             newAdmin2.email = "test";
             users.save(newAdmin);
             User taylor = new User();
-            taylor.username = "taylor234";
+            taylor.username = "test3";
             taylor.password = "taylor";
             taylor.firstName = "Taylor";
             taylor.lastName = "Rad";
@@ -159,10 +156,7 @@ public class MainController {
             p.userID = users.findOne(1).userID;
             p.partyName = "Party Name";
             p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
             parties.save(p);
         }
         Party party2 = parties.findOne(2);
@@ -171,18 +165,24 @@ public class MainController {
             p.userID = users.findOne(2).userID;
             p.partyName = "Party Name";
             p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
+            parties.save(p);
+        }
+        Party party3 = parties.findOne(3);
+        if (party == null) {
+            Party p = new Party();
+            p.userID = users.findOne(3).userID;
+            p.partyName = "Party Name";
+            p.partyDate = "party Date";
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
             parties.save(p);
         }
 
         Invite invite = invites.findOne(1);
         if (invite == null) {
             Invite i = new Invite();
-            i.party = parties.findOne(2);
-            i.user = users.findOne(1);
+            i.party = parties.findOne(1);
+            i.user = users.findOne(2);
             i.phone = "admin";
             i.email = "admin";
             invites.save(i);
@@ -199,16 +199,7 @@ public class MainController {
         Invite invite3 = invites.findOne(3);
         if (invite3 == null) {
             Invite i = new Invite();
-            i.party = parties.findOne(1);
-            i.user = users.findOne(2);
-            i.phone = "test";
-            i.email = "test";
-            invites.save(i);
-        }
-        Invite invite4 = invites.findOne(4);
-        if (invite4 == null) {
-            Invite i = new Invite();
-            i.party = parties.findOne(1);
+            i.party = parties.findOne(3);
             i.user = users.findOne(2);
             i.phone = "test";
             i.email = "test";
@@ -222,14 +213,15 @@ public class MainController {
             f.party = parties.findOne(1);
             favlists.save(f);
         }
-
     }
 
-
-
-    @RequestMapping("/test")
-    public void appLoad(HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException {
-//        return Methods.initApp(p.device, auth);
+    @RequestMapping(path = "/validate/{device}", method = RequestMethod.GET)
+    public Boolean appLoad(@PathVariable("device") Integer device) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+        Auth a = auth.findByDevice(String.valueOf(device));
+        if (a==null) {
+            return false;
+        }
+    return Methods.validate(a.user, String.valueOf(device), auth);
     }
 
     /**ALL USER RELATED ROUTES**/
@@ -425,20 +417,8 @@ public class MainController {
         if (parameters.party.subType != null) {
             check.subType = parameters.party.subType;
         }
-        if (parameters.party.street1 != null) {
-            check.street1 = parameters.party.street1;
-        }
-        if (parameters.party.street2 != null) {
-            check.street2 = parameters.party.street2;
-        }
-        if (parameters.party.zip != null) {
-            check.zip = parameters.party.zip;
-        }
-        if (parameters.party.usState != null) {
-            check.usState = parameters.party.usState;
-        }
-        if (parameters.party.city != null) {
-            check.city = parameters.party.city;
+        if (parameters.party.location != null) {
+            check.location = parameters.party.location;
         }
         if (parameters.party.stretchGoal != null) {
             check.stretchGoal = parameters.party.stretchGoal;

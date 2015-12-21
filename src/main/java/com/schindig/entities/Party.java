@@ -32,18 +32,7 @@ public class Party {
     public String partyDate;
 
 //    @Column(nullable = false)
-    public String street1;
-
-    public String street2;
-
-//    @Column(nullable = false)
-    public String city;
-
-//    @Column(nullable = false)
-    public String usState;
-
-//    @Column(nullable = false)
-    public Integer zip;
+    public String location;
 
     public String stretchName;
 
@@ -63,7 +52,7 @@ public class Party {
 
     public Party(){}
 
-    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip) {
+    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location) {
 
         this.userID = userID;
         this.partyName = partyName;
@@ -72,13 +61,9 @@ public class Party {
         this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
-        this.street1 = street1;
-        this.street2 = street2;
-        this.city = city;
-        this.usState = usState;
-        this.zip = zip;
+        this.location = location;
     }
-    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String street1, String street2, String city, String usState, Integer zip, String stretchName, Integer stretchGoal, Integer stretchStatus, Boolean byob, Boolean themeCheck, String theme, String parking) {
+    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location, String stretchName, Integer stretchGoal, Integer stretchStatus, Boolean byob, Boolean themeCheck, String theme, String parking) {
 
         this.userID = userID;
         this.partyName = partyName;
@@ -87,11 +72,7 @@ public class Party {
         this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
-        this.street1 = street1;
-        this.street2 = street2;
-        this.city = city;
-        this.usState = usState;
-        this.zip = zip;
+        this.location = location;
         this.stretchName = stretchName;
         this.stretchGoal = stretchGoal;
         this.stretchStatus = stretchStatus;
@@ -132,25 +113,9 @@ public class Party {
 
         return partyDate;
     }
-    public String getStreet1() {
+    public String getLocation() {
 
-        return street1;
-    }
-    public String getStreet2() {
-
-        return street2;
-    }
-    public String getCity() {
-
-        return city;
-    }
-    public String getUsState() {
-
-        return usState;
-    }
-    public Integer getZip() {
-
-        return zip;
+        return location;
     }
 
     public String getStretchName() {
@@ -221,25 +186,9 @@ public class Party {
 
         this.partyDate = partyDate;
     }
-    public void setStreet1(String street1) {
+    public void setLocation(String street1) {
 
-        this.street1 = street1;
-    }
-    public void setStreet2(String street2) {
-
-        this.street2 = street2;
-    }
-    public void setCity(String city) {
-
-        this.city = city;
-    }
-    public void setUsState(String usState) {
-
-        this.usState = usState;
-    }
-    public void setZip(Integer zip) {
-
-        this.zip = zip;
+        this.location = location;
     }
     public void setStretchName(String stretchName) {
 
