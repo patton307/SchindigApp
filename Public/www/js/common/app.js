@@ -5,6 +5,8 @@
     'ionic',
     'eventWizard',
     'loginRegister',
+    'viewParties',
+    'navigation',
     'profile',
     'manageParty',
     'underscore',
@@ -35,13 +37,8 @@
         url: '/createNewUser',
         templateUrl: 'js/common/views/createNewUser.html',
         controller: 'LoginRegisterController'
-      })
-        // Each tab has its own nav history stack:
-      .state('splash', {
-        url: '/splash',
-        templateUrl: 'js/common/views/splash.html',
-        controller: 'EventWizardController'
       });
+
 
     });
       angular

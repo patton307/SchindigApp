@@ -29,6 +29,12 @@
           .error(function(data){
             console.log('couldnotgetdata');
           });
+
+          //STATE GOS FOR NAVIGATION//
+          $scope.viewParitesGo =  function(){
+            $state.go('viewParties');
+          };
+
     });
 
 

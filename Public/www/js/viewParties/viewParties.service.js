@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular
-  .module('viewParty')
+  .module('viewParties')
   .factory('ViewPartyService', function($http, $state){
     var vm = this;
     var ip = 'http://localhost';

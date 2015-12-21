@@ -56,11 +56,23 @@
     <script src="js/manageParty/manageParty.service.js"></script>
     <script src="js/manageParty/manageParty.controller.js"></script>
 
+    <!-- VIEW PARTIES JS -->
+    <script src="js/viewParties/viewParties.module.js"></script>
+    <script src="js/viewParties/viewParties.service.js"></script>
+    <script src="js/viewParties/viewParties.controller.js"></script>
+
+    <!-- NAVIGATION -->
+    <script src="js/navigation/navigation.module.js"></script>
+    <script src="js/navigation/navigation.service.js"></script>
+    <script src="js/navigation/navigation.controller.js"></script>
+
   </head>
   <body ng-app="schindig">
-   <ion-pane>
-      <ion-nav-view>
-      </ion-nav-view>
-   </ion-pane>
+  <ion-pane>
+      <ion-nav-bar class="bar-royal">
+      <ion-tabs></ion-tabs>
+     <ion-nav-view>
+     </ion-nav-view>
+  </ion-pane>
  </body>
 </html>

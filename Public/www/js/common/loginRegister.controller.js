@@ -8,28 +8,31 @@
       $scope,
       $state,
       $stateParams,
-      LoginRegisterService
+      LoginRegisterService,
+      $cordovaDevice
     )
       {
+
+        //CORDOVA DEVICE//
+        console.log($cordovaDevice.getUUID());
+
+        //LOGIN USER AND ROUTE
       $scope.login = function(username, password){
         var loginData = {
           username: username,
           password: password
         };
-
         LoginRegisterService.login(loginData).then(function(data){
           console.log('dog', data);
           localStorage.setItem('userID', data.data);
-          $state.go('splash');
+          $state.go('tab.home');
         });
       };
 
       $scope.signUp = function(){
         $state.go('createNewUser');
       };
-      $scope.invite=function(){
-        $state.go('invites');
-      };
+
       //FOR TO GET TO OUR VIEWS - DELETE FOR PRODUCTION
 
       $scope.dog = function (){
