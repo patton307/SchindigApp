@@ -125,7 +125,7 @@ public class MainController {
             newAdmin2.email = "test";
             users.save(newAdmin);
             User taylor = new User();
-            taylor.username = "taylor234";
+            taylor.username = "test3";
             taylor.password = "taylor";
             taylor.firstName = "Taylor";
             taylor.lastName = "Rad";
@@ -156,7 +156,7 @@ public class MainController {
             p.userID = users.findOne(1).userID;
             p.partyName = "Party Name";
             p.partyDate = "party Date";
-            p.location = "Street One";
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
             parties.save(p);
         }
         Party party2 = parties.findOne(2);
@@ -165,15 +165,24 @@ public class MainController {
             p.userID = users.findOne(2).userID;
             p.partyName = "Party Name";
             p.partyDate = "party Date";
-            p.location = "Street One";
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
+            parties.save(p);
+        }
+        Party party3 = parties.findOne(3);
+        if (party == null) {
+            Party p = new Party();
+            p.userID = users.findOne(3).userID;
+            p.partyName = "Party Name";
+            p.partyDate = "party Date";
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
             parties.save(p);
         }
 
         Invite invite = invites.findOne(1);
         if (invite == null) {
             Invite i = new Invite();
-            i.party = parties.findOne(2);
-            i.user = users.findOne(1);
+            i.party = parties.findOne(1);
+            i.user = users.findOne(2);
             i.phone = "admin";
             i.email = "admin";
             invites.save(i);
@@ -190,16 +199,7 @@ public class MainController {
         Invite invite3 = invites.findOne(3);
         if (invite3 == null) {
             Invite i = new Invite();
-            i.party = parties.findOne(1);
-            i.user = users.findOne(2);
-            i.phone = "test";
-            i.email = "test";
-            invites.save(i);
-        }
-        Invite invite4 = invites.findOne(4);
-        if (invite4 == null) {
-            Invite i = new Invite();
-            i.party = parties.findOne(1);
+            i.party = parties.findOne(3);
             i.user = users.findOne(2);
             i.phone = "test";
             i.email = "test";
