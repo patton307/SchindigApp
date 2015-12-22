@@ -4,7 +4,11 @@
   angular
     .module('loginRegister')
 
+<<<<<<< HEAD
     .factory('LoginRegisterService', function($http, $state, $q, $cordovaDevice){
+=======
+    .factory('LoginRegisterService', function($http, $state){
+>>>>>>> eea2bafaa1edbe4fee5e1de3d5d54097efac65ba
       var ip = 'http://10.0.10.72';
       var registerUrl = ip + ':8080/user/create';
       var loginUrl = ip + ':8080/user/login';

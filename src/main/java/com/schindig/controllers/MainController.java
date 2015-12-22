@@ -4,16 +4,19 @@ import com.schindig.services.*;
 import com.schindig.utils.Methods;
 import com.schindig.utils.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,9 +49,11 @@ public class MainController {
     @Autowired
     InviteRepo invites;
 
-    @PostConstruct
-    public void init() {
+    @Autowired
+    AuthRepo auth;
 
+    @PostConstruct
+    public void init() throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, InvalidKeyException {
         Integer wizCheck = wizard.wizardSize();
         if (wizCheck == 0) {
             String fileContent = Methods.readFile("wizard.csv");
@@ -102,25 +107,25 @@ public class MainController {
         }
 
         ArrayList<User> testUsers = (ArrayList<User>) users.findAll();
-        if (testUsers.size() < 5) {
-            User john = new User();
-            john.username = "johnj843";
-            john.password = "john";
-            john.firstName = "John";
-            john.lastName = "Smith";
-            john.phone = "1234";
-            john.email = "john@email.com";
-            users.save(john);
-            User michelle = new User();
-            michelle.username = "michelle843";
-            michelle.password = "michelle";
-            michelle.firstName = "Michelle";
-            michelle.lastName = "Bart";
-            michelle.phone = "0983";
-            michelle.email = "michelle@email.com";
-            users.save(michelle);
+        if (testUsers.size() < 1) {
+            User newAdmin = new User();
+            newAdmin.username = "admin";
+            newAdmin.password =  "pass";
+            newAdmin.firstName = "Admin";
+            newAdmin.lastName = "Nimda";
+            newAdmin.phone = "admin";
+            newAdmin.email = "admin";
+            users.save(newAdmin);
+            User newAdmin2 = new User();
+            newAdmin2.username = "test";
+            newAdmin2.password = "pass";
+            newAdmin2.firstName = "Admin";
+            newAdmin2.lastName = "Nimda";
+            newAdmin2.phone = "test";
+            newAdmin2.email = "test";
+            users.save(newAdmin);
             User taylor = new User();
-            taylor.username = "taylor234";
+            taylor.username = "test3";
             taylor.password = "taylor";
             taylor.firstName = "Taylor";
             taylor.lastName = "Rad";
@@ -145,51 +150,31 @@ public class MainController {
             users.save(landon);
         }
 
-        User admin = users.findOneByUsername("admin");
-        if (admin == null) {
-            User newAdmin = new User();
-            newAdmin.username = "admin";
-            newAdmin.password = "pass";
-            newAdmin.firstName = "Admin";
-            newAdmin.lastName = "Nimda";
-            newAdmin.phone = "1234";
-            newAdmin.email = "blah@blah.com";
-            users.save(newAdmin);
-        }
-        User Admin = users.findOneByUsername("Admin");
-        if (Admin == null) {
-            User newAdmin = new User();
-            newAdmin.username = "Admin";
-            newAdmin.password = "Pass";
-            newAdmin.firstName = "Admin";
-            newAdmin.lastName = "Nimda";
-            newAdmin.phone = "1234";
-            newAdmin.email = "blah@blah.com";
-            users.save(newAdmin);
-        }
-
         Party party = parties.findOne(1);
         if (party == null) {
             Party p = new Party();
             p.userID = users.findOne(1).userID;
             p.partyName = "Party Name";
             p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
             parties.save(p);
         }
         Party party2 = parties.findOne(2);
         if (party == null) {
             Party p = new Party();
-            p.userID = users.findOne(1).userID;
+            p.userID = users.findOne(2).userID;
             p.partyName = "Party Name";
             p.partyDate = "party Date";
-            p.street1 = "Street One";
-            p.street2 = "Street Two";
-            p.city = "City";
-            p.zip = 12345;
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
+            parties.save(p);
+        }
+        Party party3 = parties.findOne(3);
+        if (party == null) {
+            Party p = new Party();
+            p.userID = users.findOne(3).userID;
+            p.partyName = "Party Name";
+            p.partyDate = "party Date";
+            p.location = "1869 Montclair Dr, Mt. Pleasant SC";
             parties.save(p);
         }
 
@@ -197,18 +182,27 @@ public class MainController {
         if (invite == null) {
             Invite i = new Invite();
             i.party = parties.findOne(1);
-            i.user = users.findOne(1);
-            i.phone = "238504333";
-            i.email = "aksldjf@alsdkfj.com";
+            i.user = users.findOne(2);
+            i.phone = "admin";
+            i.email = "admin";
             invites.save(i);
         }
         Invite invite2 = invites.findOne(2);
-        if (invite == null) {
+        if (invite2 == null) {
             Invite i = new Invite();
-            i.party = parties.findOne(1);
+            i.party = parties.findOne(2);
             i.user = users.findOne(1);
-            i.phone = "238504333";
-            i.email = "aksldjf@alsdkfj.com";
+            i.phone = "admin";
+            i.email = "admin";
+            invites.save(i);
+        }
+        Invite invite3 = invites.findOne(3);
+        if (invite3 == null) {
+            Invite i = new Invite();
+            i.party = parties.findOne(3);
+            i.user = users.findOne(2);
+            i.phone = "test";
+            i.email = "test";
             invites.save(i);
         }
 
@@ -221,6 +215,14 @@ public class MainController {
         }
     }
 
+    @RequestMapping(path = "/validate/{device}", method = RequestMethod.GET)
+    public Boolean appLoad(@PathVariable("device") Integer device) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+        Auth a = auth.findByDevice(String.valueOf(device));
+        if (a==null) {
+            return false;
+        }
+    return Methods.validate(a.user, String.valueOf(device), auth);
+    }
 
     /**ALL USER RELATED ROUTES**/
     @RequestMapping(path = "/user/update", method = RequestMethod.POST)
@@ -266,7 +268,7 @@ public class MainController {
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
         User u = users.findOneByUsername(user.username);
         if (u == null) {
-            users.save(new User(user));
+            users.save(user);
         }
     }
 
@@ -295,20 +297,18 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
+    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
         User test = users.findOneByUsername(user.username);
         try {
             if (users.findOneByUsername(user.username) == null) {
                 response.sendError(401);
             }
-            if (!user.password.equals(test.password)) {
+            if (!test.password.equals(user.password)) {
                 response.sendError(403);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        session.setAttribute("username", user.username);
         return test.userID;
     }
 
@@ -417,20 +417,8 @@ public class MainController {
         if (parameters.party.subType != null) {
             check.subType = parameters.party.subType;
         }
-        if (parameters.party.street1 != null) {
-            check.street1 = parameters.party.street1;
-        }
-        if (parameters.party.street2 != null) {
-            check.street2 = parameters.party.street2;
-        }
-        if (parameters.party.zip != null) {
-            check.zip = parameters.party.zip;
-        }
-        if (parameters.party.usState != null) {
-            check.usState = parameters.party.usState;
-        }
-        if (parameters.party.city != null) {
-            check.city = parameters.party.city;
+        if (parameters.party.location != null) {
+            check.location = parameters.party.location;
         }
         if (parameters.party.stretchGoal != null) {
             check.stretchGoal = parameters.party.stretchGoal;
@@ -476,14 +464,14 @@ public class MainController {
         ArrayList<Invite> inviteList = (ArrayList<Invite>) invites.findAll();
         ArrayList<Party> partyList = new ArrayList();
         for (Invite invite : inviteList) {
-            String[] nameSplit = invite.name.split(" ");
-            if (invite.user == u) {
-                partyList.add(invite.party);
-            } else if (u.firstName.equals(nameSplit[0])) {
-                partyList.add(invite.party);
-            } else if (u.lastName.equals(nameSplit[1])) {
-                partyList.add(invite.party);
-            } else if (u.email.equals(invite.email)) {
+//            String[] nameSplit = invite.name.split(" ");
+//            if (invite.user == u) {
+//                partyList.add(invite.party);
+//            } else if (u.firstName.equals(nameSplit[0])) {
+//                partyList.add(invite.party);
+//            } else if (u.lastName.equals(nameSplit[1])) {
+//                partyList.add(invite.party);
+            if (u.email.equals(invite.email)) {
                 partyList.add(invite.party);
             } else if (u.phone.equals(invite.phone)) {
                 partyList.add(invite.party);
