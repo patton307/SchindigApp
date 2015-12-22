@@ -23,11 +23,11 @@ public class FavorList {
 
     public Boolean claimed = false;
 
-    public FavorList(Favor favor, Party party, User user) {
+    public FavorList(Favor favor, Party party, Boolean claimed) {
 
         this.favor = favor;
         this.party = party;
-        this.user = user;
+        this.claimed = claimed;
     }
     public FavorList() {
     }

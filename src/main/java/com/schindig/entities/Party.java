@@ -165,6 +165,7 @@ public class Party {
 
         this.partyName = partyName;
     }
+
     public void setPartyType(String partyType) {
 
         this.partyType = partyType;
@@ -185,7 +186,7 @@ public class Party {
 
         this.partyDate = partyDate;
     }
-    public void setLocation(String street1) {
+    public void setLocation(String location) {
 
         this.location = location;
     }

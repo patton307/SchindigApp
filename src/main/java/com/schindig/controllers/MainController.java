@@ -1,5 +1,4 @@
 package com.schindig.controllers;
-import com.schindig.PasswordHash;
 import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
@@ -20,9 +19,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -121,58 +118,59 @@ public class MainController {
 
 
         ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
+        if (userBuild.size()<1) {
+            String fileContent = Methods.readFile("users.csv");
 
-        String fileContent = Methods.readFile("users.csv");
+            String[] lines = fileContent.split("\n");
+            for (String line : lines) {
+                String randomNumber = RandomStringUtils.randomNumeric(10);
+                String[] columns = line.split(",");
+                User u = new User(columns[0], columns[1], columns[2], columns[3], columns[2].concat(columns[4]), randomNumber);
+                userBuild.add(u);
+                users.save(u);
+            }
 
-        String[] lines = fileContent.split("\n");
-        for (String line : lines) {
-            String randomNumber = RandomStringUtils.randomNumeric(10);
-            String[] columns = line.split(",");
-            User u = new User(columns[0], columns[1], columns[2], columns[3], columns[2].concat(columns[4]), randomNumber);
-            userBuild.add(u);
-            users.save(u);
-        }
-
-        String description = "Lorem ipsum dolor sit amet, eu ligula faucibus at egestas, est nibh at non in, nec nec massa fusce vitae, lacus at risus, arcu proin pede. ";
-        String theme = "This is just a placeholder for what could be an insane theme.";
-        String location = "220 E Bryan St, Savannah, GA 31401";
-        String stretchName = "One insane crazy impossible goal.";
+            String description = "Lorem ipsum dolor sit amet, eu ligula faucibus at egestas, est nibh at non in, nec nec massa fusce vitae, lacus at risus, arcu proin pede. ";
+            String theme = "This is just a placeholder for what could be an insane theme.";
+            String location = "220 E Bryan St, Savannah, GA 31401";
+            String stretchName = "One insane crazy impossible goal.";
 
 
-        ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
+            ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
 
-        for (User user : userBuild) {
-            for (int i = 0; i < partyTypes.size(); i++) {
-                String partyType = partyTypes.get(i);
+            for (User user : userBuild) {
+                for (int i = 0; i < partyTypes.size(); i++) {
+                    String partyType = partyTypes.get(i);
 
-                String subType;
-                subTypes.get(i);
-                if (subTypes != null) {
-                    subType = subTypes.get(i);
-                } else {
-                    subType = "No subType";
-                }
-                if (parties.totalPartyCount() < 50) {
-                    Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
-                            LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), location, stretchName, 5000,
-                            0, true, true, theme, "Valet");
-                    parties.save(P);
-                    for (Favor f : fav) {
-                        for (int z = 0; z < 5; z++) {
-                            FavorList newList = new FavorList(f, P, user);
-                            favlists.save(newList);
+                    String subType;
+                    subTypes.get(i);
+                    if (subTypes != null) {
+                        subType = subTypes.get(i);
+                    } else {
+                        subType = "No subType";
+                    }
+                    if (parties.totalPartyCount() < 50) {
+                        Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
+                                LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), location, stretchName, 5000,
+                                0, true, true, theme, "Valet");
+                        parties.save(P);
+                        for (Favor f : fav) {
+                            for (int z = 0; z < 1; z++) {
+                                FavorList newList = new FavorList(f, P, false);
+                                favlists.save(newList);
+                            }
                         }
                     }
                 }
-            }
-            for (Party P : parties.findAll()) {
-                for (int u = 0; u < userBuild.size(); u++) {
-                    User invUser = userBuild.get(u);
-                    ArrayList<Invite> inviteList = invites.findByParty(P);
-                    if (invites.totalInviteCount() < 300) {
-                        Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
-                        invites.save(inv);
-                        u+=3;
+                for (Party P : parties.findAll()) {
+                    for (int u = 0; u < userBuild.size(); u++) {
+                        User invUser = userBuild.get(u);
+                        ArrayList<Invite> inviteList = invites.findByParty(P);
+                        if (invites.totalInviteCount() < 300) {
+                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+                            invites.save(inv);
+                            u += 3;
+                        }
                     }
                 }
             }
@@ -302,7 +300,7 @@ public class MainController {
             Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
             Party party = parties.findOne(parameters.partyID);
             User user = users.findOne(parameters.userID);
-            FavorList favorList = new FavorList(fav, party, user);
+            FavorList favorList = new FavorList(fav, party, false);
             favlists.save(favorList);
             Favor favor = favors.findOne(fav.favorID);
             newDump.add(favor);
@@ -314,7 +312,7 @@ public class MainController {
     public User claimFavor(@PathVariable("id") Integer id, @RequestBody Parameters p) {
         User u = users.findOne(p.userID);
         Party party = parties.findOne(id);
-        FavorList favor = favlists.findByFavorAndParty(p.favor, party);
+        FavorList favor = favlists.findOneByFavorAndParty(p.favor, party);
         favor.user = u;
         favor.claimed = true;
         favlists.save(favor);
@@ -322,14 +320,12 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
-    public ArrayList<Favor> getFavors(@PathVariable("id") int id) {
+    public ArrayList<FavorList> getFavors(@PathVariable("id") int id) {
         ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
         favorList = favorList.stream()
                 .filter(f -> f.party.partyID == id)
                 .collect(Collectors.toCollection(ArrayList<FavorList>::new));
-        return favorList.stream()
-                .map(favor -> favor.favor)
-                .collect(Collectors.toCollection(ArrayList::new));
+        return favorList;
 
     }
 
@@ -387,6 +383,10 @@ public class MainController {
     public Party updateParty(@RequestBody Parameters parameters, HttpSession session) {
 
         Party check = parties.findOne(parameters.party.partyID);
+        if (parameters.party.description != null) {
+            check.description = parameters.party.description;
+        }
+        check.location = parameters.party.location;
         if (parameters.party.partyName != null) {
             check.partyName = parameters.party.partyName;
         }
