@@ -18,9 +18,9 @@ public class Favor {
 
     public Integer useCount = 0;
 
-    public Integer partyTypeKey = 0;
+    public String partyType;
 
-    public Integer subTypeKey = 0;
+    public String subType;
 
 
     public Favor(){}
@@ -31,10 +31,10 @@ public class Favor {
         this.useCount = useCount;
     }
 
-    public Favor(Integer subTypeKey, Integer partyTypeKey, Integer useCount, Boolean generic, String favorName) {
+    public Favor(String partyType, String subType, Integer useCount, Boolean generic, String favorName) {
 
-        this.subTypeKey = subTypeKey;
-        this.partyTypeKey = partyTypeKey;
+        this.subType = subType;
+        this.partyType = partyType;
         this.useCount = useCount;
         this.generic = generic;
         this.favorName = favorName;
@@ -43,13 +43,13 @@ public class Favor {
 
         return generic;
     }
-    public Integer getPartyTypeKey() {
+    public String getPartyType() {
 
-        return partyTypeKey;
+        return partyType;
     }
-    public Integer getSubTypeKey() {
+    public String getSubType() {
 
-        return subTypeKey;
+        return subType;
     }
     public Favor(String favorName) {
 
@@ -67,7 +67,30 @@ public class Favor {
 
         return favorID;
     }
+    public void setFavorID(Integer favorID) {
 
+        this.favorID = favorID;
+    }
+    public void setFavorName(String favorName) {
+
+        this.favorName = favorName;
+    }
+    public void setGeneric(Boolean generic) {
+
+        this.generic = generic;
+    }
+    public void setUseCount(Integer useCount) {
+
+        this.useCount = useCount;
+    }
+    public void setPartyType(String partyType) {
+
+        this.partyType = partyType;
+    }
+    public void setSubType(String subType) {
+
+        this.subType = subType;
+    }
     // Database Connection
 
     /*
