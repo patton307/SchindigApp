@@ -10,13 +10,12 @@
       $stateParams,
       NavigationService
     ){
-
         //TOP LEVEL NAVIGATION//
       $scope.wizardGo = function(){
         $state.go('wizard');
       };
       $scope.managePartyGo = function(){
-        $state.go('manageParty');
+        $state.go('manageLanding');
       };
       $scope.allPartiesGo = function(){
         console.log('go go go ');

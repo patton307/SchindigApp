@@ -47,7 +47,12 @@
           </select>
         </ion-item>
         <item-item>
-          <ion-radio ng-model="subType" ng-repeat="item in subType" ng-value="'{{item}}'">{{item}}</ion-radio>
+          <ion-radio
+            ng-model="subType"
+            ng-repeat="item in subType"
+            ng-value="'{{item}}'">
+              {{item}}
+          </ion-radio>
         </item-item>
         <label class="item item-input item-floating-label">
           <span class="input-label"><strong>Party Name: </strong></span>
