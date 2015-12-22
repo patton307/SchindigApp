@@ -32,8 +32,7 @@ public class Party {
 //    @Column(nullable = false)
     public String partyDate;
 
-//    @Column(nullable = false)
-    public String location;
+    public String local;
 
     public String stretchName;
 
@@ -53,7 +52,7 @@ public class Party {
 
     public Party(){}
 
-    public Party(User host, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location) {
+    public Party(User host, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String local) {
 
         this.host = host;
         this.partyName = partyName;
@@ -62,9 +61,9 @@ public class Party {
         this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
-        this.location = location;
+        this.local = local;
     }
-    public Party(User host, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location, String stretchName, Integer stretchGoal, Integer stretchStatus, Boolean byob, Boolean themeCheck, String theme, String parking) {
+    public Party(User host, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String local, String stretchName, Integer stretchGoal, Integer stretchStatus, Boolean byob, Boolean themeCheck, String theme, String parking) {
 
         this.host = host;
         this.partyName = partyName;
@@ -73,7 +72,7 @@ public class Party {
         this.subType = subType;
         this.createDate = createDate;
         this.partyDate = partyDate;
-        this.location = location;
+        this.local = local;
         this.stretchName = stretchName;
         this.stretchGoal = stretchGoal;
         this.stretchStatus = stretchStatus;
@@ -82,6 +81,8 @@ public class Party {
         this.theme = theme;
         this.parking = parking;
     }
+
+
 
 
     public String getDescription() {
@@ -112,9 +113,9 @@ public class Party {
 
         return partyDate;
     }
-    public String getLocation() {
+    public String getLocal() {
 
-        return location;
+        return local;
     }
 
     public String getStretchName() {
@@ -185,9 +186,9 @@ public class Party {
 
         this.partyDate = partyDate;
     }
-    public void setLocation(String street1) {
+    public void setLocal(String local) {
 
-        this.location = location;
+        this.local = local;
     }
     public void setStretchName(String stretchName) {
 
