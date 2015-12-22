@@ -1,5 +1,6 @@
 package com.schindig.services;
 import com.schindig.entities.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -12,5 +13,8 @@ public interface UserRepo extends CrudRepository<User, Integer> {
     User findOneByLastName(String lastName);
     User findOneByEmail(String email);
     User findOneByPhone(String phone);
+
+    //@Query("SELECT COUNT(c) FROM USER c")
+    //Integer userSize();
 
 }
