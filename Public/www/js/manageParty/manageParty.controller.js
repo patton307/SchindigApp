@@ -28,10 +28,6 @@
             console.log('error');
           })
 
-          $scope.shouldShowDelete = false;
-          $scope.shouldShowReorder = false;
-          $scope.listCanSwipe = true;
-
 
       ////MANAGE/EDIT HOSTED PARTIES////
 
@@ -45,10 +41,12 @@
           $scope.oneParty = data.data;
         });
       };
+
+
       $scope.loadOneFavor = function(){
         var rawPartyID = +localStorage.getItem('OnePartyID');
         ManagePartyService.getPartyFavor(rawPartyID).then(function(data){
-          console.log(data);
+          console.log('load favors',data);
           $scope.onePartyFavor = data.data;
         });
       };
@@ -58,6 +56,12 @@
           console.log('controller invites', data.data);
           $scope.inviteList = data.data;
         });
+      };
+      $scope.goToManageFavor = function(){
+        $state.go('manageFavor')
+      };
+      $scope.goToManageInvites = function(){
+        $state.go('manageInvites')
       };
 
       $scope.getNameValue = function(value){
@@ -70,11 +74,17 @@
         $scope.description = descriptionValue;
         console.log('scoped description',$scope.description);
       };
-      $scope.editData = function(partyName, description){
+      $scope.getLocationValue = function(locationValue){
+        console.log('changed descriptionValue',locationValue);
+        $scope.location = locationValue;
+        console.log('scoped location',$scope.location);
+      };
+      $scope.editData = function(partyName, description, location){
         var partyID = +localStorage.getItem('OnePartyID');
-        console.log('what is this', description);
+        console.log('what is this', location.formatted_address);
         var data = {
           party: {
+            local: location.formatted_address,
             partyName: partyName,
             description: description,
             partyID: partyID

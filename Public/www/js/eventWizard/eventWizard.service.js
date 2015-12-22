@@ -24,7 +24,10 @@
         return $http.get(getWizardUrl);
       };
       var updateWizData = function(updatedWizData){
-        return $http.patch(wizUpdateUrl, updatedWizData);
+        console.log('this is wiz data', updatedWizData);
+        return $http.patch(wizUpdateUrl, updatedWizData).success(function(data){
+          console.log('this is what im sending',data);
+        });
       };
       var addFavorToData = function(favor) {
         return $http.post(addFavorToDataUrl, favor);

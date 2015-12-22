@@ -13,10 +13,14 @@
           Themed Party?
         </strong>
       </ion-toggle>
-      <ion-toggle toggle-class="toggle-calm">
-        <strong>
+      <ion-toggle
+        ng-click="byobCheck = !byobCheck"
+        toggle-class="toggle-calm">
+        <ion-item
+          ng-model="byobCheck"
+          ng-class="byobCheck ? 'byob' : 'supplied'">
           BYOB
-        </strong>
+        </ion-item>
       </ion-toggle>
       <ion-item class="item-input item-select">
        <div class="input-label">

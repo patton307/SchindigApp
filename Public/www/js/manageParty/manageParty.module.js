@@ -23,6 +23,16 @@
           templateUrl: 'js/manageParty/views/manageHostedParty.html',
           controller: 'ManagePartyController'
         })
+        .state('manageFavor', {
+          url: '/manageParty/manageFavor',
+          templateUrl: 'js/manageParty/views/manageHostedFavors.html',
+          controller: 'ManagePartyController'
+        })
+        .state('manageInvites', {
+          url: '/manageParty/manageInvites',
+          templateUrl: 'js/manageParty/views/manageHostedInvites.html',
+          controller: 'ManagePartyController'
+        })
     });
 
 
