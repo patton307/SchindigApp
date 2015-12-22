@@ -8,19 +8,27 @@
   </div>
   <ion-padding>
     <ion-content>
-      <ion-toggle toggle-class="toggle-calm">
+      <ion-toggle
+        ng-click="themeCheck = !themeCheck"
+        toggle-class="toggle-calm">
+        <div
+        ng-model="themeCheck"
+        ng-class="themeCheck ? 'theme' : 'noTheme'">
         <strong>
           Themed Party?
         </strong>
+        </div>
       </ion-toggle>
       <ion-toggle
         ng-click="byobCheck = !byobCheck"
         toggle-class="toggle-calm">
-        <ion-item
+        <div
           ng-model="byobCheck"
           ng-class="byobCheck ? 'byob' : 'supplied'">
-          BYOB
-        </ion-item>
+          <strong>
+            BYOB
+          </strong>
+        </div>
       </ion-toggle>
       <ion-item class="item-input item-select">
        <div class="input-label">

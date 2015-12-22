@@ -108,18 +108,26 @@
 
      $scope.stretchGoalData = function (stretchGoal, stretchName){
        var byobElements = document.getElementsByClassName('byob');
-
+       var themeElements = document.getElementsByClassName('theme');
+       console.log(themeElements);
        console.log(byobElements);
        var byobStatus;
+       var themeStatus;
        if(byobElements.length != 0){
          byobStatus = true;
        } else{
          byobStatus = false;
+       };
+       if(themeElements.length!= 0){
+         byobStatus = true;
+       } else {
+         themeStatus = false;
        }
        console.log(byobStatus);
        var partyID = +localStorage.getItem('partyID');
        var data = {
          party: {
+           theme: themeStatus,
            byob: byobStatus,
            stretchGoal: stretchGoal,
            stretchName: stretchName,
@@ -246,13 +254,15 @@
 
 
       /////ADD FAVOR TO DATA/////
-      $scope.addFavorToData = function(favor){
+      $scope.addFavorToData = function(favorData){
         var partyID = +localStorage.getItem('partyID');
         var favorData = {
-          favorName: favor,
+          favor: {
+            favorName: 'favorData'
+          },
           partyID: partyID
         };
-        EventWizardService.addFavorToData(favorData);
+        console.log(favorData);
         EventWizardService.addFavorToData(favorData);
       };
     });
