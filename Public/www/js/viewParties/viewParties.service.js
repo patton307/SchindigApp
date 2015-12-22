@@ -4,7 +4,7 @@
   .module('viewParties')
   .factory('ViewPartyService', function($http, $state){
     var vm = this;
-    var ip = 'http://localhost';
+    var ip = 'http://10.0.10.72';
     var viewHostedPartiesURL = ip + ':8080/parties/host';
     var viewInvitedPartiesURL = ip +':8080/parties/user';
     var getOneInvitedPartyURL = ip +':8080/party/';
@@ -44,6 +44,14 @@
         });
       };
 
+      var favorClaim = function(partyID, favorData){
+        partyID = partyID;
+        favorData = favorData;
+        return $http.post(ip + ':8080/party/'+ partyID + '/claim', favorData).success(function(data){
+
+        });
+      };
+
 
 
 
@@ -52,7 +60,8 @@
       updatedHostedParties: updatedHostedParties,
       getInvitedParties: getInvitedParties,
       getOneParty: getOneParty,
-      getPartyFavor : getPartyFavor
+      getPartyFavor : getPartyFavor,
+      favorClaim: favorClaim
     };
   });
 

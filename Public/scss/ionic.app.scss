@@ -23,6 +23,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 @include font-face("Showboat", font-files("fonts/Showboat.ttf");
 
-.homeHostPartyBtn {
+#homeHostPartyBtn {
   height: 315px;
 }

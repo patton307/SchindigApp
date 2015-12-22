@@ -16,11 +16,15 @@
 
       $scope.hostedParties = 'hostData';
       $scope.invitedParties='invData';
+      $scope.favorData = 'favorData;';
+
       var rawUserID = +localStorage.getItem('userID');
+
 
       var userID = {
       userID: rawUserID
     };
+
 
 
 
@@ -67,14 +71,30 @@
       };
 
 
-        $scope.loadOneFavor = function(){
-            var rawPartyID = +localStorage.getItem('OnePartyID');
-            ViewPartyService.getPartyFavor(rawPartyID).then(function(data){
-              console.log('favor data', data.data);
-              $scope.onePartyFavor = data.data;
-                });
-              };
+        //FAVOR CLAIMING//
 
+      $scope.loadOneFavor = function(){
+          var rawPartyID = +localStorage.getItem('oneInvPartyID');
+          ViewPartyService.getPartyFavor(rawPartyID).then(function(data){
+            console.log('favor data', data.data);
+            $scope.onePartyFavor = data.data;
+        });
+      };
+
+      $scope.postOneFavorID = function(favor){
+        var rawPartyID = +localStorage.getItem('oneInvPartyID');
+        console.log(favor);
+        var data = {
+          favor: {
+          favorID: favor.favorID
+          },
+          userID: rawUserID
+        };
+        console.log('postFavor', data);
+        ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
+          console.log('return from claim', data);
+        });
+      };
 
     });
 

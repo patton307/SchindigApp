@@ -4,18 +4,14 @@
     {{invPartyOne.partyDate | date: 'short'}}
     {{invPartyOne.street1}}<br>{{invPartyOne.street2}}
     {{invPartyOne.city}}{{invPartyOne.state}}
-    <ion-list>
-      <h3>Help out the party - pick a favor!</h3>
-      <ion-item ng-repeat="favor in onePartyFavor">
-      <ion-checkbox
-        ng-click="claimInviteFavorCheck = !claimInviteFavorCheck"
-        >
-        <ion-item
-          ng-model="claimInviteFavorCheck"
-          ng-class="claimInviteFavorCheck ? 'yeahman' : 'noman'">
-          {{favor.favorName}}
-        </ion-item>
-      </ion-checkbox>
+    <h3>Help out the party - pick a favor!</h3>
+    <ion-list ng-repeat="favor in onePartyFavor">
+
+      <ion-item
+      ng-model="favor"
+      ng-click="postOneFavorID(favor)">
+          {{favor.favor.favorName}}
+      <ion-item>
     </ion-list>
   </ion-content>
 </ion-view>
