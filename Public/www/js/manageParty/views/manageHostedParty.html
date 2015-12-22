@@ -1,37 +1,35 @@
 <ion-view title="Manage Your Party">
-  <div class="bar bar-header bar-royal">
-  <h1 class="title">Manage Your Party</h1>
-</div>
-  <ion-content>
-    <div class= 'list'>
-      <label class="item item-input item-floating-label">
-       <span class="input-label"><strong>Party Name: </strong></span>
-       <input placeholder="Change Party Name" type="text" value="{{}}">
-     </label>
-   </div>
-   <div class= 'list'>
-   <label class="item item-input item-floating-label">
-      <span class="input-label">Change Party Location: </span>
-      <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="location"></ion-google-place>
-   </label>
-    <label class="item item-input item-floating-label">
-       <span class="input-label">Pick a Date and Time: </span>
-       <input placeholder= "Date and Time" ng-model="partyDate" type="datetime-local" value="{{}}">
-    </label>
-    </div>
-    <div class="list">
-      <label class="item item-input item-floating-label">
-        <span class= "input-label">StretchGoal</span>
-        <input type="text" value"{{}}">
-      </label>
-    </div>
-    <div>
-      <label for="">
-        <span>
-        </span>
-        <input type="text" value"{{}}">
-      </label>
-    </div>
 
+  <ion-content>
+    <ion-padding>
+      <ion-item ng-init="loadOne();loadOneFavor();loadInvitedPeople()">
+
+        <label>
+          <span class="input-label">
+            <h1>{{oneParty.partyName}}</h1>
+          </span>
+        </label>
+        <h2>{{oneParty.partyType}} Party</h2>
+        <h2><strong>The Stretch Goal is : </strong>{{oneParty.stretchName}}</h2>
+        <progress></progress>
+        <h2><strong>Party Date: </strong>{{oneParty.partyDate | date: 'short'}}</h2>
+
+        <ion-list
+          show-delete="shouldShowDelete"
+          can-swipe="listCanSwipe">
+          <ion-item ng-repeat="favor in onePartyFavor">
+            <h3>{{favor.favorName}}</h3>
+            <span class="item-note">UserName</span>
+            <ion-option-button class="ion-minus-circled"
+                               ng-click="onePartyFavor.splice($index, 1)">
+              Delete
+            </ion-option-button>
+          </ion-item>
+          <ion-item ng-repeat="invitee in inviteList">
+            <h3>{{invitee.name}}</h3>
+          </ion-item>
+        </ion-list>
+      </ion-item>
+    </ion-padding>
   </ion-content>
 </ion-view>

@@ -14,7 +14,7 @@
       {
 
         //CORDOVA DEVICE//
-        console.log($cordovaDevice.getUUID());
+        // console.log($cordovaDevice.getUUID());
 
         //LOGIN USER AND ROUTE
       $scope.login = function(username, password){

@@ -10,16 +10,15 @@
       $stateParams,
       NavigationService
     ){
-
         //TOP LEVEL NAVIGATION//
       $scope.wizardGo = function(){
-        console.log('is this going to the wizard?');
         $state.go('wizard');
       };
       $scope.managePartyGo = function(){
-        $state.go('manageParty');
+        $state.go('manageLanding');
       };
       $scope.allPartiesGo = function(){
+        console.log('go go go ');
         $state.go('allParties');
       };
       $scope.profileGO = function(){

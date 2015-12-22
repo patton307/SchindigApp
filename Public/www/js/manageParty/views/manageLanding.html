@@ -1,0 +1,26 @@
+<ion-view>
+   <ion-nav-bar class="bar-stable">
+     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+     </ion-nav-back-button>
+   </ion-nav-bar>
+   <div class="bar bar-header bar-royal">
+       <h1 class= "title">Let's Manage Parties</h1>
+    </div>
+   <ion-content>
+     <div class="item item-divider">
+       <h1>Parties You Are Hosting</h1>
+     </div>
+     <ion-item
+       ui-sref="manageParty({partyID:party.partyID})"
+       ng-repeat="party in hostedParties"
+       class="card"
+       ng-model="party"
+       ng-click="viewOne(party)">
+      <div class="item item-text-wrap item-icon-right">
+        <h3>{{party.partyName}}</h3>
+        <p>{{party.partyDate}}</p>
+        <i class="icon ion-chevron-right"></i>
+      </div>
+    </ion-item>
+   </ion-content>
+ </ion-view>

@@ -17,14 +17,36 @@ public class Auth {
 
     public String device;
 
+    public String key;
+
     public String token;
 
-    public Auth(User user, String device, String token) {
+    public Auth() {
+
+    }
+    public Auth(User user, String device, String key, String token) {
+
         this.user = user;
         this.device = device;
+        this.key = key;
         this.token = token;
     }
+    public String getKey() {
 
+        return key;
+    }
+    public void setKey(String key) {
+
+        this.key = key;
+    }
+    public String getToken() {
+
+        return token;
+    }
+    public void setToken(String token) {
+
+        this.token = token;
+    }
     public User getUser() {
 
         return user;
@@ -48,13 +70,5 @@ public class Auth {
     public void setDevice(String device) {
 
         this.device = device;
-    }
-    public String getToken() {
-
-        return token;
-    }
-    public void setToken(String token) {
-
-        this.token = token;
     }
 }

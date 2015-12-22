@@ -11,7 +11,6 @@
       EventWizardService
     ){
       var vm = this;
-
       ////GET WIZARD DATA////
       EventWizardService.getWizard().then(function(data){
         $scope.wizardItems = data;
@@ -20,6 +19,7 @@
           var id = parseInt(nameId.nameId);
           for (var i = 0; i < data.data.length; i++) {
             if (i === id) {
+              console.log('wizard data',data.data[i]);
               return data.data[i-1];
             }
           }
@@ -29,18 +29,7 @@
       console.log('does this exist',$scope.partySubType);
     });
 
-    //////showSubtype()//////
-    // $scope.showSubtype = function(partyType){
-    //   if(partyType.subType[0] === 'null'){
-    //     return console.log('null');
-    //   } else {
-    //     console.log('this is in the showSubType Function',partyType);
-    //     return partyType;
-    //   }
-    // };
-
     /////POST NEW PARTY/////
-
 
     $scope.partyType='none';
     $scope.subType='none';
@@ -89,7 +78,7 @@
       var data = {
         party: {
           description: description,
-          location: location,
+          location: location.formatted_address,
           partyID: partyID,
           partyDate: partyDate
         }
@@ -219,7 +208,9 @@
         });
         console.log('this is my array',vm.favorArray);
         var partyID = +localStorage.getItem('partyID');
+        var rawUserID = +localStorage.getItem('userID');
         var data = {
+          userID: rawUserID,
           partyID: partyID,
           favorDump: vm.favorArray
         };
