@@ -142,27 +142,37 @@ public class MainController {
                 for (int i = 0; i < partyTypes.size(); i++) {
                     String partyType = partyTypes.get(i);
 
-                String subType;
-                subTypes.get(i);
-                if (subTypes != null) {
-                    subType = subTypes.get(i);
-                } else {
-                    subType = "No subType";
-                }
-                if (parties.totalPartyCount() < 50) {
-                    Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
-                            LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
-                            0, true, true, theme, "Valet");
-                    parties.save(P);
-                    for (Favor f : fav) {
-                        for (int z = 0; z < 5; z++) {
-                            FavorList newList = new FavorList(f, P, false);
-                            favlists.save(newList);
+                    String subType;
+                    subTypes.get(i);
+                    if (subTypes != null) {
+                        subType = subTypes.get(i);
+                    } else {
+                        subType = "No subType";
+                    }
+                    if (parties.totalPartyCount() < 50) {
+                        Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
+                                LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
+                                0, true, true, theme, "Valet");
+                        parties.save(P);
+                        for (Favor f : fav) {
+                            for (int z = 0; z < 5; z++) {
+                                FavorList newList = new FavorList(f, P, false);
+                                favlists.save(newList);
+                            }
                         }
                     }
                 }
-            }
-
+                    for (Party P : parties.findAll()) {
+                        for (int u = 0; u < userBuild.size(); u++) {
+                            User invUser = userBuild.get(u);
+                            ArrayList<Invite> inviteList = invites.findByParty(P);
+                            if (invites.totalInviteCount() < 300) {
+                                Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+                                invites.save(inv);
+                                u+=3;
+                                }
+                        }
+                    }
                 }
             }
         }
