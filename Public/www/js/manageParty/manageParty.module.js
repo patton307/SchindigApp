@@ -5,8 +5,12 @@
     .module('manageParty', [
       'ionic',
       'ngCordova',
-      'ion-google-place'
+      'ion-google-place',
+      'xeditable'
     ])
+    .run(function(editableOptions) {
+      editableOptions.theme = 'bs3';
+    })
     .config(function($stateProvider){
       $stateProvider
         .state('manageLanding', {

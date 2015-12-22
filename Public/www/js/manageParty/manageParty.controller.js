@@ -8,8 +8,10 @@
       $scope,
       $state,
       $stateParams,
-      ManagePartyService
+      ManagePartyService,
+      EventWizardService
     ){
+
       var vm = this;
       var rawUserID = +localStorage.getItem('userID')
         console.log('dingdong');
@@ -55,6 +57,32 @@
         ManagePartyService.getInvitedPeeps(rawPartyID).then(function(data){
           console.log('controller invites', data.data);
           $scope.inviteList = data.data;
+        });
+      };
+
+      $scope.getNameValue = function(value){
+        console.log('changed value',value);
+        $scope.partyName = value;
+        console.log('scoped value',$scope.partyName);
+      };
+      $scope.getDescriptionValue = function(descriptionValue){
+        console.log('changed descriptionValue',descriptionValue);
+        $scope.description = descriptionValue;
+        console.log('scoped description',$scope.description);
+      };
+      $scope.editData = function(partyName, description){
+        var partyID = +localStorage.getItem('OnePartyID');
+        console.log('what is this', description);
+        var data = {
+          party: {
+            partyName: partyName,
+            description: description,
+            partyID: partyID
+          }
+        };
+        EventWizardService.updateWizData(data).success(function(updatedWizData){
+          console.log('success', updatedWizData);
+          $state.go('home');
         });
       };
     });
