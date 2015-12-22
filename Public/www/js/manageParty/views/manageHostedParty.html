@@ -1,9 +1,13 @@
 <ion-view title="Manage Your Party">
-
-  <ion-content>
-    <ion-padding>
-      <ion-item ng-init="loadOne();loadOneFavor();loadInvitedPeople()">
-
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <div class="bar bar-header bar-royal">
+      <h1 class= "title">Let's Manage Parties</h1>
+   </div>
+  <ion-content ng-init="loadOne();loadOneFavor();loadInvitedPeople()">
+      <ion-item>
         <label>
           <span class="input-label">
             <h1>{{oneParty.partyName}}</h1>
@@ -13,23 +17,36 @@
         <h2><strong>The Stretch Goal is : </strong>{{oneParty.stretchName}}</h2>
         <progress></progress>
         <h2><strong>Party Date: </strong>{{oneParty.partyDate | date: 'short'}}</h2>
-
-        <ion-list
-          show-delete="shouldShowDelete"
-          can-swipe="listCanSwipe">
-          <ion-item ng-repeat="favor in onePartyFavor">
-            <h3>{{favor.favorName}}</h3>
-            <span class="item-note">UserName</span>
-            <ion-option-button class="ion-minus-circled"
-                               ng-click="onePartyFavor.splice($index, 1)">
-              Delete
-            </ion-option-button>
-          </ion-item>
-          <ion-item ng-repeat="invitee in inviteList">
-            <h3>{{invitee.name}}</h3>
-          </ion-item>
-        </ion-list>
       </ion-item>
-    </ion-padding>
+        <ion-list>
+          <ion-toggle ng-model="shouldShowDelete">
+            <strong>Remove Favors?</strong>
+          </ion-toggle>
+            <ion-list show-delete="shouldShowDelete">
+            <ion-item ng-repeat="favor in onePartyFavor">
+              <ion-delete-button
+                ng-click="onePartyFavor.splice($index, 1)"
+                class="ion-minus-circled"></ion-delete-button>
+              {{favor.favorName}}
+            </ion-item>
+          </ion-list>
+          <ion-list
+              can-swipe="listCanSwipe">
+            <strong>Guest List</strong>
+            <ion-item ng-repeat="invitee in inviteList">
+              <ion-option-button
+                ng-click=""
+                class="ion-ios-telephone button-positive"></ion-option-button>
+              {{invitee.name}}
+            </ion-item>
+          </ion-list>
+          <!-- <ion-item ng-repeat="invitee in inviteList">
+            <h3>{{invitee.name}}</h3>
+            <ion-option-button class="icon ion-ios-telephone-outline button-positive"
+                               ng-click="alert('{{invitee.name}}')">
+                               Remind
+            </ion-option-button>
+          </ion-item> -->
+        </ion-list>
   </ion-content>
 </ion-view>
