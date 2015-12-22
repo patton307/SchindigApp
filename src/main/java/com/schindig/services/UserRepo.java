@@ -14,7 +14,5 @@ public interface UserRepo extends CrudRepository<User, Integer> {
     User findOneByEmail(String email);
     User findOneByPhone(String phone);
 
-    //@Query("SELECT COUNT(c) FROM USER c")
-    //Integer userSize();
 
 }

@@ -31,7 +31,8 @@ public interface InviteRepo extends CrudRepository<Invite, Integer> {
     @Query("SELECT i FROM Invite i WHERE party = ?")
     ArrayList<Invite> findByParty(Party party);
 
-    @Query("SELECT COUNT(i) FROM Invite i")
-    Integer totalInviteCount();
+    @Query("SELECT i FROM Invite i WHERE party = ? AND user = ?")
+    Invite findByPartyAndUser(Party party, User user);
+
 
 }

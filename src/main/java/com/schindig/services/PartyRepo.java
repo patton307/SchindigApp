@@ -10,9 +10,6 @@ import java.util.ArrayList;
  */
 public interface PartyRepo extends CrudRepository<Party, Integer> {
 
-    @Query("SELECT COUNT(p) FROM Party p")
-    Integer totalPartyCount();
-
     @Query("SELECT partyType FROM Party")
     ArrayList<String> partyTypes();
 
@@ -21,5 +18,6 @@ public interface PartyRepo extends CrudRepository<Party, Integer> {
 
 //    @Query("SELECT subType FROM Party WHERE partyType = ?")
 //    ArrayList<String> partySubType(String subType);
+
 }
 
