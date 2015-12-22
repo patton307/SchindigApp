@@ -9,12 +9,22 @@
       $state,
       $stateParams,
       LoginRegisterService,
-      $cordovaDevice
+      $cordovaDevice,
+      $ionicPlatform
     )
       {
 
-        //CORDOVA DEVICE//
-        // console.log($cordovaDevice.getUUID());
+
+        // CORDOVA DEVICE//
+        var uuid;
+        $ionicPlatform.ready(function() {
+          var device = $cordovaDevice.getDevice();
+          uuid = device.uuid;
+          console.log("device uuid", device.uuid);
+      });
+
+      console.log("variable uuid", uuid);
+
 
         //LOGIN USER AND ROUTE
       $scope.login = function(username, password){
@@ -22,12 +32,14 @@
           username: username,
           password: password
         };
+        LoginRegisterService.uuidAuth(uuid);
         LoginRegisterService.login(loginData).then(function(data){
-          console.log('dog', data);
-          localStorage.setItem('userID', data.data);
-          $state.go('home');
+            localStorage.setItem('userID', data.data);
+            $state.go('home');
         });
+
         LoginRegisterService.login(loginData);
+
       };
 
       $scope.signUp = function(){

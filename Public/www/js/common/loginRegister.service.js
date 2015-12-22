@@ -8,16 +8,17 @@
       var ip = 'http://10.0.10.72';
       var registerUrl = ip + ':8080/user/create';
       var loginUrl = ip + ':8080/user/login';
-      // var uuidPostUrl = ip + ':8080/validate/' + uuid;
 
-      // var uuid = $cordovaDevice.getUUID();
 
-      // var uuidAuth = function() {
-      //   return $http.get(uuidPostUrl).success(function(data){
-      //     console.log(data);
-      //
-      //   })
-      // }
+      // var device = $cordovaDevice.getDevice();
+      // $scope.uuid = device.uuid;
+
+      var uuidAuth = function(uuid) {
+        console.log("testy", uuid);
+        return $http.get(ip + ":8080/validate/" +uuid).success(function(data){
+          console.log(data);
+        });
+      };
 
       var login = function(loginData) {
         return $http.post(loginUrl, loginData)
@@ -36,7 +37,8 @@
 
       return {
         createUser: createUser,
-        login: login
+        login: login,
+        uuidAuth: uuidAuth
       };
     });
 
