@@ -17,6 +17,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -155,8 +156,17 @@ public class MainController {
             Party p = new Party();
             p.userID = users.findOne(1).userID;
             p.partyName = "Party Name";
-            p.partyDate = "party Date";
+            p.partyDate = String.valueOf(LocalDateTime.now().plusDays(7));
             p.location = "1869 Montclair Dr, Mt. Pleasant SC";
+            p.byob = true;
+            p.themeCheck = true;
+            p.theme = "Check out my theme!";
+            p.description = "Party description goes here!";
+            p.partyType = "Christmas";
+            p.subType = "Naughty";
+            p.stretchName = "Stretch Name goes here!";
+            p.stretchGoal = 2000;
+            p.parking = "Valet";
             parties.save(p);
         }
         Party party2 = parties.findOne(2);
@@ -164,8 +174,17 @@ public class MainController {
             Party p = new Party();
             p.userID = users.findOne(2).userID;
             p.partyName = "Party Name";
-            p.partyDate = "party Date";
+            p.partyDate = String.valueOf(LocalDateTime.now().plusDays(7));
             p.location = "1869 Montclair Dr, Mt. Pleasant SC";
+            p.byob = true;
+            p.themeCheck = true;
+            p.theme = "Check out my theme!";
+            p.description = "Party description goes here!";
+            p.partyType = "Christmas";
+            p.subType = "Naughty";
+            p.stretchName = "Stretch Name goes here!";
+            p.stretchGoal = 2000;
+            p.parking = "Valet";
             parties.save(p);
         }
         Party party3 = parties.findOne(3);
@@ -173,8 +192,17 @@ public class MainController {
             Party p = new Party();
             p.userID = users.findOne(3).userID;
             p.partyName = "Party Name";
-            p.partyDate = "party Date";
+            p.partyDate = String.valueOf(LocalDateTime.now().plusDays(7));
             p.location = "1869 Montclair Dr, Mt. Pleasant SC";
+            p.byob = true;
+            p.themeCheck = true;
+            p.theme = "Check out my theme!";
+            p.description = "Party description goes here!";
+            p.partyType = "Christmas";
+            p.subType = "Naughty";
+            p.stretchName = "Stretch Name goes here!";
+            p.stretchGoal = 2000;
+            p.parking = "Valet";
             parties.save(p);
         }
 
@@ -212,6 +240,34 @@ public class MainController {
             f.favor = favors.findOne(1);
             f.party = parties.findOne(1);
             favlists.save(f);
+            FavorList f2 = new FavorList();
+            f.favor = favors.findOne(2);
+            f.party = parties.findOne(1);
+            favlists.save(f2);
+            FavorList f3 = new FavorList();
+            f.favor = favors.findOne(3);
+            f.party = parties.findOne(1);
+            favlists.save(f3);
+            FavorList f4 = new FavorList();
+            f.favor = favors.findOne(4);
+            f.party = parties.findOne(1);
+            favlists.save(f4);
+            FavorList f5 = new FavorList();
+            f.favor = favors.findOne(1);
+            f.party = parties.findOne(2);
+            favlists.save(f5);
+            FavorList f6 = new FavorList();
+            f.favor = favors.findOne(2);
+            f.party = parties.findOne(2);
+            favlists.save(f6);
+            FavorList f7 = new FavorList();
+            f.favor = favors.findOne(3);
+            f.party = parties.findOne(2);
+            favlists.save(f7);
+            FavorList f8 = new FavorList();
+            f.favor = favors.findOne(4);
+            f.party = parties.findOne(2);
+            favlists.save(f8);
         }
     }
 
@@ -336,12 +392,24 @@ public class MainController {
         for (int i = 0; i < parameters.favorDump.size(); i++) {
             Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
             Party party = parties.findOne(parameters.partyID);
-            FavorList favorList = new FavorList(fav, party);
+            User user = users.findOne(parameters.userID);
+            FavorList favorList = new FavorList(fav, party, user);
             favlists.save(favorList);
             Favor favor = favors.findOne(fav.favorID);
             newDump.add(favor);
         }
         return newDump;
+    }
+
+    @RequestMapping(path = "/party/{id}/claim", method = RequestMethod.POST)
+    public User claimFavor(@PathVariable("id") Integer id, @RequestBody Parameters p) {
+        User u = users.findOne(p.userID);
+        Party party = parties.findOne(id);
+        FavorList favor = favlists.findByFavorAndParty(p.favor, party);
+        favor.user = u;
+        favor.claimed = true;
+        favlists.save(favor);
+        return u;
     }
 
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
@@ -366,9 +434,9 @@ public class MainController {
         invites.save(invite);
     }
 
-    @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
-    public void rsvp(@RequestBody Parameters parameters) {
-
+    @RequestMapping(path = "/party/{id}/rsvp", method = RequestMethod.POST)
+    public void rsvp(@RequestBody Parameters parameters, @PathVariable("id") Integer id) {
+// needs to filter down to single party first.
         User user = parameters.user;
         user.invitedCount += 1;
         switch (parameters.rsvpStatus) {
@@ -398,6 +466,12 @@ public class MainController {
     @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
     public Party getParty(@PathVariable("id") int id) {
         return parties.findOne(id);
+    }
+
+    @RequestMapping(path = "/party/{id}/invites", method = RequestMethod.GET)
+    public ArrayList<Invite> getInvites(@PathVariable("id") Integer id) {
+        Party p = parties.findOne(id);
+        return invites.findByParty(p);
     }
 
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
@@ -464,13 +538,6 @@ public class MainController {
         ArrayList<Invite> inviteList = (ArrayList<Invite>) invites.findAll();
         ArrayList<Party> partyList = new ArrayList();
         for (Invite invite : inviteList) {
-//            String[] nameSplit = invite.name.split(" ");
-//            if (invite.user == u) {
-//                partyList.add(invite.party);
-//            } else if (u.firstName.equals(nameSplit[0])) {
-//                partyList.add(invite.party);
-//            } else if (u.lastName.equals(nameSplit[1])) {
-//                partyList.add(invite.party);
             if (u.email.equals(invite.email)) {
                 partyList.add(invite.party);
             } else if (u.phone.equals(invite.phone)) {

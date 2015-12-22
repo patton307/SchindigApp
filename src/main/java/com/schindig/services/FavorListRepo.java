@@ -2,9 +2,11 @@ package com.schindig.services;
 
 import com.schindig.entities.Favor;
 import com.schindig.entities.FavorList;
+import com.schindig.entities.Party;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +14,10 @@ import java.util.List;
  */
 public interface FavorListRepo extends CrudRepository<FavorList, Integer> {
 
-    List<FavorList> findByParty(Integer id);
+    ArrayList<FavorList> findByParty(Party party);
+
+    FavorList findByFavorAndParty(Favor favor, Party party);
+
+    Favor findByFavor(Favor id);
 
 }
