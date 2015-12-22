@@ -78,7 +78,7 @@
       var data = {
         party: {
           description: description,
-          location: location,
+          location: location.formatted_address,
           partyID: partyID,
           partyDate: partyDate
         }
@@ -208,7 +208,9 @@
         });
         console.log('this is my array',vm.favorArray);
         var partyID = +localStorage.getItem('partyID');
+        var rawUserID = +localStorage.getItem('userID');
         var data = {
+          userID: rawUserID,
           partyID: partyID,
           favorDump: vm.favorArray
         };
