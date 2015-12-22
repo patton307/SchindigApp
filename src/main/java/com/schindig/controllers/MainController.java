@@ -390,6 +390,9 @@ public class MainController {
         if (parameters.party.partyName != null) {
             check.partyName = parameters.party.partyName;
         }
+        if (parameters.party.description != null) {
+            check.description = parameters.party.description;
+        }
         if (parameters.party.partyDate != null) {
             check.partyDate = parameters.party.partyDate;
         }
