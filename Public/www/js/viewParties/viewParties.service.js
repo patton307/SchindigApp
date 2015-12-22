@@ -30,7 +30,7 @@
       });
     };
 
-    var getOneInvitedParty = function (partyID){
+    var getOneParty = function (partyID){
       partyID= partyID;
       return $http.get(ip + ':8080/party/'+partyID).success(function(data){
 
@@ -40,7 +40,15 @@
     var getPartyFavor = function(partyID){
         partyID = partyID;
         return $http.get(ip + ':8080/party/'+ partyID +'/favors').success(function(data){
-          
+
+        });
+      };
+
+      var favorClaim = function(partyID, favorData){
+        partyID = partyID;
+        favorData = favorData;
+        return $http.post(ip + ':8080/party/'+ partyID + '/claim', favorData).success(function(data){
+
         });
       };
 
@@ -51,8 +59,9 @@
       getHostedParties: getHostedParties,
       updatedHostedParties: updatedHostedParties,
       getInvitedParties: getInvitedParties,
-      getOneInvitedParty: getOneInvitedParty,
-      getPartyFavor : getPartyFavor
+      getOneParty: getOneParty,
+      getPartyFavor : getPartyFavor,
+      favorClaim: favorClaim
     };
   });
 

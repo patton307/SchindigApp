@@ -1,42 +1,45 @@
-<ion-view view-title="Parties">
+<ion-view view-title="All Your Parties">
   <ion-content>
     <div class= "list">
       <div class="item item-divider">
-        Parties you are Hosting
+        <h2>Parties You Are Hosting</h2>
       </div>
-      <div ng-repeat= "hostParty in hostedParties track by $index" class="card">
-        <div class="item item-divider">
-        {{hostParty.partyName}}
+        <ion-item
+        ui-sref="manageParty({partyID: party.partyID})"
+        ng-repeat="hostParty in hostedParties track by $index"
+        class="card"
+        ng-model="hostParty"
+        ng-click="getOneHostParty(hostParty)">
+        <div class= "item item-text-wrap item-icon-right">
+          <h2>{{hostParty.partyName}}</h2>
+          <p>{{hostParty.description}}</p>
+          <h3>{{hostParty.partyDate | date: 'short'}}</h3>
+          <i class="icon ion-chevron-right"></i>
         </div>
-        <div class="item item-text-wrap">
-        {{invParty.description}}
-        {{invParty.street1}}
-        {{invParty.street2}},
-        {{invParty.city}}
-        {{invParty.zip}}
-        </div>
-        <div class="item item-divider">
-        {{hostParty.partyDate | date: 'short'}}
-        </div>
-      </div>
+      </ion-item>
       <div class="item item-divider">
-        Parties Invited To
+        <h2>Parties You Are Invited To</h2>
       </div>
-      <div ng-repeat= "invParty in invitedParties track by $index" ng-model='invParty' ng-click="getOneInvParty(invParty)" class="card">
-        <div ui-sref= "invitedParty({partyID: invParty.partyID})" class="item item-divider">
-        {{invParty.partyName}}
-        </div>
-        <div class="item item-text-wrap">
-        {{invParty.description}}
-        </div>
-        <div class="item item-divider">
-        {{invParty.partyDate | date}}&nbsp&nbsp&nbsp&nbsp&nbsp
-        {{invParty.street1}}
-        {{invParty.street2}},
-        {{invParty.city}}
-        {{invParty.zip}}
-        </div>
-      </div>
+      <ion-item
+          ui-sref= "invitedParty({partyID: invParty.partyID})"
+          ng-repeat= "invParty in invitedParties track by $index"
+          ng-model="invParty"
+          ng-click="getOneInvParty(invParty)"
+          class="card">
+          <div class= "item item-text-wrap item-icon-right">
+            <h2>{{invParty.partyName}}</h2>
+            <p>{{invParty.description}}</p>
+            <h3>{{invParty.partyDate | date: 'short'}}</h3>
+            <i class="icon ion-chevron-right"></i>
+          </div>
+          <div class= "item item-text-wrap">
+            {{invParty.partyDate | date}}&nbsp&nbsp&nbsp&nbsp&nbsp
+            {{invParty.street1}}
+            {{invParty.street2}},
+            {{invParty.city}}
+            {{invParty.zip}}
+          </div>
+      </ion-item>
     </div>
   </ion-content>
 </ion-view>
