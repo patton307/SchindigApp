@@ -4,35 +4,55 @@
   .module('viewParties')
   .factory('ViewPartyService', function($http, $state){
     var vm = this;
-    var ip = 'http://localhost';
-    var viewHostedPartiesURL = ip + ':8080/party/host';
+    var ip = 'http://10.0.10.72';
+    var viewHostedPartiesURL = ip + ':8080/parties/host';
     var viewInvitedPartiesURL = ip +':8080/parties/user';
+    var getOneInvitedPartyURL = ip +':8080/party/';
+
 
     var getHostedParties = function(userID){
-      console.log('dog');
       return $http.post(viewHostedPartiesURL, userID)
         .success(function(data){
-          console.log('succes view', data);
+
         });
     };
 
     var updatedHostedParties = function (data){
       return $http.patch(updatedHostedPartiesURL, data)
         .success(function(data){
-          console.log('success updateParty', data);
+
         });
     };
 
-    var getUserParties = function (){
-      $http.get (viewInvitedPartiesURL);
+    var getInvitedParties = function (userID){
+      return $http.post (viewInvitedPartiesURL, userID)
+      .success(function(data){
+      });
     };
+
+    var getOneInvitedParty = function (partyID){
+      partyID= partyID;
+      return $http.get(ip + ':8080/party/'+partyID).success(function(data){
+
+      });
+    };
+
+    var getPartyFavor = function(partyID){
+        partyID = partyID;
+        return $http.get(ip + ':8080/party/'+ partyID +'/favors').success(function(data){
+          
+        });
+      };
+
 
 
 
     return {
       getHostedParties: getHostedParties,
       updatedHostedParties: updatedHostedParties,
-      getUserParties: getUserParties
+      getInvitedParties: getInvitedParties,
+      getOneInvitedParty: getOneInvitedParty,
+      getPartyFavor : getPartyFavor
     };
   });
 

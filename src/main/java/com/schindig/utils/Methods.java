@@ -1,33 +1,47 @@
 package com.schindig.utils;
 import com.schindig.AppConfig;
 import com.schindig.controllers.MainController;
-import com.schindig.entities.Invite;
-import com.schindig.entities.Party;
-import com.schindig.entities.User;
-import com.schindig.entities.Wizard;
+import com.schindig.entities.*;
+import com.schindig.services.AuthRepo;
 import com.schindig.services.InviteRepo;
 import com.schindig.services.PartyRepo;
 import com.schindig.services.UserRepo;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
+import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.web.util.CookieGenerator;
 
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.stream.Collectors;
 
 /**
  * Created by Agronis on 12/9/15.
  */
 public class Methods extends MainController {
+
+
 
     public static String readFile(String fileName) {
         File f = new File(fileName);
@@ -113,5 +127,54 @@ public class Methods extends MainController {
         }
         System.out.println("---Done---");
     }
-    
+
+    public static Boolean initApp(String device, AuthRepo arepo) {
+        Auth a = arepo.findByDevice(device);
+        return a != null;
+    }
+
+    public static KeyPair keyMaker() throws NoSuchAlgorithmException {
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        return KeyPairGenerator.getInstance("RSA").generateKeyPair();
+    }
+
+    public static void newDevice(User user, String device, AuthRepo repo) throws NoSuchAlgorithmException, NoSuchPaddingException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
+        KeyPair keyPair = keyMaker();
+        Auth auth = repo.findByDevice(device);
+        if (auth==null) {
+            final Cipher cipher = Cipher.getInstance("RSA");
+            final String token = device.concat(user.username).concat(String.valueOf(user.password));
+            cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic());
+            byte[] encryptedToken = cipher.doFinal(token.getBytes());
+            String encryptString = new String(Base64.getEncoder().encode(encryptedToken));
+            Auth a = new Auth(user, device, encryptString, token);
+            repo.save(a);
+        }
+    }
+
+    public static Boolean validate(User user, String device, AuthRepo repo) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
+        KeyPair keyPair = keyMaker();
+        Auth a = repo.findByDevice(device);
+        if (a!=null) {
+            final Cipher cipher = Cipher.getInstance("RSA");
+            final String token = device.concat(user.username).concat(String.valueOf(user.password));
+            cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic());
+            byte[] encryptedToken = cipher.doFinal(token.getBytes());
+            String encryptString = new String(Base64.getEncoder().encode(encryptedToken));
+
+            cipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
+            byte[] ciphertoken = Base64.getDecoder().decode(encryptString.getBytes());
+            byte[] decrypt = cipher.doFinal(ciphertoken);
+            String tokenTest = new String(decrypt);
+            if (!a.token.equals(tokenTest)) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
 }
+    
+

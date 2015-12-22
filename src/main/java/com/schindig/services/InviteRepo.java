@@ -6,6 +6,7 @@ import com.schindig.entities.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,4 +25,9 @@ public interface InviteRepo extends CrudRepository<Invite, Integer> {
     @Query("SELECT party FROM Invite i WHERE user = ?")
     List<Party> findInvite(User user);
 
+    @Query("SELECT COUNT(i) FROM Invite i WHERE user = ?")
+    Integer findInviteCount(Party party);
+
+    @Query("SELECT i FROM Invite i WHERE party = ?")
+    ArrayList<Invite> findByParty(Party party);
 }

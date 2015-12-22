@@ -18,7 +18,6 @@ public class User {
     @Id
     public Integer userID;
 
-
 //    @Column(nullable = false)
 //    @Size(min = 4, message = "Username must be a minimum of 4 characters in length.")
     public String username;
@@ -74,14 +73,14 @@ public class User {
         this.inviteCount = inviteCount;
         this.invitedCount = invitedCount;
     }
+    public User(String username, String password, String firstName, String lastName, String email, String phone) {
 
-    public User(User user) {
-        this.username = user.username;
-        this.password = user.password;
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.email = user.email;
-        this.phone = user.phone;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
     }
     public Integer getUserID() {
 
@@ -127,5 +126,48 @@ public class User {
 
         return invitedCount;
     }
+    public void setUserID(Integer userID) {
 
+        this.userID = userID;
+    }
+    public void setUsername(String username) {
+
+        this.username = username;
+    }
+    public void setPassword(String password) {
+
+        this.password = password;
+    }
+    public void setFirstName(String firstName) {
+
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+
+        this.lastName = lastName;
+    }
+    public void setEmail(String email) {
+
+        this.email = email;
+    }
+    public void setPhone(String phone) {
+
+        this.phone = phone;
+    }
+    public void setPartyCount(Integer partyCount) {
+
+        this.partyCount = partyCount;
+    }
+    public void setHostCount(Integer hostCount) {
+
+        this.hostCount = hostCount;
+    }
+    public void setInviteCount(Integer inviteCount) {
+
+        this.inviteCount = inviteCount;
+    }
+    public void setInvitedCount(Integer invitedCount) {
+
+        this.invitedCount = invitedCount;
+    }
 }

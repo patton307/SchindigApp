@@ -33,4 +33,6 @@ public class Parameters {
 
     public Integer userID;
 
+    public String device;
+
 }
