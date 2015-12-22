@@ -13,13 +13,13 @@ public interface PartyRepo extends CrudRepository<Party, Integer> {
     @Query("SELECT COUNT(p) FROM Party p")
     Integer totalPartyCount();
 
-    @Query("SELECT DISTINCT partyType FROM Party p")
+    @Query("SELECT partyType FROM Party")
     ArrayList<String> partyTypes();
 
     @Query("SELECT DISTINCT subType FROM Party")
     ArrayList<String> subTypes();
 
-    @Query("SELECT DISTINCT subType FROM Party WHERE partyType = ?")
-    ArrayList<String> partySubType(String subType);
+//    @Query("SELECT subType FROM Party WHERE partyType = ?")
+//    ArrayList<String> partySubType(String subType);
 }
 

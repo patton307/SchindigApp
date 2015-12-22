@@ -14,7 +14,8 @@ public class Party {
     @Id
     public Integer partyID;
 
-    public Integer userID;
+    @OneToOne
+    public User host;
 
 //    @Column(nullable = false)
     public String partyName;
@@ -52,9 +53,9 @@ public class Party {
 
     public Party(){}
 
-    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location) {
+    public Party(User host, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location) {
 
-        this.userID = userID;
+        this.host = host;
         this.partyName = partyName;
         this.partyType = partyType;
         this.description = description;
@@ -63,9 +64,9 @@ public class Party {
         this.partyDate = partyDate;
         this.location = location;
     }
-    public Party(Integer userID, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location, String stretchName, Integer stretchGoal, Integer stretchStatus, Boolean byob, Boolean themeCheck, String theme, String parking) {
+    public Party(User host, String partyName, String partyType, String description, String subType, LocalDateTime createDate, String partyDate, String location, String stretchName, Integer stretchGoal, Integer stretchStatus, Boolean byob, Boolean themeCheck, String theme, String parking) {
 
-        this.userID = userID;
+        this.host = host;
         this.partyName = partyName;
         this.partyType = partyType;
         this.description = description;
@@ -81,8 +82,6 @@ public class Party {
         this.theme = theme;
         this.parking = parking;
     }
-
-
 
 
     public String getDescription() {
@@ -146,9 +145,9 @@ public class Party {
 
         return parking;
     }
-    public Integer getUserID() {
+    public User getHost() {
 
-        return userID;
+        return host;
     }
     public Boolean getThemeCheck() {
 
@@ -158,9 +157,9 @@ public class Party {
 
         this.partyID = partyID;
     }
-    public void setUserID(Integer userID) {
+    public void setHost(User host) {
 
-        this.userID = userID;
+        this.host = host;
     }
     public void setPartyName(String partyName) {
 
