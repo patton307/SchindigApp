@@ -35,12 +35,12 @@
 
 
       $scope.getOneInvParty = function (party){
-        localStorage.setItem('OnePartyID', party.partyID);
+        localStorage.setItem('oneInvPartyID', party.partyID);
       };
 
       $scope.loadOneInvParty = function(){
-        var partyIdItem = +localStorage.getItem('OnePartyID');
-        ViewPartyService.getOneInvitedParty(partyIdItem).then(function(data){
+        var partyIdItem = +localStorage.getItem('oneInvPartyID');
+        ViewPartyService.getOneParty(partyIdItem).then(function(data){
           $scope.invPartyOne = data.data;
         });
       };
@@ -54,6 +54,17 @@
         .error(function(data){
           console.log('error');
         });
+
+      $scope.getOneHostParty = function (party) {
+        localStorage.setItem('oneHostPartyID', party.partyID);
+      };
+
+      $scope.loadOneHostParty = function(){
+        var partyIdItem = +localStorage.getItem('oneHostPartyID');
+        ViewPartyService.getOneParty(partyIdItem).then(function(data){
+          $scope.hostPartyOne = data.data;
+        });
+      };
 
 
         $scope.loadOneFavor = function(){

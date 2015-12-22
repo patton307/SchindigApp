@@ -30,7 +30,7 @@
       });
     };
 
-    var getOneInvitedParty = function (partyID){
+    var getOneParty = function (partyID){
       partyID= partyID;
       return $http.get(ip + ':8080/party/'+partyID).success(function(data){
 
@@ -51,7 +51,7 @@
       getHostedParties: getHostedParties,
       updatedHostedParties: updatedHostedParties,
       getInvitedParties: getInvitedParties,
-      getOneInvitedParty: getOneInvitedParty,
+      getOneParty: getOneParty,
       getPartyFavor : getPartyFavor
     };
   });
