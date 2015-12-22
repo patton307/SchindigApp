@@ -135,7 +135,7 @@ public class MainController {
 
         String description = "Lorem ipsum dolor sit amet, eu ligula faucibus at egestas, est nibh at non in, nec nec massa fusce vitae, lacus at risus, arcu proin pede. ";
         String theme = "This is just a placeholder for what could be an insane theme.";
-        String location = "220 E Bryan St, Savannah, GA 31401";
+        String local = "220 E Bryan St, Savannah, GA 31401";
         String stretchName = "One insane crazy impossible goal.";
 
 
@@ -154,7 +154,7 @@ public class MainController {
                 }
                 if (parties.totalPartyCount() < 50) {
                     Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
-                            LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), location, stretchName, 5000,
+                            LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                             0, true, true, theme, "Valet");
                     parties.save(P);
                     for (Favor f : fav) {
@@ -384,49 +384,56 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
-    public Party updateParty(@RequestBody Parameters parameters, HttpSession session) {
+    public Party updateParty(@RequestBody Parameters parameters) {
 
         Party check = parties.findOne(parameters.party.partyID);
-        if (parameters.party.partyName != null) {
-            check.partyName = parameters.party.partyName;
-        }
-        if (parameters.party.partyDate != null) {
-            check.partyDate = parameters.party.partyDate;
-        }
-        if (parameters.party.partyType != null) {
-            check.partyType = parameters.party.partyType;
-        }
-        if (parameters.party.subType != null) {
-            check.subType = parameters.party.subType;
-        }
-        if (parameters.party.location != null) {
-            check.location = parameters.party.location;
-        }
-        if (parameters.party.stretchGoal != null) {
-            check.stretchGoal = parameters.party.stretchGoal;
-        }
-        if (parameters.party.stretchName != null) {
-            check.stretchName = parameters.party.stretchName;
-        }
-        if (parameters.party.themeCheck) {
-            check.themeCheck = true;
-            check.theme = parameters.party.theme;
-        }
-        if (parameters.party.byob) {
-            check.byob = true;
-        }
-        if (parameters.party.parking != null) {
-            check.parking = parameters.party.parking;
-        }
-        if (parameters.inviteDump != null) {
-            User user = users.findOne(check.host.userID);
-            for (int i = 0; i < parameters.inviteDump.size(); i++) {
-                Invite invite = parameters.inviteDump.get(i);
-                Methods.newInvite(invite, invites, check);
-                user.invitedCount += 1;
+
+            if (parameters.party.description != null) {
+                check.description = parameters.party.description;
             }
-        }
-        parties.save(check);
+            if (parameters.party.partyName != null) {
+                check.partyName = parameters.party.partyName;
+            }
+            if (parameters.party.partyDate != null) {
+                check.partyDate = parameters.party.partyDate;
+            }
+            if (parameters.party.partyType != null) {
+                check.partyType = parameters.party.partyType;
+            }
+            if (parameters.party.subType != null) {
+                check.subType = parameters.party.subType;
+            }
+            if (parameters.party.local != null) {
+                check.local = parameters.party.local;
+            }
+            if (parameters.party.stretchGoal != null) {
+                check.stretchGoal = parameters.party.stretchGoal;
+            }
+            if (parameters.party.stretchName != null) {
+                check.stretchName = parameters.party.stretchName;
+            }
+            if (parameters.party.themeCheck) {
+                check.themeCheck = true;
+                check.theme = parameters.party.theme;
+            }
+            if (parameters.party.byob) {
+                check.byob = true;
+            }
+            if (parameters.party.parking != null) {
+                check.parking = parameters.party.parking;
+            }
+
+            if (parameters.inviteDump != null) {
+                User user = users.findOne(check.host.userID);
+                for (int i = 0; i < parameters.inviteDump.size(); i++) {
+                    Invite invite = parameters.inviteDump.get(i);
+                    Methods.newInvite(invite, invites, check);
+                    user.invitedCount += 1;
+                }
+            }
+
+            parties.save(check);
+
         return check;
     }
 
