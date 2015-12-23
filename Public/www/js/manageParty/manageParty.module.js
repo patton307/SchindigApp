@@ -34,6 +34,4 @@
           controller: 'ManagePartyController'
         })
     });
-
-
 }());

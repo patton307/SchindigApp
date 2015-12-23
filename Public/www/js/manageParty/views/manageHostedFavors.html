@@ -1,4 +1,4 @@
-<ion-view title="Manage Your Favors">
+<ion-view>
   <ion-nav-bar class="bar-stable">
     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
     </ion-nav-back-button>
@@ -25,8 +25,7 @@
     <ion-list>
       <ion-checkbox
         ng-repeat="item in onePartyFavor"
-        ng-click="favorHostCheck = !favorHostCheck"
-        >
+        ng-click="favorHostCheck = !favorHostCheck">
         <ion-item
           ng-model="favorHostCheck"
           id="{{item}}"

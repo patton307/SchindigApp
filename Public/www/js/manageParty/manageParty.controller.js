@@ -11,7 +11,6 @@
       ManagePartyService,
       EventWizardService
     ){
-
       var vm = this;
       var rawUserID = +localStorage.getItem('userID')
         console.log('dingdong');
@@ -28,9 +27,7 @@
             console.log('error');
           })
 
-
       ////MANAGE/EDIT HOSTED PARTIES////
-
       $scope.viewOne = function(party){
         localStorage.setItem('OnePartyID', party.partyID);
       };
@@ -41,8 +38,6 @@
           $scope.oneParty = data.data;
         });
       };
-
-
       $scope.loadOneFavor = function(){
         var rawPartyID = +localStorage.getItem('OnePartyID');
         ManagePartyService.getPartyFavor(rawPartyID).then(function(data){
@@ -63,7 +58,6 @@
       $scope.goToManageInvites = function(){
         $state.go('manageInvites')
       };
-
       $scope.getNameValue = function(value){
         console.log('changed value',value);
         $scope.partyName = value;
@@ -96,5 +90,4 @@
         });
       };
     });
-
 }());

@@ -7,12 +7,28 @@
       <h1 class= "title">Let's Manage Parties</h1>
    </div>
   <ion-content ng-init="loadOne()">
-    <ion-item><h1>Click To Edit</h1></ion-item>
-    <ion-item>Party Name: <input type="text" ng-model="partyName" ng-change='getNameValue(partyName)'>{{oneParty.partyName}}</ion-item>
-    <ion-item>Party Description: <input type="text" ng-model="description" ng-change='getDescriptionValue(description)' placeholder="{{oneParty.description}}"></ion-item>
+    <ion-item>Click To Edit</ion-item>
+    <ion-item>Party Name:
+      <input
+        type="text"
+        ng-model="partyName"
+        ng-change='getNameValue(partyName)'
+        placeholder="{{oneParty.partyName}}">
+    </ion-item>
+    <ion-item>Party Description:
+      <input
+        type="text"
+        ng-model="description"
+        ng-change='getDescriptionValue(description)'
+        placeholder="{{oneParty.description}}">
+    </ion-item>
     <ion-item>
        <span class="input-label">Where the Party At? </span>
-       <ion-google-place  placeholder= "{{oneParty.location}}" ng-model="location"ng-change="getLocationValue(location)"></ion-google-place>
+       <ion-google-place
+         placeholder= "{{oneParty.location}}"
+         ng-model="location"
+         ng-change="getLocationValue(location)">
+       </ion-google-place>
     </ion-item>
     <button
       ng-click="goToManageFavor()"
@@ -29,6 +45,5 @@
       class="button button-full button-positive">
      Submit Edit
     </button>
-
   </ion-content>
 </ion-view>

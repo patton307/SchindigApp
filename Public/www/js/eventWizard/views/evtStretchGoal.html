@@ -19,6 +19,8 @@
         </strong>
         </div>
       </ion-toggle>
+      <input ng-model="themeVal" type="text" ng-show="themeCheck" placeholder="Whats the theme?">
+
       <ion-toggle
         ng-click="byobCheck = !byobCheck"
         toggle-class="toggle-calm">
@@ -47,7 +49,7 @@
         <input placeholder="How Much is This Going to Cost" ng-model="stretchGoal" type="number">
       </label>
       <button
-        ng-click="stretchGoalData(stretchGoal, stretchName)"
+        ng-click="stretchGoalData(stretchGoal, stretchName, themeVal)"
         class="button button-full button-positive">
        Submit Stretchgoooooooal
       </button>

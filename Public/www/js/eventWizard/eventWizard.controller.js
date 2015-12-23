@@ -106,11 +106,9 @@
 
      ////STRETCHGOAL PATCH and SCOPES////
 
-     $scope.stretchGoalData = function (stretchGoal, stretchName){
+     $scope.stretchGoalData = function (stretchGoal, stretchName, themeVal){
        var byobElements = document.getElementsByClassName('byob');
        var themeElements = document.getElementsByClassName('theme');
-       console.log(themeElements);
-       console.log(byobElements);
        var byobStatus;
        var themeStatus;
        if(byobElements.length != 0){
@@ -127,7 +125,7 @@
        var partyID = +localStorage.getItem('partyID');
        var data = {
          party: {
-           theme: themeStatus,
+           theme: themeVal,
            byob: byobStatus,
            stretchGoal: stretchGoal,
            stretchName: stretchName,
@@ -139,8 +137,6 @@
          $state.go('favors');
        });
      };
-
-
     })
 
 
@@ -256,9 +252,10 @@
       /////ADD FAVOR TO DATA/////
       $scope.addFavorToData = function(favorData){
         var partyID = +localStorage.getItem('partyID');
+        var userID = +localStorage.getItem('userID');
         var favorData = {
           favor: {
-            favorName: 'favorData'
+            favorName: favorData
           },
           partyID: partyID
         };
