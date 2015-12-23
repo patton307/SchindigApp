@@ -146,32 +146,18 @@ public class MainController {
                     } else {
                         subType = "No subType";
                     }
-                    if (parties.count() < 10) {
+                    if (parties.count() <= 10) {
                         Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                                 0, true, true, theme, "Valet");
                         parties.save(P);
-                        ArrayList<FavorList> favList = favlists.findAllByParty(P);
-                            for (int z = 0; z < 5; z++) {
-                                for (Favor f : fav) {
-                                    if (favList.size()< 10) {
-                                        FavorList newList = new FavorList(f, P, false);
-                                        favlists.save(newList);
-                                    }
+                        for (int u = 0; u < userBuild.size()-10; u++) {
+                            User invUser = userBuild.get(u);
+                            if (invites.count() < 10) {
+                                Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+                                invites.save(inv);
+                                u += 3;
                             }
-                        }
-                    }
-                }
-                for (Party P : parties.findAll()) {
-                    if (parties.count() > 10) {
-                        break;
-                    }
-                    for (int u = 0; u < userBuild.size(); u++) {
-                        User invUser = userBuild.get(u);
-                        if (invites.count() < 10) {
-                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
-                            invites.save(inv);
-                            u += 3;
                         }
                     }
                 }
