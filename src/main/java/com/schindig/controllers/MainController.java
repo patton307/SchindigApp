@@ -114,64 +114,64 @@ public class MainController {
         }
 
 
-        ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
-        if (userBuild.size() < 1) {
-            String fileContent = Methods.readFile("users.csv");
-
-            String[] lines = fileContent.split("\n");
-            for (String line : lines) {
-                String randomNumber = RandomStringUtils.randomNumeric(10);
-                String[] columns = line.split(",");
-                User u = new User(columns[0], columns[1], columns[2], columns[3], columns[2].concat(columns[4]), randomNumber);
-                userBuild.add(u);
-                users.save(u);
-            }
-
-            String description = "Lorem ipsum dolor sit amet, eu ligula faucibus at egestas, est nibh at non in, nec nec massa fusce vitae, lacus at risus, arcu proin pede. ";
-            String theme = "This is just a placeholder for what could be an insane theme.";
-            String local = "220 E Bryan St, Savannah, GA 31401";
-            String stretchName = "One insane crazy impossible goal.";
-
-
-            ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
-
-            for (User user : userBuild) {
-                for (int i = 0; i < partyTypes.size(); i++) {
-                    String partyType = partyTypes.get(i);
-
-                    String subType;
-                    subTypes.get(i);
-                    if (subTypes != null) {
-                        subType = subTypes.get(i);
-                    } else {
-                        subType = "No subType";
-                    }
-                    if (parties.count() < 50) {
-                        Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
-                                LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
-                                0, true, true, theme, "Valet");
-                        parties.save(P);
-                        for (Favor f : fav) {
-                            for (int z = 0; z < 5; z++) {
-                                FavorList newList = new FavorList(f, P, false);
-                                favlists.save(newList);
-                            }
-                        }
-                    }
-                }
-                for (Party P : parties.findAll()) {
-                    for (int u = 0; u < userBuild.size(); u++) {
-                        User invUser = userBuild.get(u);
-                        ArrayList<Invite> inviteList = invites.findByParty(P);
-                        if (invites.count() < 300) {
-                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
-                            invites.save(inv);
-                            u += 3;
-                        }
-                    }
-                }
-            }
-        }
+//        ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
+//        if (userBuild.size() < 1) {
+//            String fileContent = Methods.readFile("users.csv");
+//
+//            String[] lines = fileContent.split("\n");
+//            for (String line : lines) {
+//                String randomNumber = RandomStringUtils.randomNumeric(10);
+//                String[] columns = line.split(",");
+//                User u = new User(columns[0], columns[1], columns[2], columns[3], columns[2].concat(columns[4]), randomNumber);
+//                userBuild.add(u);
+//                users.save(u);
+//            }
+//
+//            String description = "Lorem ipsum dolor sit amet, eu ligula faucibus at egestas, est nibh at non in, nec nec massa fusce vitae, lacus at risus, arcu proin pede. ";
+//            String theme = "This is just a placeholder for what could be an insane theme.";
+//            String local = "220 E Bryan St, Savannah, GA 31401";
+//            String stretchName = "One insane crazy impossible goal.";
+//
+//
+//            ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
+//
+//            for (User user : userBuild) {
+//                for (int i = 0; i < partyTypes.size(); i++) {
+//                    String partyType = partyTypes.get(i);
+//
+//                    String subType;
+//                    subTypes.get(i);
+//                    if (subTypes != null) {
+//                        subType = subTypes.get(i);
+//                    } else {
+//                        subType = "No subType";
+//                    }
+//                    if (parties.count() < 50) {
+//                        Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
+//                                LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
+//                                0, true, true, theme, "Valet");
+//                        parties.save(P);
+//                        for (Favor f : fav) {
+//                            for (int z = 0; z < 5; z++) {
+//                                FavorList newList = new FavorList(f, P, false);
+//                                favlists.save(newList);
+//                            }
+//                        }
+//                    }
+//                }
+//                for (Party P : parties.findAll()) {
+//                    for (int u = 0; u < userBuild.size(); u++) {
+//                        User invUser = userBuild.get(u);
+//                        ArrayList<Invite> inviteList = invites.findByParty(P);
+//                        if (invites.count() < 300) {
+//                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+//                            invites.save(inv);
+//                            u += 3;
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
 
