@@ -16,14 +16,15 @@
 
 
         // CORDOVA DEVICE//
-        var uuid;
-        $ionicPlatform.ready(function() {
-          var device = $cordovaDevice.getDevice();
-          uuid = device.uuid;
-          console.log("device uuid", device.uuid);
-      });
-
-      console.log("variable uuid", uuid);
+      //   var uuid;
+      //   $ionicPlatform.ready(function() {
+      //     var device = $cordovaDevice.getDevice();
+      //     uuid = device.uuid;
+      //     console.log("device uuid", device.uuid);
+      //     LoginRegisterService.uuidAuth(uuid);
+      // });
+      //
+      // console.log("variable uuid", uuid);
 
 
         //LOGIN USER AND ROUTE
@@ -32,7 +33,7 @@
           username: username,
           password: password
         };
-        LoginRegisterService.uuidAuth(uuid);
+        //UNCOMMENT OUT WHEN UUID IMPLEMENTED// LoginRegisterService.uuidAuth(uuid);
         LoginRegisterService.login(loginData).then(function(data){
             localStorage.setItem('userID', data.data);
             $state.go('home');

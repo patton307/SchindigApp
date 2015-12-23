@@ -8,6 +8,7 @@
       $scope,
       $state,
       $stateParams,
+      $ionicPopup,
       ViewPartyService
 
     ){
@@ -19,14 +20,9 @@
       $scope.favorData = 'favorData;';
 
       var rawUserID = +localStorage.getItem('userID');
-
-
       var userID = {
       userID: rawUserID
-    };
-
-
-
+    };//THIS IS PROBABLY USED, BLAKE IS STUPID
 
     //INVITED PARTIES GET
     ViewPartyService.getInvitedParties(userID)
@@ -36,7 +32,6 @@
       .error(function(data){
         console.log('error');
       });
-
 
       $scope.getOneInvParty = function (party){
         localStorage.setItem('oneInvPartyID', party.partyID);
@@ -49,7 +44,6 @@
         });
       };
 
-
       //HOSTED PARTIES GET
       ViewPartyService.getHostedParties(userID)
         .success(function(hostData){
@@ -58,11 +52,9 @@
         .error(function(data){
           console.log('error');
         });
-
       $scope.getOneHostParty = function (party) {
         localStorage.setItem('oneHostPartyID', party.partyID);
       };
-
       $scope.loadOneHostParty = function(){
         var partyIdItem = +localStorage.getItem('oneHostPartyID');
         ViewPartyService.getOneParty(partyIdItem).then(function(data){
@@ -72,7 +64,6 @@
 
 
         //FAVOR CLAIMING//
-
       $scope.loadOneFavor = function(){
           var rawPartyID = +localStorage.getItem('oneInvPartyID');
           ViewPartyService.getPartyFavor(rawPartyID).then(function(data){
@@ -81,24 +72,46 @@
         });
       };
 
-      $scope.postOneFavorID = function(favor){
-        var rawPartyID = +localStorage.getItem('oneInvPartyID');
-        console.log(favor);
-        var data = {
-          favor: {
-          favorID: favor.favorID
-          },
-          userID: rawUserID
-        };
-        console.log('postFavor', data);
-        ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
-          console.log('return from claim', data);
+      $scope.showFavorConfirm = function(favor){
+        var favorClaimPopup = $ionicPopup.confirm ({
+          title: 'Claim Party Favor?',
+          template: 'Are you REALLY going to bring this?'
+        });
+        favorClaimPopup.then (function(res){
+          if(res){
+            var rawPartyID = +localStorage.getItem('oneInvPartyID');
+            console.log(favor);
+            var data = {
+              favor: {
+              favorID: favor.favorID
+              },
+              userID: rawUserID
+            };
+            console.log('postFavor', data);
+            ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
+              console.log('return from claim', data);
+            });
+          }
+          else {
+            alert("Alrighty Then...");
+          }
         });
       };
 
 
-
+      // $scope.postOneFavorID = function(favor){
+      //   var rawPartyID = +localStorage.getItem('oneInvPartyID');
+      //   console.log(favor);
+      //   var data = {
+      //     favor: {
+      //     favorID: favor.favorID
+      //     },
+      //     userID: rawUserID
+      //   };
+      //   console.log('postFavor', data);
+      //   ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
+      //     console.log('return from claim', data);
+      //   });
+      // };
     });
-
-
 }());

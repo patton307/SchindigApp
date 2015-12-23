@@ -37,7 +37,6 @@
         url: '/createNewUser',
         templateUrl: 'js/common/views/createNewUser.html',
         controller: 'LoginRegisterController'
-
       });
     });
 
