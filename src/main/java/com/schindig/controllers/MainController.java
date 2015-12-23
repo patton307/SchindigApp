@@ -151,8 +151,8 @@ public class MainController {
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                                 0, true, true, theme, "Valet");
                         parties.save(P);
-                        for (Favor f : fav) {
                             for (int z = 0; z < 5; z++) {
+                                for (Favor f : fav) {
                                 FavorList newList = new FavorList(f, P, false);
                                 favlists.save(newList);
                             }
