@@ -16,8 +16,10 @@ public interface FavorListRepo extends CrudRepository<FavorList, Integer> {
 
     ArrayList<FavorList> findByParty(Party party);
 
-    @Query("SELECT (f) FROM FavorList f WHERE favor = ? AND party = ?")
+    @Query("SELECT (f) FROM FavorList f WHERE favor = ?1 AND party = ?1")
     FavorList findOneByFavorAndParty(Favor favor, Party party);
+
+    ArrayList<FavorList> findAllByParty(Party party);
 
     Favor findByFavor(Favor id);
 

@@ -146,15 +146,18 @@ public class MainController {
                     } else {
                         subType = "No subType";
                     }
-                    if (parties.count() < 50) {
+                    if (parties.count() < 10) {
                         Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                                 0, true, true, theme, "Valet");
                         parties.save(P);
+                        ArrayList<FavorList> favList = favlists.findAllByParty(P);
                             for (int z = 0; z < 5; z++) {
                                 for (Favor f : fav) {
-                                FavorList newList = new FavorList(f, P, false);
-                                favlists.save(newList);
+                                    if (favList.size()< 10) {
+                                        FavorList newList = new FavorList(f, P, false);
+                                        favlists.save(newList);
+                                    }
                             }
                         }
                     }
