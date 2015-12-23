@@ -163,6 +163,7 @@ public class MainController {
                 }
             }
         }
+        System.out.println("There have been "+ (users.count()+favors.count()+wizard.count()+favlists.count()+auth.count()+parties.count()) + "rows created.");
     }
 
 
