@@ -168,8 +168,7 @@ public class MainController {
                     }
                     for (int u = 0; u < userBuild.size(); u++) {
                         User invUser = userBuild.get(u);
-                        ArrayList<Invite> inviteList = invites.findByParty(P);
-                        if (invites.count() < 300) {
+                        if (invites.count() < 10) {
                             Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
                             invites.save(inv);
                             u += 3;
