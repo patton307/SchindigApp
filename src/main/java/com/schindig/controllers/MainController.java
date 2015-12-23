@@ -104,10 +104,9 @@ public class MainController {
             for (String line : lines) {
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                Boolean genericCheck = Boolean.valueOf(columns[1]);
                 Favor fav = new Favor(line);
                 fav.favorName = favor;
-                fav.generic = genericCheck;
+                fav.generic = true;
                 favors.save(fav);
 
 
