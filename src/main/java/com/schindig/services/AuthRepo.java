@@ -13,6 +13,6 @@ public interface AuthRepo extends CrudRepository<Auth, Integer> {
 
     Auth findByDevice(String device);
 
-    ArrayList<Auth> findByUser(User user);
+//    ArrayList<Auth> findByUser(User user);
 
 }
