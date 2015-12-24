@@ -149,32 +149,24 @@ public class MainController {
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                                 0, true, true, theme, "Valet");
                         parties.save(P);
-                        for (int fa = 0; fa < 10; fa++) {
+                        for (int fa = 1; fa < 10; fa++) {
                             Favor f = favors.findOne(fa);
                             FavorList newList = new FavorList(f, P, false);
                             favlists.save(newList);
                         }
-                    }
-                }
-            }
-                for (Party P : parties.findAll()) {
-                    ArrayList<Favor> all = (ArrayList<Favor>) favors.findAll();
-                    for (int y = 0; y < all.size()-120; y++) {
-                        FavorList newList = new FavorList();
-                        newList.favor = all.get(y);
-                        favlists.save(newList);
-                    }
-                    for (int u = 0; u < userBuild.size(); u++) {
-                        User invUser = userBuild.get(u);
-                        ArrayList<Invite> inviteList = invites.findByParty(P);
-                        if (inviteList.size() < 10) {
-                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
-                            invites.save(inv);
-                            u += 3;
+                        for (int u = 0; u < userBuild.size(); u++) {
+                            User invUser = userBuild.get(u);
+                            ArrayList<Invite> inviteList = invites.findByParty(P);
+                            if (inviteList.size() < 10) {
+                                Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+                                invites.save(inv);
+                                u += 3;
+                            }
                         }
                     }
                 }
             }
+        }
         System.out.println("There have been "+ (users.count()+favors.count()+wizard.count()+favlists.count()+auth.count()+parties.count()) + " rows created.");
     }
 
@@ -326,20 +318,23 @@ public class MainController {
         return newDump;
     }
 
-    @RequestMapping(path = "/party/{id}/claim", method = RequestMethod.POST)
-    public User claimFavor(@PathVariable("id") Integer id, @RequestBody Parameters p, HttpServletResponse response) throws IOException {
+    @RequestMapping(path = "/party/claim", method = RequestMethod.POST)
+    public FavorList claimFavor(@RequestBody Parameters p, HttpServletResponse response) throws IOException {
 
         User u = users.findOne(p.userID);
-        Party party = parties.findOne(id);
-        FavorList favor = favlists.findOneByFavorAndParty(p.favor, party);
-        if (favor.user != u && favor.user != null) {
+        FavorList favItem = favlists.findOne(p.listID);
+        if (favItem.user != u && favItem.user != null) {
             response.sendError(403, "Not your's to unclaim.");
         } else {
-            favor.user = u;
-            favor.claimed = true;
-            favlists.save(favor);
+            favItem.user = u;
+            if (favItem.claimed) {
+                favItem.claimed = false;
+            } else {
+                favItem.claimed = true;
+            }
+            favlists.save(favItem);
         }
-        return u;
+        return favItem;
     }
 
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)

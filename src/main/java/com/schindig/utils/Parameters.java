@@ -35,4 +35,6 @@ public class Parameters {
 
     public String device;
 
+    public Integer listID;
+
 }
