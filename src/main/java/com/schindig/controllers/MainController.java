@@ -425,7 +425,7 @@ public class MainController {
         if (parameters.party.stretchName != null) {
             check.stretchName = parameters.party.stretchName;
         }
-        if (parameters.party.theme !=null) {
+        if (parameters.party.theme != null) {
             check.theme = parameters.party.theme;
         }
         if (parameters.party.byob) {
@@ -440,41 +440,11 @@ public class MainController {
                 Methods.newInvite(invite, invites, check);
                 check.host.invitedCount += 1;
             }
-            if (parameters.party.partyName != null) {
-                check.partyName = parameters.party.partyName;
-            }
-            if (parameters.party.partyDate != null) {
-                check.partyDate = parameters.party.partyDate;
-            }
-            if (parameters.party.partyType != null) {
-                check.partyType = parameters.party.partyType;
-            }
-            if (parameters.party.subType != null) {
-                check.subType = parameters.party.subType;
-            }
-            if (parameters.party.local != null) {
-                check.local = parameters.party.local;
-            }
-            if (parameters.party.stretchGoal != null) {
-                check.stretchGoal = parameters.party.stretchGoal;
-            }
-            if (parameters.party.stretchName != null) {
-                check.stretchName = parameters.party.stretchName;
-            }
-            if (parameters.party.themeCheck) {
-                check.themeCheck = true;
-                check.theme = parameters.party.theme;
-            }
-            if (parameters.party.byob) {
-                check.byob = true;
-            }
-            if (parameters.party.parking != null) {
-                check.parking = parameters.party.parking;
-            }
 
-        parties.save(check);
-
+            parties.save(check);
+        }
         return check;
+
     }
 
     @RequestMapping(path = "/parties/host", method = RequestMethod.POST)
@@ -560,15 +530,6 @@ public class MainController {
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
-    public String addFavorItem(@RequestBody Favor favor) {
-
-        if (!favors.exists(favor.favorID)) {
-            Favor c = new Favor();
-            c.favorName = favor.favorName;
-            favors.save(c);
-        } else {
-            favors.save(favor);
-            return "Item updated.";
     public Favor addFavorItem(@RequestBody Parameters parameters) {
         Favor thisOne = favors.findOneByFavorName(parameters.favor.favorName);
         if (thisOne==null) {
@@ -587,8 +548,6 @@ public class MainController {
             favors.save(f);
             }
         return thisOne;
-        }
-        return "Item added to database";
     }
 
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
