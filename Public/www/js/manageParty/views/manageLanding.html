@@ -18,7 +18,7 @@
        ng-click="viewOne(party)">
       <div class="item item-text-wrap item-icon-right">
         <h3>{{party.partyName}}</h3>
-        <p>{{party.partyDate}}</p>
+        <p>{{party.partyDate | date: 'short'}}</p>
         <i class="icon ion-chevron-right"></i>
       </div>
     </ion-item>

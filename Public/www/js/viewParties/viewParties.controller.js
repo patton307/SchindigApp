@@ -73,6 +73,7 @@
       };
 
       $scope.showFavorConfirm = function(favor){
+        if (favor.claimed == false){
         var favorClaimPopup = $ionicPopup.confirm ({
           title: 'Claim Party Favor?',
           template: 'Are you REALLY going to bring this?'
@@ -90,16 +91,17 @@
             };
             console.log('postFavor', data);
             ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
-              console.log('return from claim', data);
-              console.log('blake', favor.claimed);
-              // favor.claimed = true;
               favor.claimed = true;
             });
           }
           else {
             alert("Alrighty Then...");
-          }
-        });
+            }
+          });
+        }
+        else {
+
+        }
       };
 
 
