@@ -102,9 +102,10 @@ public class MainController {
 
 
             for (String line : lines) {
+                Favor fav = new Favor();
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                Favor fav = new Favor(line);
+                fav.generic = true;
                 fav.favorName = favor;
                 fav.generic = true;
                 favors.save(fav);
@@ -328,7 +329,11 @@ public class MainController {
             response.sendError(403, "Not your's to unclaim.");
         } else {
             favItem.user = u;
-            favItem.claimed = true;
+            if (favItem.claimed) {
+                favItem.claimed = false;
+            } else {
+                favItem.claimed = true;
+            }
             favlists.save(favItem);
         }
         return favItem;
@@ -536,17 +541,15 @@ public class MainController {
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
-    public String addFavorItem(@RequestBody Favor favor) {
-
-        if (!favors.exists(favor.favorID)) {
-            Favor c = new Favor();
-            c.favorName = favor.favorName;
-            favors.save(c);
-        } else {
-            favors.save(favor);
-            return "Item updated.";
-        }
-        return "Item added to database";
+    public Favor addFavorItem(@RequestBody Parameters p) {
+        Favor fav = new Favor();
+        Party party = parties.findOne(p.partyID);
+        fav.favorName = p.favor.favorName;
+        fav.generic = false;
+        fav.partyType = party.partyType;
+        fav.subType = party.subType;
+        favors.save(fav);
+        return fav;
     }
 
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
