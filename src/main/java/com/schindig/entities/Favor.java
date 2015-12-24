@@ -55,9 +55,9 @@ public class Favor {
 
         this.favorName = favorName;
     }
-    public String getFavorName(String favorName) {
+    public String getFavorName() {
 
-        return this.favorName;
+        return favorName;
     }
     public Integer getUseCount() {
 
