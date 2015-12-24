@@ -44,9 +44,10 @@
       ViewPartyService.getHostedParties(userID)
         .success(function(hostData){
           $scope.hostedParties = hostData;
+          console.log(hostData);
         })
         .error(function(data){
-          console.log('error');
+          console.log('error', rawUserID);
         });
       $scope.getOneHostParty = function (party) {
         localStorage.setItem('oneHostPartyID', party.partyID);
@@ -67,14 +68,15 @@
       };
       $scope.postOneFavorID = function(favor){
         var rawPartyID = +localStorage.getItem('oneInvPartyID');
-        console.log(favor);
+        console.log(favor.favor.favorID);
         var data = {
           favor: {
-          favorID: favor.favorID
+            favorID: favor.favor.favorID
           },
           userID: rawUserID
         };
         ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
+          console.log('doodad', data);
         });
       };
     });

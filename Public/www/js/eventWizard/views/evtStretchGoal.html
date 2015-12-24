@@ -19,8 +19,9 @@
         </strong>
         </div>
       </ion-toggle>
-      <input ng-model="themeVal" type="text" ng-show="themeCheck" placeholder="Whats the theme?">
-
+      <div ng-show="themeCheck" class="item">
+        <input ng-model="themeVal" type="text"  placeholder="Whats the theme?">
+      </div>
       <ion-toggle
         ng-click="byobCheck = !byobCheck"
         toggle-class="toggle-calm">
@@ -36,20 +37,22 @@
        <div class="input-label">
          <strong>Parking?</strong>
        </div>
-       <select>
-         <option>Parking Options go here</option>
+       <select ng-model="parking" ng-change='getParking(parking)'>
+         <option value="Valet">Valet</option>
+         <option value="On Site">On Site</option>
+         <option value="Off Site">Off Site</option>
        </select>
      </ion-item>
       <label class="item item-input item-floating-label">
-        <span class="input-label">What's the goal?</span>
-        <input placeholder="What is the Goal?" ng-model= "stretchName" type="text">
+        <span class="input-label">What would make this party awesome?</span>
+        <input placeholder="Dream Fund ex. Ice Louge, Band.." ng-model= "stretchName" type="text">
       </label>
       <label class="item item-input item-floating-label">
         <span class= "input-label">How much is this going to cost?</span>
         <input placeholder="How Much is This Going to Cost" ng-model="stretchGoal" type="number">
       </label>
       <button
-        ng-click="stretchGoalData(stretchGoal, stretchName, themeVal)"
+        ng-click="stretchGoalData(stretchGoal, stretchName, themeVal, parking)"
         class="button button-full button-positive">
        Submit Stretchgoooooooal
       </button>
