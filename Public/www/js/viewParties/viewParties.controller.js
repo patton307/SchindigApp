@@ -83,13 +83,17 @@
             console.log(favor);
             var data = {
               favor: {
-              favorID: favor.favorID
+              favorID: favor.favor.favorID
               },
-              userID: rawUserID
+              userID: rawUserID,
+              listID: favor.listID
             };
             console.log('postFavor', data);
             ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
               console.log('return from claim', data);
+              console.log('blake', favor.claimed);
+              // favor.claimed = true;
+              favor.claimed = true;
             });
           }
           else {

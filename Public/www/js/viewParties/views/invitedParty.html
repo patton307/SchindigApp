@@ -1,5 +1,5 @@
 <ion-view view-title="Parties">
-  <ion-content ng-init="loadOneInvParty(); loadOneFavor() ">
+  <ion-content ng-init="loadOneInvParty(); loadOneFavor()">
     <div id="onePartyHeader">
       <h3>{{invPartyOne.partyName}}</h3>
       <h2>{{invPartyOne.partyDate | date: 'short'}}</h2>
@@ -14,8 +14,8 @@
       ng-model="favor"
       ng-click="showFavorConfirm(favor)"
       class="item">
-          <div class=" blanced favorUnclaimed" ng-show= "favor.claimed != true"><h3>{{favor.favor.favorName}}</h3></div>
-          <div class=" royal favorClaimed" ng-show="favor.claimed == true"><h1>{{favor.favor.favorName}}</h1></div>
+          <div class=" favorUnclaimed" ng-show= "favor.claimed != true"><h3>{{favor.favor.favorName}}</h3></div>
+          <div class=" favorClaimed" ng-show="favor.claimed == true"><h1>{{favor.favor.favorName}}</h1></div>
       <ion-item>
     </ion-list>
   </ion-content>
