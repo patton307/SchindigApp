@@ -1,5 +1,6 @@
 package com.schindig.services;
 import com.schindig.entities.Favor;
+import com.schindig.utils.Parameters;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,5 +11,7 @@ public interface FavorRepo extends CrudRepository<Favor, Integer> {
 
     @Query("SELECT COUNT(c) FROM Favor c")
     Integer favorSize();
+
+    Favor findOneByFavorName(String favor);
     
 }

@@ -108,10 +108,10 @@ public class MainController {
             for (String line : lines) {
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                Boolean genericCheck = Boolean.valueOf(columns[1]);
+               // Boolean genericCheck = Boolean.valueOf(columns[1]);
                 Favor fav = new Favor(line);
                 fav.favorName = favor;
-                fav.generic = genericCheck;
+                //fav.generic = genericCheck;
                 favors.save(fav);
 
 
@@ -320,17 +320,16 @@ public class MainController {
         favlists.save(favor);
         return u;
     }
+    //@PathVariable("id") int id
 
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
-    public ArrayList<Favor> getFavors(@PathVariable("id") int id) {
-        ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
-        favorList = favorList.stream()
-                .filter(f -> f.party.partyID == id)
-                .collect(Collectors.toCollection(ArrayList<FavorList>::new));
-        return favorList.stream()
-                .map(favor -> favor.favor)
-                .collect(Collectors.toCollection(ArrayList::new));
-
+    public FavorList getFavors(@PathVariable("id") Integer id) throws Exception {
+        Party p = parties.findOne(id);
+        FavorList favorList = favlists.findOne(p.partyID);
+        if (favorList == null) {
+            throw new Exception("FavorList does not exist.");
+        }
+        return favorList;
     }
 
     @RequestMapping(path = "/party/invite", method = RequestMethod.POST)
@@ -412,8 +411,7 @@ public class MainController {
             if (parameters.party.stretchName != null) {
                 check.stretchName = parameters.party.stretchName;
             }
-            if (parameters.party.themeCheck) {
-                check.themeCheck = true;
+            if (parameters.party.theme != null) {
                 check.theme = parameters.party.theme;
             }
             if (parameters.party.byob) {
@@ -508,17 +506,26 @@ public class MainController {
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
-    public String addFavorItem(@RequestBody Favor favor) {
-        if (!favors.exists(favor.favorID)) {
-            Favor c = new Favor();
-            c.favorName = favor.favorName;
-            favors.save(c);
-        } else {
-            favors.save(favor);
-            return "Item updated.";
+    public Favor addFavorItem(@RequestBody Parameters parameters) {
+        Favor thisOne = favors.findOneByFavorName(parameters.favor.favorName);
+        if (thisOne==null) {
+            Favor f = new Favor();
+            f.favorName = parameters.favor.favorName;
+            Party p = parties.findOne(parameters.partyID);
+            if (p != null) {
+                f.partyType = p.partyType;
+                f.subType = p.subType;
+                favors.save(f);
+                FavorList favItem = new FavorList();
+                favItem.favor = f;
+                favItem.party = p;
+                favlists.save(favItem);
+            }
+            favors.save(f);
+            }
+        return thisOne;
         }
-        return "Item added to database";
-    }
+
 
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
     public ArrayList<Favor> deleteFavorItem(@RequestBody Favor item) {
