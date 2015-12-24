@@ -8,15 +8,29 @@
   </div>
   <ion-padding>
     <ion-content>
-      <ion-toggle toggle-class="toggle-calm">
+      <ion-toggle
+        ng-click="themeCheck = !themeCheck"
+        toggle-class="toggle-calm">
+        <div
+        ng-model="themeCheck"
+        ng-class="themeCheck ? 'theme' : 'noTheme'">
         <strong>
           Themed Party?
         </strong>
+        </div>
       </ion-toggle>
-      <ion-toggle toggle-class="toggle-calm">
-        <strong>
-          BYOB
-        </strong>
+      <input ng-model="themeVal" type="text" ng-show="themeCheck" placeholder="Whats the theme?">
+
+      <ion-toggle
+        ng-click="byobCheck = !byobCheck"
+        toggle-class="toggle-calm">
+        <div
+          ng-model="byobCheck"
+          ng-class="byobCheck ? 'byob' : 'supplied'">
+          <strong>
+            BYOB
+          </strong>
+        </div>
       </ion-toggle>
       <ion-item class="item-input item-select">
        <div class="input-label">
@@ -35,7 +49,7 @@
         <input placeholder="How Much is This Going to Cost" ng-model="stretchGoal" type="number">
       </label>
       <button
-        ng-click="stretchGoalData(stretchGoal, stretchName)"
+        ng-click="stretchGoalData(stretchGoal, stretchName, themeVal)"
         class="button button-full button-positive">
        Submit Stretchgoooooooal
       </button>
