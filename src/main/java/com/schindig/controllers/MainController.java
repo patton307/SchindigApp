@@ -440,9 +440,8 @@ public class MainController {
                 Methods.newInvite(invite, invites, check);
                 check.host.invitedCount += 1;
             }
-
-            parties.save(check);
         }
+        parties.save(check);
         return check;
 
     }
