@@ -58,6 +58,7 @@
       $scope.loadOneHostParty = function(){
         var partyIdItem = +localStorage.getItem('oneHostPartyID');
         ViewPartyService.getOneParty(partyIdItem).then(function(data){
+          console.log('hostpartyData', data.data);
           $scope.hostPartyOne = data.data;
         });
       };
@@ -73,15 +74,12 @@
       };
 
       $scope.showFavorConfirm = function(favor){
-        if (favor.claimed == false){
         var favorClaimPopup = $ionicPopup.confirm ({
           title: 'Claim Party Favor?',
           template: 'Are you REALLY going to bring this?'
         });
         favorClaimPopup.then (function(res){
           if(res){
-            var rawPartyID = +localStorage.getItem('oneInvPartyID');
-            console.log(favor);
             var data = {
               favor: {
               favorID: favor.favor.favorID
@@ -90,7 +88,8 @@
               listID: favor.listID
             };
             console.log('postFavor', data);
-            ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
+            ViewPartyService.favorClaim(data).then(function(data){
+              console.log(data);
               favor.claimed = true;
             });
           }
@@ -98,11 +97,8 @@
             alert("Alrighty Then...");
             }
           });
-        }
-        else {
+        };
 
-        }
-      };
 
 
       // $scope.postOneFavorID = function(favor){

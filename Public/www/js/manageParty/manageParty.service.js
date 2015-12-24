@@ -5,10 +5,10 @@
     .module('manageParty')
     .factory('ManagePartyService', function($http, $state){
       var vm = this;
-      var ip = 'http://localhost';
-      var viewHostedPartiesURL = ip + ':8080/parties/host';
-      var viewInvitedPartiesURL = ip +':8080/parties/user';
-      var updatedHostedPartiesURL = ip + ':8080/party/update';
+      var ip = 'http://10.0.10.72:8080';
+      var viewHostedPartiesURL = ip + '/parties/host';
+      var viewInvitedPartiesURL = ip +'/parties/user';
+      var updatedHostedPartiesURL = ip + '/party/update';
 
       var getInvitedPeeps = function(partyID){
         return $http.get(ip+':8080/party/'+partyID+'/invites').success(function(data){
