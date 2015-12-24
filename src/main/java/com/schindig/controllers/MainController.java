@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 public class MainController {
 
 
-
     @Autowired
     WizardRepo wizard;
 
@@ -104,14 +103,12 @@ public class MainController {
 
 
             for (String line : lines) {
+                Favor fav = new Favor();
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                Favor fav = new Favor(line);
-                fav.favorName = favor;
                 fav.generic = true;
+                fav.favorName = favor;
                 favors.save(fav);
-
-
             }
         }
 
@@ -136,7 +133,7 @@ public class MainController {
 
 
             for (User user : userBuild) {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 5; i++) {
                     String partyType = partyTypes.get(i);
 
                     String subType;
@@ -151,26 +148,25 @@ public class MainController {
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                                 0, true, true, theme, "Valet");
                         parties.save(P);
-                        for (int fa = 0; fa < 10; fa++) {
+                        for (int fa = 1; fa < 10; fa++) {
                             Favor f = favors.findOne(fa);
                             FavorList newList = new FavorList(f, P, false);
                             favlists.save(newList);
                         }
-                    }
-                }
-                for (Party P : parties.findAll()) {
-                    for (int u = 0; u < userBuild.size(); u++) {
-                        User invUser = userBuild.get(u);
-                        ArrayList<Invite> inviteList = invites.findByParty(P);
-                        if (inviteList.size() < 10) {
-                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
-                            invites.save(inv);
-                            u += 3;
+                        for (int u = 0; u < userBuild.size(); u++) {
+                            User invUser = userBuild.get(u);
+                            ArrayList<Invite> inviteList = invites.findByParty(P);
+                            if (inviteList.size() < 10) {
+                                Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+                                invites.save(inv);
+                                u += 3;
+                            }
                         }
                     }
                 }
             }
         }
+        System.out.println("There have been "+ (users.count()+favors.count()+wizard.count()+favlists.count()+auth.count()+parties.count()) + " rows created.");
     }
 
 
@@ -313,8 +309,8 @@ public class MainController {
         return newDump;
     }
 
-    @RequestMapping(path = "/party/{id}/claim", method = RequestMethod.POST)
-    public FavorList claimFavor(@PathVariable("id") Integer id, @RequestBody Parameters p, HttpServletResponse response) throws IOException {
+    @RequestMapping(path = "/party/claim", method = RequestMethod.POST)
+    public FavorList claimFavor(@RequestBody Parameters p, HttpServletResponse response) throws IOException {
 
         User u = users.findOne(p.userID);
         FavorList favItem = favlists.findOne(p.listID);
@@ -322,7 +318,11 @@ public class MainController {
             response.sendError(403, "Not your's to unclaim.");
         } else {
             favItem.user = u;
-            favItem.claimed = true;
+            if (favItem.claimed) {
+                favItem.claimed = false;
+            } else {
+                favItem.claimed = true;
+            }
             favlists.save(favItem);
         }
         return favItem;
@@ -332,10 +332,11 @@ public class MainController {
     public ArrayList<FavorList> getFavors(@PathVariable("id") int id) {
 
         ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
-        favorList = favorList.stream()
-                .filter(f -> f.party.partyID == id)
-                .collect(Collectors.toCollection(ArrayList<FavorList>::new));
-        return favorList;
+        ArrayList<FavorList> newList = favorList.stream().filter(fav -> fav.party.partyID == id).collect(Collectors.toCollection(ArrayList::new));
+        if (newList==null) {
+            return null;
+        }
+        return newList;
 
     }
 
@@ -443,7 +444,6 @@ public class MainController {
         }
         parties.save(check);
         return check;
-
     }
 
     @RequestMapping(path = "/parties/host", method = RequestMethod.POST)
@@ -529,24 +529,19 @@ public class MainController {
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
-    public Favor addFavorItem(@RequestBody Parameters parameters) {
-        Favor thisOne = favors.findOneByFavorName(parameters.favor.favorName);
-        if (thisOne==null) {
-            Favor f = new Favor();
-            f.favorName = parameters.favor.favorName;
-            Party p = parties.findOne(parameters.partyID);
-            if (p != null) {
-                f.partyType = p.partyType;
-                f.subType = p.subType;
-                favors.save(f);
-                FavorList favItem = new FavorList();
-                favItem.favor = f;
-                favItem.party = p;
-                favlists.save(favItem);
-            }
-            favors.save(f);
-            }
-        return thisOne;
+    public Favor addFavorItem(@RequestBody Parameters p) {
+        Favor fav = new Favor();
+        Party party = parties.findOne(p.partyID);
+        if (p.favor.favorName==null || p.favor.favorName.isEmpty()){
+            return null;
+        } else {
+            fav.favorName = p.favor.favorName;
+            fav.generic = false;
+            fav.partyType = party.partyType;
+            fav.subType = party.subType;
+            favors.save(fav);
+            return fav;
+        }
     }
 
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
