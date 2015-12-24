@@ -14,9 +14,10 @@ import java.util.List;
  */
 public interface FavorListRepo extends CrudRepository<FavorList, Integer> {
 
-    ArrayList<FavorList> findByParty(Integer party);
+    ArrayList<FavorList> findByParty(Party party);
 
-    FavorList findByFavorAndParty(Favor favor, Party party);
+    @Query("SELECT (f) FROM FavorList f WHERE favor = ?1 AND party = ?1")
+    FavorList findOneByFavorAndParty(Favor favor, Party party);
 
     Favor findByFavor(Favor id);
 

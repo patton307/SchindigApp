@@ -2,6 +2,7 @@
   'use strict';
 
   angular
+
     .module('eventWizard', [
       'ionic',
       'loginRegister',

@@ -9,20 +9,18 @@
       $state,
       $stateParams,
       ViewPartyService
-
     ){
 
       var vm = this;
-
       $scope.hostedParties = 'hostData';
       $scope.invitedParties='invData';
-      var rawUserID = +localStorage.getItem('userID');
+      $scope.favorData = 'favorData;';
 
+      var rawUserID = +localStorage.getItem('userID');
+///what is this, max?
       var userID = {
       userID: rawUserID
     };
-
-
 
     //INVITED PARTIES GET
     ViewPartyService.getInvitedParties(userID)
@@ -32,19 +30,15 @@
       .error(function(data){
         console.log('error');
       });
-
-
       $scope.getOneInvParty = function (party){
-        localStorage.setItem('OnePartyID', party.partyID);
+        localStorage.setItem('oneInvPartyID', party.partyID);
       };
-
       $scope.loadOneInvParty = function(){
-        var partyIdItem = +localStorage.getItem('OnePartyID');
-        ViewPartyService.getOneInvitedParty(partyIdItem).then(function(data){
+        var partyIdItem = +localStorage.getItem('oneInvPartyID');
+        ViewPartyService.getOneParty(partyIdItem).then(function(data){
           $scope.invPartyOne = data.data;
         });
       };
-
 
       //HOSTED PARTIES GET
       ViewPartyService.getHostedParties(userID)
@@ -54,18 +48,34 @@
         .error(function(data){
           console.log('error');
         });
+      $scope.getOneHostParty = function (party) {
+        localStorage.setItem('oneHostPartyID', party.partyID);
+      };
+      $scope.loadOneHostParty = function(){
+        var partyIdItem = +localStorage.getItem('oneHostPartyID');
+        ViewPartyService.getOneParty(partyIdItem).then(function(data){
+          $scope.hostPartyOne = data.data;
+        });
+      };
 
-
-        $scope.loadOneFavor = function(){
-            var rawPartyID = +localStorage.getItem('OnePartyID');
-            ViewPartyService.getPartyFavor(rawPartyID).then(function(data){
-              console.log('favor data', data.data);
-              $scope.onePartyFavor = data.data;
-                });
-              };
-
-
+        //FAVOR CLAIMING//
+      $scope.loadOneFavor = function(){
+          var rawPartyID = +localStorage.getItem('oneInvPartyID');
+          ViewPartyService.getPartyFavor(rawPartyID).then(function(data){
+            $scope.onePartyFavor = data.data;
+        });
+      };
+      $scope.postOneFavorID = function(favor){
+        var rawPartyID = +localStorage.getItem('oneInvPartyID');
+        console.log(favor);
+        var data = {
+          favor: {
+          favorID: favor.favorID
+          },
+          userID: rawUserID
+        };
+        ViewPartyService.favorClaim(rawPartyID, data).then(function(data){
+        });
+      };
     });
-
-
 }());
