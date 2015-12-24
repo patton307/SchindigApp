@@ -483,12 +483,17 @@ public class MainController {
         Party p = parties.findOne(party.partyID);
         ArrayList<FavorList> f = favlists.findAllByParty(p);
         ArrayList<Invite> i = invites.findByParty(party);
-        for (FavorList stuff : f) {
-            favlists.delete(stuff);
+
+        if (f != null) {
+            for (FavorList stuff : f) {
+                favlists.delete(stuff);
+            }
         }
 
-        for (Invite list : i) {
-            invites.delete(list);
+        if (i != null) {
+            for (Invite list : i) {
+                invites.delete(list);
+            }
         }
 
         //u.hostCount -= 1;
