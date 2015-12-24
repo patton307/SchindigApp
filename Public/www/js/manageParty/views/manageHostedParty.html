@@ -1,35 +1,49 @@
-<ion-view title="Manage Your Party">
-
-  <ion-content>
-    <ion-padding>
-      <ion-item ng-init="loadOne();loadOneFavor();loadInvitedPeople()">
-
-        <label>
-          <span class="input-label">
-            <h1>{{oneParty.partyName}}</h1>
-          </span>
-        </label>
-        <h2>{{oneParty.partyType}} Party</h2>
-        <h2><strong>The Stretch Goal is : </strong>{{oneParty.stretchName}}</h2>
-        <progress></progress>
-        <h2><strong>Party Date: </strong>{{oneParty.partyDate | date: 'short'}}</h2>
-
-        <ion-list
-          show-delete="shouldShowDelete"
-          can-swipe="listCanSwipe">
-          <ion-item ng-repeat="favor in onePartyFavor">
-            <h3>{{favor.favorName}}</h3>
-            <span class="item-note">UserName</span>
-            <ion-option-button class="ion-minus-circled"
-                               ng-click="onePartyFavor.splice($index, 1)">
-              Delete
-            </ion-option-button>
-          </ion-item>
-          <ion-item ng-repeat="invitee in inviteList">
-            <h3>{{invitee.name}}</h3>
-          </ion-item>
-        </ion-list>
-      </ion-item>
-    </ion-padding>
+<ion-view title="">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <div class="bar bar-header bar-royal">
+      <h1 class= "title">Let's Manage Parties</h1>
+   </div>
+  <ion-content ng-init="loadOne()">
+    <ion-item>Click To Edit</ion-item>
+    <ion-item>Party Name:
+      <input
+        type="text"
+        ng-model="partyName"
+        ng-change='getNameValue(partyName)'
+        placeholder="{{oneParty.partyName}}">
+    </ion-item>
+    <ion-item>Party Description:
+      <input
+        type="text"
+        ng-model="description"
+        ng-change='getDescriptionValue(description)'
+        placeholder="{{oneParty.description}}">
+    </ion-item>
+    <ion-item>
+       <span class="input-label">Where the Party At? </span>
+       <ion-google-place
+         placeholder= "{{oneParty.location}}"
+         ng-model="location"
+         ng-change="getLocationValue(location)">
+       </ion-google-place>
+    </ion-item>
+    <button
+      ng-click="goToManageFavor()"
+      class="button button-full button-assertive">
+      Manage Favors
+    </button>
+    <button
+      ng-click="goToManageInvites()"
+      class="button button-full button-royal">
+      Manage Invites
+    </button>
+    <button
+      ng-click="editData(partyName, description, location)"
+      class="button button-full button-positive">
+     Submit Edit
+    </button>
   </ion-content>
 </ion-view>

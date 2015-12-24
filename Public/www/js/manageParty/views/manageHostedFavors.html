@@ -1,0 +1,38 @@
+<ion-view>
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <div class="bar bar-header bar-royal">
+      <h1 class= "title">Let's Manage Favors</h1>
+   </div>
+   <ion-content ng-init="loadOneFavor()">
+     <div class="list">
+       <div class="item item-input-inset">
+         <label class="item-input-wrapper">
+           <input
+             ng-model="newFavor"
+             type="text"
+             placeholder="Add Your Own">
+         </label>
+         <button
+           ng-click="addFavorToData(newFavor)"
+           class="button button-small">
+           Submit new Favor
+         </button>
+       </div>
+     </div>
+    <ion-list>
+      <ion-checkbox
+        ng-repeat="item in onePartyFavor"
+        ng-click="favorHostCheck = !favorHostCheck">
+        <ion-item
+          ng-model="favorHostCheck"
+          id="{{item}}"
+          ng-class="favorHostCheck ? 'yes' : 'no'">
+          {{item.favor.favorName}}
+        </ion-item>
+      </ion-checkbox>
+    </ion-list>
+   </ion-content>
+ </ion-view>

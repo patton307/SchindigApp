@@ -1,0 +1,16 @@
+<ion-view title="Manage Your Invites">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <div class="bar bar-header bar-royal">
+      <h1 class= "title">Let's Manage Invites</h1>
+   </div>
+   <ion-content ng-init="loadInvitedPeople()">
+    <ion-list>
+      <ion-item ng-repeat="invite in inviteList">
+        {{invite}}
+      </ion-item>
+    </ion-list>
+   </ion-content>
+ </ion-view>

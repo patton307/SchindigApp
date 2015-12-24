@@ -1,33 +1,3 @@
-<!-- <ion-view>
-   <ion-nav-bar class="bar-stable">
-     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
-     </ion-nav-back-button>
-   </ion-nav-bar>
-   <div class="bar bar-header bar-royal">
-       <h1 class= "title">Let's Get This Party Started</h1>
-    </div>
-     <ion-content>
-       <ion-padding>
-         <label class="item item-input item-floating-label">
-          <span class="input-label"><strong>Party Name: </strong></span>
-          <input type="text" placeholder="Name that party">
-        </label>
-        <ion-padding>
-         <input type="search"
-                 ng-model="search.partyType"
-                 class="item search"
-                 placeholder="Search Party Type">
-         </ion-padding>
-          <ion-item
-                    ng-repeat="item in wizardItems.data | filter:search"
-                    href="#/wizard/{{item.wizardID}}"
-                    class = "list inset-list">
-              {{item.partyType}}
-          </ion-item>
-    </ion-padding>
- </ion-content>
-</ion-view> -->
-
 <ion-view>
    <ion-nav-bar class="bar-stable">
      <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
@@ -46,20 +16,20 @@
             <option ng-repeat="item in wizardItems.data" value='{{item}}'>{{item.partyType}}</option>
           </select>
         </ion-item>
-        <item-item>
-          <ion-radio
-            ng-model="subType"
-            ng-repeat="item in subType"
-            ng-value="'{{item}}'">
-              {{item}}
-          </ion-radio>
-        </item-item>
+        <ion-item class="item-input item-select">
+         <div class="input-label">
+           <strong>Does Your Party Have a SubType?</strong>
+         </div>
+         <select ng-model="subTypeVal" ng-change='getSubValue(subTypeVal)'>
+           <option ng-repeat="item in subType" value='{{item}}'>{{item}}</option>
+         </select>
+       </ion-item>
         <label class="item item-input item-floating-label">
           <span class="input-label"><strong>Party Name: </strong></span>
           <input ng-model="partyName" type="text" placeholder="Name that party">
         </label>
        <button
-         ng-click="newWizPartyPost(partyType, partyName, partyDescription)"
+         ng-click="newWizPartyPost(partyType, subTypeVal, partyName, partyDescription)"
          class="button button-full button-positive">
         Submit Party Name and Type
        </button>
