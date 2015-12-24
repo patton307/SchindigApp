@@ -8,6 +8,9 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface FavorRepo extends CrudRepository<Favor, Integer> {
 
+    @Query("SELECT COUNT(c) FROM Favor c")
+    Integer favorSize();
 
+    Favor findOneByFavorName(String favor);
     
 }
