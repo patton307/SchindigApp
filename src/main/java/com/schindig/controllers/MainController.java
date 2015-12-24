@@ -158,6 +158,12 @@ public class MainController {
                 }
             }
                 for (Party P : parties.findAll()) {
+                    ArrayList<Favor> all = (ArrayList<Favor>) favors.findAll();
+                    for (int y = 0; y < all.size()-120; y++) {
+                        FavorList newList = new FavorList();
+                        newList.favor = all.get(y);
+                        favlists.save(newList);
+                    }
                     for (int u = 0; u < userBuild.size(); u++) {
                         User invUser = userBuild.get(u);
                         ArrayList<Invite> inviteList = invites.findByParty(P);
