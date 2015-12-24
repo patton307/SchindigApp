@@ -35,4 +35,5 @@ public interface InviteRepo extends CrudRepository<Invite, Integer> {
     Invite findByPartyAndUser(Party party, User user);
 
 
+
 }
