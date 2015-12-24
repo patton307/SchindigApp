@@ -38,14 +38,20 @@
       console.log(newVal);
       $scope.partyType = newVal.partyType;
       $scope.subType = newVal.subType;
-      console.log($scope.subType);
+      console.log(newVal.subType);
     };
-    $scope.newWizPartyPost = function(partyType, partyName, description){
+    $scope.getSubValue = function(subValue){
+      console.log(subValue);
+      console.log('parsed');
+      $scope.subTypeVal = subValue;
+    };
+    $scope.newWizPartyPost = function(partyType, subTypeVal, partyName, description){
       console.log(partyType);
       var rawUserID = +localStorage.getItem('userID');
       var item = {
         party: {
           description: description,
+          subType: subTypeVal,
           partyType: partyType,
           partyName: partyName
         },
@@ -72,17 +78,23 @@
         var vm = this;
 
 
+
       ///PATCH DATE, TIME AND NAME/////
     $scope.dateAndTimePost = function(partyDate, location, description){
       var partyID = +localStorage.getItem('partyID');
       var data = {
         party: {
           description: description,
-          location: location.formatted_address,
+          local: location.formatted_address,
           partyID: partyID,
           partyDate: partyDate
         }
       };
+      console.log('doomba',data.party.local);
+
+
+      console.log('dooadfsadfmba',data.party.local);
+
       data.party.partyDate = JSON.stringify(data.party.partyDate);
       data.party.partyDate = JSON.parse(data.party.partyDate);
       EventWizardService.updateWizData(data).success(function(updatedWizData){
@@ -94,11 +106,27 @@
 
      ////STRETCHGOAL PATCH and SCOPES////
 
-
-     $scope.stretchGoalData = function (stretchGoal, stretchName){
+     $scope.stretchGoalData = function (stretchGoal, stretchName, themeVal){
+       var byobElements = document.getElementsByClassName('byob');
+       var themeElements = document.getElementsByClassName('theme');
+       var byobStatus;
+       var themeStatus;
+       if(byobElements.length != 0){
+         byobStatus = true;
+       } else{
+         byobStatus = false;
+       };
+       if(themeElements.length!= 0){
+         byobStatus = true;
+       } else {
+         themeStatus = false;
+       }
+       console.log(byobStatus);
        var partyID = +localStorage.getItem('partyID');
        var data = {
          party: {
+           theme: themeVal,
+           byob: byobStatus,
            stretchGoal: stretchGoal,
            stretchName: stretchName,
            partyID: partyID
@@ -222,13 +250,16 @@
 
 
       /////ADD FAVOR TO DATA/////
-      $scope.addFavorToData = function(favor){
+      $scope.addFavorToData = function(favorData){
         var partyID = +localStorage.getItem('partyID');
+        var userID = +localStorage.getItem('userID');
         var favorData = {
-          favorName: favor,
+          favor: {
+            favorName: favorData
+          },
           partyID: partyID
         };
-        EventWizardService.addFavorToData(favorData);
+        console.log(favorData);
         EventWizardService.addFavorToData(favorData);
       };
     });

@@ -28,6 +28,10 @@
 
       $urlRouterProvider.otherwise('/login');
       $stateProvider
+      .state('redirect', {
+        url: '/',
+        templateUrl: 'js/common/views/redirect.html'
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'js/common/views/login.html',
@@ -37,7 +41,6 @@
         url: '/createNewUser',
         templateUrl: 'js/common/views/createNewUser.html',
         controller: 'LoginRegisterController'
-
       });
     });
 

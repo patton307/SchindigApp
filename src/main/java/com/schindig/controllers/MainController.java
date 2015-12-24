@@ -1,4 +1,5 @@
 package com.schindig.controllers;
+import com.schindig.PasswordHash;
 import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
@@ -102,14 +103,12 @@ public class MainController {
 
 
             for (String line : lines) {
+                Favor fav = new Favor();
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                Favor fav = new Favor(line);
-                fav.favorName = favor;
                 fav.generic = true;
+                fav.favorName = favor;
                 favors.save(fav);
-
-
             }
         }
 
@@ -229,7 +228,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
-
         User u = users.findOneByUsername(user.username);
         if (u == null) {
             users.save(user);
@@ -238,13 +236,11 @@ public class MainController {
 
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
     public void deleteUser(@RequestBody User user) {
-
         users.delete(user);
     }
 
     @RequestMapping(path = "/user/all", method = RequestMethod.GET)
     public ArrayList<User> getAllUsers() {
-
         ArrayList<User> temp = (ArrayList<User>) users.findAll();
         temp = temp.stream()
                 .map(p -> {
@@ -257,7 +253,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public User findOneUser(@PathVariable("id") int id) {
-
         User u = users.findOne(id);
         u.password = null;
         return u;
@@ -265,7 +260,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
-
         User test = users.findOneByUsername(user.username);
         try {
             if (users.findOneByUsername(user.username) == null) {
@@ -282,7 +276,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
     public void logout(HttpSession session) {
-
         session.invalidate();
     }
 
@@ -292,7 +285,6 @@ public class MainController {
 
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
     public Party createParty(@RequestBody Parameters params, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
-
         User user = users.findOne(params.userID);
         Party p = params.party;
         p.host = user;
@@ -304,7 +296,6 @@ public class MainController {
 
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public ArrayList<Favor> addPartyFavor(@RequestBody Parameters parameters) {
-
         ArrayList<Favor> newDump = new ArrayList<>();
         for (int i = 0; i < parameters.favorDump.size(); i++) {
             Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
@@ -341,10 +332,11 @@ public class MainController {
     public ArrayList<FavorList> getFavors(@PathVariable("id") int id) {
 
         ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
-        favorList = favorList.stream()
-                .filter(f -> f.party.partyID == id)
-                .collect(Collectors.toCollection(ArrayList<FavorList>::new));
-        return favorList;
+        ArrayList<FavorList> newList = favorList.stream().filter(fav -> fav.party.partyID == id).collect(Collectors.toCollection(ArrayList::new));
+        if (newList==null) {
+            return null;
+        }
+        return newList;
 
     }
 
@@ -434,7 +426,7 @@ public class MainController {
         if (parameters.party.stretchName != null) {
             check.stretchName = parameters.party.stretchName;
         }
-        if (parameters.party.theme !=null) {
+        if (parameters.party.theme != null) {
             check.theme = parameters.party.theme;
         }
         if (parameters.party.byob) {
@@ -450,9 +442,7 @@ public class MainController {
                 check.host.invitedCount += 1;
             }
         }
-
         parties.save(check);
-
         return check;
     }
 
@@ -539,17 +529,19 @@ public class MainController {
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
-    public String addFavorItem(@RequestBody Favor favor) {
-
-        if (!favors.exists(favor.favorID)) {
-            Favor c = new Favor();
-            c.favorName = favor.favorName;
-            favors.save(c);
+    public Favor addFavorItem(@RequestBody Parameters p) {
+        Favor fav = new Favor();
+        Party party = parties.findOne(p.partyID);
+        if (p.favor.favorName==null || p.favor.favorName.isEmpty()){
+            return null;
         } else {
-            favors.save(favor);
-            return "Item updated.";
+            fav.favorName = p.favor.favorName;
+            fav.generic = false;
+            fav.partyType = party.partyType;
+            fav.subType = party.subType;
+            favors.save(fav);
+            return fav;
         }
-        return "Item added to database";
     }
 
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)
