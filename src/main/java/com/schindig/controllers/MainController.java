@@ -133,10 +133,8 @@ public class MainController {
             String stretchName = "One insane crazy impossible goal.";
 
 
-            ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
-
             for (User user : userBuild) {
-                for (int i = 0; i < partyTypes.size(); i++) {
+                for (int i = 0; i < 5; i++) {
                     String partyType = partyTypes.get(i);
 
                     String subType;
@@ -146,24 +144,32 @@ public class MainController {
                     } else {
                         subType = "No subType";
                     }
-                    if (parties.count() <= 10) {
+                    if (parties.count() < 10) {
                         Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                                 0, true, true, theme, "Valet");
                         parties.save(P);
-                        for (int u = 0; u < userBuild.size()-10; u++) {
-                            User invUser = userBuild.get(u);
-                            if (invites.count() < 10) {
-                                Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
-                                invites.save(inv);
-                                u += 3;
-                            }
+                        for (int fa = 0; fa < 10; fa++) {
+                            Favor f = favors.findOne(fa);
+                            FavorList newList = new FavorList(f, P, false);
+                            favlists.save(newList);
                         }
                     }
                 }
             }
-        }
-        System.out.println("There have been "+ (users.count()+favors.count()+wizard.count()+favlists.count()+auth.count()+parties.count()) + "rows created.");
+                for (Party P : parties.findAll()) {
+                    for (int u = 0; u < userBuild.size(); u++) {
+                        User invUser = userBuild.get(u);
+                        ArrayList<Invite> inviteList = invites.findByParty(P);
+                        if (inviteList.size() < 10) {
+                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+                            invites.save(inv);
+                            u += 3;
+                        }
+                    }
+                }
+            }
+        System.out.println("There have been "+ (users.count()+favors.count()+wizard.count()+favlists.count()+auth.count()+parties.count()) + " rows created.");
     }
 
 

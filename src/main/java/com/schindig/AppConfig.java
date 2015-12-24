@@ -1,9 +1,6 @@
 package com.schindig;
 import org.apache.tomcat.jdbc.pool.DataSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.*;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.net.URI;
@@ -17,6 +14,7 @@ import java.util.Properties;
 public class AppConfig {
 
     @Bean
+//    @Profile("heroku")
     public DataSource postgresDataSource() {
         String databaseUrl = System.getenv("DATABASE_URL");
         if (databaseUrl==null) {
