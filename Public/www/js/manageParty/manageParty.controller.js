@@ -13,19 +13,54 @@
     ){
       var vm = this;
       var rawUserID = +localStorage.getItem('userID')
-        console.log('dingdong');
-        var userID = {
-          userID: rawUserID
-        }
+      var userID = {
+        userID: rawUserID
+      }
+      ManagePartyService.getHostedParties(userID)
+        .success(function(data){
+          $scope.hostedParties = data;
+          console.log('party one ',data);
+        })
+        .error(function(data){
+          console.log('error');
+        })
+      $scope.onPartyDelete = function(item){
+        console.log($scope.hostedParties.indexOf(item));
 
-        ManagePartyService.getHostedParties(userID)
-          .success(function(data){
-            $scope.hostedParties = data;
-            console.log('party one ',data);
+        var rawUserID = +localStorage.getItem('userID');
+        var partyDeleteID = item.partyID;
+        var partyDeleteData = {
+              partyID: partyDeleteID
+        }
+        $scope.hostedParties.splice($scope.hostedParties.indexOf(item), 1);
+        ManagePartyService.deleteParty(partyDeleteData)
+          .then(function(data){
+            $scope.hostedParties = $scope.hostedParties;
+            console.log('data', data);
+            console.log('what is this', $scope.hostedParties);
+        }).then(function(data){
+          console.log('new page', $scope.hostedParties);
+          $state.go('manageLanding')
+
+        });
+      };
+
+      $scope.onItemDelete = function(item) {
+        var listDelete = {
+          listID: item.listID
+        }
+        $scope.onePartyFavor.splice($scope.onePartyFavor.indexOf(item), 1);
+        ManagePartyService.deleteFavorFromParty(listDelete)
+          .then(function(data){
+            console.log('deleted',data);
           })
-          .error(function(data){
-            console.log('error');
-          })
+        };
+      $scope.data = {
+          showDelete: true
+       };
+
+
+
 
       ////MANAGE/EDIT HOSTED PARTIES////
       $scope.viewOne = function(party){
@@ -70,24 +105,28 @@
       };
       $scope.getLocationValue = function(locationValue){
         console.log('changed descriptionValue',locationValue);
-        $scope.location = locationValue;
-        console.log('scoped location',$scope.location);
+        $scope.local = locationValue;
+        console.log('scoped location',$scope.local);
       };
-      $scope.editData = function(partyName, description, location){
+      $scope.editData = function(partyName, description, local, themeValue, doggy){
         var partyID = +localStorage.getItem('OnePartyID');
-        console.log('what is this', location.formatted_address);
+        console.log('what is this', local);
         var data = {
           party: {
-            local: location.formatted_address,
+            byob: doggy,
+            theme: themeValue,
+            local: local,
             partyName: partyName,
             description: description,
             partyID: partyID
           }
         };
+        console.log(data.party.byob);
         EventWizardService.updateWizData(data).success(function(updatedWizData){
           console.log('success', updatedWizData);
           $state.go('home');
         });
       };
+
     });
 }());
