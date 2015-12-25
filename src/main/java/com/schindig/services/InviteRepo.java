@@ -17,22 +17,23 @@ public interface InviteRepo extends CrudRepository<Invite, Integer> {
 
 //    List<Invite> findAllByUserId(Integer id);
 
-    Invite findByUser(Integer id);
+//    Invite findByUser(Integer id);
 
-//    @Query("SELECT i FROM Invite i WHERE party =?, user =?")
-//    Integer findInvite(Party party, User user);
+    @Query("SELECT COUNT(i) FROM Invite i WHERE party =?1")
+    Integer findPartyInviteCount(Party party);
 
-    @Query("SELECT party FROM Invite i WHERE user = ?")
+    @Query("SELECT party FROM Invite i WHERE user = ?1")
     List<Party> findInvite(User user);
 
 //    @Query("SELECT COUNT(i) FROM Invite i WHERE user = ?")
 //    Integer findInviteCount(Party party);
 
-    @Query("SELECT i FROM Invite i WHERE party = ?")
+    @Query("SELECT i FROM Invite i WHERE party = ?1")
     ArrayList<Invite> findByParty(Party party);
 
-    @Query("SELECT i FROM Invite i WHERE party = ? AND user = ?")
+    @Query("SELECT i FROM Invite i WHERE party = ?1 AND user = ?1")
     Invite findByPartyAndUser(Party party, User user);
+
 
 
 }

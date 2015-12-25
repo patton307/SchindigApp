@@ -1,4 +1,5 @@
 package com.schindig.controllers;
+import com.schindig.PasswordHash;
 import com.schindig.entities.*;
 import com.schindig.services.*;
 import com.schindig.utils.Methods;
@@ -14,6 +15,7 @@ import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -51,6 +53,8 @@ public class MainController {
 
     @Autowired
     AuthRepo auth;
+
+
 
     @PostConstruct
     public void init() throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, InvalidKeyException, InvalidKeySpecException {
@@ -102,21 +106,18 @@ public class MainController {
 
 
             for (String line : lines) {
+                Favor fav = new Favor();
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                Boolean genericCheck = Boolean.valueOf(columns[1]);
-                Favor fav = new Favor(line);
+                fav.generic = true;
                 fav.favorName = favor;
-                fav.generic = genericCheck;
                 favors.save(fav);
-
-
             }
         }
 
 
         ArrayList<User> userBuild = (ArrayList<User>) users.findAll();
-        if (userBuild.size() < 1) {
+        if (userBuild.size() < 10) {
             String fileContent = Methods.readFile("users.csv");
 
             String[] lines = fileContent.split("\n");
@@ -134,10 +135,8 @@ public class MainController {
             String stretchName = "One insane crazy impossible goal.";
 
 
-            ArrayList<Favor> fav = (ArrayList<Favor>) favors.findAll();
-
             for (User user : userBuild) {
-                for (int i = 0; i < partyTypes.size(); i++) {
+                for (int i = 0; i < 5; i++) {
                     String partyType = partyTypes.get(i);
 
                     String subType;
@@ -147,32 +146,30 @@ public class MainController {
                     } else {
                         subType = "No subType";
                     }
-                    if (parties.count() < 50) {
+                    if (parties.count() < 10) {
                         Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
                                 0, true, true, theme, "Valet");
                         parties.save(P);
-                        for (Favor f : fav) {
-                            for (int z = 0; z < 5; z++) {
-                                FavorList newList = new FavorList(f, P, false);
-                                favlists.save(newList);
-                            }
+                        for (int fa = 1; fa < 10; fa++) {
+                            Favor f = favors.findOne(fa);
+                            FavorList newList = new FavorList(f, P, false);
+                            favlists.save(newList);
                         }
-                    }
-                }
-                for (Party P : parties.findAll()) {
-                    for (int u = 0; u < userBuild.size(); u++) {
-                        User invUser = userBuild.get(u);
-                        ArrayList<Invite> inviteList = invites.findByParty(P);
-                        if (invites.count() < 300) {
-                            Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
-                            invites.save(inv);
-                            u += 3;
+                        for (int u = 0; u < userBuild.size(); u++) {
+                            User invUser = userBuild.get(u);
+                            ArrayList<Invite> inviteList = invites.findByParty(P);
+                            if (inviteList.size() < 10) {
+                                Invite inv = new Invite(invUser, P, invUser.phone, invUser.email, "Maybe", invUser.firstName + invUser.lastName);
+                                invites.save(inv);
+                                u += 3;
+                            }
                         }
                     }
                 }
             }
         }
+        System.out.println("There have been "+ (users.count()+favors.count()+wizard.count()+favlists.count()+auth.count()+parties.count()) + " rows created.");
     }
 
 
@@ -234,7 +231,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
-
         User u = users.findOneByUsername(user.username);
         if (u == null) {
             users.save(user);
@@ -243,13 +239,11 @@ public class MainController {
 
     @RequestMapping(path = "/user/delete", method = RequestMethod.POST)
     public void deleteUser(@RequestBody User user) {
-
         users.delete(user);
     }
 
     @RequestMapping(path = "/user/all", method = RequestMethod.GET)
     public ArrayList<User> getAllUsers() {
-
         ArrayList<User> temp = (ArrayList<User>) users.findAll();
         temp = temp.stream()
                 .map(p -> {
@@ -262,7 +256,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public User findOneUser(@PathVariable("id") int id) {
-
         User u = users.findOne(id);
         u.password = null;
         return u;
@@ -270,7 +263,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
     public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
-
         User test = users.findOneByUsername(user.username);
         try {
             if (users.findOneByUsername(user.username) == null) {
@@ -287,7 +279,6 @@ public class MainController {
 
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
     public void logout(HttpSession session) {
-
         session.invalidate();
     }
 
@@ -297,7 +288,6 @@ public class MainController {
 
     @RequestMapping(path = "/party/create", method = RequestMethod.POST)
     public Party createParty(@RequestBody Parameters params, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
-
         User user = users.findOne(params.userID);
         Party p = params.party;
         p.host = user;
@@ -309,7 +299,6 @@ public class MainController {
 
     @RequestMapping(path = "/party/favor", method = RequestMethod.POST)
     public ArrayList<Favor> addPartyFavor(@RequestBody Parameters parameters) {
-
         ArrayList<Favor> newDump = new ArrayList<>();
         for (int i = 0; i < parameters.favorDump.size(); i++) {
             Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
@@ -323,30 +312,34 @@ public class MainController {
         return newDump;
     }
 
-    @RequestMapping(path = "/party/{id}/claim", method = RequestMethod.POST)
-    public User claimFavor(@PathVariable("id") Integer id, @RequestBody Parameters p, HttpServletResponse response) throws IOException {
+    @RequestMapping(path = "/party/claim", method = RequestMethod.POST)
+    public FavorList claimFavor(@RequestBody Parameters p, HttpServletResponse response) throws IOException {
 
         User u = users.findOne(p.userID);
-        Party party = parties.findOne(id);
-        FavorList favor = favlists.findOneByFavorAndParty(p.favor, party);
-        if (favor.user != u && favor.user != null) {
+        FavorList favItem = favlists.findOne(p.listID);
+        if (favItem.user != u && favItem.user != null) {
             response.sendError(403, "Not your's to unclaim.");
         } else {
-            favor.user = u;
-            favor.claimed = true;
-            favlists.save(favor);
+            favItem.user = u;
+            if (favItem.claimed) {
+                favItem.claimed = false;
+            } else {
+                favItem.claimed = true;
+            }
+            favlists.save(favItem);
         }
-        return u;
+        return favItem;
     }
 
     @RequestMapping(path = "/party/{id}/favors", method = RequestMethod.GET)
     public ArrayList<FavorList> getFavors(@PathVariable("id") int id) {
 
         ArrayList<FavorList> favorList = (ArrayList<FavorList>) favlists.findAll();
-        favorList = favorList.stream()
-                .filter(f -> f.party.partyID == id)
-                .collect(Collectors.toCollection(ArrayList<FavorList>::new));
-        return favorList;
+        ArrayList<FavorList> newList = favorList.stream().filter(fav -> fav.party.partyID == id).collect(Collectors.toCollection(ArrayList::new));
+        if (newList==null) {
+            return null;
+        }
+        return newList;
 
     }
 
@@ -436,7 +429,7 @@ public class MainController {
         if (parameters.party.stretchName != null) {
             check.stretchName = parameters.party.stretchName;
         }
-        if (parameters.party.theme !=null) {
+        if (parameters.party.theme != null) {
             check.theme = parameters.party.theme;
         }
         if (parameters.party.byob) {
@@ -452,9 +445,7 @@ public class MainController {
                 check.host.invitedCount += 1;
             }
         }
-
         parties.save(check);
-
         return check;
     }
 
@@ -486,23 +477,35 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
-    public List<Party> deleteParty(@RequestBody Party party, HttpServletResponse response) throws IOException {
+    public void deleteParty(@RequestBody Party party, HttpServletResponse response) throws IOException {
 
-        User u = users.findOne(party.host.userID);
+        //User u = users.findOne(parameters.userID);
         Party p = parties.findOne(party.partyID);
-        if (p.host != u) {
-            response.sendError(403);
+        ArrayList<FavorList> f = favlists.findAllByParty(p);
+        ArrayList<Invite> i = invites.findByParty(party);
+
+        if (f != null) {
+            for (FavorList stuff : f) {
+                favlists.delete(stuff);
+            }
         }
-        u.hostCount -= 1;
-        users.save(u);
-        parties.delete(party.partyID);
-        return invites.findInvite(u);
+
+        if (i != null) {
+            for (Invite list : i) {
+                invites.delete(list);
+            }
+        }
+
+        //u.hostCount -= 1;
+        //users.save(u);
+            parties.delete(p);
     }
 
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public void deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
-
-        parameters.favorListDump.forEach(favlists::delete);
+    public FavorList deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
+        FavorList f = favlists.findOne(parameters.listID);
+        favlists.delete(f);
+        return f;
     }
 
     /**
@@ -541,17 +544,19 @@ public class MainController {
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
-    public String addFavorItem(@RequestBody Favor favor) {
-
-        if (!favors.exists(favor.favorID)) {
-            Favor c = new Favor();
-            c.favorName = favor.favorName;
-            favors.save(c);
+    public Favor addFavorItem(@RequestBody Parameters p) {
+        Favor fav = new Favor();
+        Party party = parties.findOne(p.partyID);
+        if (p.favor.favorName==null || p.favor.favorName.isEmpty()){
+            return null;
         } else {
-            favors.save(favor);
-            return "Item updated.";
+            fav.favorName = p.favor.favorName;
+            fav.generic = false;
+            fav.partyType = party.partyType;
+            fav.subType = party.subType;
+            favors.save(fav);
+            return fav;
         }
-        return "Item added to database";
     }
 
     @RequestMapping(path = "/favor/remove", method = RequestMethod.POST)

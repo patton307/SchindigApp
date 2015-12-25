@@ -10,13 +10,13 @@ import java.util.ArrayList;
  */
 public interface PartyRepo extends CrudRepository<Party, Integer> {
 
-    @Query("SELECT partyType FROM Party")
-    ArrayList<String> partyTypes();
+//    @Query("SELECT partyType FROM Party")
+//    ArrayList<String> partyTypes();
+//
+//    @Query("SELECT DISTINCT subType FROM Party")
+//    ArrayList<String> subTypes();
 
-    @Query("SELECT DISTINCT subType FROM Party")
-    ArrayList<String> subTypes();
-
-//    @Query("SELECT subType FROM Party WHERE partyType = ?")
+//    @Query("SELECT subType FROM Party WHERE partyType = ?1")
 //    ArrayList<String> partySubType(String subType);
 
 }
