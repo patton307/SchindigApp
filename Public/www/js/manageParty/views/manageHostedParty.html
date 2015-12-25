@@ -7,7 +7,7 @@
       <h1 class= "title">Let's Manage Parties</h1>
    </div>
   <ion-content ng-init="loadOne()">
-    <ion-item>Click To Edit</ion-item>
+
     <ion-item>Party Name:
       <input
         type="text"
@@ -22,14 +22,47 @@
         ng-change='getDescriptionValue(description)'
         placeholder="{{oneParty.description}}">
     </ion-item>
-    <ion-item>
-       <span class="input-label">Where the Party At? </span>
-       <ion-google-place
-         placeholder= "{{oneParty.location}}"
-         ng-model="location"
-         ng-change="getLocationValue(location)">
-       </ion-google-place>
+    <ion-item>Where the Party At?:
+      <input
+        type="text"
+        placeholder= "{{oneParty.local}}"
+        ng-model="local"
+        ng-change="getLocationValue(local)">
     </ion-item>
+    <ion-toggle
+      ng-click="themeCheck = !themeCheck"
+      toggle-class="toggle-calm">
+      <div
+      ng-model="themeCheck"
+      ng-class="themeCheck ? 'theme' : 'noTheme'">
+        <strong>
+          Themed Party?
+        </strong>
+      </div>
+    </ion-toggle>
+    <div ng-show="themeCheck" class="item">
+      <input ng-model="themeVal" type="text"  placeholder="Whats the theme?">
+    </div>
+    <ion-toggle
+      ng-model="doggy"
+      ng-click="byobManageCheck = !byobManageCheck"
+      toggle-class="toggle-calm">
+      <div
+        ng-model="byobManageCheck"
+        ng-class="byobManageCheck ? 'byobManage' : 'suppliedManage'">
+        <strong>
+          BYOB
+        </strong>
+      </div>
+    </ion-toggle>
+    <ion-list show-delete="data.showDelete">
+      <ion-item>
+        <ion-delete-button
+            class="ion-minus-circled"
+            ng-click="onPartyDelete(oneParty, hostedParties);">
+        </ion-delete-button>
+      </ion-item>
+    </ion-list>
     <button
       ng-click="goToManageFavor()"
       class="button button-full button-assertive">
@@ -41,7 +74,7 @@
       Manage Invites
     </button>
     <button
-      ng-click="editData(partyName, description, location)"
+      ng-click="editData(partyName, description, local, themeVal, doggy)"
       class="button button-full button-positive">
      Submit Edit
     </button>

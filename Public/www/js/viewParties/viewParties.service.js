@@ -4,7 +4,7 @@
   .module('viewParties')
   .factory('ViewPartyService', function($http, $state){
     var vm = this;
-    var ip = 'http://10.0.10.72:8080';
+    var ip = 'http://localhost:8080';
     var viewHostedPartiesURL = ip + '/parties/host';
     var viewInvitedPartiesURL = ip +'/parties/user';
     var getOneInvitedPartyURL = ip +'/party';
@@ -12,6 +12,7 @@
     var getHostedParties = function(userID){
       return $http.post(viewHostedPartiesURL, userID)
         .success(function(data){
+          console.log('host success', data);
         });
     };
     var updatedHostedParties = function (data){
@@ -40,6 +41,7 @@
         favorData = favorData;
         return $http.post(ip + '/party/claim', favorData)
           .success(function(data){
+            console.log(data);
         });
       };
 

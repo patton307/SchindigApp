@@ -13,15 +13,15 @@
             <strong>What Kind of Party?</strong>
           </div>
           <select ng-model="partyType" ng-change='getValue(partyType)'>
-            <option ng-repeat="item in wizardItems.data" value='{{item}}'>{{item.partyType}}</option>
+            <option ng-repeat="item in wizardItems.data track by $index" value='{{item}}'>{{item.partyType}}</option>
           </select>
         </ion-item>
-        <ion-item class="item-input item-select">
+        <ion-item ng-show="partyType" class="item-input item-select ng-hide">
          <div class="input-label">
            <strong>Does Your Party Have a SubType?</strong>
          </div>
          <select ng-model="subTypeVal" ng-change='getSubValue(subTypeVal)'>
-           <option ng-repeat="item in subType" value='{{item}}'>{{item}}</option>
+           <option ng-repeat="item in subType track by $index" value='{{item}}'>{{item}}</option>
          </select>
        </ion-item>
         <label class="item item-input item-floating-label">

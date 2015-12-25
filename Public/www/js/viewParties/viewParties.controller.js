@@ -48,9 +48,10 @@
       ViewPartyService.getHostedParties(userID)
         .success(function(hostData){
           $scope.hostedParties = hostData;
+          console.log(hostData);
         })
         .error(function(data){
-          console.log('error');
+          console.log('error', rawUserID);
         });
       $scope.getOneHostParty = function (party) {
         localStorage.setItem('oneHostPartyID', party.partyID);
