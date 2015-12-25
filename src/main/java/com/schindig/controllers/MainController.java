@@ -15,6 +15,7 @@ import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -52,6 +53,8 @@ public class MainController {
 
     @Autowired
     AuthRepo auth;
+
+
 
     @PostConstruct
     public void init() throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, InvalidKeyException, InvalidKeySpecException {
@@ -474,23 +477,35 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/delete", method = RequestMethod.POST)
-    public List<Party> deleteParty(@RequestBody Party party, HttpServletResponse response) throws IOException {
+    public void deleteParty(@RequestBody Party party, HttpServletResponse response) throws IOException {
 
-        User u = users.findOne(party.host.userID);
+        //User u = users.findOne(parameters.userID);
         Party p = parties.findOne(party.partyID);
-        if (p.host != u) {
-            response.sendError(403);
+        ArrayList<FavorList> f = favlists.findAllByParty(p);
+        ArrayList<Invite> i = invites.findByParty(party);
+
+        if (f != null) {
+            for (FavorList stuff : f) {
+                favlists.delete(stuff);
+            }
         }
-        u.hostCount -= 1;
-        users.save(u);
-        parties.delete(party.partyID);
-        return invites.findInvite(u);
+
+        if (i != null) {
+            for (Invite list : i) {
+                invites.delete(list);
+            }
+        }
+
+        //u.hostCount -= 1;
+        //users.save(u);
+            parties.delete(p);
     }
 
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
-    public void deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
-
-        parameters.favorListDump.forEach(favlists::delete);
+    public FavorList deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
+        FavorList f = favlists.findOne(parameters.listID);
+        favlists.delete(f);
+        return f;
     }
 
     /**

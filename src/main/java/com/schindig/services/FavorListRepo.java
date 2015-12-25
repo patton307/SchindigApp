@@ -21,4 +21,6 @@ public interface FavorListRepo extends CrudRepository<FavorList, Integer> {
 
     Favor findByFavor(Favor id);
 
+    ArrayList<FavorList> findAllByParty(Party party);
+
 }
