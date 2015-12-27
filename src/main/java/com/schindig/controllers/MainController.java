@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.mail.MessagingException;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -153,7 +154,9 @@ public class MainController {
                         parties.save(P);
                         for (int fa = 1; fa < 10; fa++) {
                             Favor f = favors.findOne(fa);
+                            f.useCount += 1;
                             FavorList newList = new FavorList(f, P, false);
+                            favors.save(f);
                             favlists.save(newList);
                         }
                         for (int u = 0; u < userBuild.size(); u++) {
@@ -272,11 +275,11 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Auth a = auth.findByDevice(p.device);
-        if (a==null) {
-            Methods.newDevice(user, p.device, auth);
-            return user.userID;
-        }
+//        Auth a = auth.findByDevice(p.device);
+//        if (a==null) {
+//            Methods.newDevice(user, p.device, auth);
+//            return user.userID;
+//        }
         return user.userID;
     }
 
@@ -307,11 +310,11 @@ public class MainController {
         for (int i = 0; i < parameters.favorDump.size(); i++) {
             Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
             Party party = parties.findOne(parameters.partyID);
-            User user = users.findOne(parameters.userID);
+            fav.useCount += 1;
             FavorList favorList = new FavorList(fav, party, false);
             favlists.save(favorList);
-            Favor favor = favors.findOne(fav.favorID);
-            newDump.add(favor);
+            favors.save(fav);
+            newDump.add(fav);
         }
         return newDump;
     }
@@ -405,7 +408,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
-    public Party updateParty(@RequestBody Parameters parameters, HttpSession session) {
+    public Party updateParty(@RequestBody Parameters parameters) throws MessagingException {
 
         Party check = parties.findOne(parameters.party.partyID);
 
@@ -446,8 +449,13 @@ public class MainController {
             for (int i = 0; i < parameters.inviteDump.size(); i++) {
                 Invite invite = parameters.inviteDump.get(i);
                 Methods.newInvite(invite, invites, check);
+                Methods.sendInvite(invite, check.host, check);
+                invite.sent = true;
                 check.host.invitedCount += 1;
             }
+        }
+        if (parameters.party.wizPosition != null) {
+            check.wizPosition = parameters.party.wizPosition;
         }
         parties.save(check);
         return check;
@@ -508,6 +516,9 @@ public class MainController {
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public FavorList deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
         FavorList f = favlists.findOne(parameters.listID);
+        Favor fav = f.favor;
+        fav.useCount -= 1;
+        favors.save(fav);
         favlists.delete(f);
         return f;
     }
@@ -542,8 +553,15 @@ public class MainController {
      **/
 
     @RequestMapping(path = "/favor", method = RequestMethod.GET)
-    public ArrayList<Favor> getFavorList() {
-
+    public ArrayList<Favor> getFavorList(@RequestBody Parameters p) {
+//        Party party = parties.findOne(p.partyID);
+//        ArrayList<Favor> list = favors.findAllByPartyType(party.partyType);
+//        ArrayList<Favor> filter = (ArrayList<Favor>) favors.findAll();
+//        list.addAll(filter.stream()
+//                .filter(fav -> fav.partyType == party.partyType)
+//                .sorted(Comparator.comparing(Favor::getUseCount))
+//                .collect(Collectors.toList()));
+//        return list;
         return (ArrayList<Favor>) favors.findAll();
     }
 
@@ -558,6 +576,7 @@ public class MainController {
             fav.generic = false;
             fav.partyType = party.partyType;
             fav.subType = party.subType;
+            fav.useCount += 1;
             favors.save(fav);
             return fav;
         }
