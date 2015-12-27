@@ -17,12 +17,11 @@
 
         // CORDOVA DEVICE//
         var uuid;
-        $ionicPlatform.ready(function() {
-          var device = $cordovaDevice.getDevice();
-          uuid = device.uuid;
-          console.log("device uuid", device.uuid);
-          // LoginRegisterService.uuidAuth(uuid);
-      });
+      //   $ionicPlatform.ready(function() {
+      //     var device = $cordovaDevice.getDevice();
+      //     uuid = device.uuid;
+      //     console.log("device uuid", device.uuid);
+      // });
 
       // console.log("variable uuid", uuid);
 

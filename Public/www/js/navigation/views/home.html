@@ -1,17 +1,9 @@
 <ion-view view-title="Home">
   <ion-content>
-    <div class="row" id="homeContainerColOne">
-      <div id="homeHostPartyBtn" class= ng-click="wizardGo()">Host A Party</div>
-      <div id="homeProfileBtn" class="button col col-50" ng-click='profileGo()'>View Profile</div>
-    </div>
-    <div class="row">
-      <div id="homeManagePartyBtn" class='col col-offset-50 splashNav button button-energized'ng-click="managePartyGo()">Manage Party</div>
-    </div>
-    <div class="row" id="homeContainerColTwo">
-      <div id="homeAllPartyBtn" class='col splashNav button button-royal' ng-click="allPartiesGo()">View Parties</div>
-    </div>
-    <div class="row">
-      <div id="homeAllPartyBtn" class='col splashNav button button-royal' ng-click="logOut()">Log Out</div>
-    </div>
+    <div id="newHomeHostPartyBtn" class="homePage" ng-click="wizardGo()">HOST <br> A PARTY</div>
+    <div id="homeManagePartyBtn" class="homePage" ng-click="managePartyGo()">Manage Party</div>
+    <div id="homeProfileBtn" class="homePage" ng-click='profileGo()'>View Profile</div>
+    <div id="homeAllPartyBtn" class="homePage" ng-click="allPartiesGo()">View Parties</div>
+    <div id="logout" class="homePage" ng-click="logOut()">Log Out</div>
   </ion-content>
 </ion-view>

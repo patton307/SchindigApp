@@ -14,12 +14,12 @@
     ){
 
       var uuid;
-      $ionicPlatform.ready(function() {
-        var device = $cordovaDevice.getDevice();
-        uuid = device.uuid;
-        console.log("navigation uuid", device.uuid);
+      // $ionicPlatform.ready(function() {
+      //   var device = $cordovaDevice.getDevice();
+      //   uuid = device.uuid;
+        // console.log("navigation uuid", device.uuid);
         // LoginRegisterService.uuidAuth(uuid);
-    });
+    // });
 
 
         //TOP LEVEL NAVIGATION//

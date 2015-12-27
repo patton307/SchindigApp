@@ -9095,11 +9095,31 @@ a.button {
   font-weight: normal;
   font-style: normal; }
 
-table {
-  display: table; }
+.homePage {
+  box-sizing: border-box;
+  border: 2px; }
 
-#homeHostPartyBtn {
-  padding-top: 5%;
+#newHomeHostPartyBtn {
+  background-color: red;
+  line-height: normal;
+  padding-top: 30px;
+  width: 50%;
   height: 75vh;
   font-family: 'Showboat';
-  font-size: 12px; }
+  font-size: 35px;
+  float: left;
+  border-color: black;
+  border: 30px; }
+
+#homeAllPartyBtn {
+  clear: both;
+  background-color: blue;
+  height: 25vh; }
+
+#homeManagePartyBtn {
+  background-color: green;
+  height: 37.5vh; }
+
+#homeProfileBtn {
+  background-color: purple;
+  height: 37.5vh; }
