@@ -5,7 +5,8 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 .iml
 
-SchindigApp.iml
+SchindigAppHeroku.iml
+.build
 
 ## Directory-based project format:
 
