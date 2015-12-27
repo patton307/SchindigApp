@@ -110,7 +110,9 @@ public class MainController {
                 Favor fav = new Favor();
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                fav.generic = true;
+                if (columns[1]!=null) {
+                    fav.partyType = columns[1];
+                }
                 fav.favorName = favor;
                 favors.save(fav);
             }
@@ -573,9 +575,8 @@ public class MainController {
             return null;
         } else {
             fav.favorName = p.favor.favorName;
-            fav.generic = false;
             fav.partyType = party.partyType;
-            fav.subType = party.subType;
+//            fav.subType = party.subType;
             fav.useCount += 1;
             favors.save(fav);
             return fav;
