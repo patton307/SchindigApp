@@ -14,8 +14,6 @@ public class Favor {
 //    @Column(nullable = false)
     public String favorName;
 
-    public Boolean generic = false;
-
     public Integer useCount = 0;
 
     public String partyType;
@@ -31,17 +29,12 @@ public class Favor {
         this.useCount = useCount;
     }
 
-    public Favor(String partyType, String subType, Integer useCount, Boolean generic, String favorName) {
+    public Favor(String partyType, String subType, Integer useCount, String favorName) {
 
         this.subType = subType;
         this.partyType = partyType;
         this.useCount = useCount;
-        this.generic = generic;
         this.favorName = favorName;
-    }
-    public Boolean getGeneric() {
-
-        return generic;
     }
     public String getPartyType() {
 
@@ -75,10 +68,6 @@ public class Favor {
 
         this.favorName = favorName;
     }
-    public void setGeneric(Boolean generic) {
-
-        this.generic = generic;
-    }
     public void setUseCount(Integer useCount) {
 
         this.useCount = useCount;
@@ -91,9 +80,4 @@ public class Favor {
 
         this.subType = subType;
     }
-    // Database Connection
-
-    /*
-    @ManyToOne Party partyFavor;
-    */
 }
