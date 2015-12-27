@@ -1,3 +1,11 @@
+
+$fontMonoton:'Monoton';
+$fontMonofett: 'Monofett';
+$fontFredoka: 'Fredoka+One';
+$fontRighteous: 'Righteous';
+
+
+
 @font-face {
     font-family: 'Showboat';
     src:url('fonts/Showboat.ttf.woff') format('woff'),
@@ -9,20 +17,22 @@
 }
 
 .homePage {
-  box-sizing: border-box;
-  border: 2px
+
 }
 
 
 
 #newHomeHostPartyBtn {
+
   background-color: red;
-  line-height: normal;
-  padding-top: 30px;
+  text-align: center;
+  color: white;
+  line-height: 175%;
+  padding-top: 90px;
   width:50%;
   height: 75vh;
   font-family: 'Showboat';
-  font-size: 35px;
+  font-size: 39px;
   float: left;
   border-color: black;
   border:30px;
@@ -32,6 +42,9 @@
   clear:both;
   background-color: blue;
   height: 25vh;
+  font-family: $fontMonoton;
+  text-align: center;
+  font-size: 39px;
 
 }
 
