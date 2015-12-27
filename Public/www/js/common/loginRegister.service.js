@@ -2,7 +2,8 @@
   'use strict';
 
   angular
-    .module('loginRegister')
+
+    .module('schindig')
     .factory('LoginRegisterService', function($http, $state, $q, $cordovaDevice){
 
       var ip = 'http://10.0.10.72:8080';
@@ -12,12 +13,12 @@
       // var device = $cordovaDevice.getDevice();
       // $scope.uuid = device.uuid;
 
-      var uuidAuth = function(uuid) {
-        console.log("testy", uuid);
-        return $http.get(ip + ":8080/validate/" +uuid).success(function(data){
-          console.log(data);
-        });
-      };
+      // var uuidAuth = function(uuid) {
+      //   console.log("testy", uuid);
+      //   return $http.get(ip + ":8080/validate/" +uuid).success(function(data){
+      //     console.log(data);
+      //   });
+      // };
 
       var login = function(loginData) {
         return $http.post(loginUrl, loginData)
@@ -32,8 +33,8 @@
       };
       return {
         createUser: createUser,
-        login: login,
-        uuidAuth: uuidAuth
+        login: login
+        // uuidAuth: uuidAuth
       };
     });
 }());

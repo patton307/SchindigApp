@@ -9089,5 +9089,17 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+@font-face {
+  font-family: 'Showboat';
+  src: url("fonts/Showboat.ttf.woff") format("woff"), url("fonts/Showboat.ttf.svg#Showboat") format("svg"), url("fonts/Showboat.ttf.eot"), url("fonts/Showboat.ttf.eot?#iefix") format("embedded-opentype");
+  font-weight: normal;
+  font-style: normal; }
+
+table {
+  display: table; }
+
 #homeHostPartyBtn {
-  height: 315px; }
+  padding-top: 5%;
+  height: 75vh;
+  font-family: 'Showboat';
+  font-size: 12px; }

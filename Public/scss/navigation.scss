@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Showboat';
+    src:url('fonts/Showboat.ttf.woff') format('woff'),
+        url('fonts/Showboat.ttf.svg#Showboat') format('svg'),
+        url('fonts/Showboat.ttf.eot'),
+        url('fonts/Showboat.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+table {
+  display: table;
+}
+#homeContainerColOne {
+
+}
+
+#homeContainerColTwo {
+
+}
+
+#homeHostPartyBtn {
+  padding-top:5%;
+  height: 75vh;
+  font-family: 'Showboat';
+  font-size: 12px;
+  // width:52%;
+}
+
+#homeAllPartyBtn{
+
+}
+
+#homeManagePartyBtn {
+
+}
+
+#homeProfileBtn {
+
+}
