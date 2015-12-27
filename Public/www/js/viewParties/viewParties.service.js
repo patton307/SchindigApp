@@ -4,14 +4,15 @@
   .module('viewParties')
   .factory('ViewPartyService', function($http, $state){
     var vm = this;
-    var ip = 'http://localhost';
-    var viewHostedPartiesURL = ip + ':8080/parties/host';
-    var viewInvitedPartiesURL = ip +':8080/parties/user';
-    var getOneInvitedPartyURL = ip +':8080/party';
+    var ip = 'http://10.0.10.39:8080';
+    var viewHostedPartiesURL = ip + '/parties/host';
+    var viewInvitedPartiesURL = ip +'/parties/user';
+    var getOneInvitedPartyURL = ip +'/party';
 
     var getHostedParties = function(userID){
       return $http.post(viewHostedPartiesURL, userID)
         .success(function(data){
+          console.log('host success', data);
         });
     };
     var updatedHostedParties = function (data){
@@ -26,21 +27,23 @@
     };
     var getOneParty = function (partyID){
       partyID= partyID;
-      return $http.get(ip + ':8080/party/'+partyID)
+      return $http.get(ip + '/party/'+partyID)
         .success(function(data){
       });
     };
     var getPartyFavor = function(partyID){
         partyID = partyID;
-        return $http.get(ip + ':8080/party/'+ partyID +'/favors')
+        return $http.get(ip + '/party/'+ partyID +'/favors')
           .success(function(data){
         });
       };
       var favorClaim = function(partyID, favorData){
         partyID = partyID;
+        console.log('favordata', favorData);
         favorData = favorData;
-        return $http.post(ip + ':8080/party/'+ partyID + '/claim', favorData)
+        return $http.post(ip + '/party/'+ 1 + '/claim', favorData)
           .success(function(data){
+            console.log(data);
         });
       };
 
