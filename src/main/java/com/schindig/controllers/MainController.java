@@ -174,17 +174,15 @@ public class MainController {
 
 
     @RequestMapping(path = "/validate/{device}", method = RequestMethod.GET)
-    public Boolean appLoad(@PathVariable("device") String device, HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IOException {
+    public Integer appLoad(@PathVariable("device") String device, HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IOException {
 
         Auth a = auth.findByDevice(device);
         if (a == null) {
-            User u = users.findOne(1);
-            Methods.newDevice(u, device, auth);
+            return 0;
+        } else {
+            User u = auth.findByDevice(device).user;
+            return u.userID;
         }
-        if (Methods.validate(a.user, device, auth)) {
-            response.sendRedirect("/#/home");
-        }
-        return false;
     }
 
     /**
@@ -262,24 +260,30 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
-        User test = users.findOneByUsername(user.username);
+    public Integer login(@RequestBody Parameters p, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
+        User user = users.findOneByUsername(p.user.username);
         try {
-            if (users.findOneByUsername(user.username) == null) {
+            if (users.findOneByUsername(p.user.username) == null) {
                 response.sendError(401);
             }
-            if (!test.password.equals(user.password)) {
+            if (!user.password.equals(p.user.password)) {
                 response.sendError(403);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return test.userID;
+        Auth a = auth.findByDevice(p.device);
+        if (a==null) {
+            Methods.newDevice(user, p.device, auth);
+            return user.userID;
+        }
+        return user.userID;
     }
 
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
-    public void logout(HttpSession session) {
-        session.invalidate();
+    public void logout(@RequestBody Parameters p) {
+        Auth a = auth.findByDevice(p.device);
+        auth.delete(a);
     }
 
     /**
@@ -567,7 +571,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
-    public ArrayList<String> partyStats() {
+    public ArrayList<String> partyStats(@RequestBody Parameters p) {
 
         ArrayList<Object> stats = new ArrayList<>();
         long party = parties.count();
@@ -576,7 +580,9 @@ public class MainController {
         long user = users.count();
         long favor = favors.count();
 
-        HashMap<String, Long> databaseStats = new HashMap<>();
+        ArrayList<Object> userStats;
+        HashMap<String, Long> databaseStats;
+        databaseStats = new HashMap<>();
         stats.add(databaseStats);
 
         return new ArrayList<>();

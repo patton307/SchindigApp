@@ -63,9 +63,6 @@ public class Methods extends MainController {
         invite.email = i.email;
         invite.phone = i.phone;
         invite.name = i.name;
-        if (i.invite) {
-            invite.invite = true;
-        }
         inv.save(invite);
     }
 
@@ -109,13 +106,13 @@ public class Methods extends MainController {
             sprint.setTo(user.phone+"@messaging.sprintpcs.net");
             sprint.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
             mailSender.send(sprintMsg);
-            MimeMessage tmoMsg = mailSender.createMimeMessage();
-            MimeMessageHelper tmo = new MimeMessageHelper(tmoMsg);
-            tmo.setFrom("schindig.app@gmail.com");
-            tmo.setReplyTo(host.email);
-            tmo.setTo(user.phone+"@tmomail.net");
-            tmo.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
-            mailSender.send(tmoMsg);
+//            MimeMessage tmoMsg = mailSender.createMimeMessage();
+//            MimeMessageHelper tmo = new MimeMessageHelper(tmoMsg);
+//            tmo.setFrom("schindig.app@gmail.com");
+//            tmo.setReplyTo(host.email);
+//            tmo.setTo(user.phone+"@tmomail.net");
+//            tmo.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
+//            mailSender.send(tmoMsg);
         }
         if (user.email!=null) {
             mailMsg.setFrom("schindig.app@gmail.com");
@@ -157,7 +154,7 @@ public class Methods extends MainController {
         Auth a = repo.findByDevice(device);
         if (a!=null) {
             final Cipher cipher = Cipher.getInstance("RSA");
-            final String token = device.concat(user.username).concat(String.valueOf(user.password));
+            final String token = device.concat(user.username).concat(user.password);
             cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic());
             byte[] encryptedToken = cipher.doFinal(token.getBytes());
             String encryptString = new String(Base64.getEncoder().encode(encryptedToken));
