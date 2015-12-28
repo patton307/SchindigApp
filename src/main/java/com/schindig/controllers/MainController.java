@@ -113,7 +113,9 @@ public class MainController {
                 String favor = columns[0];
                 try {
                     String partyType = columns[1];
-                    if (partyType!=null) {
+                    if (partyType == null) {
+                        break;
+                    } else {
                         fav.partyType = partyType;
                     }
                 } catch (Exception e) {
@@ -159,7 +161,7 @@ public class MainController {
                     if (parties.count() < 10) {
                         Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
-                                0, true, true, theme, "Valet");
+                                0, false, false, theme, "Valet");
                         parties.save(P);
                         for (int fa = 1; fa < 10; fa++) {
                             Favor f = favors.findOne(fa);
@@ -200,44 +202,6 @@ public class MainController {
     /**
      * ALL USER RELATED ROUTES
      **/
-    @RequestMapping(path = "/user/update", method = RequestMethod.POST)
-    public User updateUser(@RequestBody User u) {
-
-        User user = users.findOne(u.userID);
-        if (u.username != null) {
-            user.username = u.username;
-        }
-        if (u.password != null) {
-            user.password = u.password;
-        }
-        if (u.email != null) {
-            user.email = u.email;
-        }
-        if (u.phone != null) {
-            user.phone = u.phone;
-        }
-        if (u.firstName != null) {
-            user.firstName = u.firstName;
-        }
-        if (u.lastName != null) {
-            user.lastName = u.lastName;
-        }
-        if (u.hostCount != null) {
-            user.hostCount = u.hostCount;
-        }
-        if (u.inviteCount != null) {
-            user.inviteCount = u.inviteCount;
-        }
-        if (u.invitedCount != null) {
-            user.invitedCount = u.invitedCount;
-        }
-        if (u.partyCount != null) {
-            user.partyCount = u.partyCount;
-        }
-        users.save(user);
-        user.password = null;
-        return user;
-    }
 
     @RequestMapping(path = "/user/create", method = RequestMethod.POST)
     public void createUser(@RequestBody User user, HttpServletResponse response, HttpSession session) throws Exception {
@@ -296,6 +260,30 @@ public class MainController {
     public void logout(@RequestBody Parameters p) {
         Auth a = auth.findByDevice(p.device);
         auth.delete(a);
+    }
+
+    @RequestMapping(path = "/user/update", method = RequestMethod.PATCH)
+    public User updateUser(@RequestBody Parameters parameters) {
+        User check = users.findOne(parameters.user.userID);
+
+        if (parameters.user.password != null) {
+            check.password = parameters.user.password;
+        }
+        if (parameters.user.phone != null) {
+            check.phone = parameters.user.phone;
+        }
+        if (parameters.user.email != null) {
+            check.email = parameters.user.email;
+        }
+        if (parameters.user.firstName != null) {
+            check.firstName = parameters.user.firstName;
+        }
+        if (parameters.user.lastName != null) {
+            check.lastName = parameters.user.lastName;
+        }
+        users.save(check);
+        check.username = null;
+        return check;
     }
 
     /**
