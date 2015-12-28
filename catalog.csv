@@ -1,205 +1,111 @@
-Garbage Bags,true
-Cooler,true
-Ice,true,
-Cooler,false
-Ice,true
-Paper Towels,true
-Toilet Paper,
-Charcoal,
-Bug Spray,
-Citronella,
-Glasses,
-Wine Glasses,
-Champagne Glasses,
-Water Pitcher,
-Cocktail Glasses,
-Stemmed Glass,
-Tall Glass,
-Short Glass,
-Cocktail Shaker,
-Cocktail Napkin,
-Jigger,
-Ice Bucket,
-Punch Bowl,
-Beverage Tub,
-Vodka,
-Gin,
-Dry Vermouth,
-Sweet Vermouth,
-Maraschino Cherries,
-Bourbon,
-Whiskey,
-Tequila,
-Rum,
+Garbage Bags,
+ Garbage Bags,
+Cookout Cooler, 
+Cooler,Cookout
+ Ice,
+ Ice,Cookout 
+Toilet Paper, 
+Charcoal,Cookout 
+Bug Spray,Cookout 
+Citronella,Cookout
+ Glasses, 
+Wine Glasses, 
+Champagne Glasses, 
+Water Pitcher, 
+Cocktail Glasses, 
+Stemmed Glasses, 
+Tall Glasses, 
+Short Glasses, 
+Cocktail Shaker, 
+Cocktail Napkin, 
+Jigger, 
+Ice Bucket, 
+Punch Bowl, 
+Beverage Tub, 
+Vodka, 
+Gin, 
+Dry Vermouth, 
+Sweet Vermouth, 
+Maraschino Cherry, 
+Bourbon, 
+Whiskey, 
+Tequila, 
+Rum, 
 Sparkling Wine,
-Beer,
-Cognac,
-Sake,
-Bitters,
-Ping Pong Balls,
-Beach Towels,
-Bottled Water,
-Party Bus,
-Cologne,
-Strippers,
-Escorts,
-Penis Straws,
-Colorful Panties,
-Edible Underwear,
-Slow Cooker,
-Cookie Sheets,
-Toaster Oven,
-Cutting Boards,
-Disposable Cups,
-Disposable Plates,
-Disposable Utensils,
-Folding Table,
-Folding Chairs,
-Blender,
-Bluetooth Speakers,
-Candles,
-Instant Camera,
-Christmas Wreath,
-Christmas Tree Stand,
-Christmas Lights,
-Mistletoe,
-Toilet Paper,false
-Charcoal,false
-Bug Spray,false
-Citronella,false
-Glasses,false
-Wine Glasses,false
-Champagne Glasses,false
-Water Pitcher,false
-Cocktail Glasses,false
-Stemmed Glass,false
-Tall Glass,false
-Short Glass,false
-Cocktail Shaker,false
-Cocktail Napkin,false
-Jigger,false
-Ice Bucket,false
-Punch Bowl,false
-Beverage Tub,false
-Vodka,false
-Gin,false
-Dry Vermouth,false
-Sweet Vermouth,false
-Maraschino Cherry,false
-Bourbon,false
-Whiskey,false
-Tequila,false
-Rum,false
-Sparkling Wine,false
-Beer,false
-Cognac,false
-Sake,false
-Bitters,false
-Ping Pong Balls,false
-Beach Towels,false
-Bottled Water,false
-Strippers,false
-Escorts,false
-Party Bus,false
-Uber ride funds,false
-Condoms,false
-Pocket Pussies,false
-STD tests,false
-Cologne,false
-Attorney Fund,false
-Travelers Insurance,false
-Cocaine,false
-Marijuana,false
-LSD,false
-Acid,false
-Oxycoton,false
-Oxycodon,false
-Ecstasy,false
-Date Rape pills,false
-Strippers,false
-Escorts,false
-Uber ride funds,false
-Condoms,false
-Dental Dam,false
-Attorney Fund,false
-Penis Straws,false
-Colorful Panties,false
-Edible Underwear,false
-Small size dildo,false
-Medium size dildo,false
-Large size dildo,false
-OMFG that is a huge Dildo,false
-STD tests,false
-Slow Cooker,false
-Cookie Sheets,false
-Toaster Oven,false
-Cutting Boards,false
-Disposable Cups,false
-Disposable Plates,false
-Disposable Utensils,false
-Folding Table,false
-Folding Chairs,false
-Blender,false
-Bluetooth Speakers,false
-Candles,false
-Instant Camera,false
-Christmas Wreath,false
-Christmas Tree Stand,false
-Christmas Lights,false
-Mistletoe,false
-Chips,true
-Salsa,true
-Cheese Dip,false
-Soft Drinks,false
-Pizza,false
-Quesadillas,false
-Lasagna,false
-Spaghetti,false
-Raviolis,false
-Tortollini,false
-Burritos,false
-Tacos,false
-Chalupas,false
-Chinese,false
-Sushi,false
-Steak,false
-Chicken Breast,false
-Macaroni and Cheese,false
-Bean Dip,false
-Pita Chips,false
-Pita Bread,false
-Cheese Board,false
-Charcuterie Tray,false
-Hot Dogs,false
-Burgers,false
-Condiments,false
-Pickles,false
-Guacamole,false
-Mashed Potatoes,false
-Deviled Eggs,false
-Bacon Wrapped Asparagus,false
-Cookies,false
-Brownies,false
-Pie,false
-Ice Cream,false
-Cheesecake,false
-DJ,false
-Keg,false
-Bouncer,false
-Pledge Valet,false
-Pledge Cleanup,false
-Birthday Cake,false
-Cupcakes,false
-Birthday Hats,false
-Balloons,false
-Strobe Lights,false
-Board Games,false
-Playing cards,false
-Cards Against Humanity,false
-Party Bus,false
-Video Games,false
-Swimsuit,false
-Computer,false
-Pickup Truck,false
-4-Wheeler,false
-Slip and Slide,false
+ Beer, 
+Cognac, 
+Sake, 
+Bitters, 
+Ping Pong Balls, 
+Beach Towels, 
+Bottled Water, 
+Uber ride funds, 
+Slow Cooker, 
+Cookie Sheets, 
+Toaster Oven, 
+Cutting Boards, 
+Disposable Cups, 
+Disposable Cups, Cookout 
+Disposable Plates, 
+Disposable Plates,Cookout 
+Disposable Utensils, 
+Folding Table, 
+Folding Chairs,Cookout 
+Blender, 
+Bluetooth Speakers, 
+Candles, 
+Instant Camera, 
+Christmas Wreath,Christmas 
+Christmas Tree Stand,Christmas 
+Christmas Lights,Christmas 
+Mistletoe,Christmas 
+Chips, 
+Chips,Cookout 
+Salsa, 
+Salsa,Cookout 
+Cheese Dip, 
+Soft Drinks,Cookout 
+Soft Drinks, 
+Pizza,Potluck Dinner 
+Quesadillas, 
+Lasagna, 
+Spaghetti, 
+Raviolis, 
+Tortollini,Potluck Dinner 
+Burritos,Potluck Dinner 
+Tacos,Potluck Dinner 
+Chalupas,Potluck Dinner 
+Sushi,Potluck Dinner 
+Steak,Potluck Dinner 
+Macaroni and Cheese,Potluck Dinner 
+Bean Dip,Cookout 
+Pita Chips, 
+Pita Bread, 
+Cheese Board,Potluck Dinner 
+Charcuterie Tray,Potluck Dinner 
+Hot Dogs,Cookout 
+Burgers,Cookout 
+Condiments,Cookout 
+Pickles,Cookout 
+Guacamole, 
+Mashed Potatoes, 
+Deviled Eggs, 
+Bacon Wrapped Asparagus, 
+Cookies,Birthday Party 
+Brownies,Birthday Party 
+Pie,Birthday Party 
+Ice Cream,Birthday Party 
+Cheesecake,Birthday Party 
+DJ, 
+Keg, 
+Bouncer, 
+Birthday Cake,Birthday Party 
+Cupcakes, 
+Birthday Hats,Birthday Party 
+Balloons, 
+Strobe Lights, 
+Board Games,Birthday Party 
+Playing cards,Birthday Party 
+Cards Against Humanity, 
+Video Games, 
+Slip and Slide,Birthday Party

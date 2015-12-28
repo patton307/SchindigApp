@@ -556,15 +556,14 @@ public class MainController {
 
     @RequestMapping(path = "/favor", method = RequestMethod.GET)
     public ArrayList<Favor> getFavorList(@RequestBody Parameters p) {
-//        Party party = parties.findOne(p.partyID);
-//        ArrayList<Favor> list = favors.findAllByPartyType(party.partyType);
-//        ArrayList<Favor> filter = (ArrayList<Favor>) favors.findAll();
-//        list.addAll(filter.stream()
-//                .filter(fav -> fav.partyType == party.partyType)
-//                .sorted(Comparator.comparing(Favor::getUseCount))
-//                .collect(Collectors.toList()));
-//        return list;
-        return (ArrayList<Favor>) favors.findAll();
+        Party party = parties.findOne(p.partyID);
+        ArrayList<Favor> list = favors.findAllByPartyType(party.partyType);
+        ArrayList<Favor> filter = (ArrayList<Favor>) favors.findAll();
+        list.addAll(filter.stream()
+                .filter(fav -> fav.partyType == party.partyType)
+                .sorted(Comparator.comparing(Favor::getUseCount))
+                .collect(Collectors.toList()));
+        return list;
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
