@@ -48,11 +48,12 @@ img {
 #host {
   text-align: center;
   font-weight: 500;
+  font-size: 3rem;
   // font-style: italic;
 }
 #letterA{
   line-height:30vh;
-  font-size: 7.5rem;
+  font-size: 7.0rem;
   position: relative;
   top: -6%;
 }
@@ -82,8 +83,8 @@ img {
   background-repeat: no-repeat;
   background-size:300%;
   height: 25vh;
-  line-height: 6vh;
-  padding-top: 11%;
+  line-height: 6.5vh;
+  padding-top: 8%;
   font-family: $fontMonoton;
   text-align: center;
   font-size: 70px;
@@ -94,9 +95,17 @@ img {
 }
 
 #homeManagePartyBtn {
-  background-color: green;
+  background-image: url("../img/manageParty1.jpg");
   height:37.5vh;
+  padding-top: 5vh;
 
+}
+
+#managePartyText {
+  font-family: $fontDamion;
+  font-size: 3rem;
+  line-height: 7vh;
+  
 }
 
 #homeProfileBtn {
