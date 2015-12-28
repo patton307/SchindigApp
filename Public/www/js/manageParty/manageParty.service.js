@@ -5,7 +5,6 @@
     .module('manageParty')
     .factory('ManagePartyService', function($http, $state){
       var vm = this;
-
       var ip = 'http://localhost:8080';
       var viewHostedPartiesURL = ip + '/parties/host';
       var viewInvitedPartiesURL = ip +'/parties/user';
