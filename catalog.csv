@@ -1,76 +1,76 @@
-Garbage Bags,
- Garbage Bags,
-Cookout Cooler, 
+Garbage Bags,null
+ Garbage Bags,Cookout 
+Cooler, null
 Cooler,Cookout
- Ice,
+ Ice,null
  Ice,Cookout 
-Toilet Paper, 
+Toilet Paper, null
 Charcoal,Cookout 
 Bug Spray,Cookout 
 Citronella,Cookout
- Glasses, 
-Wine Glasses, 
-Champagne Glasses, 
-Water Pitcher, 
-Cocktail Glasses, 
-Stemmed Glasses, 
-Tall Glasses, 
-Short Glasses, 
-Cocktail Shaker, 
-Cocktail Napkin, 
-Jigger, 
-Ice Bucket, 
-Punch Bowl, 
-Beverage Tub, 
-Vodka, 
-Gin, 
-Dry Vermouth, 
-Sweet Vermouth, 
-Maraschino Cherry, 
-Bourbon, 
-Whiskey, 
-Tequila, 
-Rum, 
-Sparkling Wine,
- Beer, 
-Cognac, 
-Sake, 
-Bitters, 
-Ping Pong Balls, 
-Beach Towels, 
-Bottled Water, 
-Uber ride funds, 
-Slow Cooker, 
-Cookie Sheets, 
-Toaster Oven, 
-Cutting Boards, 
-Disposable Cups, 
+ Glasses, null
+Wine Glasses,null 
+Champagne Glasses, null
+Water Pitcher, null
+Cocktail Glasses, null
+Stemmed Glasses, null
+Tall Glasses, null
+Short Glasses, null
+Cocktail Shaker, null
+Cocktail Napkin, null
+Jigger, null
+Ice Bucket,null 
+Punch Bowl, null
+Beverage Tub, null
+Vodka, null
+Gin, null
+Dry Vermouth, null
+Sweet Vermouth, null
+Maraschino Cherry, null
+Bourbon, null
+Whiskey, null
+Tequila, null
+Rum, null
+Sparkling Wine,null
+ Beer, null
+Cognac, null
+Sake, null
+Bitters, null
+Ping Pong Balls, null
+Beach Towels, null
+Bottled Water, null
+Uber ride funds, null
+Slow Cooker, null
+Cookie Sheets, null
+Toaster Oven, null
+Cutting Boards, null
+Disposable Cups, null
 Disposable Cups, Cookout 
-Disposable Plates, 
+Disposable Plates, null
 Disposable Plates,Cookout 
-Disposable Utensils, 
-Folding Table, 
+Disposable Utensils, null
+Folding Table, null
 Folding Chairs,Cookout 
-Blender, 
-Bluetooth Speakers, 
-Candles, 
-Instant Camera, 
+Blender, null
+Bluetooth Speakers, null
+Candles, null
+Instant Camera, null
 Christmas Wreath,Christmas 
 Christmas Tree Stand,Christmas 
 Christmas Lights,Christmas 
 Mistletoe,Christmas 
-Chips, 
+Chips, null
 Chips,Cookout 
-Salsa, 
+Salsa, null
 Salsa,Cookout 
-Cheese Dip, 
+Cheese Dip, null
 Soft Drinks,Cookout 
-Soft Drinks, 
+Soft Drinks, null
 Pizza,Potluck Dinner 
-Quesadillas, 
-Lasagna, 
-Spaghetti, 
-Raviolis, 
+Quesadillas, null
+Lasagna, null
+Spaghetti, null
+Raviolis, null
 Tortollini,Potluck Dinner 
 Burritos,Potluck Dinner 
 Tacos,Potluck Dinner 
@@ -79,33 +79,33 @@ Sushi,Potluck Dinner 
 Steak,Potluck Dinner 
 Macaroni and Cheese,Potluck Dinner 
 Bean Dip,Cookout 
-Pita Chips, 
-Pita Bread, 
+Pita Chips, null
+Pita Bread, null
 Cheese Board,Potluck Dinner 
 Charcuterie Tray,Potluck Dinner 
 Hot Dogs,Cookout 
 Burgers,Cookout 
 Condiments,Cookout 
 Pickles,Cookout 
-Guacamole, 
-Mashed Potatoes, 
-Deviled Eggs, 
-Bacon Wrapped Asparagus, 
+Guacamole, null
+Mashed Potatoes, null
+Deviled Eggs, null
+Bacon Wrapped Asparagus, null
 Cookies,Birthday Party 
 Brownies,Birthday Party 
 Pie,Birthday Party 
 Ice Cream,Birthday Party 
 Cheesecake,Birthday Party 
-DJ, 
-Keg, 
-Bouncer, 
+DJ, null
+Keg, null
+Bouncer,null 
 Birthday Cake,Birthday Party 
-Cupcakes, 
+Cupcakes, null
 Birthday Hats,Birthday Party 
-Balloons, 
-Strobe Lights, 
+Balloons, null
+Strobe Lights, null
 Board Games,Birthday Party 
 Playing cards,Birthday Party 
 Cards Against Humanity, 
-Video Games, 
+Video Games, null
 Slip and Slide,Birthday Party
