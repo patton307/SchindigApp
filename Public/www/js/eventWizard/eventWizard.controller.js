@@ -26,7 +26,6 @@
         return null;
       };
       $scope.partySubType = $scope.get($stateParams);
-      console.log('does this exist',$scope.partySubType);
     });
 
     /////POST NEW PARTY/////
@@ -35,18 +34,13 @@
     $scope.subType='none';
     $scope.getValue = function(value){
       var newVal = JSON.parse(value);
-      console.log(newVal);
       $scope.partyType = newVal.partyType;
       $scope.subType = newVal.subType;
-      console.log(newVal.subType);
     };
     $scope.getSubValue = function(subValue){
-      console.log(subValue);
-      console.log('parsed');
       $scope.subTypeVal = subValue;
     };
     $scope.newWizPartyPost = function(partyType, subTypeVal, partyName, description){
-      console.log(partyType);
       var rawUserID = +localStorage.getItem('userID');
       var item = {
         party: {
@@ -58,7 +52,6 @@
         userID: rawUserID
       };
       EventWizardService.newWizPartyPost(item).success(function(data){
-        console.log('You made a party', data.partyID);
         localStorage.setItem('partyID', data.partyID);
         $state.go('whenwhere');
       });
@@ -77,8 +70,6 @@
     ){
         var vm = this;
 
-
-
       ///PATCH DATE, TIME AND NAME/////
     $scope.dateAndTimePost = function(partyDate, location, description){
       var partyID = +localStorage.getItem('partyID');
@@ -90,24 +81,23 @@
           partyDate: partyDate
         }
       };
-      console.log('doomba',data.party.local);
-
-
-      console.log('dooadfsadfmba',data.party.local);
 
       data.party.partyDate = JSON.stringify(data.party.partyDate);
       data.party.partyDate = JSON.parse(data.party.partyDate);
       EventWizardService.updateWizData(data).success(function(updatedWizData){
-        console.log('date and time post', updatedWizData);
         $state.go('stretchgoal');
       });
     };
 
-
      ////STRETCHGOAL PATCH and SCOPES////
-
-     $scope.stretchGoalData = function (stretchGoal, stretchName, themeVal){
+     $scope.parking='none';
+     $scope.getParking = function(parking){
+       $scope.parking = parking;
+     };
+     $scope.stretchGoalData = function (stretchGoal, stretchName, themeVal, parking){
+       console.log(parking);
        var byobElements = document.getElementsByClassName('byob');
+       console.log('this is what i want',byobElements.length);
        var themeElements = document.getElementsByClassName('theme');
        var byobStatus;
        var themeStatus;
@@ -125,6 +115,7 @@
        var partyID = +localStorage.getItem('partyID');
        var data = {
          party: {
+           parking: parking,
            theme: themeVal,
            byob: byobStatus,
            stretchGoal: stretchGoal,
@@ -133,13 +124,11 @@
          }
        };
        EventWizardService.updateWizData(data).success(function(updatedWizData){
-         console.log('success', updatedWizData);
+         console.log(data);
          $state.go('favors');
        });
      };
     })
-
-
 
     .controller('ContactsController', function(
       $scope,
@@ -201,7 +190,6 @@
               };
             });
               EventWizardService.updateWizData(data).then(function(data){
-                console.log('contacts have been sent', data);
                 $state.go('home');
               });
             }
@@ -211,6 +199,8 @@
           });
         };
     })
+
+        
 
     .controller('FavorsController', function(
       $scope,
@@ -223,6 +213,7 @@
       ////GET FAVORS////
        EventWizardService.getFavors().then(function(data){
          $scope.favors = data.data;
+         console.log($scope.favors);
        });
 
       /////FAVORS PATCH/////
@@ -234,7 +225,6 @@
           var parsed = JSON.parse(el.id);
           vm.favorArray.push(parsed);
         });
-        console.log('this is my array',vm.favorArray);
         var partyID = +localStorage.getItem('partyID');
         var rawUserID = +localStorage.getItem('userID');
         var data = {
@@ -243,24 +233,41 @@
           favorDump: vm.favorArray
         };
         EventWizardService.updatePartyFavorList(data).success(function(data){
-          console.log('the favor list has been updated', data);
           $state.go('invites');
         });
       };
 
-
       /////ADD FAVOR TO DATA/////
-      $scope.addFavorToData = function(favorData){
+      $scope.addFavorToData = function(favorDoo){
         var partyID = +localStorage.getItem('partyID');
         var userID = +localStorage.getItem('userID');
         var favorData = {
           favor: {
-            favorName: favorData
+            favorName: favorDoo
           },
           partyID: partyID
         };
-        console.log(favorData);
-        EventWizardService.addFavorToData(favorData);
+        if (favorData != null || favorData.favor.favorName != "") {
+            var newDataBlue;
+            EventWizardService.addFavorToData(favorData)
+              .then(function(data){
+                newDataBlue = data;
+            }).then(function(){
+              console.log(newDataBlue.data.favorName);
+              if(newDataBlue.data.favorName == null){
+               return;
+            }
+              else if(newDataBlue.data.favorName.length == 0 ){
+                return;
+            }
+              else {
+              $scope.favors.unshift(newDataBlue.data);
+            }
+          });
+        } else {
+          console.log('doodad');
+          return;
+        }
       };
     });
 }());

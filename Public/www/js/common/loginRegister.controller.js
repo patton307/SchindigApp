@@ -2,32 +2,46 @@
   'use strict';
 
   angular
-    .module('loginRegister')
+    .module('schindig')
     .controller('LoginRegisterController', function(
       $http,
       $scope,
       $state,
       $stateParams,
       LoginRegisterService,
-      $cordovaDevice
+      $cordovaDevice,
+      $ionicPlatform
     )
       {
 
-        //CORDOVA DEVICE//
-        // console.log($cordovaDevice.getUUID());
+
+        // CORDOVA DEVICE//
+        var uuid;
+      //   $ionicPlatform.ready(function() {
+      //     var device = $cordovaDevice.getDevice();
+      //     uuid = device.uuid;
+      //     console.log("device uuid", device.uuid);
+      // });
+
+      // console.log("variable uuid", uuid);
+
 
         //LOGIN USER AND ROUTE
       $scope.login = function(username, password){
         var loginData = {
-          username: username,
-          password: password
+          user : {
+            username: username,
+            password: password
+          },
+          device : uuid
         };
         LoginRegisterService.login(loginData).then(function(data){
-          console.log('dog', data);
-          localStorage.setItem('userID', data.data);
-          $state.go('home');
+            localStorage.setItem('userID', data.data);
+            $state.go('home');
         });
-        LoginRegisterService.login(loginData);
+
+        // LoginRegisterService.login(loginData);
+
       };
 
       $scope.signUp = function(){
@@ -51,6 +65,7 @@
           email: email,
           phone: phone
         };
+
         LoginRegisterService.createUser(userData).success(function(data){
           console.log('create new user',data);
           $state.go('login');

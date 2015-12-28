@@ -5,7 +5,7 @@
 
     .module('eventWizard', [
       'ionic',
-      'loginRegister',
+      'schindig',
       'ngCordova',
       'profile',
       'manageParty',

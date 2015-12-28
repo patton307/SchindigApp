@@ -5,12 +5,14 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 .iml
 
-SchindigApp.iml
+SchindigAppHeroku.iml
+.build
 
 ## Directory-based project format:
 
 .idea
 build
+.gradle
 
 # if you remove the above rule, at least ignore the following:
 
@@ -103,5 +105,3 @@ bower_components
 *.db
 
 .DS_Store
-
-.gradle

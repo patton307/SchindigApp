@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.mail.MessagingException;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -76,7 +78,7 @@ public class MainController {
                 if (columns[1] != null) {
                     subTypes.add(columns[1]);
                 }
-                if (partyMod == null) {
+                if (columns[1] == null) {
                     partyMod = "empty";
                 }
                 Wizard check = wizard.findOneByPartyType(partyType);
@@ -109,7 +111,15 @@ public class MainController {
                 Favor fav = new Favor();
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                fav.generic = true;
+                try {
+                    String partyType = columns[1];
+                    if (partyType!=null) {
+                        fav.partyType = partyType;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    e.getMessage();
+                }
                 fav.favorName = favor;
                 favors.save(fav);
             }
@@ -153,7 +163,9 @@ public class MainController {
                         parties.save(P);
                         for (int fa = 1; fa < 10; fa++) {
                             Favor f = favors.findOne(fa);
+                            f.useCount += 1;
                             FavorList newList = new FavorList(f, P, false);
+                            favors.save(f);
                             favlists.save(newList);
                         }
                         for (int u = 0; u < userBuild.size(); u++) {
@@ -174,17 +186,15 @@ public class MainController {
 
 
     @RequestMapping(path = "/validate/{device}", method = RequestMethod.GET)
-    public Boolean appLoad(@PathVariable("device") String device, HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IOException {
+    public Integer appLoad(@PathVariable("device") String device, HttpServletResponse response) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException, IOException {
 
         Auth a = auth.findByDevice(device);
         if (a == null) {
-            User u = users.findOne(1);
-            Methods.newDevice(u, device, auth);
+            return 0;
+        } else {
+            User u = auth.findByDevice(device).user;
+            return u.userID;
         }
-        if (Methods.validate(a.user, device, auth)) {
-            response.sendRedirect("/#/home");
-        }
-        return false;
     }
 
     /**
@@ -262,24 +272,30 @@ public class MainController {
     }
 
     @RequestMapping(path = "/user/login", method = RequestMethod.POST)
-    public Integer login(@RequestBody User user, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
-        User test = users.findOneByUsername(user.username);
+    public Integer login(@RequestBody Parameters p, HttpServletResponse response, HttpSession session, HttpServletRequest request) throws Exception {
+        User user = users.findOneByUsername(p.user.username);
         try {
-            if (users.findOneByUsername(user.username) == null) {
+            if (users.findOneByUsername(p.user.username) == null) {
                 response.sendError(401);
             }
-            if (!test.password.equals(user.password)) {
+            if (!user.password.equals(p.user.password)) {
                 response.sendError(403);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return test.userID;
+//        Auth a = auth.findByDevice(p.device);
+//        if (a==null) {
+//            Methods.newDevice(user, p.device, auth);
+//            return user.userID;
+//        }
+        return user.userID;
     }
 
     @RequestMapping(path = "/user/logout", method = RequestMethod.POST)
-    public void logout(HttpSession session) {
-        session.invalidate();
+    public void logout(@RequestBody Parameters p) {
+        Auth a = auth.findByDevice(p.device);
+        auth.delete(a);
     }
 
     /**
@@ -303,11 +319,11 @@ public class MainController {
         for (int i = 0; i < parameters.favorDump.size(); i++) {
             Favor fav = favors.findOne(parameters.favorDump.get(i).favorID);
             Party party = parties.findOne(parameters.partyID);
-            User user = users.findOne(parameters.userID);
+            fav.useCount += 1;
             FavorList favorList = new FavorList(fav, party, false);
             favlists.save(favorList);
-            Favor favor = favors.findOne(fav.favorID);
-            newDump.add(favor);
+            favors.save(fav);
+            newDump.add(fav);
         }
         return newDump;
     }
@@ -401,7 +417,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/update", method = RequestMethod.PATCH)
-    public Party updateParty(@RequestBody Parameters parameters, HttpSession session) {
+    public Party updateParty(@RequestBody Parameters parameters) throws MessagingException {
 
         Party check = parties.findOne(parameters.party.partyID);
 
@@ -442,8 +458,13 @@ public class MainController {
             for (int i = 0; i < parameters.inviteDump.size(); i++) {
                 Invite invite = parameters.inviteDump.get(i);
                 Methods.newInvite(invite, invites, check);
+                Methods.sendInvite(invite, check.host, check);
+                invite.sent = true;
                 check.host.invitedCount += 1;
             }
+        }
+        if (parameters.party.wizPosition != null) {
+            check.wizPosition = parameters.party.wizPosition;
         }
         parties.save(check);
         return check;
@@ -504,6 +525,9 @@ public class MainController {
     @RequestMapping(path = "/party/favor/delete", method = RequestMethod.POST)
     public FavorList deletePartyFavor(@RequestBody Parameters parameters, HttpServletResponse response) throws IOException {
         FavorList f = favlists.findOne(parameters.listID);
+        Favor fav = f.favor;
+        fav.useCount -= 1;
+        favors.save(fav);
         favlists.delete(f);
         return f;
     }
@@ -538,9 +562,15 @@ public class MainController {
      **/
 
     @RequestMapping(path = "/favor", method = RequestMethod.GET)
-    public ArrayList<Favor> getFavorList() {
-
-        return (ArrayList<Favor>) favors.findAll();
+    public ArrayList<Favor> getFavorList(@RequestBody Parameters p) {
+        Party party = parties.findOne(p.partyID);
+        ArrayList<Favor> list = favors.findAllByPartyType(party.partyType);
+        ArrayList<Favor> filter = (ArrayList<Favor>) favors.findAll();
+        list.addAll(filter.stream()
+                .filter(fav -> fav.partyType == party.partyType)
+                .sorted(Comparator.comparing(Favor::getUseCount))
+                .collect(Collectors.toList()));
+        return list;
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
@@ -551,9 +581,9 @@ public class MainController {
             return null;
         } else {
             fav.favorName = p.favor.favorName;
-            fav.generic = false;
             fav.partyType = party.partyType;
-            fav.subType = party.subType;
+//            fav.subType = party.subType;
+            fav.useCount += 1;
             favors.save(fav);
             return fav;
         }
@@ -567,7 +597,7 @@ public class MainController {
     }
 
     @RequestMapping(path = "/party/stats", method = RequestMethod.GET)
-    public ArrayList<String> partyStats() {
+    public ArrayList<String> partyStats(@RequestBody Parameters p) {
 
         ArrayList<Object> stats = new ArrayList<>();
         long party = parties.count();
@@ -576,7 +606,9 @@ public class MainController {
         long user = users.count();
         long favor = favors.count();
 
-        HashMap<String, Long> databaseStats = new HashMap<>();
+        ArrayList<Object> userStats;
+        HashMap<String, Long> databaseStats;
+        databaseStats = new HashMap<>();
         stats.add(databaseStats);
 
         return new ArrayList<>();

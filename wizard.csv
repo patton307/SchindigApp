@@ -1,39 +1,43 @@
-Christmas,null
+Christmas,Naughty
+Christmas,Nice
 Valentine's Day,null
 4th of July,null
-Hanukkah,null
+Hannukkah,null
 St. Patrick's Day,null
 Graduation,null
-Bachelorette Party,null
-Bachelor Party,null
+Bachelorette Party,Mild
+Bachelorette Party,Wild
+Bachelor Party,Mild
+Bachelor Party,Wild
 Birthday Party,null
 Anniversary Party,null
-Congratulations,null
+Congratulations, For what?
 Divorce,null
 Retirement,null
-Job Promotion,null
-Bon Voyage,null
-Baby Shower,null
+Job Promotion, Into what?
+Bon Voyage, Where are they going?
+Baby Shower, Boy or Girl?
 Bridal Shower,null
-Benefit,null
-Fund Raiser,null
+Benefit, Towards what?
+Fund Raiser, Towards what?
 Costume Party, null
 Housewarming Party,null
 Cocktail Party,null
 Tea Party,null
 Wedding Reception,null
-Family Re-Union,null
-High School Re-Union,null
-College Re-Union,null
+Family Re-Union, How many years has it been?
+High School Re-Union, How many years has it been?
+College Re-Union, How many years has it been?
 Potluck Dinner,null
 Fondue Dinner,null
 Wine Tasting,null
 Oyster Roast,null
 Brunch,null
-Barbecue,null
+Pig Pickin',null
 Halloween Party,null
 New Year's Eve,null
 Mardi Gras,null
-New Year's Eve,null
-Super Bowl Party,null
-Custom,null
+New Year's Day,null
+Super Bowl Party, null
+Cookout,null
+Custom, What kind of party is this?
