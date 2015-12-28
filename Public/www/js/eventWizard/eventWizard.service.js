@@ -36,8 +36,8 @@
       var updatePartyFavorList = function (data){
         return $http.post(favorUpdateUrl, data);
       };
-      var getFavors = function () {
-        return $http.get(favorGetUrl);
+      var getFavors = function (partyID) {
+        return $http.get(favorGetUrl, partyID);
       };
       var postInviteData = function(inviteData){
         return $http.patch(invitePostUrl, inviteData);

@@ -208,9 +208,11 @@
     ){
       var vm = this;
       ////GET FAVORS////
-       EventWizardService.getFavors().then(function(data){
-         $scope.favors = data.data;
-         console.log($scope.favors);
+      var partyID = +localStorage.getItem('partyID');
+       EventWizardService
+        .getFavors(partyID).then(function(data){
+           $scope.favors = data.data;
+           console.log($scope.favors);
        });
 
       /////FAVORS PATCH/////
