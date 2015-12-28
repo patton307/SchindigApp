@@ -23,6 +23,7 @@ import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -77,7 +78,7 @@ public class MainController {
                 if (columns[1] != null) {
                     subTypes.add(columns[1]);
                 }
-                if (partyMod == null) {
+                if (columns[1] == null) {
                     partyMod = "empty";
                 }
                 Wizard check = wizard.findOneByPartyType(partyType);
@@ -110,8 +111,14 @@ public class MainController {
                 Favor fav = new Favor();
                 String[] columns = line.split(",");
                 String favor = columns[0];
-                if (columns[1]!=null) {
-                    fav.partyType = columns[1];
+                try {
+                    String partyType = columns[1];
+                    if (partyType!=null) {
+                        fav.partyType = partyType;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    e.getMessage();
                 }
                 fav.favorName = favor;
                 favors.save(fav);
@@ -556,15 +563,14 @@ public class MainController {
 
     @RequestMapping(path = "/favor", method = RequestMethod.GET)
     public ArrayList<Favor> getFavorList(@RequestBody Parameters p) {
-//        Party party = parties.findOne(p.partyID);
-//        ArrayList<Favor> list = favors.findAllByPartyType(party.partyType);
-//        ArrayList<Favor> filter = (ArrayList<Favor>) favors.findAll();
-//        list.addAll(filter.stream()
-//                .filter(fav -> fav.partyType == party.partyType)
-//                .sorted(Comparator.comparing(Favor::getUseCount))
-//                .collect(Collectors.toList()));
-//        return list;
-        return (ArrayList<Favor>) favors.findAll();
+        Party party = parties.findOne(p.partyID);
+        ArrayList<Favor> list = favors.findAllByPartyType(party.partyType);
+        ArrayList<Favor> filter = (ArrayList<Favor>) favors.findAll();
+        list.addAll(filter.stream()
+                .filter(fav -> fav.partyType == party.partyType)
+                .sorted(Comparator.comparing(Favor::getUseCount))
+                .collect(Collectors.toList()));
+        return list;
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
