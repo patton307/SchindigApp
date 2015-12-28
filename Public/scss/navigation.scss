@@ -87,7 +87,7 @@ img {
   padding-top: 8%;
   font-family: $fontMonoton;
   text-align: center;
-  font-size: 70px;
+  font-size: 3.5rem;
   color:#ff94d7;
   text-shadow: 0 0 2px #ff94d7, 0 0 5px #ff94d7, 0 0 6px #ff94d7;
   font-weight: 500;
@@ -99,13 +99,21 @@ img {
   height:37.5vh;
   padding-top: 5vh;
 
+
 }
 
 #managePartyText {
+  position:relative;
+  left:4.5%;
   font-family: $fontDamion;
-  font-size: 3rem;
+  font-size: 2.7rem;
   line-height: 7vh;
-  
+  color: #fac12f;
+  font-weight: bold;
+  text-shadow: -5px 10px 0px rgba(#f6e67d, 0.87),
+                 -10px 20px 0px rgba(#fff7ad, 0.64),
+
+
 }
 
 #homeProfileBtn {

@@ -9154,7 +9154,7 @@ img {
   padding-top: 8%;
   font-family: "Monoton";
   text-align: center;
-  font-size: 70px;
+  font-size: 3.5rem;
   color: #ff94d7;
   text-shadow: 0 0 2px #ff94d7, 0 0 5px #ff94d7, 0 0 6px #ff94d7;
   font-weight: 500; }
@@ -9165,9 +9165,14 @@ img {
   padding-top: 5vh; }
 
 #managePartyText {
+  position: relative;
+  left: 4.5%;
   font-family: "Damion";
-  font-size: 3rem;
-  line-height: 7vh; }
+  font-size: 2.7rem;
+  line-height: 7vh;
+  color: #fac12f;
+  font-weight: bold;
+  text-shadow: -5px 10px 0px rgba(246, 230, 125, 0.87), -10px 20px 0px rgba(255, 247, 173, 0.64); }
 
 #homeProfileBtn {
   background-color: purple;
