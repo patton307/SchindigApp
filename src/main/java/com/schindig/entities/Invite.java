@@ -26,7 +26,7 @@ public class Invite {
 
     public String name;
 
-    public Boolean invite = false;
+    public Boolean sent = false;
 
 
 
@@ -38,13 +38,13 @@ public class Invite {
         this.email = email;
     }
 
-    public Invite(Party party, String phone, String email, String name, Boolean invite) {
+    public Invite(Party party, String phone, String email, String name, Boolean sent) {
 
         this.party = party;
         this.phone = phone;
         this.email = email;
         this.name = name;
-        this.invite = invite;
+        this.sent = sent;
     }
     public Invite() {
     }
@@ -64,9 +64,9 @@ public class Invite {
         this.name = name;
     }
 
-    public Boolean getInvite() {
+    public Boolean getSent() {
 
-        return invite;
+        return sent;
     }
     public String getRsvpStatus() {
 

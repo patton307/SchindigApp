@@ -2,17 +2,15 @@ Christmas,Naughty
 Christmas,Nice
 Valentine's Day,null
 4th of July,null
-Hanukkah,null
+Hannukkah,null
 St. Patrick's Day,null
-Graduation, What are they graduating from?
+Graduation,null
 Bachelorette Party,Mild
 Bachelorette Party,Wild
 Bachelor Party,Mild
 Bachelor Party,Wild
-Birthday Party,Age
-Birthday Party,Male
-Birthday Party,Female
-Anniversary Party, For who/what? How many years?
+Birthday Party,
+Anniversary Party,null
 Congratulations, For what?
 Divorce,null
 Retirement,null
@@ -41,4 +39,5 @@ New Year's Eve,null
 Mardi Gras,null
 New Year's Day,null
 Super Bowl Party, null
+Cookout,null
 Custom, What kind of party is this?

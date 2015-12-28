@@ -63,9 +63,6 @@ public class Methods extends MainController {
         invite.email = i.email;
         invite.phone = i.phone;
         invite.name = i.name;
-        if (i.invite) {
-            invite.invite = true;
-        }
         inv.save(invite);
     }
 
@@ -79,7 +76,7 @@ public class Methods extends MainController {
         repo.findOne(party.partyID);
     }
 
-    public static void sendInvite(User user, User host, Party party) throws MessagingException {
+    public static void sendInvite(Invite user, User host, Party party) throws MessagingException {
 
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(AppConfig.class);
@@ -93,39 +90,39 @@ public class Methods extends MainController {
             att.setFrom("schindig.app@gmail.com");
             att.setTo(user.phone+"@txt.att.net");
             att.setReplyTo(host.email);
-            att.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
+            att.setText("Hey "+user.name+"! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
             mailSender.send(attMsg);
             MimeMessage vzwMsg = mailSender.createMimeMessage();
             MimeMessageHelper vzw = new MimeMessageHelper(vzwMsg);
             vzw.setFrom("schindig.app@gmail.com");
             vzw.setReplyTo(host.email);
             vzw.setTo(user.phone+"@vtext.com");
-            vzw.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
+            vzw.setText("Hey "+user.name+"! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
             mailSender.send(vzwMsg);
             MimeMessage sprintMsg = mailSender.createMimeMessage();
             MimeMessageHelper sprint = new MimeMessageHelper(sprintMsg);
             sprint.setFrom("schindig.app@gmail.com");
             sprint.setReplyTo(host.email);
-            sprint.setTo(user.phone+"@messaging.sprintpcs.net");
-            sprint.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
+            sprint.setTo(user.phone+"@messaging.sprintpcs.com");
+            sprint.setText("Hey "+user.name+"! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
             mailSender.send(sprintMsg);
-            MimeMessage tmoMsg = mailSender.createMimeMessage();
-            MimeMessageHelper tmo = new MimeMessageHelper(tmoMsg);
-            tmo.setFrom("schindig.app@gmail.com");
-            tmo.setReplyTo(host.email);
-            tmo.setTo(user.phone+"@tmomail.net");
-            tmo.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
-            mailSender.send(tmoMsg);
+//            MimeMessage tmoMsg = mailSender.createMimeMessage();
+//            MimeMessageHelper tmo = new MimeMessageHelper(tmoMsg);
+//            tmo.setFrom("schindig.app@gmail.com");
+//            tmo.setReplyTo(host.email);
+//            tmo.setTo(user.phone+"@tmomail.net");
+//            tmo.setText("Hey! "+host.firstName+" just invited you to their party! Go to http://www.schindig.com/app to RSVP!");
+//            mailSender.send(tmoMsg);
         }
-        if (user.email!=null) {
-            mailMsg.setFrom("schindig.app@gmail.com");
-            mailMsg.setReplyTo(host.email);
-            mailMsg.setTo(user.email);
-            mailMsg.setSubject(host.firstName+" just invited you to their party!");
-            mailMsg.setText("Hello World!");
-            mailSender.send(mimeMessage);
-        }
-        System.out.println("---Done---");
+//        if (user.email!=null) {
+//            mailMsg.setFrom("schindig.app@gmail.com");
+//            mailMsg.setReplyTo(host.email);
+//            mailMsg.setTo(user.email);
+//            mailMsg.setSubject(host.firstName+" just invited you to their party!");
+//            mailMsg.setText("Hello World!");
+//            mailSender.send(mimeMessage);
+//        }
+//        System.out.println("---Done---");
     }
 
     public static Boolean initApp(String device, AuthRepo arepo) {
@@ -157,7 +154,7 @@ public class Methods extends MainController {
         Auth a = repo.findByDevice(device);
         if (a!=null) {
             final Cipher cipher = Cipher.getInstance("RSA");
-            final String token = device.concat(user.username).concat(String.valueOf(user.password));
+            final String token = device.concat(user.username).concat(user.password);
             cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic());
             byte[] encryptedToken = cipher.doFinal(token.getBytes());
             String encryptString = new String(Base64.getEncoder().encode(encryptedToken));
