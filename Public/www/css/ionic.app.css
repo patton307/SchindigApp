@@ -9095,27 +9095,65 @@ a.button {
   font-weight: normal;
   font-style: normal; }
 
-#newHomeHostPartyBtn {
-  background-color: red;
+img {
+  width: 70vw;
+  height: 15vh;
+  position: relative;
+  bottom: 40vh;
+  left: -8%;
+  transform: rotate(90deg); }
+
+.homePage {
+  border-style: solid;
+  border-color: white;
+  border-width: thick; }
+
+#party {
+  letter-spacing: 2px;
+  text-align: left;
+  line-height: 9vh;
+  font-size: 3.7rem;
+  position: relative;
+  bottom: 13%;
+  right: 30%; }
+
+#host {
+  text-align: center;
+  font-weight: 500; }
+
+#letterA {
+  line-height: 30vh;
+  font-size: 7.5rem;
+  position: relative;
+  top: -6%; }
+
+#homeHostPartyBtn {
+  background-image: url("../img/homeHostParty1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   text-align: center;
   color: white;
-  line-height: 175%;
-  padding-top: 90px;
+  padding-top: 3vh;
   width: 50%;
   height: 75vh;
   font-family: 'Showboat';
   font-size: 39px;
   float: left;
-  border-color: black;
-  border: 30px; }
+  padding-bottom: 40px; }
 
 #homeAllPartyBtn {
   clear: both;
-  background-color: blue;
+  background-image: "../img/viewParties1.jpg";
+  background-position: center;
+  background-size: 50%;
   height: 25vh;
+  line-height: 5vh;
+  padding-top: 11%;
   font-family: "Monoton";
   text-align: center;
-  font-size: 39px; }
+  font-size: 55px;
+  color: #ff94d7; }
 
 #homeManagePartyBtn {
   background-color: green;
