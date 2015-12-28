@@ -4,7 +4,8 @@
   .module('viewParties')
   .factory('ViewPartyService', function($http, $state){
     var vm = this;
-    var ip = 'http://10.0.10.39:8080';
+
+    var ip = 'http://10.0.10.29:8080';
     var viewHostedPartiesURL = ip + '/parties/host';
     var viewInvitedPartiesURL = ip +'/parties/user';
     var getOneInvitedPartyURL = ip +'/party';
@@ -37,11 +38,9 @@
           .success(function(data){
         });
       };
-      var favorClaim = function(partyID, favorData){
-        partyID = partyID;
-        console.log('favordata', favorData);
+      var favorClaim = function(favorData){
         favorData = favorData;
-        return $http.post(ip + '/party/'+ 1 + '/claim', favorData)
+        return $http.post(ip + '/party/claim', favorData)
           .success(function(data){
             console.log(data);
         });

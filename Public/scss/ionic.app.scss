@@ -20,11 +20,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+@import "navigation.scss"
 
-@include font-face("Showboat", font-files("fonts/Showboat.ttf");
-.topBar{
-  margin-top: 200px;
-}
-#homeHostPartyBtn{
-  margin-top: 400px;
-}
+// @include font-face("Showboat", font-files("fonts/Showboat.ttf");

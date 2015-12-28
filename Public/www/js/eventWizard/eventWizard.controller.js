@@ -200,6 +200,8 @@
         };
     })
 
+        
+
     .controller('FavorsController', function(
       $scope,
       $http,

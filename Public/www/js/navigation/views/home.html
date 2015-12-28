@@ -1,12 +1,9 @@
 <ion-view view-title="Home">
   <ion-content>
-    <div class="button-bar topBar">
-      <a id="homeHostPartyBtn" class='splashNav button button-positive icon-left ion-home' ng-click="wizardGo()">Host A Party</a>
-      <a id="homeAllPartyBtn" class='splashNav button button-calm icon-right ion-home ng' ng-click="allPartiesGo()">View Parties</a>
-    </div>
-    <div class="button-bar">
-      <a id="homeProfileBtn" class='splashNav button button-balanced icon-left ion-home' ng-click='profileGo()'>View Profile</a>
-      <a id="homeManagePartyBtn" class='splashNav button button-energized icon-right ion-home'ng-click="managePartyGo()">Manage Party</a>
-    </div>
+    <div id="homeHostPartyBtn" class="homePage" ng-click="wizardGo()"><span id="host">HOST</span><br><span id="letterA">A</span> <span id="party"><br>P<br>A<br>R<br>T<br>Y<br></span><img src="../../../img/whitefinger.png"></div>
+    <div id="homeManagePartyBtn" class="homePage" ng-click="managePartyGo()"><span id="managePartyText">Manage Party</span></div>
+    <div id="homeProfileBtn" class="homePage" ng-click='profileGo()'>View Profile</div>
+    <div id="homeAllPartyBtn" class="homePage" ng-click="allPartiesGo()">View PARTIES</div>
+    <!-- <div id="logout" class="homePage" ng-click="logOut()">Log Out</div> -->
   </ion-content>
 </ion-view>

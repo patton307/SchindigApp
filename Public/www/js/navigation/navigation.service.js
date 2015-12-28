@@ -4,11 +4,18 @@
   angular
     .module('navigation')
     .factory('NavigationService', function($http, $state){
-        var test = function(){
-          console.log('doggydog');
+        var ip = "http://10.0.10.29:8080";
+        var logOutUrl = ip + "/user/logout";
+
+        var logOutUser = function(data) {
+          return $http.post(logOutUrl, data)
+          .success(function(data){
+            console.log("logoutService", data);
+          });
         };
+
         return {
-          test: test
+          logOutUser: logOutUser
         };
     });
 }());
