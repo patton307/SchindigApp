@@ -9144,16 +9144,19 @@ img {
 
 #homeAllPartyBtn {
   clear: both;
-  background-image: "../img/viewParties1.jpg";
+  background-image: url("../img/viewParties1.jpg");
   background-position: center;
-  background-size: 50%;
+  background-repeat: no-repeat;
+  background-size: 300%;
   height: 25vh;
-  line-height: 5vh;
+  line-height: 6vh;
   padding-top: 11%;
   font-family: "Monoton";
   text-align: center;
-  font-size: 55px;
-  color: #ff94d7; }
+  font-size: 70px;
+  color: #ff94d7;
+  text-shadow: 0 0 2px #ff94d7, 0 0 5px #ff94d7, 0 0 6px #ff94d7;
+  font-weight: 500; }
 
 #homeManagePartyBtn {
   background-color: green;
