@@ -12,6 +12,7 @@ SchindigAppHeroku.iml
 
 .idea
 build
+.gradle
 
 # if you remove the above rule, at least ignore the following:
 
@@ -104,5 +105,3 @@ bower_components
 *.db
 
 .DS_Store
-
-.gradle
