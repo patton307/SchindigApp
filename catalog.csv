@@ -1,206 +1,190 @@
-Garbage Bags,true
-Cooler,true
-Ice,true,
-Cooler,false
-Ice,true
-Paper Towels,true
-Toilet Paper,
-Charcoal,
-Bug Spray,
-Citronella,
-Glasses,
-Wine Glasses,
-Champagne Glasses,
-Water Pitcher,
-Cocktail Glasses,
-Stemmed Glass,
-Tall Glass,
-Short Glass,
-Cocktail Shaker,
-Cocktail Napkin,
-Jigger,
-Ice Bucket,
-Punch Bowl,
-Beverage Tub,
-Vodka,
-Gin,
-Dry Vermouth,
-Sweet Vermouth,
-Maraschino Cherries,
-Bourbon,
-Whiskey,
-Tequila,
-Rum,
-Sparkling Wine,
-Beer,
-Cognac,
-Sake,
-Bitters,
-Ping Pong Balls,
-Beach Towels,
-Bottled Water,
-Party Bus,
-Cologne,
-Strippers,
-Escorts,
-Penis Straws,
-Colorful Panties,
-Edible Underwear,
-Slow Cooker,
-Cookie Sheets,
-Toaster Oven,
-Cutting Boards,
-Disposable Cups,
-Disposable Plates,
-Disposable Utensils,
-Folding Table,
-Folding Chairs,
-Blender,
-Bluetooth Speakers,
-Candles,
-Instant Camera,
-Christmas Wreath,
-Christmas Tree Stand,
-Christmas Lights,
-Mistletoe,
-Toilet Paper,false
-Charcoal,false
-Bug Spray,false
-Citronella,false
-Glasses,false
-Wine Glasses,false
-Champagne Glasses,false
-Water Pitcher,false
-Cocktail Glasses,false
-Stemmed Glass,false
-Tall Glass,false
-Short Glass,false
-Cocktail Shaker,false
-Cocktail Napkin,false
-Jigger,false
-Ice Bucket,false
-Punch Bowl,false
-Beverage Tub,false
-Vodka,false
-Gin,false
-Dry Vermouth,false
-Sweet Vermouth,false
-Maraschino Cherry,false
-Bourbon,false
-Whiskey,false
-Tequila,false
-Rum,false
-Sparkling Wine,false
-Beer,false
-Cognac,false
-Sake,false
-Bitters,false
-Ping Pong Balls,false
-Beach Towels,false
-Bottled Water,false
-Strippers,false
-Escorts,false
-Party Bus,false
-Uber ride funds,false
-Condoms,false
-Pocket Pussies,false
-STD tests,false
-Cologne,false
-Attorney Fund,false
-Travelers Insurance,false
-Cocaine,false
-Marijuana,false
-LSD,false
-Acid,false
-Oxycoton,false
-Oxycodon,false
-Ecstasy,false
-Date Rape pills,false
-Strippers,false
-Escorts,false
-Uber ride funds,false
-Condoms,false
-Dental Dam,false
-Attorney Fund,false
-Penis Straws,false
-Colorful Panties,false
-Edible Underwear,false
-Small size dildo,false
-Medium size dildo,false
-Large size dildo,false
-OMFG that is a huge Dildo,false
-STD tests,false
-Slow Cooker,false
-Cookie Sheets,false
-Toaster Oven,false
-Cutting Boards,false
-Disposable Cups,false
-Disposable Plates,false
-Disposable Utensils,false
-Folding Table,false
-Folding Chairs,false
-Blender,false
-Bluetooth Speakers,false
-Candles,false
-Instant Camera,false
-Christmas Wreath,false
-Christmas Tree Stand,false
-Christmas Lights,false
-Mistletoe,false
-Chips,true
-Salsa,true
-Cheese Dip,false
-Soft Drinks,false
-Pizza,false
-Quesadillas,false
-Lasagna,false
-Spaghetti,false
-Raviolis,false
-Tortollini,false
-Burritos,false
-Tacos,false
-Chalupas,false
-Chinese,false
-Sushi,false
-Steak,false
-Chicken Breast,false
-Macaroni and Cheese,false
-Bean Dip,false
-Pita Chips,false
-Pita Bread,false
-Cheese Board,false
-Charcuterie Tray,false
-Hot Dogs,false
-Burgers,false
-Condiments,false
-Pickles,false
-Guacamole,false
-Mashed Potatoes,false
-Deviled Eggs,false
-Bacon Wrapped Asparagus,false
-Cookies,false
-Brownies,false
-Pie,false
-Ice Cream,false
-Cheesecake,false
-DJ,false
-Keg,false
-Bouncer,false
-Pledge Valet,false
-Pledge Cleanup,false
-Birthday Cake,false
-Cupcakes,false
-Birthday Hats,false
-Balloons,false
-Strobe Lights,false
-Board Games,false
-Playing cards,false
-Cards Against Humanity,false
-Party Bus,false
-Video Games,false
-Swimsuit,false
-Computer,false
-Pickup Truck,false
-4-Wheeler,false
-Slip and Slide,false
+Garbage Bags,true,null
+Cooler,true,null
+Ice,true,null
+Cooler,false,null
+Ice,true,null
+Paper Towels,true,null
+Toilet Paper,false,null
+Charcoal,false,null
+Bug Spray,false,null
+Citronella,false,null
+Glasses,true,null
+Wine Glasses,false,null
+Champagne Glasses,false,null
+Water Pitcher,false,null
+Cocktail Glasses,false,null
+Stemmed Glass,false,null
+Tall Glass,false,null
+Short Glass,false,null
+Cocktail Shaker,false,null
+Cocktail Napkin,false,null
+Jigger,false,null
+Ice Bucket,false,null
+Punch Bowl,false,null
+Beverage Tub,false,null
+Vodka,false,null
+Gin,false,null
+Dry Vermouth,false,null
+Sweet Vermouth,false,null
+Maraschino Cherries,false,null
+Bourbon,false,null
+Whiskey,false,null
+Tequila,false,null
+Rum,false,null
+Sparkling Wine,false,null
+Beer,false,null
+Cognac,false,null
+Sake,false,null
+Bitters,false,null
+Ping Pong Balls,false,null
+Beach Towels,false,null
+Bottled Water,false,null
+Party Bus,false,null
+Cologne,false,null
+Strippers,false,null
+Escorts,false,null
+Penis Straws,false,null
+Colorful Panties,false,null
+Edible Underwear,false,null
+Slow Cooker,false,null
+Cookie Sheets,false,null
+Toaster Oven,false,null
+Cutting Boards,false,null
+Disposable Cups,false,null
+Disposable Plates,false,null
+Disposable Utensils,false,null
+Folding Table,false,null
+Folding Chairs,false,null
+Blender,false,null
+Bluetooth Speakers,false,null
+Candles,false,null
+Instant Camera,false,null
+Christmas Wreath,false,Christmas
+Christmas Tree Stand,false,Christmas
+Christmas Lights,false,Christmas
+Mistletoe,false,Christmas
+Toilet Paper,false,null
+Charcoal,false,null
+Bug Spray,false,null
+Citronella,false,null
+Glasses,false,null
+Wine Glasses,false,null
+Champagne Glasses,false,null
+Water Pitcher,false,null
+Cocktail Glasses,false,null
+Stemmed Glass,false,null
+Tall Glass,false,null
+Short Glass,false,null
+Cocktail Shaker,false,null
+Cocktail Napkin,false,null
+Jigger,false,null
+Ice Bucket,false,null
+Punch Bowl,false,null
+Beverage Tub,false,null
+Vodka,false,null
+Gin,false,null
+Dry Vermouth,false,null
+Sweet Vermouth,false,null
+Maraschino Cherry,false,null
+Bourbon,false,null
+Whiskey,false,null
+Tequila,false,null
+Rum,false,null
+Sparkling Wine,false,null
+Beer,false,null
+Cognac,false,null
+Sake,false,null
+Bitters,false,null
+Ping Pong Balls,false,null
+Beach Towels,false,null
+Bottled Water,false,null
+Strippers,false,null
+Escorts,false,null
+Party Bus,false,null
+Uber ride funds,false,null
+Condoms,false,null
+Pocket Pussies,false,null
+Cologne,false,null
+Attorney Fund,false,null
+Travelers Insurance,false,null
+Strippers,false,null
+Escorts,false,null
+Uber ride funds,false,null
+Attorney Fund,false,null
+Penis Straws,false,null
+Colorful Panties,false,null
+Edible Underwear,false,null
+Slow Cooker,false,null
+Cookie Sheets,false,null
+Toaster Oven,false,null
+Cutting Boards,false,null
+Disposable Cups,false,null
+Disposable Plates,false,null
+Disposable Utensils,false,null
+Folding Table,false,null
+Folding Chairs,false,null
+Blender,false,null
+Bluetooth Speakers,false,null
+Candles,false,null
+Instant Camera,false,null
+Christmas Wreath,false,null
+Christmas Tree Stand,false,null
+Christmas Lights,false,null
+Mistletoe,false,null
+Chips,true,null
+Salsa,true,null
+Cheese Dip,false,null
+Soft Drinks,false,null
+Pizza,false,null
+Quesadillas,false,null
+Lasagna,false,null
+Spaghetti,false,null
+Raviolis,false,null
+Tortollini,false,null
+Burritos,false,null
+Tacos,false,null
+Chalupas,false,null
+Chinese,false,null
+Sushi,false,null
+Steak,false,null
+Chicken Breast,false,null
+Macaroni and Cheese,false,null
+Bean Dip,false,null
+Pita Chips,false,null
+Pita Bread,false,null
+Cheese Board,false,null
+Charcuterie Tray,false,null
+Hot Dogs,false,null
+Burgers,false,null
+Condiments,false,null
+Pickles,false,null
+Guacamole,false,null
+Mashed Potatoes,false,null
+Deviled Eggs,false,null
+Bacon Wrapped Asparagus,false,null
+Cookies,false,null
+Brownies,false,null
+Pie,false,null
+Ice Cream,false,null
+Cheesecake,false,null
+DJ,false,null
+Keg,false,null
+Bouncer,false,null
+Pledge Valet,false,null
+Pledge Cleanup,false,null
+Birthday Cake,false,null
+Cupcakes,false,null
+Birthday Hats,false,null
+Balloons,false,null
+Strobe Lights,false,null
+Board Games,false,null
+Playing cards,false,null
+Cards Against Humanity,false,null
+Party Bus,false,null
+Video Games,false,null
+Swimsuit,false,null
+Computer,false,null
+Pickup Truck,false,null
+4-Wheeler,false,null
+Slip and Slide,false,null
 
