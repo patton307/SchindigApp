@@ -13,7 +13,7 @@
       var deletePartyUrl = ip + '/party/delete';
 
       var deleteParty = function(data){
-        return $http.post(deletePartyUrl, data)
+        return $http.post(deletePartyUrl, data);
       };
       var deleteFavorFromParty = function(listDelete){
         console.log(listDelete);

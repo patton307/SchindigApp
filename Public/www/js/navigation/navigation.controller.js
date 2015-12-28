@@ -8,8 +8,20 @@
       $scope,
       $state,
       $stateParams,
+      $ionicPlatform,
+      $cordovaDevice,
       NavigationService
     ){
+
+      var uuid;
+      // $ionicPlatform.ready(function() {
+      //   var device = $cordovaDevice.getDevice();
+      //   uuid = device.uuid;
+        // console.log("navigation uuid", device.uuid);
+        // LoginRegisterService.uuidAuth(uuid);
+    // });
+
+
         //TOP LEVEL NAVIGATION//
       $scope.wizardGo = function(){
         $state.go('wizard');
@@ -24,7 +36,16 @@
       $scope.profileGO = function(){
         $state.go('profile');
       };
-        //TABS//
+          //LOGOUT USER//
+      $scope.logOut = function (){
+        var deviceData = {
+          device: uuid
+        };
+        console.log("logout data", deviceData);
+        NavigationService.logOutUser(deviceData);
+        $state.go("login");
+      };
+
 
     });
 }());

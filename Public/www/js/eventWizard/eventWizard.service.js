@@ -28,7 +28,7 @@
         });
       };
       var addFavorToData = function(favorData) {
-        return $http.post(addFavorToDataUrl, favorData)
+        return $http.post(addFavorToDataUrl, favorData);
       };
       var updateFavorData = function(updatedFavorData){
         return $http.patch(wizUpdateUrl, updatedFavorData);
