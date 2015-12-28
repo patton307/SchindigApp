@@ -8,7 +8,8 @@
       $scope,
       $state,
       $stateParams,
-      ViewPartyService
+      ViewPartyService,
+      ionicMaterialMotion
     ){
 
       var vm = this;

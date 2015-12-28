@@ -4,45 +4,17 @@
     </ion-nav-back-button>
   </ion-nav-bar>
   <div class="bar bar-header bar-royal">
-      <h1 class= "title">Get By With a Little Help From Your Friends: Stretchgoal</h1>
+    <h1 class= "title">Stretchgoal</h1>
   </div>
   <ion-padding>
     <ion-content>
-      <ion-toggle
-        ng-click="themeCheck = !themeCheck"
-        toggle-class="toggle-calm">
-        <div
-        ng-model="themeCheck"
-        ng-class="themeCheck ? 'theme' : 'noTheme'">
-        <strong>
-          Themed Party?
-        </strong>
-        </div>
-      </ion-toggle>
-      <div ng-show="themeCheck" class="item">
-        <input ng-model="themeVal" type="text"  placeholder="Whats the theme?">
-      </div>
-      <ion-toggle
-        ng-click="byobCheck = !byobCheck"
-        toggle-class="toggle-calm">
-        <div
-          ng-model="byobCheck"
-          ng-class="byobCheck ? 'byob' : 'supplied'">
-          <strong>
-            BYOB
-          </strong>
-        </div>
-      </ion-toggle>
-      <ion-item class="item-input item-select">
-       <div class="input-label">
-         <strong>Parking?</strong>
-       </div>
-       <select ng-model="parking" ng-change='getParking(parking)'>
-         <option value="Valet">Valet</option>
-         <option value="On Site">On Site</option>
-         <option value="Off Site">Off Site</option>
-       </select>
-     </ion-item>
+      <label class='item item-input item-floating-label'>
+        <span>
+          <br>A Stretchgoal turns a party into THE party! 
+          <br> Set a Dream Goal that would set this party over the edge,
+          <br>and ask your friends to contribute!
+        </span>
+      </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">What would make this party awesome?</span>
         <input placeholder="Dream Fund ex. Ice Louge, Band.." ng-model= "stretchName" type="text">
@@ -52,10 +24,47 @@
         <input placeholder="How Much is This Going to Cost" ng-model="stretchGoal" type="number">
       </label>
       <button
-        ng-click="stretchGoalData(stretchGoal, stretchName, themeVal, parking)"
+        ng-click="stretchGoalData(stretchGoal, stretchName)"
         class="button button-full button-positive">
        Submit Stretchgoooooooal
       </button>
     </ion-content>
   </ion-padding>
 </ion-view>
+
+<!--
+<ion-toggle
+  ng-click="themeCheck = !themeCheck"
+  toggle-class="toggle-calm">
+  <div
+  ng-model="themeCheck"
+  ng-class="themeCheck ? 'theme' : 'noTheme'">
+  <strong>
+    Themed Party?
+  </strong>
+  </div>
+</ion-toggle>
+<div ng-show="themeCheck" class="item">
+  <input ng-model="themeVal" type="text"  placeholder="Whats the theme?">
+</div>
+<ion-toggle
+  ng-click="byobCheck = !byobCheck"
+  toggle-class="toggle-calm">
+  <div
+    ng-model="byobCheck"
+    ng-class="byobCheck ? 'byob' : 'supplied'">
+    <strong>
+      BYOB
+    </strong>
+  </div>
+</ion-toggle>
+<ion-item class="item-input item-select">
+ <div class="input-label">
+   <strong>Parking?</strong>
+ </div>
+ <select ng-model="parking" ng-change='getParking(parking)'>
+   <option value="Valet">Valet</option>
+   <option value="On Site">On Site</option>
+   <option value="Off Site">Off Site</option>
+ </select>
+</ion-item> -->

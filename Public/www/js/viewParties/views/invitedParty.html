@@ -1,18 +1,32 @@
 <ion-view view-title="Parties">
-  <ion-content ng-init="loadOneInvParty();loadOneFavor() ">
-    <h3>{{invPartyOne.partyName}}</h3>
-    <h2>{{invPartyOne.partyDate | date: 'short'}}</h2>
-    <h3>{{invPartyOne.street1}}<br>{{invPartyOne.street2}}<h3>
-    <h3>{{invPartyOne.city}}{{invPartyOne.state}}</h3>
+  <ion-content ng-init="loadOneInvParty();loadOneFavor()">
+    <ion-list class="list card">
+      <div class="row">
+        <div class="col col-75">
+          <ion-item>
+            <h2>{{invPartyOne.partyName}}</h2>
+            <h5>{{invPartyOne.description}}</h5>
+            <p>{{invPartyOne.partyDate | date: 'short'}}</p>
+          </ion-item>
+        </div>
+        <div class="col col-25">
+          <button class="item item-right">
+           <div class="button button-positive">
+             <i class="icon ion-ios-telephone"></i>
+             RSVP
+           </div>
+         </button>
+        </div>
+      </div>
+    </ion-list>
     <h3>Help out the party - pick a favor!</h3>
     <ion-list ng-repeat="favor in onePartyFavor">
-
       <ion-item
-      ng-model="favor"
-      ng-click="postOneFavorID(favor)">
-          <div class="favorUnclaimed" ng-show= "favor.claimed != true"><h3>{{favor.favor.favorName}}</h3></div>
-          <div class="favorClaimed" ng-show="favor.claimed == true"><h1>{{favor.favor.favorName}}</h1></div>
-      <ion-item>
+        ng-model="favor"
+        ng-click="postOneFavorID(favor)">
+        <div class="favorUnclaimed" ng-show= "favor.claimed != true"><h3>{{favor.favor.favorName}}</h3></div>
+        <div class="favorClaimed" ng-show="favor.claimed == true"><h1>{{favor.favor.favorName}}</h1></div>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -1,6 +1,7 @@
 <ion-view>
   <ion-nav-bar class="bar-stable">
-    <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
     </ion-nav-back-button>
   </ion-nav-bar>
   <div class="bar bar-header bar-royal">
@@ -26,8 +27,13 @@
           </button>
         </div>
       </div>
+      <button
+        ng-click="pushToFavorArray()"
+        class="button button-full button-positive">
+        Submit Your Favors
+      </button>
       <ion-checkbox
-        ng-repeat="item in favors"
+        ng-repeat="item in favors | filter: favorDoo"
         ng-click="favorCheck = !favorCheck">
         <ion-item
           ng-model="favorCheck"
@@ -37,10 +43,5 @@
         </ion-item>
       </ion-checkbox>
     </ul>
-    <button
-      ng-click="pushToFavorArray()"
-      class="button button-full button-positive">
-      Submit Your Favors
-    </button>
   </ion-content>
 </ion-view>

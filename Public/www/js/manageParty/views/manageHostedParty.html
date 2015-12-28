@@ -7,76 +7,156 @@
       <h1 class= "title">Let's Manage Parties</h1>
    </div>
   <ion-content ng-init="loadOne()">
-
-    <ion-item>Party Name:
-      <input
-        type="text"
-        ng-model="partyName"
-        ng-change='getNameValue(partyName)'
-        placeholder="{{oneParty.partyName}}">
-    </ion-item>
-    <ion-item>Party Description:
-      <input
-        type="text"
-        ng-model="description"
-        ng-change='getDescriptionValue(description)'
-        placeholder="{{oneParty.description}}">
-    </ion-item>
-    <ion-item>Where the Party At?:
-      <input
-        type="text"
-        placeholder= "{{oneParty.local}}"
-        ng-model="local"
-        ng-change="getLocationValue(local)">
-    </ion-item>
-    <ion-toggle
-      ng-click="themeCheck = !themeCheck"
-      toggle-class="toggle-calm">
-      <div
-      ng-model="themeCheck"
-      ng-class="themeCheck ? 'theme' : 'noTheme'">
-        <strong>
-          Themed Party?
-        </strong>
-      </div>
-    </ion-toggle>
-    <div ng-show="themeCheck" class="item">
-      <input ng-model="themeVal" type="text"  placeholder="Whats the theme?">
-    </div>
-    <ion-toggle
-      ng-model="doggy"
-      ng-click="byobManageCheck = !byobManageCheck"
-      toggle-class="toggle-calm">
-      <div
-        ng-model="byobManageCheck"
-        ng-class="byobManageCheck ? 'byobManage' : 'suppliedManage'">
-        <strong>
-          BYOB
-        </strong>
-      </div>
-    </ion-toggle>
-    <ion-list show-delete="data.showDelete">
+    <ion-list>
       <ion-item>
-        <ion-delete-button
-            class="ion-minus-circled"
-            ng-click="onPartyDelete(oneParty, hostedParties);">
-        </ion-delete-button>
+        <div ng-show="!edit" class="item-icon-right">
+            <strong>Party Name: <br></strong>{{oneParty.partyName}}
+            <button
+              ng-hide="edit"
+              ng-click="edit = true"
+              class="button-icon icon ion-ios-compose-outline">
+            </button>
+        </div>
+        <div ng-show="edit" class="item-icon-right">
+          <input
+            type="text"
+            ng-model="partyName"
+            ng-change='getNameValue(partyName)'
+            placeholder="{{oneParty.partyName}}">
+            <button
+              ng-click="edit = false; editData(partyName, description, local, themeVal, doggy, parking, partyDate);"
+              class="button-icon icon ion-ios-checkmark">
+            </button>
+        </div>
       </ion-item>
+      <ion-item>
+        <div ng-show="!edit" class="item-icon-right">
+            <strong>Description: <br></strong>{{oneParty.description}}
+            <button
+              ng-hide="edit"
+              ng-click="edit = true"
+              class="button-icon icon ion-ios-compose-outline">
+            </button>
+        </div>
+        <div ng-show="edit" class="item-icon-right">
+          <input
+            type="text"
+            ng-model="description"
+            ng-change='getDescriptionValue(description)'
+            placeholder="{{oneParty.description}}">
+            <button
+              ng-click="edit = false; editData(partyName, description, local, themeVal, doggy, parking, partyDate);"
+              class="button-icon icon ion-ios-checkmark">
+            </button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div ng-show="!edit" class="item-icon-right">
+            <strong>Where The Party At? <br></strong>{{oneParty.local}}
+            <button
+              ng-hide="edit"
+              ng-click="edit = true"
+              class="button-icon icon ion-ios-compose-outline">
+            </button>
+        </div>
+        <div ng-show="edit" class="item-icon-right">
+          <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="local"></ion-google-place>
+            <button
+              ng-click="edit = false; editData(partyName, description, local.formatted_address, themeVal, doggy, parking, partyDate);"
+              class="button-icon icon ion-ios-checkmark">
+            </button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div ng-show="!edit" class="item-icon-right">
+            <strong>When The Party At? <br></strong>{{oneParty.partyDate}}
+            <button
+              ng-hide="edit"
+              ng-click="edit = true"
+              class="button-icon icon ion-ios-compose-outline">
+            </button>
+        </div>
+        <div ng-show="edit" class="item-icon-right">
+          <input placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
+            <button
+              ng-click="edit = false; editData(partyName, description, local, themeVal, doggy, parking, partyDate);"
+              class="button-icon icon ion-ios-checkmark">
+            </button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div ng-show="!edit" class="item-icon-right">
+            <strong>Parking: <br></strong>{{oneParty.parking}}
+            <button
+              ng-hide="edit"
+              ng-click="edit = true"
+              class="button-icon icon ion-ios-compose-outline">
+            </button>
+        </div>
+        <div ng-show="edit" class="item-icon-right">
+          <strong>Parking: <br></strong>
+          <select ng-model="parking" ng-change='getParking(parking)'>
+            <option value="Valet">Valet</option>
+            <option value="On Site">On Site</option>
+            <option value="Off Site">Off Site</option>
+          </select>
+          <button
+            ng-click="edit = false; editData(partyName, description, local, themeVal, doggy, parking, partyDate);"
+            class="button-icon icon ion-ios-checkmark">
+          </button>
+        </div>
+      </ion-item>
+<!--
+      <label class="item item-input">
+         <span class="input-label"><strong>Date and Time: </strong></span>
+         <input placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
+       </label> -->
+      <ion-toggle
+        ng-click="themeCheck = !themeCheck"
+        toggle-class="toggle-calm">
+        <div
+        ng-model="themeCheck"
+        ng-class="themeCheck ? 'theme' : 'noTheme'">
+          <strong>
+            Themed Party?
+          </strong>
+        </div>
+      </ion-toggle>
+      <div ng-show="themeCheck" class="item">
+        <input ng-model="themeVal" type="text"  placeholder="{{oneParty.theme}}">
+      </div>
+      <ion-toggle
+        ng-model="doggy"
+        ng-checked="oneParty.byob"
+        ng-click="byobManageCheck = !byobManageCheck"
+        toggle-class="toggle-calm">
+        <div
+          ng-model="byobManageCheck"
+          ng-class="byobManageCheck ? 'byobManage' : 'suppliedManage'">
+          <strong>
+            BYOB
+          </strong>
+        </div>
+      </ion-toggle>
+      <ion-list show-delete="data.showDelete">
+        <ion-item>
+          <ion-delete-button
+              class="ion-minus-circled"
+              ng-click="onPartyDelete(oneParty, hostedParties);">
+          </ion-delete-button>
+        </ion-item>
+      </ion-list>
+      <button
+        ng-click="goToManageFavor()"
+        class="button button-full button-assertive">
+        Manage Favors
+      </button>
+      <button
+        ng-click="goToManageInvites()"
+        class="button button-full button-royal">
+        Manage Invites
+      </button>
+
     </ion-list>
-    <button
-      ng-click="goToManageFavor()"
-      class="button button-full button-assertive">
-      Manage Favors
-    </button>
-    <button
-      ng-click="goToManageInvites()"
-      class="button button-full button-royal">
-      Manage Invites
-    </button>
-    <button
-      ng-click="editData(partyName, description, local, themeVal, doggy)"
-      class="button button-full button-positive">
-     Submit Edit
-    </button>
   </ion-content>
 </ion-view>

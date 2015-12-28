@@ -21,9 +21,9 @@
         controller: "WizardLandingController"
 
       })
-      .state('whenwhere', {
+      .state('details', {
         url:"/wizard/whenwhere",
-        templateUrl: "js/eventWizard/views/evtWhenWhere.html",
+        templateUrl: "js/eventWizard/views/partyDetails.html",
         controller: "EventWizardController as evtCtrl"
       })
       .state('stretchgoal', {

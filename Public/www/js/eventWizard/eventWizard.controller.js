@@ -25,38 +25,42 @@
           }
         return null;
       };
-      $scope.partySubType = $scope.get($stateParams);
+      // $scope.partySubType = $scope.get($stateParams);
     });
 
     /////POST NEW PARTY/////
 
     $scope.partyType='none';
-    $scope.subType='none';
+    // $scope.subType='none';
     $scope.getValue = function(value){
       var newVal = JSON.parse(value);
       $scope.partyType = newVal.partyType;
-      $scope.subType = newVal.subType;
+      // $scope.subType = newVal.subType;
     };
-    $scope.getSubValue = function(subValue){
-      $scope.subTypeVal = subValue;
-    };
-    $scope.newWizPartyPost = function(partyType, subTypeVal, partyName, description){
+    // $scope.getSubValue = function(subValue){
+    //   $scope.subTypeVal = subValue;
+    // };
+    $scope.newWizPartyPost = function(partyType, local, partyName, partyDate){
       var rawUserID = +localStorage.getItem('userID');
       var item = {
         party: {
-          description: description,
-          subType: subTypeVal,
+          partyDate: partyDate,
+          local: local.formatted_address,
           partyType: partyType,
           partyName: partyName
         },
         userID: rawUserID
       };
+      item.party.partyDate = JSON.stringify(item.party.partyDate);
+      item.party.partyDate = JSON.parse(item.party.partyDate);
+      console.log('party post', item);
       EventWizardService.newWizPartyPost(item).success(function(data){
         localStorage.setItem('partyID', data.partyID);
-        $state.go('whenwhere');
+        $state.go('details');
       });
     };
     })
+
     .controller("EventWizardController", function(
       $scope,
       $http,
@@ -68,24 +72,38 @@
       $ionicPopup,
       $timeout
     ){
-        var vm = this;
-
+      var vm = this;
       ///PATCH DATE, TIME AND NAME/////
-    $scope.dateAndTimePost = function(partyDate, location, description){
+    $scope.partyDeetsPatch = function(description, themeVal, parking){
       var partyID = +localStorage.getItem('partyID');
+      var byobElements = document.getElementsByClassName('byob');
+      var themeElements = document.getElementsByClassName('theme');
+      var byobStatus;
+      var themeStatus;
+      if(byobElements.length != 0){
+        byobStatus = true;
+      } else{
+        byobStatus = false;
+      };
+      if(themeElements.length != 0){
+        themeStatus = true;
+      } else {
+        themeStatus = false;
+      }
       var data = {
         party: {
           description: description,
-          local: location.formatted_address,
+          byob: byobStatus,
           partyID: partyID,
-          partyDate: partyDate
+          theme: themeVal,
+          parking: parking,
+          themeCheck: themeStatus
         }
       };
-
-      data.party.partyDate = JSON.stringify(data.party.partyDate);
-      data.party.partyDate = JSON.parse(data.party.partyDate);
-      EventWizardService.updateWizData(data).success(function(updatedWizData){
-        $state.go('stretchgoal');
+      console.log('first check', data);
+      EventWizardService.updateWizData(data)
+        .success(function(updatedWizData){
+          $state.go('stretchgoal');
       });
     };
 
@@ -94,36 +112,18 @@
      $scope.getParking = function(parking){
        $scope.parking = parking;
      };
-     $scope.stretchGoalData = function (stretchGoal, stretchName, themeVal, parking){
-       console.log(parking);
-       var byobElements = document.getElementsByClassName('byob');
-       console.log('this is what i want',byobElements.length);
-       var themeElements = document.getElementsByClassName('theme');
-       var byobStatus;
-       var themeStatus;
-       if(byobElements.length != 0){
-         byobStatus = true;
-       } else{
-         byobStatus = false;
-       };
-       if(themeElements.length!= 0){
-         byobStatus = true;
-       } else {
-         themeStatus = false;
-       }
-       console.log(byobStatus);
+     $scope.stretchGoalData = function (stretchGoal, stretchName){
        var partyID = +localStorage.getItem('partyID');
        var data = {
          party: {
-           parking: parking,
-           theme: themeVal,
-           byob: byobStatus,
            stretchGoal: stretchGoal,
            stretchName: stretchName,
            partyID: partyID
          }
        };
-       EventWizardService.updateWizData(data).success(function(updatedWizData){
+       console.log('party creation',data);
+       EventWizardService.updateWizData(data)
+        .success(function(updatedWizData){
          console.log(data);
          $state.go('favors');
        });
@@ -140,7 +140,6 @@
       $ionicPopup
     ){
       var vm = this;
-
        //CORDOVA CONTACTS AND INVITATIONS //
        $scope.getContactList = function() {
                  $cordovaContacts
