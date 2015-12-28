@@ -10,7 +10,7 @@
       $stateParams,
       ViewPartyService,
       ionicMaterialMotion,
-      $ionicPopup,
+      $ionicPopup
 
     ){
 
@@ -41,6 +41,22 @@
       $scope.loadOneInvParty = function(){
         var partyIdItem = +localStorage.getItem('oneInvPartyID');
         ViewPartyService.getOneParty(partyIdItem).then(function(data){
+          console.log('invite data',data.data);
+          if(data.data.byob === true){
+            console.log('true');
+            data.data.byob = "BYOB"
+          } else {
+            console.log('false');
+            data.data.byob = "Booze Included"
+          }
+          if(data.data.themeCheck === true){
+            console.log('theme true');
+            data.data.theme = data.data.theme
+          } else {
+            console.log('theme false');
+            data.data.theme = 'does not have a theme'
+          }
+          console.log('byob statsu', data.data.byob);
           $scope.invPartyOne = data.data;
         });
       };

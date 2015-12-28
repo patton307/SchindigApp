@@ -1,22 +1,57 @@
 <ion-view view-title="Parties">
-<<<<<<< HEAD
   <ion-content ng-init="loadOneInvParty();loadOneFavor()">
     <ion-list class="list card">
-      <div class="row">
-        <div class="col col-75">
-          <ion-item>
+
+      <div class="row center">
+        <div class="col">
+          <ion-item class="item-text-wrap">
             <h2>{{invPartyOne.partyName}}</h2>
-            <h5>{{invPartyOne.description}}</h5>
-            <p>{{invPartyOne.partyDate | date: 'short'}}</p>
           </ion-item>
         </div>
-        <div class="col col-25">
-          <button class="item item-right">
-           <div class="button button-positive">
-             <i class="icon ion-ios-telephone"></i>
-             RSVP
-           </div>
+      </div>
+      <div class="row center">
+        <div class="col">
+          <ion-item class="item-text-wrap">
+            <h2>{{invPartyOne.stretchName}}</h2>
+          </ion-item>
+        </div>
+      </div>
+      <div class="row center">
+        <div class="col">
+          <ion-item class="item-text-wrap">
+            <p>{{invPartyOne.partyDate | date: 'short'}}</p>
+            <p>{{invPartyOne.local}}</p>
+          </ion-item>
+        </div>
+        <div class="col text-right">
+         <button class="button button-positive">
+           RSVP
          </button>
+        </div>
+      </div>
+      <div class="row center">
+        <div class="col">
+          <ion-item class="item-text-wrap">
+            <p>{{invPartyOne.description}}</p>
+          </ion-item>
+        </div>
+        <div ng-show="invPartyOne.byob" class="col text-right">
+         <button class="button button-assertive">
+           {{invPartyOne.byob}}
+         </button>
+        </div>
+      </div>
+      <div class="row center">
+        <div class="col">
+          <ion-item model="themeRun" class="item-text-wrap">
+            <div ng-hide="themeRun" class="noTheme"><p>This <strong>{{invPartyOne.partyType}} Party</strong>  {{invPartyOne.theme}} </p></div>
+            <div ng-show="themeRun"><p>This <strong>{{invPartyOne.partyType}}</strong> party has a theme: <strong>{{invPartyOne.theme}}</strong></p></div>
+          </ion-item>
+        </div>
+        <div class="col text-right">
+          <button class="button button-royal">
+            Parking: {{invPartyOne.parking}}
+          </button>
         </div>
       </div>
     </ion-list>
