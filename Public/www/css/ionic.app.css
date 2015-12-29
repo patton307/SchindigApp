@@ -9206,4 +9206,17 @@ img {
   text-shadow: 0px 0px 10px #c1f6f3; }
 
 .wizard {
-  font-family: cursive; }
+  font-family: "Showboat"; }
+  .wizard .button {
+    font-family: "Showboat"; }
+  .wizard .item-input {
+    font-family: "Showboat"; }
+  .wizard .item {
+    font-family: "Showboat"; }
+
+#wizardHeader h1 {
+  background-image: url("../img/homeHostParty1.jpg");
+  font-family: "Showboat";
+  font-size: 1.5rem;
+  color: white;
+  margin: 0; }

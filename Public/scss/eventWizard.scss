@@ -1,5 +1,24 @@
-$royal: 'black' !default;
 
 .wizard {
- font-family: cursive;
+  font-family: "Showboat";
+  .button {
+    font-family: "Showboat";
+  }
+  .item-input {
+    font-family: "Showboat";
+  }
+  .item {
+    font-family: "Showboat";
+  }
+}
+
+#wizardHeader {
+  // background-color: red;
+  h1 {
+    background-image: url("../img/homeHostParty1.jpg");
+    font-family: "Showboat";
+    font-size: 1.5rem;
+    color:white;
+    margin: 0;
+  }
 }

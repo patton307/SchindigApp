@@ -3,29 +3,29 @@
      <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
      </ion-nav-back-button>
    </ion-nav-bar>
-   <div class="bar bar-header bar-royal">
-       <h1 class= "title">Let's Get This Party Started</h1>
+   <div id="wizardHeader" class="bar bar-header">
+       <h1 class= "title">LET'S GET THIS PARTY STARTED</h1>
     </div>
     <ion-content class="wizard">
      <ion-padding>
        <ion-item class="item-input item-select">
-        <div class="input-label">
-          <strong>What Kind of Party?</strong>
+        <div class="item-text-wrap input-label">
+          WHAT KIND OF PARTY?
         </div>
         <select ng-model="partyType" ng-change='getValue(partyType)'>
           <option ng-repeat="item in wizardItems.data track by $index" value='{{item}}'>{{item.partyType}}</option>
         </select>
       </ion-item>
       <label class="item item-input item-floating-label">
-        <span class="input-label"><strong>Party Name: </strong></span>
+        <span class="input-label">PARTY NAME:</span>
         <input ng-model="partyName" type="text" placeholder="Name that party">
       </label>
       <label class="item item-input">
-         <span class="input-label"><strong>Where the Party At? </strong></span>
+         <span class="input-label">WHERE THE PARTY AT?</span>
          <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="location"></ion-google-place>
       </label>
       <label class="item item-input">
-         <span class="input-label"><strong>Date and Time: </strong></span>
+         <span class="input-label">DATE AND TIME:</span>
          <input placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
        </label>
      <button
