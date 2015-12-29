@@ -30,8 +30,12 @@ $fontMarker: "Permanent Marker";
 
 $popup-width:                     100% !default;
 
+$bar-footer-height:               75px!default;
+$bar-subheader-height:            75px!default;
+$bar-subfooter-height:            75px !default;
+
 $bar-height:                      200px !default;
-$base-background-color:           #FFE582 !default;
+$base-background-color:           #fff !default;
 $base-color:                      #FF4C4C !default;
 $light:                           #ffffff !default;
 $stable:                          #ececec !default;
@@ -39,7 +43,7 @@ $positive:                        #FF4C4C !default;
 $calm:                            #11c1f3 !default;
 $balanced:                        #33cd5f !default;
 $energized:                       #ffc900 !default;
-$assertive:                       #FF4C4C !default;
+$assertive:                       #f2cf1e !default;
 // $royal:                           #FF4C4C !default;
 $font-family-sans-serif:          "Righteous", "Roboto", "Segoe UI", sans-serif !default;
 

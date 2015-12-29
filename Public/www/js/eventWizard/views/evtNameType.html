@@ -6,7 +6,7 @@
    <div class="wizardHeader bar bar-header">
        <h1 class= "title-text-wrap"><span class="textViewHeader">LET'S GET THIS PARTY STARTED</span></h1>
     </div>
-    <ion-content class="wizard">
+    <ion-content>
      <ion-padding>
        <ion-item class="item-input item-select">
         <div class="item-text-wrap input-label">
@@ -28,11 +28,11 @@
          <span class="item-text-wrap input-label">DATE | TIME:</span>
          <input class="wizardDateTime" placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
        </label>
-     <button
-       ng-click="newWizPartyPost(partyType, location, partyName, partyDate)"
-       class="button button-full button-positive">
-      Submit
-     </button>
+        <button
+        ng-click="newWizPartyPost(partyType, location, partyName, partyDate)"
+        class="bar bar-footer button button-full button-assertive">
+        Submit
+       </button>
   </ion-padding>
  </ion-content>
 </ion-view>

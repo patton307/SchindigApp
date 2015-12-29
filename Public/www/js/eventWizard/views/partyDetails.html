@@ -3,13 +3,13 @@
     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
     </ion-nav-back-button>
   </ion-nav-bar>
-  <div class="wizardHeader bar bar-header bar-royal">
-      <h1 class= "title">SOME EXTRAS</h1>
+  <div class="wizardHeader bar bar-header">
+      <h1 class= "title-text-wrap"><span class="textViewHeader">SOME EXTRAS</span></h1>
   </div>
   <ion-padding>
     <ion-content>
       <label class="item item-input item-floating-label">
-        <span class="input-label"><strong>PARTY DESCRIPTION: </strong></span>
+        <span class="input-label">PARTY DESCRIPTION: </span>
         <input ng-model="description" type="text" placeholder="Tell Us About Your Party">
       </label>
       <ion-toggle
@@ -18,9 +18,7 @@
         <div
         ng-model="themeCheck"
         ng-class="themeCheck ? 'theme' : 'noTheme'">
-        <strong>
           THEMED PARTY?
-        </strong>
         </div>
       </ion-toggle>
       <div ng-show="themeCheck" class="item">
@@ -32,14 +30,14 @@
         <div
           ng-model="byobCheck"
           ng-class="byobCheck ? 'byob' : 'supplied'">
-          <strong>
+
             BYOB
-          </strong>
+
         </div>
       </ion-toggle>
       <ion-item class="item-input item-select">
        <div class="input-label">
-         <strong>PARKING?</strong>
+         PARKING?
        </div>
        <select ng-model="parking" ng-change='getParking(parking)'>
          <option value="Valet">VALET</option>
@@ -50,7 +48,7 @@
       <button
         ng-click="partyDeetsPatch(description, themeVal, parking)"
         class="button button-full button-positive">
-       Submit Date and Location
+       Submit
       </button>
     </ion-content>
   </ion-padding>

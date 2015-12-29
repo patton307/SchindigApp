@@ -5,6 +5,7 @@
   font-family: serif;
 }
 
+
 .wizard {
   font-family: "Showboat" serif;
   background-color: white;
@@ -15,9 +16,17 @@
   }
   .button {
     font-family: "Showboat";
+    font-size: 2rem;
     background-color: #680E34;
     text-transform: uppercase;
+
   }
+
+  select {
+    font-family: "Showboat";
+    text-transform: uppercase;
+  }
+
   input {
     background-color: white;
   }
