@@ -1,15 +1,15 @@
-<ion-view>
+<ion-view class="wizard">
   <ion-nav-bar class="bar-stable">
     <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
     </ion-nav-back-button>
   </ion-nav-bar>
-  <div class="bar bar-header bar-royal">
-      <h1 class= "title">Where's This Party Going Down?</h1>
+  <div class="wizardHeader bar bar-header bar-royal">
+      <h1 class= "title">SOME EXTRAS</h1>
   </div>
   <ion-padding>
     <ion-content>
       <label class="item item-input item-floating-label">
-        <span class="input-label"><strong>Party Description: </strong></span>
+        <span class="input-label"><strong>PARTY DESCRIPTION: </strong></span>
         <input ng-model="description" type="text" placeholder="Tell Us About Your Party">
       </label>
       <ion-toggle
@@ -19,7 +19,7 @@
         ng-model="themeCheck"
         ng-class="themeCheck ? 'theme' : 'noTheme'">
         <strong>
-          Themed Party?
+          THEMED PARTY?
         </strong>
         </div>
       </ion-toggle>
@@ -39,12 +39,12 @@
       </ion-toggle>
       <ion-item class="item-input item-select">
        <div class="input-label">
-         <strong>Parking?</strong>
+         <strong>PARKING?</strong>
        </div>
        <select ng-model="parking" ng-change='getParking(parking)'>
-         <option value="Valet">Valet</option>
-         <option value="On Site">On Site</option>
-         <option value="Off Site">Off Site</option>
+         <option value="Valet">VALET</option>
+         <option value="On Site">ON SITE</option>
+         <option value="Off Site">OFF SITE</option>
        </select>
      </ion-item>
       <button

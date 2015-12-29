@@ -3,8 +3,8 @@
      <ion-nav-back-button class='button button-small icon-left ion-chevron-left button-clear button-dark'>
      </ion-nav-back-button>
    </ion-nav-bar>
-   <div id="wizardHeader" class="bar bar-header">
-       <h1 class= "title">LET'S GET THIS PARTY STARTED</h1>
+   <div class="wizardHeader bar bar-header">
+       <h1 class= "title-text-wrap"><span class="textViewHeader">LET'S GET THIS PARTY STARTED</span></h1>
     </div>
     <ion-content class="wizard">
      <ion-padding>
@@ -12,26 +12,26 @@
         <div class="item-text-wrap input-label">
           WHAT KIND OF PARTY?
         </div>
-        <select ng-model="partyType" ng-change='getValue(partyType)'>
+        <select ng-required ng-model="partyType" ng-change='getValue(partyType)'>
           <option ng-repeat="item in wizardItems.data track by $index" value='{{item}}'>{{item.partyType}}</option>
         </select>
       </ion-item>
       <label class="item item-input item-floating-label">
         <span class="input-label">PARTY NAME:</span>
-        <input ng-model="partyName" type="text" placeholder="Name that party">
+        <input ng-model="partyName" type="text" placeholder="NAME THAT PARTY">
       </label>
       <label class="item item-input">
-         <span class="input-label">WHERE THE PARTY AT?</span>
-         <ion-google-place placeholder= "Enter an Address, Apt#, and ZIP" ng-model="location"></ion-google-place>
+         <span class="item-text-wrap input-label">WHERE?</span>
+         <ion-google-place class="wizard" placeholder= "ADDRESS, ZIP" ng-model="location"></ion-google-place>
       </label>
       <label class="item item-input">
-         <span class="input-label">DATE AND TIME:</span>
-         <input placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
+         <span class="item-text-wrap input-label">DATE | TIME:</span>
+         <input class="wizardDateTime" placeholder= "Pick a Date and Time" ng-model="partyDate" type="datetime-local">
        </label>
      <button
        ng-click="newWizPartyPost(partyType, location, partyName, partyDate)"
        class="button button-full button-positive">
-      Submit Party Name and Type
+      Submit
      </button>
   </ion-padding>
  </ion-content>
