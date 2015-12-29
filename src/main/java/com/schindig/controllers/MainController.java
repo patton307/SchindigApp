@@ -161,7 +161,7 @@ public class MainController {
                     if (parties.count() < 10) {
                         Party P = new Party(user, "Insert Party Name Here", partyType, description, subType,
                                 LocalDateTime.now(), String.valueOf(LocalDateTime.now().plusDays(7)), local, stretchName, 5000,
-                                0, false, false, theme, "Valet");
+                                0, false, true, theme, "Valet");
                         parties.save(P);
                         for (int fa = 1; fa < 10; fa++) {
                             Favor f = favors.findOne(fa);
@@ -282,7 +282,7 @@ public class MainController {
             check.lastName = parameters.user.lastName;
         }
         users.save(check);
-        check.username = null;
+        check.password = null;
         return check;
     }
 
@@ -361,34 +361,21 @@ public class MainController {
         invites.save(invite);
     }
 
-    @RequestMapping(path = "/party/{id}/rsvp", method = RequestMethod.POST)
-    public void rsvp(@RequestBody Parameters parameters, @PathVariable("id") Integer id) {
+    @RequestMapping(path = "/party/rsvp", method = RequestMethod.POST)
+    public Invite rsvp(@RequestBody Parameters parameters) {
 
         Party p = parties.findOne(parameters.partyID);
-        User user = parameters.user;
-        user.invitedCount += 1;
-        switch (parameters.rsvpStatus) {
-            case "Yes": {
-                user.partyCount += 1;
-                Invite i = invites.findByPartyAndUser(p, user);
-                i.rsvpStatus = "Yes";
-                invites.save(i);
-                break;
-            }
-            case "Maybe": {
-                Invite i = invites.findByPartyAndUser(p, user);
-                i.rsvpStatus = "Maybe";
-                invites.save(i);
-                break;
-            }
-            case "No": {
-                Invite i = invites.findByPartyAndUser(p, user);
-                i.rsvpStatus = "Yes";
-                invites.save(i);
-                break;
-            }
+        User user = users.findOne(parameters.userID);
+        Invite i = invites.findByPartyAndUser(p, user);
+
+        /*
+        if (parameters.rsvpStatus.equals("Yes") || parameters.rsvpStatus.equals("Maybe")) {
+            user.inviteCount +=1;
         }
-        users.save(user);
+        */
+        i.rsvpStatus = parameters.invites.rsvpStatus;
+        invites.save(i);
+        return i;
     }
 
     @RequestMapping(path = "/party/{id}", method = RequestMethod.GET)
