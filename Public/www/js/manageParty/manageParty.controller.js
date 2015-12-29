@@ -59,9 +59,6 @@
           showDelete: true
        };
 
-
-
-
       ////MANAGE/EDIT HOSTED PARTIES////
       $scope.viewOne = function(party){
         localStorage.setItem('OnePartyID', party.partyID);
@@ -108,11 +105,13 @@
         $scope.local = locationValue;
         console.log('scoped location',$scope.local);
       };
-      $scope.editData = function(partyName, description, local, themeValue, doggy){
+      $scope.editData = function(partyName, description, local, themeValue, doggy, parking, partyDate){
         var partyID = +localStorage.getItem('OnePartyID');
         console.log('what is this', local);
         var data = {
           party: {
+            partyDate: partyDate,
+            parking: parking,
             byob: doggy,
             theme: themeValue,
             local: local,
@@ -123,8 +122,9 @@
         };
         console.log(data.party.byob);
         EventWizardService.updateWizData(data).success(function(updatedWizData){
-          console.log('success', updatedWizData);
-          $state.go('home');
+          console.log('new party', updatedWizData);
+          $scope.oneParty = updatedWizData;
+          // $state.go('home');
         });
       };
 
