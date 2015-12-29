@@ -536,16 +536,12 @@ public class MainController {
      * ALL FAVOR SPECIFIC ROUTES
      **/
 
-    @RequestMapping(path = "/favor", method = RequestMethod.GET)
-    public ArrayList<Favor> getFavorList(@RequestBody Parameters p) {
-        Party party = parties.findOne(p.partyID);
-        ArrayList<Favor> list = favors.findAllByPartyType(party.partyType);
-        ArrayList<Favor> filter = (ArrayList<Favor>) favors.findAll();
-        list.addAll(filter.stream()
-                .filter(fav -> fav.partyType == party.partyType)
-                .sorted(Comparator.comparing(Favor::getUseCount))
-                .collect(Collectors.toList()));
+    @RequestMapping(path = "/favor", method = RequestMethod.POST)
+    public ArrayList<Favor> getFavorList(@RequestBody Parameters parameters) {
+        Party p = parties.findOne(parameters.partyID);
+        ArrayList<Favor> list = favors.findAllByPartyType(p.partyType);
         return list;
+
     }
 
     @RequestMapping(path = "/favor/save", method = RequestMethod.POST)
